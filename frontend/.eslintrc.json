@@ -40,9 +40,11 @@
         "@angular-eslint/use-lifecycle-interface": [
           "error"
         ],
+        "@angular-eslint/sort-ngmodule-metadata-arrays": [
+          "warn"
+        ],
         "@typescript-eslint/member-ordering": 0,
-        "@typescript-eslint/naming-convention": 0,
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/naming-convention": 0
       }
     },
     {
