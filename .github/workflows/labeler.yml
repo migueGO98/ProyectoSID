@@ -1,4 +1,4 @@
-name: "Agregar Labels al Pull Request - Labeler"
+name: "Agregar Labels Pull Req-Labeler"
 on:
 - pull_request_target
 
