@@ -123,6 +123,44 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.0.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<generatorName>spring</generatorName>
+
+							<inputSpec>${project.basedir}/../api-sid.yml</inputSpec>
+							<output>.</output>
+
+							<groupId>mx.agr.dgec</groupId>
+
+							<packageName>mx.agr.dgec.generate</packageName>
+							<apiPackage>mx.agr.dgec.generate.api</apiPackage>
+							<modelPackage>mx.agr.dgec.generate.model</modelPackage>
+							<!-- <modelNameSuffix>Dto</modelNameSuffix> -->
+							<invokerPackage>mx.agr.dgec.generate.invoker</invokerPackage>
+							<generateSupportingFiles>true</generateSupportingFiles>
+							<supportingFilesToGenerate>enum</supportingFilesToGenerate>
+
+							<configOptions>
+								<useSpringBoot3>true</useSpringBoot3>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<configPackage>mx.agr.dgec.config</configPackage> <!-- Paquete de configuración  ¿No crea nada?-->
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<useTags>true</useTags>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

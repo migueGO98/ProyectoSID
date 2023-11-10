@@ -23,5 +23,6 @@
 #!docs/README.md
 pom.xml
 # Ignoro el archivo de configuracion de la aplicacion que genera OpenApi
-src/main/java/org/openapitools/OpenApiGeneratorApplication.java
-src/main/resources/openapi.yaml
+#src/main/java/org/openapitools/OpenApiGeneratorApplication.java
+#src/main/resources/openapi.yaml
+README.md

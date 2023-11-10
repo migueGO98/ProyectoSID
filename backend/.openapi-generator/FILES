@@ -1,0 +1,10 @@
+src/main/java/mx/agr/dgec/generate/api/PersonasApi.java
+src/main/java/mx/agr/dgec/generate/model/DireccionDto.java
+src/main/java/mx/agr/dgec/generate/model/EmpleadoDto.java
+src/main/java/mx/agr/dgec/generate/model/EscolaridadDto.java
+src/main/java/mx/agr/dgec/generate/model/EstadoCedulaProfesionalEscolaridad.java
+src/main/java/mx/agr/dgec/generate/model/EstadoNivelEscolaridad.java
+src/main/java/mx/agr/dgec/generate/model/ModelErrorDto.java
+src/main/java/mx/agr/dgec/generate/model/NivelEscolaridad.java
+src/main/java/mx/agr/dgec/generate/model/PersonaCreadaDto.java
+src/main/java/mx/agr/dgec/generate/model/PersonaDto.java
