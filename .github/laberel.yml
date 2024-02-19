@@ -3,3 +3,6 @@ frontend:
 
 backend:
 - 'backend/**'
+
+cambia-codigo-autogenerado-API:
+- 'backend/src/main/java/mx/agr/dgec/generate/**'
