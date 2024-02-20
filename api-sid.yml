@@ -2,12 +2,6 @@ openapi: 3.1.0
 tags:
   - name: Empleados
     description: Funciones sobre empleados de la DGEC
-  - name: Escolaridades
-    description: Funciones sobre escolaridades
-  - name: Personas
-    description: Funciones sobre personas
-  - name: Regiones
-    description: Funciones sobre regiones
 x-stoplight:
   id: zub4eo4y641wl
 info:
@@ -70,111 +64,6 @@ paths:
               $ref: '#/components/schemas/NewEmpleado'
         description: ''
         required: true
-    parameters: []
-  /api/escolaridades:
-    get:
-      summary: Obtener escolaridades
-      tags:
-        - Escolaridades
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Items'
-                  x-stoplight:
-                    id: 267z8wl6nxo6z
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: obtenerEscolaridades
-      x-stoplight:
-        id: cyuyx52mu89xm
-      description: Recupera todas las escolaridades registradas
-      requestBody:
-        content: {}
-  /api/escolaridades/estados:
-    get:
-      summary: Obtener estados de la escolaridad
-      tags:
-        - Escolaridades
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Items'
-                  x-stoplight:
-                    id: s2aoxik4frbta
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: obtenerEstadosEscolaridad
-      description: Recupera todos los estados de una escolaridad
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Items'
-      x-stoplight:
-        id: fedx6l7nww77l
-    parameters: []
-  /api/personas/generos:
-    get:
-      summary: Obtener generos
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Items'
-                  x-stoplight:
-                    id: aj03l9ezczuf2
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: obtenerGeneros
-      x-stoplight:
-        id: l1k1rk60ywcxr
-      description: Obtiene los géneros registrados para una persona
-      tags:
-        - Personas
     parameters: []
 components:
   schemas:
