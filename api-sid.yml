@@ -1,9 +1,13 @@
 openapi: 3.1.0
 tags:
-  - name: empleados
-    description: Etiqueta relacionada a empleados
-  - name: personas
-    description: Etiqueta relacionada a personas
+  - name: Empleados
+    description: Funciones sobre empleados de la DGEC
+  - name: Escolaridades
+    description: Funciones sobre escolaridades
+  - name: Personas
+    description: Funciones sobre personas
+  - name: Regiones
+    description: Funciones sobre regiones
 x-stoplight:
   id: zub4eo4y641wl
 info:
@@ -11,375 +15,558 @@ info:
   version: '1.0'
   contact:
     name: Proyect SID
-    email: miguel.gzm98@gmail.com
+    email: gzm98.miguel@gmail.com
     url: 'https://github.com/migueGO98/ProyectoSID'
-  description: Proyecto de entrenamiento "Sistema de Integración Divisional" para la empresa Agricultura
+  description: Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para la empresa Agricultura en la Dirección General de Enlace y Coordinación (DGEC). Esta API está elaborada solo con fines educativos y de practica personal.
   license:
     name: MIT
     url: 'https://migueGO98.github.io/license'
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/persona:
+  /api/empleados:
     post:
-      summary: Registrar nueva persona
-      operationId: crearNuevaPersona
+      summary: Crear nuevo empleado
+      tags:
+        - Empleados
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonaCreada'
+                $ref: '#/components/schemas/Empleado'
           headers:
             Location:
               schema:
                 type: string
-              description: Ubicación de la persona creada
+              description: Ubicación del empleado creado
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ModelError'
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: crearEmpleado
       x-stoplight:
-        id: 2d77e6d9ax8xa
-      description: Permite registrar una nueva persona
-      tags:
-        - personas
+        id: kl20364k5fm8r
+      description: Crea un nuevo empleado
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Persona'
+              $ref: '#/components/schemas/NewEmpleado'
         description: ''
+        required: true
+    parameters: []
+  /api/escolaridades:
+    get:
+      summary: Obtener escolaridades
+      tags:
+        - Escolaridades
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Items'
+                  x-stoplight:
+                    id: 267z8wl6nxo6z
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: obtenerEscolaridades
+      x-stoplight:
+        id: cyuyx52mu89xm
+      description: Recupera todas las escolaridades registradas
+      requestBody:
+        content: {}
+  /api/escolaridades/estados:
+    get:
+      summary: Obtener estados de la escolaridad
+      tags:
+        - Escolaridades
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Items'
+                  x-stoplight:
+                    id: s2aoxik4frbta
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: obtenerEstadosEscolaridad
+      description: Recupera todos los estados de una escolaridad
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Items'
+      x-stoplight:
+        id: fedx6l7nww77l
+    parameters: []
+  /api/personas/generos:
+    get:
+      summary: Obtener generos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Items'
+                  x-stoplight:
+                    id: aj03l9ezczuf2
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: obtenerGeneros
+      x-stoplight:
+        id: l1k1rk60ywcxr
+      description: Obtiene los géneros registrados para una persona
+      tags:
+        - Personas
     parameters: []
 components:
   schemas:
-    Empleado:
-      title: Empleado
+    NewEmpleado:
+      title: NewEmpleado
       x-stoplight:
-        id: kxuxfiei69gyb
+        id: 8yun4ny2yjvcl
       type: object
-      description: Atributos de un empleado
+      examples:
+        - persona:
+            nombre: Fabian
+            apellidoPaterno: Cortez
+            apellidoMaterno: Estrada
+            fechaNacimiento: '1998-01-01'
+            edad: 26
+            genero: Masculino
+            numeroSeguroSocial: '12345678965'
+            rfc: COEF980101ABC
+            curp: COEF980101HDFABCXX
+            correoElectronico: fabian.cortez@correo.com
+            telefono: '5512345678'
+            contactoEmergenciaNombre: Carolina Cortez Estrada
+            contactoEmergenciaTelefono: '5598745632'
+          domicilio:
+            calle: Prolongación
+            colonia: Lomas de Prolongación
+            codigoPostal: '01474'
+            municipio: Iztapalapa
+            estado: CDMX
+            pais: México
+          escolaridad:
+            - nivel: LICENCIATURA
+              estadoNivel: TITULADO
+              conCedulaProfesional: false
+              cedulaProfesional: null
+            - nivel: MAESTRIA
+              estadoNivel: TITULADO
+              conCedulaProfesional: true
+              cedulaProfesional: '12345678'
+      required:
+        - persona
+        - domicilio
+        - escolaridad
+        - fechaIngreso
+        - tipoContratacion
+        - idRegion
+        - idDireccion
+        - idSubdireccion
+        - idPuesto
       properties:
-        activo:
-          type: boolean
+        persona:
+          $ref: '#/components/schemas/Persona'
           x-stoplight:
-            id: rqi08wpb8cftu
+            id: 1yvd9d9gpzspk
+        domicilio:
+          $ref: '#/components/schemas/Domicilio'
+          x-stoplight:
+            id: 0yjlcc812o9o1
+        escolaridad:
+          type: array
+          x-stoplight:
+            id: 5d72q7jwipk1b
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Escolaridad'
+            x-stoplight:
+              id: qer2gzyyk8okf
         fechaIngreso:
           type: string
           x-stoplight:
-            id: n0sm7npofqp0z
+            id: wdy6ow3fslntt
           format: date
-        fechaTermino:
+        tipoContratacion:
+          $ref: '#/components/schemas/TipoContratacionEnum'
+          x-stoplight:
+            id: ik7wg04lltcgg
+        idRegion:
+          type: integer
+          x-stoplight:
+            id: a1q7dz7v5mdq9
+        idDireccion:
           type: string
           x-stoplight:
-            id: 4cpwmzj7u52bk
-          format: date
-        diasVacaciones:
-          type: integer
+            id: boowi8vzpkton
+        idSubdireccion:
+          type: string
           x-stoplight:
-            id: q5q3imcj5rhbr
-        diasVacacionesPendiente:
-          type: integer
+            id: zh9m61v7pyyzq
+        idPuesto:
+          type: string
           x-stoplight:
-            id: 6cdisgfzztk7x
-        motivoBaja:
-          x-stoplight:
-            id: 0zealfvkr8khb
-          enum:
-            - N/A
-            - TERMINO CONTRATO
-            - RENUNCIA
-            - LIQUIDACION
-          example: N/A
-          default: N/A
+            id: 3vyfm67aisq6x
+    Domicilio:
+      title: DomicilioEmpleado
+      x-stoplight:
+        id: dsm6yd1sxwctg
+      type: object
+      description: Domicilio particular del empleado
+      examples:
+        - calle: Prolongación
+          codigoPostal: '99999'
+          colonia: Lomas de Prolongación
+          municipio: Iztapalapa
+          estado: CDMX
+          ciudad: México
       required:
-        - activo
-        - fechaIngreso
-        - fechaTermino
-        - diasVacaciones
-        - diasVacacionesPendiente
-        - motivoBaja
+        - calle
+        - codigoPostal
+        - colonia
+        - municipio
+        - ciudad
+        - estado
+      properties:
+        calle:
+          type: string
+          x-stoplight:
+            id: chbn8upr51erf
+        codigoPostal:
+          type: string
+          x-stoplight:
+            id: 056p06a2j714p
+          minLength: 5
+          maxLength: 5
+        colonia:
+          type: string
+          x-stoplight:
+            id: 8x4osm8qnfns4
+        municipio:
+          type: string
+          x-stoplight:
+            id: ruu95nkca4g1h
+        ciudad:
+          type: string
+          x-stoplight:
+            id: pvbducyurysn9
+        estado:
+          type: string
+          x-stoplight:
+            id: dmhqr9a3xstf8
     Persona:
       title: Persona
       x-stoplight:
-        id: ungygkrt83q67
+        id: 0iql6hgq28bre
       type: object
-      description: Atributos de una persona
+      description: Atributos que tiene una persona
       examples:
-        - nombre: string
-          apellidoPaterno: string
-          apellidoMaterno: string
-          curp: ABCD998877ABCDEFGH
-          rfc: ABCD998877ABC
-          nss: '01234567890'
-          fechaNacimiento: '2019-08-24'
-          edad: 25
-          direccion:
-            calle: string
-            codigoPostal: '01234'
-            colonia: string
-            municipio: string
-            estado: string
-            ciudad: string
-          telefonoPersonal: '5512345678'
-          correoElectronico: user@example.com
-          cuentaConCredito: true
-          nombreCompletoEmergencia: string
-          telefonoEmergencia: '5512345678'
-          observaciones: ''
-      properties:
-        nombre:
-          type: string
-          x-stoplight:
-            id: 1j7ixxx7tfea2
-          description: Nombre(s)
-        apellidoPaterno:
-          type: string
-          x-stoplight:
-            id: ypnwiz963dzxm
-          description: Apellido paterno
-        apellidoMaterno:
-          type: string
-          x-stoplight:
-            id: ou2vb1zmvwbmy
-          description: Apellido materno
-        curp:
-          type: string
-          x-stoplight:
-            id: vrv5fsfryhs8b
-          maxLength: 18
-          minLength: 18
-          description: CURP de 18 dígitos
-        rfc:
-          type: string
-          x-stoplight:
-            id: a7pxzs2uvwelf
-          minLength: 13
-          maxLength: 13
-          description: RFC de 13 dígitos
-        nss:
-          type: string
-          x-stoplight:
-            id: 20ycwh4lb2mzg
-          minLength: 11
-          maxLength: 11
-          description: Número de seguro social de 11 dígitos
-        fechaNacimiento:
-          type: string
-          x-stoplight:
-            id: 7cfbegpx6n0cu
-          format: date
-          description: Fecha de nacimiento
-        edad:
-          type: integer
-          x-stoplight:
-            id: 9w86vjuezc4vx
-          description: Edad actual
-        direccion:
-          $ref: '#/components/schemas/Direccion'
-          x-stoplight:
-            id: tsoq4sl5q25k9
-          description: Dirección postal del hogar
-        telefonoPersonal:
-          type: string
-          x-stoplight:
-            id: 1bjajyw281g1h
-          minLength: 10
-          maxLength: 10
-          description: Télefono celular a 10 dígitos
-        correoElectronico:
-          type: string
-          x-stoplight:
-            id: ijnpl81vgqah6
-          format: email
-          description: Correo eléctronico personal
-        cuentaConCredito:
-          type: boolean
-          x-stoplight:
-            id: 08myqz3aulkda
-          description: Saber si cuenta o no con algún crédito
-        nombreCompletoEmergencia:
-          type: string
-          x-stoplight:
-            id: ni91bo8k6vbd6
-          description: Nombre completo de una persona de contacto en caso de alguna emergencia
-        telefonoEmergencia:
-          type: string
-          x-stoplight:
-            id: zxwj5l4nulq23
-          minLength: 10
-          maxLength: 10
-          description: Número de telefono de la persona de contacto en caso de alguna emergencia a 10 dígitos
-        observaciones:
-          type:
-            - string
-          x-stoplight:
-            id: xqmrv10f8rpbq
-          description: Alguna observación de la persona
+        - nombre: Fabian
+          apellidoPaterno: Cortez
+          apellidoMaterno: Estrada
+          fechaNacimiento: '1998-01-01'
+          edad: 26
+          genero: MASCULINO
+          numeroSeguroSocial: '12345678965'
+          rfc: COEF980101ABC
+          curp: COEF980101HDFABCXX
+          correoElectronico: fabian.cortez@correo.com
+          telefono: '5512345678'
+          contactoEmergenciaNombre: Carolina Cortez Estrada
+          contactoEmergenciaTelefono: '5598745632'
       required:
         - nombre
         - apellidoPaterno
         - apellidoMaterno
         - curp
         - rfc
-        - nss
+        - numeroSeguroSocial
         - fechaNacimiento
         - edad
-        - direccion
+        - genero
         - telefonoPersonal
-        - correoElectronico
-        - cuentaConCredito
-        - nombreCompletoEmergencia
-        - telefonoEmergencia
-        - observaciones
-    PersonaCreada:
-      title: PersonaCreada
-      x-stoplight:
-        id: rof2ty20g8ve8
-      type: object
-      description: Devuelve ID despues de registrar exitosamente una nueva persona
-      examples:
-        - id: 1
+        - correoElectronicoPersonal
+        - contactoEmergenciaNombre
+        - contactoEmergenciaTelefono
       properties:
-        id:
+        nombre:
+          type: string
+          x-stoplight:
+            id: 4vxs42tgyyole
+        apellidoPaterno:
+          type: string
+          x-stoplight:
+            id: jezjc4droemva
+        apellidoMaterno:
+          type: string
+          x-stoplight:
+            id: z6okx1m1lgx6p
+        curp:
+          type: string
+          x-stoplight:
+            id: ezkzkta9jq8ux
+          minLength: 18
+          maxLength: 18
+        rfc:
+          type: string
+          x-stoplight:
+            id: zddhtkawg3h78
+          minLength: 13
+          maxLength: 13
+        numeroSeguroSocial:
+          type: string
+          x-stoplight:
+            id: un0t2eeiu2k0s
+          minLength: 11
+          maxLength: 11
+        fechaNacimiento:
+          type: string
+          x-stoplight:
+            id: j56xlbv53ik12
+          format: date
+        edad:
           type: integer
           x-stoplight:
-            id: 7jylnwqae782w
-          description: ID de la persona
-      required:
-        - id
-    Direccion:
-      title: Direccion
+            id: qi3sk0u2ui1xi
+        genero:
+          $ref: '#/components/schemas/GeneroEnum'
+          x-stoplight:
+            id: d3hrreuqel3uq
+        telefonoPersonal:
+          type: string
+          x-stoplight:
+            id: aovoq7ifm4w78
+          minLength: 10
+          maxLength: 10
+        correoElectronicoPersonal:
+          type: string
+          x-stoplight:
+            id: j049ngdf3718t
+          format: email
+        contactoEmergenciaNombre:
+          type: string
+          x-stoplight:
+            id: qhhzyzz4t5qc0
+        contactoEmergenciaTelefono:
+          type: string
+          x-stoplight:
+            id: qcxvhfup30ouq
+          minLength: 10
+          maxLength: 10
+    Empleado:
+      title: Empleado
       x-stoplight:
-        id: d8i9sq8di3lhc
+        id: 9m99cxtgz3q1c
       type: object
-      examples:
-        - calle: string
-          codigoPostal: '01234'
-          colonia: string
-          municipio: string
-          estado: string
-          ciudad: string
-      description: Dirección postal de la persona
-      properties:
-        calle:
-          type: string
-          x-stoplight:
-            id: q3t6yoslg1l84
-        codigoPostal:
-          type: string
-          x-stoplight:
-            id: vvyruxeq8bn2u
-          minLength: 5
-          maxLength: 5
-        colonia:
-          type: string
-          x-stoplight:
-            id: dzrztbx18nsc5
-        municipio:
-          type: string
-          x-stoplight:
-            id: g3jt6ietcq3l1
-        estado:
-          type: string
-          x-stoplight:
-            id: 03801gl1wh05f
-        ciudad:
-          type: string
-          x-stoplight:
-            id: 9qargp5s4c3tv
       required:
-        - calle
-        - codigoPostal
-        - colonia
-        - municipio
-        - estado
-        - ciudad
+        - idEmpleado
+        - idDireccion
+        - idSubdireccion
+        - idPuesto
+      properties:
+        idEmpleado:
+          type: string
+          x-stoplight:
+            id: myafa2fnybuv5
+        idDireccion:
+          type: string
+          x-stoplight:
+            id: nazqvlt9rcpaa
+        idSubdireccion:
+          type: string
+          x-stoplight:
+            id: 6quw534b4cf41
+        idPuesto:
+          type: string
+          x-stoplight:
+            id: pixazuooo111q
+    Error:
+      title: Error
+      x-stoplight:
+        id: 6g2k21cuqycj0
+      type: object
+      description: Error a mostrar en caso de alguna anomalía
+      examples:
+        - codigo: 12
+          mensaje: Aquí va el mensaje del error personalizado.
+      required:
+        - codigo
+        - mensaje
+      properties:
+        codigo:
+          type: integer
+          x-stoplight:
+            id: ovrpmxh6eo3w8
+        mensaje:
+          type: string
+          x-stoplight:
+            id: l9nb3gjt8aehy
+    GeneroEnum:
+      title: GeneroEnum
+      x-stoplight:
+        id: 2hngh3fp26t3k
+      enum:
+        - MASCULINO
+        - FEMENINO
+        - NO_BINARIO
+        - DESCONOCIDO
+      description: Valores permitidos para el género de una persona.
     Escolaridad:
       title: Escolaridad
       x-stoplight:
-        id: i6szxpid62d17
+        id: 45bqtlnoej3gh
       type: object
-      properties:
-        nivel:
-          x-stoplight:
-            id: 9iw8xjap27uqx
-          enum:
-            - BACHILLERATO
-            - TÉCNICO
-            - LICENCIATURA
-            - MAESTRÍA
-            - DOCTORADO
-            - ESPECIALIDAD
-            - DIPLOMADO
-          example: LICENCIATURA
-        carrera:
-          type: string
-          x-stoplight:
-            id: zxmfiff4imarq
-        estadoNivel:
-          x-stoplight:
-            id: n7g420peararj
-          enum:
-            - SIN TITULO
-            - CERTIFICADO
-            - PASANTE
-            - CREDITOS COMPLETOS
-            - TRAMITE
-            - TITULADO
-          example: TITULADO
-        estadoCedulaProfesional:
-          x-stoplight:
-            id: mbl08wzp5txbc
-          enum:
-            - N/A
-            - SIN CEDULA
-            - TRAMITE
-            - CON CEDULA
-          example: CON CEDULA
-        numeroCedulaProfesional:
-          type: string
-          x-stoplight:
-            id: 23y9w9nodwr3n
-          minLength: 7
-          maxLength: 8
+      examples:
+        - nivel: LICENCIATURA
+          estadoNivel: CREDITOS_CUBIERTOS
+          conCedulaProfesional: false
+          cedulaProfesional: null
+      description: Escolaridad de una persona u empleado
       required:
         - nivel
         - carrera
         - estadoNivel
-        - estadoCedulaProfesional
-        - numeroCedulaProfesional
-      description: Escolaridades que tiene una persona
-      examples:
-        - nivel: LICENCIATURA
-          carrera: COMPUTACIÓN
-          estadoNivel: TITULADO
-          estadoCedulaProfesional: CON CEDULA
-          numeroCedulaProfesional: '12345678'
-    ModelError:
-      title: ModelError
-      x-stoplight:
-        id: 1ozdniizrmqru
-      type: object
-      description: Modelo para especificar el error que haya sucedido
-      examples:
-        - codigo: Errorx1
-          mensaje: No se puede crear
+        - conCedulaProfesional
+        - cedulaProfesional
       properties:
-        codigo:
+        nivel:
+          $ref: '#/components/schemas/EscolaridadesEnum'
+          x-stoplight:
+            id: v6plghb2z1y2h
+        carrera:
           type: string
           x-stoplight:
-            id: onmvp07qaewf5
-          description: Código del error amigable
-        mensaje:
-          type: string
+            id: 4mgvs6bze6az6
+        estadoNivel:
+          $ref: '#/components/schemas/EstadoEscolaridadEnum'
           x-stoplight:
-            id: 3kg4z5ooazen9
-          description: Mensaje amigable personalizado
+            id: eoc1unktk22m0
+        conCedulaProfesional:
+          type: boolean
+          x-stoplight:
+            id: cdax02p05vavh
+        cedulaProfesional:
+          type:
+            - string
+            - 'null'
+          x-stoplight:
+            id: i008hrw387hye
+          minLength: 7
+          maxLength: 8
+    EscolaridadesEnum:
+      title: EscolaridadesEnum
+      x-stoplight:
+        id: b0vkgsn675z45
+      enum:
+        - TECNICO
+        - LICENCIATURA
+        - MAESTRIA
+        - ESPECIALIDAD
+        - DOCTORADO
+        - BACHILLERATO
+        - DIPLOMADO
+      description: Escolaridades permitidas
+    EstadoEscolaridadEnum:
+      title: EstadoEscolaridadEnum
+      x-stoplight:
+        id: jtzmbyk1m4drc
+      enum:
+        - CREDITOS_CUBIERTOS
+        - CERTIFICADO
+        - PASANTE
+        - TITULADO
+        - TRAMITE_TITULACION
+        - TRUNCA
+      description: Estado que tiene una escolaridad
+    Items:
+      title: Items
+      x-stoplight:
+        id: fthrm3hcau1dq
+      type: object
       required:
-        - codigo
-        - mensaje
+        - id
+        - nombre
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: m35sa3z03os56
+        nombre:
+          type: string
+          x-stoplight:
+            id: cr3563tmajs4v
+      description: 'Obtiene los campos registrados, en pares ordenados'
+    TipoContratacionEnum:
+      title: TipoContratacionEnum
+      x-stoplight:
+        id: yx0yt7b5j2jic
+      enum:
+        - SP
+        - EE
+        - INCA
+      description: Tipos de contratación que pueda ser un empleado
+  requestBodies: {}
+  responses: {}
+  securitySchemes: {}
+x-extension-1: null
 
