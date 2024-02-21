@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum EstadosNivelesEscolaridadesEnum {
-    TITULADO("Titulado"),
-    PASANTE("Pasante"),
     CREDITOS_CUBIERTOS("Créditos cubiertos"),
-    TRAMITE_TITULACION("Trámite de titulación"),
-    TRUNCA("Trunca"),
-    CERTIFICADO("Certificado");
+    CERTIFICADO("Certificado"),
+    PASANTE("Pasante"),
+    TITULADO("Titulado"),
+    TRAMITE_TITULACION("Titulo en trámite"),
+    TRUNCA("Trunca");
 
     private final String estadoNivel;
 

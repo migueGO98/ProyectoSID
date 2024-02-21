@@ -4,16 +4,16 @@ import lombok.Getter;
 
 @Getter
 public enum EstadoCivilEnum {
-    SOLTERO("Soltero"),
-    SOLTERA("Soltera"),
     CASADO("Casado"),
     CASADA("Casada"),
-    DIVORCIADO("Divorciado"),
-    DIVORCIADA("Divorciada"),
+    SOLTERO("Soltero"),
+    SOLTERA("Soltera"),
     VIUDO("Viudo"),
     VIUDA("Viuda"),
     SEPARADO("Separado"),
     SEPARADA("Separada"),
+    DIVORCIADO("Divorciado"),
+    DIVORCIADA("Divorciada"),
     UNION_LIBRE("Unión libre");
 
     private final String estadoCivil;

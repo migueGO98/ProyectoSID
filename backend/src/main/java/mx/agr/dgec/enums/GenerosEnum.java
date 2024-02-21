@@ -7,7 +7,7 @@ public enum GenerosEnum {
 
     MASCULINO("Masculino"),
     FEMENINO("Femenino"),
-    NO_BINARIO("No Binario"),
+    NO_BINARIO("No binario"),
     DESCONOCIDO("Desconocido");
 
     private final String genero;

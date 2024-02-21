@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum NivelesEscolaridadesEnum {
-    BACHILLERATO("Bachillerato"),
     TECNICO("Técnico"),
     LICENCIATURA("Licenciatura"),
     MAESTRIA("Maestría"),
-    DOCTORADO("Doctorado"),
     ESPECIALIDAD("Especialidad"),
+    DOCTORADO("Doctorado"),
+    BACHILLERATO("Bachillerato"),
     DIPLOMADO("Diplomado");
 
     private final String nivel;
