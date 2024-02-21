@@ -72,43 +72,12 @@ components:
       x-stoplight:
         id: 8yun4ny2yjvcl
       type: object
-      examples:
-        - persona:
-            nombre: Fabian
-            apellidoPaterno: Cortez
-            apellidoMaterno: Estrada
-            fechaNacimiento: '1998-01-01'
-            edad: 26
-            genero: Masculino
-            numeroSeguroSocial: '12345678965'
-            rfc: COEF980101ABC
-            curp: COEF980101HDFABCXX
-            correoElectronico: fabian.cortez@correo.com
-            telefono: '5512345678'
-            contactoEmergenciaNombre: Carolina Cortez Estrada
-            contactoEmergenciaTelefono: '5598745632'
-          domicilio:
-            calle: Prolongación
-            colonia: Lomas de Prolongación
-            codigoPostal: '01474'
-            municipio: Iztapalapa
-            estado: CDMX
-            pais: México
-          escolaridad:
-            - nivel: LICENCIATURA
-              estadoNivel: TITULADO
-              conCedulaProfesional: false
-              cedulaProfesional: null
-            - nivel: MAESTRIA
-              estadoNivel: TITULADO
-              conCedulaProfesional: true
-              cedulaProfesional: '12345678'
       required:
         - persona
         - domicilio
         - escolaridad
         - fechaIngreso
-        - tipoContratacion
+        - tipoPlaza
         - idRegion
         - idDireccion
         - idSubdireccion
@@ -136,8 +105,8 @@ components:
           x-stoplight:
             id: wdy6ow3fslntt
           format: date
-        tipoContratacion:
-          $ref: '#/components/schemas/TipoContratacionEnum'
+        tipoPlaza:
+          $ref: '#/components/schemas/TipoPlazaEnum'
           x-stoplight:
             id: ik7wg04lltcgg
         idRegion:
@@ -221,6 +190,8 @@ components:
           curp: COEF980101HDFABCXX
           correoElectronico: fabian.cortez@correo.com
           telefono: '5512345678'
+          estadoCivil: SOLTERO
+          hijos: false
           contactoEmergenciaNombre: Carolina Cortez Estrada
           contactoEmergenciaTelefono: '5598745632'
       required:
@@ -235,6 +206,8 @@ components:
         - genero
         - telefonoPersonal
         - correoElectronicoPersonal
+        - estadoCivil
+        - hijos
         - contactoEmergenciaNombre
         - contactoEmergenciaTelefono
       properties:
@@ -247,7 +220,9 @@ components:
           x-stoplight:
             id: jezjc4droemva
         apellidoMaterno:
-          type: string
+          type:
+            - string
+            - 'null'
           x-stoplight:
             id: z6okx1m1lgx6p
         curp:
@@ -292,6 +267,14 @@ components:
           x-stoplight:
             id: j049ngdf3718t
           format: email
+        estadoCivil:
+          $ref: '#/components/schemas/EstadoCivilEnum'
+          x-stoplight:
+            id: h4e6kk9f8popy
+        hijos:
+          type: boolean
+          x-stoplight:
+            id: bj5ztpk3thvne
         contactoEmergenciaNombre:
           type: string
           x-stoplight:
@@ -309,26 +292,66 @@ components:
       type: object
       required:
         - idEmpleado
+        - activo
+        - fechaIngreso
+        - correoElectronico
+        - telefono
+        - extensionTelefono
+        - idTipoPlaza
+        - idPuesto
         - idDireccion
         - idSubdireccion
-        - idPuesto
       properties:
         idEmpleado:
           type: string
           x-stoplight:
-            id: myafa2fnybuv5
-        idDireccion:
+            id: rh1yparzqepfj
+        activo:
+          type: boolean
+          x-stoplight:
+            id: in0s8o0z6fdi1
+        fechaIngreso:
           type: string
           x-stoplight:
-            id: nazqvlt9rcpaa
-        idSubdireccion:
+            id: olfmt84xdsjc1
+          format: date
+        correoElectronico:
+          type:
+            - string
+            - 'null'
+          x-stoplight:
+            id: 7fa32agn82zej
+          format: email
+        telefono:
           type: string
           x-stoplight:
-            id: 6quw534b4cf41
+            id: yoidbofauv70c
+          minLength: 10
+          maxLength: 10
+        extensionTelefono:
+          type:
+            - string
+            - 'null'
+          x-stoplight:
+            id: hvqen0y10dh5u
+          minLength: 3
+          maxLength: 6
+        idTipoPlaza:
+          type: string
+          x-stoplight:
+            id: 9vomj8jmlg8az
         idPuesto:
           type: string
           x-stoplight:
-            id: pixazuooo111q
+            id: v09aa1w1k4ti4
+        idDireccion:
+          type: string
+          x-stoplight:
+            id: 1wl5q5frp4orx
+        idSubdireccion:
+          type: string
+          x-stoplight:
+            id: hz1n048geshpu
     Error:
       title: Error
       x-stoplight:
@@ -379,7 +402,7 @@ components:
         - cedulaProfesional
       properties:
         nivel:
-          $ref: '#/components/schemas/EscolaridadesEnum'
+          $ref: '#/components/schemas/NivelesEscolaridadesEnum'
           x-stoplight:
             id: v6plghb2z1y2h
         carrera:
@@ -387,7 +410,7 @@ components:
           x-stoplight:
             id: 4mgvs6bze6az6
         estadoNivel:
-          $ref: '#/components/schemas/EstadoEscolaridadEnum'
+          $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
             id: eoc1unktk22m0
         conCedulaProfesional:
@@ -402,8 +425,8 @@ components:
             id: i008hrw387hye
           minLength: 7
           maxLength: 8
-    EscolaridadesEnum:
-      title: EscolaridadesEnum
+    NivelesEscolaridadesEnum:
+      title: NivelesEscolaridadesEnum
       x-stoplight:
         id: b0vkgsn675z45
       enum:
@@ -415,8 +438,8 @@ components:
         - BACHILLERATO
         - DIPLOMADO
       description: Escolaridades permitidas
-    EstadoEscolaridadEnum:
-      title: EstadoEscolaridadEnum
+    EstadosNivelesEscolaridadesEnum:
+      title: EstadosNivelesEscolaridadesEnum
       x-stoplight:
         id: jtzmbyk1m4drc
       enum:
@@ -427,8 +450,8 @@ components:
         - TRAMITE_TITULACION
         - TRUNCA
       description: Estado que tiene una escolaridad
-    Items:
-      title: Items
+    Registros:
+      title: Registros
       x-stoplight:
         id: fthrm3hcau1dq
       type: object
@@ -445,8 +468,8 @@ components:
           x-stoplight:
             id: cr3563tmajs4v
       description: 'Obtiene los campos registrados, en pares ordenados'
-    TipoContratacionEnum:
-      title: TipoContratacionEnum
+    TipoPlazaEnum:
+      title: TipoPlazaEnum
       x-stoplight:
         id: yx0yt7b5j2jic
       enum:
@@ -454,6 +477,30 @@ components:
         - EE
         - INCA
       description: Tipos de contratación que pueda ser un empleado
+    EstadoCivilEnum:
+      title: EstadoCivilEnum
+      x-stoplight:
+        id: len2iwhy926um
+      enum:
+        - CASADO
+        - CASADA
+        - SOLTERO
+        - SOLTERA
+        - VIUDO
+        - VIUDA
+        - SEPARADO
+        - SEPARADA
+        - DIVORCIADO
+        - DIVORCIADA
+        - UNION_LIBRE
+    MotivoBajaEnum:
+      title: MotivoBajaEnum
+      x-stoplight:
+        id: cpyoo4aner4ew
+      enum:
+        - TERMINO_CONTRATO
+        - RENUNCIA
+        - LIQUIDACION
   requestBodies: {}
   responses: {}
   securitySchemes: {}
