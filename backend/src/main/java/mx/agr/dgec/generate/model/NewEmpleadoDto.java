@@ -13,7 +13,7 @@ import java.util.List;
 import mx.agr.dgec.generate.model.DomicilioDto;
 import mx.agr.dgec.generate.model.EscolaridadDto;
 import mx.agr.dgec.generate.model.PersonaDto;
-import mx.agr.dgec.generate.model.TipoContratacionEnumDto;
+import mx.agr.dgec.generate.model.TipoPlazaEnumDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -43,7 +43,7 @@ public class NewEmpleadoDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
-  private TipoContratacionEnumDto tipoContratacion;
+  private TipoPlazaEnumDto tipoPlaza;
 
   private Integer idRegion;
 
@@ -60,12 +60,12 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridad, LocalDate fechaIngreso, TipoContratacionEnumDto tipoContratacion, Integer idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridad, LocalDate fechaIngreso, TipoPlazaEnumDto tipoPlaza, Integer idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridad = escolaridad;
     this.fechaIngreso = fechaIngreso;
-    this.tipoContratacion = tipoContratacion;
+    this.tipoPlaza = tipoPlaza;
     this.idRegion = idRegion;
     this.idDireccion = idDireccion;
     this.idSubdireccion = idSubdireccion;
@@ -160,24 +160,24 @@ public class NewEmpleadoDto {
     this.fechaIngreso = fechaIngreso;
   }
 
-  public NewEmpleadoDto tipoContratacion(TipoContratacionEnumDto tipoContratacion) {
-    this.tipoContratacion = tipoContratacion;
+  public NewEmpleadoDto tipoPlaza(TipoPlazaEnumDto tipoPlaza) {
+    this.tipoPlaza = tipoPlaza;
     return this;
   }
 
   /**
-   * Get tipoContratacion
-   * @return tipoContratacion
+   * Get tipoPlaza
+   * @return tipoPlaza
   */
   @NotNull @Valid 
-  @Schema(name = "tipoContratacion", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("tipoContratacion")
-  public TipoContratacionEnumDto getTipoContratacion() {
-    return tipoContratacion;
+  @Schema(name = "tipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("tipoPlaza")
+  public TipoPlazaEnumDto getTipoPlaza() {
+    return tipoPlaza;
   }
 
-  public void setTipoContratacion(TipoContratacionEnumDto tipoContratacion) {
-    this.tipoContratacion = tipoContratacion;
+  public void setTipoPlaza(TipoPlazaEnumDto tipoPlaza) {
+    this.tipoPlaza = tipoPlaza;
   }
 
   public NewEmpleadoDto idRegion(Integer idRegion) {
@@ -273,7 +273,7 @@ public class NewEmpleadoDto {
         Objects.equals(this.domicilio, newEmpleado.domicilio) &&
         Objects.equals(this.escolaridad, newEmpleado.escolaridad) &&
         Objects.equals(this.fechaIngreso, newEmpleado.fechaIngreso) &&
-        Objects.equals(this.tipoContratacion, newEmpleado.tipoContratacion) &&
+        Objects.equals(this.tipoPlaza, newEmpleado.tipoPlaza) &&
         Objects.equals(this.idRegion, newEmpleado.idRegion) &&
         Objects.equals(this.idDireccion, newEmpleado.idDireccion) &&
         Objects.equals(this.idSubdireccion, newEmpleado.idSubdireccion) &&
@@ -282,7 +282,7 @@ public class NewEmpleadoDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(persona, domicilio, escolaridad, fechaIngreso, tipoContratacion, idRegion, idDireccion, idSubdireccion, idPuesto);
+    return Objects.hash(persona, domicilio, escolaridad, fechaIngreso, tipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto);
   }
 
   @Override
@@ -293,7 +293,7 @@ public class NewEmpleadoDto {
     sb.append("    domicilio: ").append(toIndentedString(domicilio)).append("\n");
     sb.append("    escolaridad: ").append(toIndentedString(escolaridad)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
-    sb.append("    tipoContratacion: ").append(toIndentedString(tipoContratacion)).append("\n");
+    sb.append("    tipoPlaza: ").append(toIndentedString(tipoPlaza)).append("\n");
     sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
     sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
+import mx.agr.dgec.generate.model.EstadoCivilEnumDto;
 import mx.agr.dgec.generate.model.GeneroEnumDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -32,7 +33,7 @@ public class PersonaDto {
 
   private String apellidoPaterno;
 
-  private String apellidoMaterno;
+  private JsonNullable<String> apellidoMaterno = JsonNullable.<String>undefined();
 
   private String curp;
 
@@ -51,6 +52,10 @@ public class PersonaDto {
 
   private String correoElectronicoPersonal;
 
+  private EstadoCivilEnumDto estadoCivil;
+
+  private Boolean hijos;
+
   private String contactoEmergenciaNombre;
 
   private String contactoEmergenciaTelefono;
@@ -62,10 +67,10 @@ public class PersonaDto {
   /**
    * Constructor with only required parameters
    */
-  public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, Integer edad, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
+  public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, Integer edad, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
     this.nombre = nombre;
     this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = apellidoMaterno;
+    this.apellidoMaterno = JsonNullable.of(apellidoMaterno);
     this.curp = curp;
     this.rfc = rfc;
     this.numeroSeguroSocial = numeroSeguroSocial;
@@ -74,6 +79,8 @@ public class PersonaDto {
     this.genero = genero;
     this.telefonoPersonal = telefonoPersonal;
     this.correoElectronicoPersonal = correoElectronicoPersonal;
+    this.estadoCivil = estadoCivil;
+    this.hijos = hijos;
     this.contactoEmergenciaNombre = contactoEmergenciaNombre;
     this.contactoEmergenciaTelefono = contactoEmergenciaTelefono;
   }
@@ -119,7 +126,7 @@ public class PersonaDto {
   }
 
   public PersonaDto apellidoMaterno(String apellidoMaterno) {
-    this.apellidoMaterno = apellidoMaterno;
+    this.apellidoMaterno = JsonNullable.of(apellidoMaterno);
     return this;
   }
 
@@ -130,11 +137,11 @@ public class PersonaDto {
   @NotNull 
   @Schema(name = "apellidoMaterno", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoMaterno")
-  public String getApellidoMaterno() {
+  public JsonNullable<String> getApellidoMaterno() {
     return apellidoMaterno;
   }
 
-  public void setApellidoMaterno(String apellidoMaterno) {
+  public void setApellidoMaterno(JsonNullable<String> apellidoMaterno) {
     this.apellidoMaterno = apellidoMaterno;
   }
 
@@ -298,6 +305,46 @@ public class PersonaDto {
     this.correoElectronicoPersonal = correoElectronicoPersonal;
   }
 
+  public PersonaDto estadoCivil(EstadoCivilEnumDto estadoCivil) {
+    this.estadoCivil = estadoCivil;
+    return this;
+  }
+
+  /**
+   * Get estadoCivil
+   * @return estadoCivil
+  */
+  @NotNull @Valid 
+  @Schema(name = "estadoCivil", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("estadoCivil")
+  public EstadoCivilEnumDto getEstadoCivil() {
+    return estadoCivil;
+  }
+
+  public void setEstadoCivil(EstadoCivilEnumDto estadoCivil) {
+    this.estadoCivil = estadoCivil;
+  }
+
+  public PersonaDto hijos(Boolean hijos) {
+    this.hijos = hijos;
+    return this;
+  }
+
+  /**
+   * Get hijos
+   * @return hijos
+  */
+  @NotNull 
+  @Schema(name = "hijos", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("hijos")
+  public Boolean getHijos() {
+    return hijos;
+  }
+
+  public void setHijos(Boolean hijos) {
+    this.hijos = hijos;
+  }
+
   public PersonaDto contactoEmergenciaNombre(String contactoEmergenciaNombre) {
     this.contactoEmergenciaNombre = contactoEmergenciaNombre;
     return this;
@@ -358,13 +405,15 @@ public class PersonaDto {
         Objects.equals(this.genero, persona.genero) &&
         Objects.equals(this.telefonoPersonal, persona.telefonoPersonal) &&
         Objects.equals(this.correoElectronicoPersonal, persona.correoElectronicoPersonal) &&
+        Objects.equals(this.estadoCivil, persona.estadoCivil) &&
+        Objects.equals(this.hijos, persona.hijos) &&
         Objects.equals(this.contactoEmergenciaNombre, persona.contactoEmergenciaNombre) &&
         Objects.equals(this.contactoEmergenciaTelefono, persona.contactoEmergenciaTelefono);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nombre, apellidoPaterno, apellidoMaterno, curp, rfc, numeroSeguroSocial, fechaNacimiento, edad, genero, telefonoPersonal, correoElectronicoPersonal, contactoEmergenciaNombre, contactoEmergenciaTelefono);
+    return Objects.hash(nombre, apellidoPaterno, apellidoMaterno, curp, rfc, numeroSeguroSocial, fechaNacimiento, edad, genero, telefonoPersonal, correoElectronicoPersonal, estadoCivil, hijos, contactoEmergenciaNombre, contactoEmergenciaTelefono);
   }
 
   @Override
@@ -382,6 +431,8 @@ public class PersonaDto {
     sb.append("    genero: ").append(toIndentedString(genero)).append("\n");
     sb.append("    telefonoPersonal: ").append(toIndentedString(telefonoPersonal)).append("\n");
     sb.append("    correoElectronicoPersonal: ").append(toIndentedString(correoElectronicoPersonal)).append("\n");
+    sb.append("    estadoCivil: ").append(toIndentedString(estadoCivil)).append("\n");
+    sb.append("    hijos: ").append(toIndentedString(hijos)).append("\n");
     sb.append("    contactoEmergenciaNombre: ").append(toIndentedString(contactoEmergenciaNombre)).append("\n");
     sb.append("    contactoEmergenciaTelefono: ").append(toIndentedString(contactoEmergenciaTelefono)).append("\n");
     sb.append("}");

@@ -3,7 +3,7 @@ package mx.agr.dgec.enums;
 import lombok.Getter;
 
 @Getter
-public enum EscolaridadesEnum {
+public enum NivelesEscolaridadesEnum {
     BACHILLERATO("Bachillerato"),
     TECNICO("Técnico"),
     LICENCIATURA("Licenciatura"),
@@ -14,6 +14,6 @@ public enum EscolaridadesEnum {
 
     private final String nivel;
 
-    EscolaridadesEnum(String nivel) { this.nivel = nivel; }
+    NivelesEscolaridadesEnum(String nivel) { this.nivel = nivel; }
 
 }

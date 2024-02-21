@@ -1,6 +1,11 @@
 package mx.agr.dgec.entidades;
 
-public class Estados {
+import java.util.List;
+
+public class Estado {
     private String idEstado;
     private String nombre;
+    private List<Region> regiones;
+    private List<Direccion> direcciones;
+    private List<Subdireccion> subdirecciones;
 }

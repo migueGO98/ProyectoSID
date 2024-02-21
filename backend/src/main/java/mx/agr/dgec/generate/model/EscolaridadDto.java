@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import mx.agr.dgec.generate.model.EscolaridadesEnumDto;
-import mx.agr.dgec.generate.model.EstadoEscolaridadEnumDto;
+import mx.agr.dgec.generate.model.EstadosNivelesEscolaridadesEnumDto;
+import mx.agr.dgec.generate.model.NivelesEscolaridadesEnumDto;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -27,11 +27,11 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class EscolaridadDto {
 
-  private EscolaridadesEnumDto nivel;
+  private NivelesEscolaridadesEnumDto nivel;
 
   private String carrera;
 
-  private EstadoEscolaridadEnumDto estadoNivel;
+  private EstadosNivelesEscolaridadesEnumDto estadoNivel;
 
   private Boolean conCedulaProfesional;
 
@@ -44,7 +44,7 @@ public class EscolaridadDto {
   /**
    * Constructor with only required parameters
    */
-  public EscolaridadDto(EscolaridadesEnumDto nivel, String carrera, EstadoEscolaridadEnumDto estadoNivel, Boolean conCedulaProfesional, String cedulaProfesional) {
+  public EscolaridadDto(NivelesEscolaridadesEnumDto nivel, String carrera, EstadosNivelesEscolaridadesEnumDto estadoNivel, Boolean conCedulaProfesional, String cedulaProfesional) {
     this.nivel = nivel;
     this.carrera = carrera;
     this.estadoNivel = estadoNivel;
@@ -52,7 +52,7 @@ public class EscolaridadDto {
     this.cedulaProfesional = JsonNullable.of(cedulaProfesional);
   }
 
-  public EscolaridadDto nivel(EscolaridadesEnumDto nivel) {
+  public EscolaridadDto nivel(NivelesEscolaridadesEnumDto nivel) {
     this.nivel = nivel;
     return this;
   }
@@ -64,11 +64,11 @@ public class EscolaridadDto {
   @NotNull @Valid 
   @Schema(name = "nivel", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nivel")
-  public EscolaridadesEnumDto getNivel() {
+  public NivelesEscolaridadesEnumDto getNivel() {
     return nivel;
   }
 
-  public void setNivel(EscolaridadesEnumDto nivel) {
+  public void setNivel(NivelesEscolaridadesEnumDto nivel) {
     this.nivel = nivel;
   }
 
@@ -92,7 +92,7 @@ public class EscolaridadDto {
     this.carrera = carrera;
   }
 
-  public EscolaridadDto estadoNivel(EstadoEscolaridadEnumDto estadoNivel) {
+  public EscolaridadDto estadoNivel(EstadosNivelesEscolaridadesEnumDto estadoNivel) {
     this.estadoNivel = estadoNivel;
     return this;
   }
@@ -104,11 +104,11 @@ public class EscolaridadDto {
   @NotNull @Valid 
   @Schema(name = "estadoNivel", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("estadoNivel")
-  public EstadoEscolaridadEnumDto getEstadoNivel() {
+  public EstadosNivelesEscolaridadesEnumDto getEstadoNivel() {
     return estadoNivel;
   }
 
-  public void setEstadoNivel(EstadoEscolaridadEnumDto estadoNivel) {
+  public void setEstadoNivel(EstadosNivelesEscolaridadesEnumDto estadoNivel) {
     this.estadoNivel = estadoNivel;
   }
 
