@@ -7,7 +7,6 @@ import lombok.experimental.SuperBuilder;
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GenerosEnum;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class Persona {
+public abstract class Persona {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
