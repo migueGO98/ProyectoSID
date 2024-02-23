@@ -62,6 +62,44 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NewEmpleado'
+            examples:
+              Example 1:
+                value:
+                  persona:
+                    nombre: Fabian
+                    apellidoPaterno: Lopez
+                    apellidoMaterno: Estrada
+                    curp: LOEF111111HDFASDXX
+                    rfc: LOEF111111FG9
+                    numeroSeguroSocial: '11111111111'
+                    fechaNacimiento: '2019-08-24'
+                    edad: 20
+                    genero: MASCULINO
+                    telefonoPersonal: '1234567890'
+                    correoElectronicoPersonal: user@example.com
+                    estadoCivil: CASADO
+                    hijos: true
+                    contactoEmergenciaNombre: Martina
+                    contactoEmergenciaTelefono: '9876543210'
+                  domicilio:
+                    calle: Izta
+                    codigoPostal: '99999'
+                    colonia: Prolongacion
+                    municipio: Iztapalapa
+                    ciudad: CDMX
+                    estado: CDMX
+                  escolaridad:
+                    - nivel: LICENCIATURA
+                      carrera: COMPUTACION
+                      estadoNivel: TRAMITE_TITULACION
+                      conCedulaProfesional: true
+                      cedulaProfesional: '1234567'
+                  fechaIngreso: '2019-08-24'
+                  tipoPlaza: SP
+                  idRegion: OC
+                  idDireccion: DGEC
+                  idSubdireccion: SDGEC
+                  idPuesto: SJD1
         description: ''
         required: true
     parameters: []
@@ -110,7 +148,7 @@ components:
           x-stoplight:
             id: ik7wg04lltcgg
         idRegion:
-          type: integer
+          type: string
           x-stoplight:
             id: a1q7dz7v5mdq9
         idDireccion:
@@ -125,19 +163,48 @@ components:
           type: string
           x-stoplight:
             id: 3vyfm67aisq6x
+      examples:
+        - persona:
+            nombre: Fabian
+            apellidoPaterno: Lopez
+            apellidoMaterno: Estrada
+            curp: LOEF111111HDFASDXX
+            rfc: LOEF111111FG9
+            numeroSeguroSocial: '11111111111'
+            fechaNacimiento: '2019-08-24'
+            edad: 20
+            genero: MASCULINO
+            telefonoPersonal: '1234567890'
+            correoElectronicoPersonal: user@example.com
+            estadoCivil: CASADO
+            hijos: true
+            contactoEmergenciaNombre: Martina
+            contactoEmergenciaTelefono: '9876543210'
+          domicilio:
+            calle: Izta
+            codigoPostal: '99999'
+            colonia: Prolongacion
+            municipio: Iztapalapa
+            ciudad: CDMX
+            estado: CDMX
+          escolaridad:
+            - nivel: LICENCIATURA
+              carrera: COMPUTACION
+              estadoNivel: TRAMITE_TITULACION
+              conCedulaProfesional: true
+              cedulaProfesional: '1234567'
+          fechaIngreso: '2019-08-24'
+          tipoPlaza: SP
+          idRegion: OC
+          idDireccion: DGEC
+          idSubdireccion: SDGEC
+          idPuesto: SJD1
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
         id: dsm6yd1sxwctg
       type: object
       description: Domicilio particular del empleado
-      examples:
-        - calle: Prolongación
-          codigoPostal: '99999'
-          colonia: Lomas de Prolongación
-          municipio: Iztapalapa
-          estado: CDMX
-          ciudad: México
       required:
         - calle
         - codigoPostal
@@ -172,6 +239,13 @@ components:
           type: string
           x-stoplight:
             id: dmhqr9a3xstf8
+      examples:
+        - calle: Izta
+          codigoPostal: '99999'
+          colonia: Prolongacion
+          municipio: Iztapalapa
+          ciudad: CDMX
+          estado: CDMX
     Persona:
       title: Persona
       x-stoplight:
@@ -180,20 +254,20 @@ components:
       description: Atributos que tiene una persona
       examples:
         - nombre: Fabian
-          apellidoPaterno: Cortez
+          apellidoPaterno: Lopez
           apellidoMaterno: Estrada
-          fechaNacimiento: '1998-01-01'
-          edad: 26
+          curp: LOEF111111HDFASDXX
+          rfc: LOEF111111FG9
+          numeroSeguroSocial: '11111111111'
+          fechaNacimiento: '2019-08-24'
+          edad: 20
           genero: MASCULINO
-          numeroSeguroSocial: '12345678965'
-          rfc: COEF980101ABC
-          curp: COEF980101HDFABCXX
-          correoElectronico: fabian.cortez@correo.com
-          telefono: '5512345678'
-          estadoCivil: SOLTERO
-          hijos: false
-          contactoEmergenciaNombre: Carolina Cortez Estrada
-          contactoEmergenciaTelefono: '5598745632'
+          telefonoPersonal: '1234567890'
+          correoElectronicoPersonal: user@example.com
+          estadoCivil: CASADO
+          hijos: true
+          contactoEmergenciaNombre: Martina
+          contactoEmergenciaTelefono: '9876543210'
       required:
         - nombre
         - apellidoPaterno
@@ -220,9 +294,7 @@ components:
           x-stoplight:
             id: jezjc4droemva
         apellidoMaterno:
-          type:
-            - string
-            - 'null'
+          type: string
           x-stoplight:
             id: z6okx1m1lgx6p
         curp:
@@ -316,12 +388,9 @@ components:
             id: olfmt84xdsjc1
           format: date
         correoElectronico:
-          type:
-            - string
-            - 'null'
+          type: string
           x-stoplight:
             id: 7fa32agn82zej
-          format: email
         telefono:
           type: string
           x-stoplight:
@@ -329,9 +398,7 @@ components:
           minLength: 10
           maxLength: 10
         extensionTelefono:
-          type:
-            - string
-            - 'null'
+          type: string
           x-stoplight:
             id: hvqen0y10dh5u
           minLength: 3
@@ -383,17 +450,19 @@ components:
         - NO_BINARIO
         - DESCONOCIDO
       description: Valores permitidos para el género de una persona.
+      example: MASCULINO
     Escolaridad:
       title: Escolaridad
       x-stoplight:
         id: 45bqtlnoej3gh
       type: object
+      description: Escolaridad de una persona u empleado
       examples:
         - nivel: LICENCIATURA
-          estadoNivel: CREDITOS_CUBIERTOS
-          conCedulaProfesional: false
-          cedulaProfesional: null
-      description: Escolaridad de una persona u empleado
+          carrera: COMPUTACION
+          estadoNivel: TRAMITE_TITULACION
+          conCedulaProfesional: true
+          cedulaProfesional: '1234567'
       required:
         - nivel
         - carrera
@@ -418,9 +487,7 @@ components:
           x-stoplight:
             id: cdax02p05vavh
         cedulaProfesional:
-          type:
-            - string
-            - 'null'
+          type: string
           x-stoplight:
             id: i008hrw387hye
           minLength: 7
@@ -438,6 +505,7 @@ components:
         - BACHILLERATO
         - DIPLOMADO
       description: Escolaridades permitidas
+      example: LICENCIATURA
     EstadosNivelesEscolaridadesEnum:
       title: EstadosNivelesEscolaridadesEnum
       x-stoplight:
@@ -450,6 +518,7 @@ components:
         - TRAMITE_TITULACION
         - TRUNCA
       description: Estado que tiene una escolaridad
+      example: TRAMITE_TITULACION
     Registros:
       title: Registros
       x-stoplight:
@@ -477,6 +546,7 @@ components:
         - EE
         - INCA
       description: Tipos de contratación que pueda ser un empleado
+      example: SP
     EstadoCivilEnum:
       title: EstadoCivilEnum
       x-stoplight:
@@ -493,6 +563,7 @@ components:
         - DIVORCIADO
         - DIVORCIADA
         - UNION_LIBRE
+      example: SOLTERO
     MotivoBajaEnum:
       title: MotivoBajaEnum
       x-stoplight:
