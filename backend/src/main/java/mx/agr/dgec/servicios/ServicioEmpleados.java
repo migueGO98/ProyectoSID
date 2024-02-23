@@ -1,6 +1,6 @@
 package mx.agr.dgec.servicios;
 
-import mx.agr.dgec.enums.MotivoBajaEnum;
+import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.mappers.EmpleadoMapper;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
+@Slf4j
 public class ServicioEmpleados {
 
     public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleado) {
@@ -16,13 +17,12 @@ public class ServicioEmpleados {
 
         // Las asignaciones de activo, fechaBaja, correoElectronico, telefono, extensionTelefono, diasVacacionesDisponibles,
         // diasVacacionesTomados y motivoBaja son por Reglas de Negocio
-        var empleado = EmpleadoMapper.INSTANCE.toEmpleado(idEmpleado, nuevoEmpleado, true,
+        final var empleado = EmpleadoMapper.INSTANCE.toEmpleado(idEmpleado, nuevoEmpleado, true,
                 null, null, null,
                 null, 0,
                 0, null);
-
-        System.out.println("Empleado creado: " + empleado);
-        return null;
+        log.info("Empleado creado: " + empleado);
+        return EmpleadoMapper.INSTANCE.toEmpleadoDto(empleado);
     }
 
     private String generarIdEmpleado(String rfc, LocalDate fechaIngreso) {

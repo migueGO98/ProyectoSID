@@ -10,6 +10,6 @@ public class Puesto {
     private String idPuesto;
     private String nombre;
     private float salarioBruto;
-    private TipoPlaza tipoPlaza;
+    private String idTipoPlaza;
     private List<Empleado> empleados;
 }

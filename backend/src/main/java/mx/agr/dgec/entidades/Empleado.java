@@ -29,7 +29,7 @@ public class Empleado extends Persona{
     private int diasVacacionesDisponibles;
     private int diasVacacionesTomados;
     private MotivoBajaEnum motivoBaja;
-    private TipoPlazaEnum tipoPlaza;
+    private String idTipoPlaza;
     private String idPuesto;
     private String idRegion;
     private String idDireccion;

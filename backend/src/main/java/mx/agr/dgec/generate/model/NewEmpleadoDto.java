@@ -43,7 +43,7 @@ public class NewEmpleadoDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
-  private TipoPlazaEnumDto tipoPlaza;
+  private TipoPlazaEnumDto idTipoPlaza;
 
   private String idRegion;
 
@@ -60,12 +60,12 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridad, LocalDate fechaIngreso, TipoPlazaEnumDto tipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridad, LocalDate fechaIngreso, TipoPlazaEnumDto idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridad = escolaridad;
     this.fechaIngreso = fechaIngreso;
-    this.tipoPlaza = tipoPlaza;
+    this.idTipoPlaza = idTipoPlaza;
     this.idRegion = idRegion;
     this.idDireccion = idDireccion;
     this.idSubdireccion = idSubdireccion;
@@ -160,24 +160,24 @@ public class NewEmpleadoDto {
     this.fechaIngreso = fechaIngreso;
   }
 
-  public NewEmpleadoDto tipoPlaza(TipoPlazaEnumDto tipoPlaza) {
-    this.tipoPlaza = tipoPlaza;
+  public NewEmpleadoDto idTipoPlaza(TipoPlazaEnumDto idTipoPlaza) {
+    this.idTipoPlaza = idTipoPlaza;
     return this;
   }
 
   /**
-   * Get tipoPlaza
-   * @return tipoPlaza
+   * Get idTipoPlaza
+   * @return idTipoPlaza
   */
   @NotNull @Valid 
-  @Schema(name = "tipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("tipoPlaza")
-  public TipoPlazaEnumDto getTipoPlaza() {
-    return tipoPlaza;
+  @Schema(name = "idTipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("idTipoPlaza")
+  public TipoPlazaEnumDto getIdTipoPlaza() {
+    return idTipoPlaza;
   }
 
-  public void setTipoPlaza(TipoPlazaEnumDto tipoPlaza) {
-    this.tipoPlaza = tipoPlaza;
+  public void setIdTipoPlaza(TipoPlazaEnumDto idTipoPlaza) {
+    this.idTipoPlaza = idTipoPlaza;
   }
 
   public NewEmpleadoDto idRegion(String idRegion) {
@@ -273,7 +273,7 @@ public class NewEmpleadoDto {
         Objects.equals(this.domicilio, newEmpleado.domicilio) &&
         Objects.equals(this.escolaridad, newEmpleado.escolaridad) &&
         Objects.equals(this.fechaIngreso, newEmpleado.fechaIngreso) &&
-        Objects.equals(this.tipoPlaza, newEmpleado.tipoPlaza) &&
+        Objects.equals(this.idTipoPlaza, newEmpleado.idTipoPlaza) &&
         Objects.equals(this.idRegion, newEmpleado.idRegion) &&
         Objects.equals(this.idDireccion, newEmpleado.idDireccion) &&
         Objects.equals(this.idSubdireccion, newEmpleado.idSubdireccion) &&
@@ -282,7 +282,7 @@ public class NewEmpleadoDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(persona, domicilio, escolaridad, fechaIngreso, tipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto);
+    return Objects.hash(persona, domicilio, escolaridad, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto);
   }
 
   @Override
@@ -293,7 +293,7 @@ public class NewEmpleadoDto {
     sb.append("    domicilio: ").append(toIndentedString(domicilio)).append("\n");
     sb.append("    escolaridad: ").append(toIndentedString(escolaridad)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
-    sb.append("    tipoPlaza: ").append(toIndentedString(tipoPlaza)).append("\n");
+    sb.append("    idTipoPlaza: ").append(toIndentedString(idTipoPlaza)).append("\n");
     sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
     sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");

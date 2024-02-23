@@ -2,10 +2,11 @@ package mx.agr.dgec.mappers;
 
 import mx.agr.dgec.entidades.Empleado;
 import mx.agr.dgec.enums.MotivoBajaEnum;
+import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
 import java.time.LocalDate;
 
 @Mapper
@@ -49,6 +50,20 @@ public interface EmpleadoMapper {
                 .diasVacacionesDisponibles(diasVacacionesDisponibles)
                 .diasVacacionesTomados(diasVacacionesTomados)
                 .motivoBaja(motivoBaja)
+                .idTipoPlaza(newEmpleadoDto.getIdTipoPlaza().getValue())
+                .idPuesto(newEmpleadoDto.getIdPuesto())
+                .idRegion(newEmpleadoDto.getIdRegion())
+                .idDireccion(newEmpleadoDto.getIdDireccion())
+                .idSubdireccion(newEmpleadoDto.getIdSubdireccion())
                 .build();
+    }
+
+    @Mapping(target = "nombreCompleto", expression = "java(concatenarNombreCompleto(empleado))")
+    EmpleadoDto toEmpleadoDto(Empleado empleado);
+
+    // Método para concatenar el nombre y apellidos
+    default String concatenarNombreCompleto(Empleado empleado) {
+        // Implementa la lógica para concatenar nombre y apellido
+        return String.format("%s %s %s", empleado.getNombre(), empleado.getApellidoPaterno(), empleado.getApellidoMaterno());
     }
 }

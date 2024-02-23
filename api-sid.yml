@@ -95,7 +95,7 @@ paths:
                       conCedulaProfesional: true
                       cedulaProfesional: '1234567'
                   fechaIngreso: '2019-08-24'
-                  tipoPlaza: SP
+                  idTipoPlaza: SP
                   idRegion: OC
                   idDireccion: DGEC
                   idSubdireccion: SDGEC
@@ -110,59 +110,6 @@ components:
       x-stoplight:
         id: 8yun4ny2yjvcl
       type: object
-      required:
-        - persona
-        - domicilio
-        - escolaridad
-        - fechaIngreso
-        - tipoPlaza
-        - idRegion
-        - idDireccion
-        - idSubdireccion
-        - idPuesto
-      properties:
-        persona:
-          $ref: '#/components/schemas/Persona'
-          x-stoplight:
-            id: 1yvd9d9gpzspk
-        domicilio:
-          $ref: '#/components/schemas/Domicilio'
-          x-stoplight:
-            id: 0yjlcc812o9o1
-        escolaridad:
-          type: array
-          x-stoplight:
-            id: 5d72q7jwipk1b
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Escolaridad'
-            x-stoplight:
-              id: qer2gzyyk8okf
-        fechaIngreso:
-          type: string
-          x-stoplight:
-            id: wdy6ow3fslntt
-          format: date
-        tipoPlaza:
-          $ref: '#/components/schemas/TipoPlazaEnum'
-          x-stoplight:
-            id: ik7wg04lltcgg
-        idRegion:
-          type: string
-          x-stoplight:
-            id: a1q7dz7v5mdq9
-        idDireccion:
-          type: string
-          x-stoplight:
-            id: boowi8vzpkton
-        idSubdireccion:
-          type: string
-          x-stoplight:
-            id: zh9m61v7pyyzq
-        idPuesto:
-          type: string
-          x-stoplight:
-            id: 3vyfm67aisq6x
       examples:
         - persona:
             nombre: Fabian
@@ -194,11 +141,64 @@ components:
               conCedulaProfesional: true
               cedulaProfesional: '1234567'
           fechaIngreso: '2019-08-24'
-          tipoPlaza: SP
+          idTipoPlaza: SP
           idRegion: OC
           idDireccion: DGEC
           idSubdireccion: SDGEC
           idPuesto: SJD1
+      required:
+        - persona
+        - domicilio
+        - escolaridad
+        - fechaIngreso
+        - idTipoPlaza
+        - idRegion
+        - idDireccion
+        - idSubdireccion
+        - idPuesto
+      properties:
+        persona:
+          $ref: '#/components/schemas/Persona'
+          x-stoplight:
+            id: 1yvd9d9gpzspk
+        domicilio:
+          $ref: '#/components/schemas/Domicilio'
+          x-stoplight:
+            id: 0yjlcc812o9o1
+        escolaridad:
+          type: array
+          x-stoplight:
+            id: 5d72q7jwipk1b
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Escolaridad'
+            x-stoplight:
+              id: qer2gzyyk8okf
+        fechaIngreso:
+          type: string
+          x-stoplight:
+            id: wdy6ow3fslntt
+          format: date
+        idTipoPlaza:
+          $ref: '#/components/schemas/TipoPlazaEnum'
+          x-stoplight:
+            id: ik7wg04lltcgg
+        idRegion:
+          type: string
+          x-stoplight:
+            id: a1q7dz7v5mdq9
+        idDireccion:
+          type: string
+          x-stoplight:
+            id: boowi8vzpkton
+        idSubdireccion:
+          type: string
+          x-stoplight:
+            id: zh9m61v7pyyzq
+        idPuesto:
+          type: string
+          x-stoplight:
+            id: 3vyfm67aisq6x
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
@@ -364,20 +364,23 @@ components:
       type: object
       required:
         - idEmpleado
+        - nombreCompleto
         - activo
         - fechaIngreso
-        - correoElectronico
-        - telefono
-        - extensionTelefono
         - idTipoPlaza
-        - idPuesto
+        - idRegion
         - idDireccion
         - idSubdireccion
+        - idPuesto
       properties:
         idEmpleado:
           type: string
           x-stoplight:
             id: rh1yparzqepfj
+        nombreCompleto:
+          type: string
+          x-stoplight:
+            id: m3wjs9vpsjhdt
         activo:
           type: boolean
           x-stoplight:
@@ -387,30 +390,14 @@ components:
           x-stoplight:
             id: olfmt84xdsjc1
           format: date
-        correoElectronico:
-          type: string
-          x-stoplight:
-            id: 7fa32agn82zej
-        telefono:
-          type: string
-          x-stoplight:
-            id: yoidbofauv70c
-          minLength: 10
-          maxLength: 10
-        extensionTelefono:
-          type: string
-          x-stoplight:
-            id: hvqen0y10dh5u
-          minLength: 3
-          maxLength: 6
         idTipoPlaza:
           type: string
           x-stoplight:
             id: 9vomj8jmlg8az
-        idPuesto:
+        idRegion:
           type: string
           x-stoplight:
-            id: v09aa1w1k4ti4
+            id: wilf6fku1ufgo
         idDireccion:
           type: string
           x-stoplight:
@@ -419,6 +406,20 @@ components:
           type: string
           x-stoplight:
             id: hz1n048geshpu
+        idPuesto:
+          type: string
+          x-stoplight:
+            id: v09aa1w1k4ti4
+      examples:
+        - idEmpleado: LOEF2082019
+          nombreCompleto: Lopez Estrada Fabian
+          activo: true
+          fechaIngreso: '2019-08-24'
+          idTipoPlaza: SP
+          idRegion: OC
+          idDireccion: DGEC
+          idSubdireccion: SDGEC
+          idPuesto: SJD1
     Error:
       title: Error
       x-stoplight:

@@ -27,24 +27,22 @@ public class EmpleadoDto {
 
   private String idEmpleado;
 
+  private String nombreCompleto;
+
   private Boolean activo;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
-  private String correoElectronico;
-
-  private String telefono;
-
-  private String extensionTelefono;
-
   private String idTipoPlaza;
 
-  private String idPuesto;
+  private String idRegion;
 
   private String idDireccion;
 
   private String idSubdireccion;
+
+  private String idPuesto;
 
   public EmpleadoDto() {
     super();
@@ -53,17 +51,16 @@ public class EmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public EmpleadoDto(String idEmpleado, Boolean activo, LocalDate fechaIngreso, String correoElectronico, String telefono, String extensionTelefono, String idTipoPlaza, String idPuesto, String idDireccion, String idSubdireccion) {
+  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
     this.idEmpleado = idEmpleado;
+    this.nombreCompleto = nombreCompleto;
     this.activo = activo;
     this.fechaIngreso = fechaIngreso;
-    this.correoElectronico = correoElectronico;
-    this.telefono = telefono;
-    this.extensionTelefono = extensionTelefono;
     this.idTipoPlaza = idTipoPlaza;
-    this.idPuesto = idPuesto;
+    this.idRegion = idRegion;
     this.idDireccion = idDireccion;
     this.idSubdireccion = idSubdireccion;
+    this.idPuesto = idPuesto;
   }
 
   public EmpleadoDto idEmpleado(String idEmpleado) {
@@ -84,6 +81,26 @@ public class EmpleadoDto {
 
   public void setIdEmpleado(String idEmpleado) {
     this.idEmpleado = idEmpleado;
+  }
+
+  public EmpleadoDto nombreCompleto(String nombreCompleto) {
+    this.nombreCompleto = nombreCompleto;
+    return this;
+  }
+
+  /**
+   * Get nombreCompleto
+   * @return nombreCompleto
+  */
+  @NotNull 
+  @Schema(name = "nombreCompleto", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("nombreCompleto")
+  public String getNombreCompleto() {
+    return nombreCompleto;
+  }
+
+  public void setNombreCompleto(String nombreCompleto) {
+    this.nombreCompleto = nombreCompleto;
   }
 
   public EmpleadoDto activo(Boolean activo) {
@@ -126,66 +143,6 @@ public class EmpleadoDto {
     this.fechaIngreso = fechaIngreso;
   }
 
-  public EmpleadoDto correoElectronico(String correoElectronico) {
-    this.correoElectronico = correoElectronico;
-    return this;
-  }
-
-  /**
-   * Get correoElectronico
-   * @return correoElectronico
-  */
-  @NotNull 
-  @Schema(name = "correoElectronico", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("correoElectronico")
-  public String getCorreoElectronico() {
-    return correoElectronico;
-  }
-
-  public void setCorreoElectronico(String correoElectronico) {
-    this.correoElectronico = correoElectronico;
-  }
-
-  public EmpleadoDto telefono(String telefono) {
-    this.telefono = telefono;
-    return this;
-  }
-
-  /**
-   * Get telefono
-   * @return telefono
-  */
-  @NotNull @Size(min = 10, max = 10) 
-  @Schema(name = "telefono", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("telefono")
-  public String getTelefono() {
-    return telefono;
-  }
-
-  public void setTelefono(String telefono) {
-    this.telefono = telefono;
-  }
-
-  public EmpleadoDto extensionTelefono(String extensionTelefono) {
-    this.extensionTelefono = extensionTelefono;
-    return this;
-  }
-
-  /**
-   * Get extensionTelefono
-   * @return extensionTelefono
-  */
-  @NotNull @Size(min = 3, max = 6) 
-  @Schema(name = "extensionTelefono", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("extensionTelefono")
-  public String getExtensionTelefono() {
-    return extensionTelefono;
-  }
-
-  public void setExtensionTelefono(String extensionTelefono) {
-    this.extensionTelefono = extensionTelefono;
-  }
-
   public EmpleadoDto idTipoPlaza(String idTipoPlaza) {
     this.idTipoPlaza = idTipoPlaza;
     return this;
@@ -206,24 +163,24 @@ public class EmpleadoDto {
     this.idTipoPlaza = idTipoPlaza;
   }
 
-  public EmpleadoDto idPuesto(String idPuesto) {
-    this.idPuesto = idPuesto;
+  public EmpleadoDto idRegion(String idRegion) {
+    this.idRegion = idRegion;
     return this;
   }
 
   /**
-   * Get idPuesto
-   * @return idPuesto
+   * Get idRegion
+   * @return idRegion
   */
   @NotNull 
-  @Schema(name = "idPuesto", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idPuesto")
-  public String getIdPuesto() {
-    return idPuesto;
+  @Schema(name = "idRegion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("idRegion")
+  public String getIdRegion() {
+    return idRegion;
   }
 
-  public void setIdPuesto(String idPuesto) {
-    this.idPuesto = idPuesto;
+  public void setIdRegion(String idRegion) {
+    this.idRegion = idRegion;
   }
 
   public EmpleadoDto idDireccion(String idDireccion) {
@@ -266,6 +223,26 @@ public class EmpleadoDto {
     this.idSubdireccion = idSubdireccion;
   }
 
+  public EmpleadoDto idPuesto(String idPuesto) {
+    this.idPuesto = idPuesto;
+    return this;
+  }
+
+  /**
+   * Get idPuesto
+   * @return idPuesto
+  */
+  @NotNull 
+  @Schema(name = "idPuesto", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("idPuesto")
+  public String getIdPuesto() {
+    return idPuesto;
+  }
+
+  public void setIdPuesto(String idPuesto) {
+    this.idPuesto = idPuesto;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -276,20 +253,19 @@ public class EmpleadoDto {
     }
     EmpleadoDto empleado = (EmpleadoDto) o;
     return Objects.equals(this.idEmpleado, empleado.idEmpleado) &&
+        Objects.equals(this.nombreCompleto, empleado.nombreCompleto) &&
         Objects.equals(this.activo, empleado.activo) &&
         Objects.equals(this.fechaIngreso, empleado.fechaIngreso) &&
-        Objects.equals(this.correoElectronico, empleado.correoElectronico) &&
-        Objects.equals(this.telefono, empleado.telefono) &&
-        Objects.equals(this.extensionTelefono, empleado.extensionTelefono) &&
         Objects.equals(this.idTipoPlaza, empleado.idTipoPlaza) &&
-        Objects.equals(this.idPuesto, empleado.idPuesto) &&
+        Objects.equals(this.idRegion, empleado.idRegion) &&
         Objects.equals(this.idDireccion, empleado.idDireccion) &&
-        Objects.equals(this.idSubdireccion, empleado.idSubdireccion);
+        Objects.equals(this.idSubdireccion, empleado.idSubdireccion) &&
+        Objects.equals(this.idPuesto, empleado.idPuesto);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idEmpleado, activo, fechaIngreso, correoElectronico, telefono, extensionTelefono, idTipoPlaza, idPuesto, idDireccion, idSubdireccion);
+    return Objects.hash(idEmpleado, nombreCompleto, activo, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto);
   }
 
   @Override
@@ -297,15 +273,14 @@ public class EmpleadoDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmpleadoDto {\n");
     sb.append("    idEmpleado: ").append(toIndentedString(idEmpleado)).append("\n");
+    sb.append("    nombreCompleto: ").append(toIndentedString(nombreCompleto)).append("\n");
     sb.append("    activo: ").append(toIndentedString(activo)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
-    sb.append("    correoElectronico: ").append(toIndentedString(correoElectronico)).append("\n");
-    sb.append("    telefono: ").append(toIndentedString(telefono)).append("\n");
-    sb.append("    extensionTelefono: ").append(toIndentedString(extensionTelefono)).append("\n");
     sb.append("    idTipoPlaza: ").append(toIndentedString(idTipoPlaza)).append("\n");
-    sb.append("    idPuesto: ").append(toIndentedString(idPuesto)).append("\n");
+    sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
     sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");
+    sb.append("    idPuesto: ").append(toIndentedString(idPuesto)).append("\n");
     sb.append("}");
     return sb.toString();
   }
