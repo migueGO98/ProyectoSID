@@ -3,6 +3,7 @@ package mx.agr.dgec.servicios;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.mappers.DomicilioMapper;
+import mx.agr.dgec.mappers.EscolaridadMapper;
 import org.mapstruct.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,10 @@ public class ServicioEmpleados {
 
         var idEmpleado = generarIdEmpleado(nuevoEmpleado.getPersona().getRfc(), nuevoEmpleado.getFechaIngreso());
         var domicilio = DomicilioMapper.INSTANCE.toDomicilio(idEmpleado, nuevoEmpleado.getDomicilio());
+        var escolaridad = EscolaridadMapper.INSTANCE.toEscolaridad(idEmpleado, nuevoEmpleado.getEscolaridad());
 
         log.info("Creando nuevo empleado con id: " + idEmpleado + " y domicilio: " + domicilio.toString());
+        log.info("Creando nuevo empleado con id: " + idEmpleado + " y escolaridad: " + escolaridad.toString());
         return null;
     }
 
