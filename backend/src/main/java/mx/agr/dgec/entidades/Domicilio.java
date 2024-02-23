@@ -1,5 +1,10 @@
 package mx.agr.dgec.entidades;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Domicilio {
     private String idEmpleado;
     private String calle;

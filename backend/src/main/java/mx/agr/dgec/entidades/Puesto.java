@@ -1,9 +1,11 @@
 package mx.agr.dgec.entidades;
 
-import mx.agr.dgec.enums.TipoPlazaEnum;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
 public class Puesto {
     private String idPuesto;
     private String nombre;
