@@ -20,7 +20,7 @@ servers:
 paths:
   /api/empleados:
     post:
-      summary: Crear nuevo empleado
+      summary: Crear un nuevo empleado
       tags:
         - Empleados
       responses:

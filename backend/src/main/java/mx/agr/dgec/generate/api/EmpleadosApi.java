@@ -40,7 +40,7 @@ import jakarta.annotation.Generated;
 public interface EmpleadosApi {
 
     /**
-     * POST /api/empleados : Crear nuevo empleado
+     * POST /api/empleados : Crear un nuevo empleado
      * Crea un nuevo empleado
      *
      * @param newEmpleadoDto  (required)
@@ -51,7 +51,7 @@ public interface EmpleadosApi {
      */
     @Operation(
         operationId = "crearEmpleado",
-        summary = "Crear nuevo empleado",
+        summary = "Crear un nuevo empleado",
         description = "Crea un nuevo empleado",
         tags = { "Empleados" },
         responses = {
