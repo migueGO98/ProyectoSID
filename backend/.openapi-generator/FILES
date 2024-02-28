@@ -1,4 +1,6 @@
 src/main/java/mx/agr/dgec/generate/api/EmpleadosApi.java
+src/main/java/mx/agr/dgec/generate/api/EscolaridadesApi.java
+src/main/java/mx/agr/dgec/generate/api/PersonasApi.java
 src/main/java/mx/agr/dgec/generate/model/DomicilioDto.java
 src/main/java/mx/agr/dgec/generate/model/EmpleadoDto.java
 src/main/java/mx/agr/dgec/generate/model/ErrorDto.java

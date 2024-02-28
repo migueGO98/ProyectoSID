@@ -4,10 +4,12 @@ import mx.agr.dgec.entidades.Empleado;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
+import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
+import java.util.List;
 
 @Mapper
 public interface EmpleadoMapper {
@@ -59,4 +61,8 @@ public interface EmpleadoMapper {
 
     @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")
     EmpleadoDto toEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
+
+    default List<RegistrosDto> motivosBajaEnumtoRegistrosDto(List<MotivoBajaEnum> motivosBaja){
+        return motivosBaja.stream().map(motivo -> new RegistrosDto(motivo.name(), motivo.getMotivoBaja())).toList();
+    }
 }

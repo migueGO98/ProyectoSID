@@ -6,6 +6,7 @@ import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 import mx.agr.dgec.generate.model.EscolaridadDto;
 import mx.agr.dgec.generate.model.EstadosNivelesEscolaridadesEnumDto;
 import mx.agr.dgec.generate.model.NivelesEscolaridadesEnumDto;
+import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;
@@ -46,4 +47,13 @@ public interface EscolaridadMapper {
             )
         ).toList();
     }
+
+    default List<RegistrosDto> nivelesEscolaridadesEnumToRegistrosDto(List<NivelesEscolaridadesEnum> niveles){
+        return niveles.stream().map(nivel -> new RegistrosDto(nivel.name(), nivel.getNivel())).toList();
+    }
+
+    default List<RegistrosDto> estadosNivelesEscolaridadesEnumToRegistrosDto(List<EstadosNivelesEscolaridadesEnum> estados){
+        return estados.stream().map(estado -> new RegistrosDto(estado.name(), estado.getEstadoNivel())).toList();
+    }
+
 }

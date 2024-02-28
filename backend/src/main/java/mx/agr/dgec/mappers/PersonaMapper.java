@@ -4,9 +4,12 @@ import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GenerosEnum;
 import mx.agr.dgec.generate.model.EstadoCivilEnumDto;
 import mx.agr.dgec.generate.model.GeneroEnumDto;
+import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 
 @Mapper
@@ -30,7 +33,14 @@ public interface PersonaMapper {
     @ValueMapping(source = "MASCULINO", target = "MASCULINO")
     @ValueMapping(source = "FEMENINO", target = "FEMENINO")
     @ValueMapping(source = "NO_BINARIO", target = "NO_BINARIO")
-    @ValueMapping(source = "DESCONOCIDO", target = "DESCONOCIDO")
+    @ValueMapping(source = "NO_DECIRLO", target = "NO_DECIRLO")
     GenerosEnum toGenerosEnum(GeneroEnumDto genero);
 
+    default List<RegistrosDto> estadosCivilesEnumToRegistrosDto(List<EstadoCivilEnum> estadosCiviles){
+        return estadosCiviles.stream().map(estadoCivil -> new RegistrosDto(estadoCivil.name(), estadoCivil.getEstadoCivil())).toList();
+    }
+
+    default List<RegistrosDto> generosEnumToRegistrosDto(List<GenerosEnum> generos){
+        return generos.stream().map(genero -> new RegistrosDto(genero.name(), genero.getGenero())).toList();
+    }
 }

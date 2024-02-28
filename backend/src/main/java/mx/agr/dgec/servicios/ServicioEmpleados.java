@@ -1,11 +1,15 @@
 package mx.agr.dgec.servicios;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
+import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.mappers.EmpleadoMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -35,5 +39,11 @@ public class ServicioEmpleados {
         var periodoQuincenalIngreso = (diaIngreso <= 15) ? 1 : 2;
 
         return rfcInicio + periodoQuincenalIngreso + String.format("%02d", mesIngreso) + anioIngreso;
+    }
+
+    public List<RegistrosDto> recuperarMotivosBaja() {
+        var motivosBaja = Arrays.stream(MotivoBajaEnum.values()).toList();
+        log.info("Se recuperaron los motivos de baja");
+        return EmpleadoMapper.INSTANCE.motivosBajaEnumtoRegistrosDto(motivosBaja);
     }
 }
