@@ -1,11 +1,12 @@
 package mx.agr.dgec.entidades;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import mx.agr.dgec.enums.MotivoBajaEnum;
-import mx.agr.dgec.enums.TipoPlazaEnum;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
@@ -34,4 +35,8 @@ public class Empleado extends Persona{
     private String idRegion;
     private String idDireccion;
     private String idSubdireccion;
+
+    public void calcularEdad() {
+        super.calcularEdadPersona();
+    }
 }

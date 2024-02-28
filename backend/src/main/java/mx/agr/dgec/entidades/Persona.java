@@ -8,6 +8,7 @@ import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GenerosEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Data
@@ -35,4 +36,9 @@ public abstract class Persona {
     private String contactoEmergenciaTelefono;
     private Domicilio domicilio;
     private List<Escolaridad> escolaridades;
+
+    protected final void calcularEdadPersona() {
+        LocalDate fechaActual = LocalDate.now();
+        this.edad = Period.between(fechaNacimiento, fechaActual).getYears();
+    }
 }

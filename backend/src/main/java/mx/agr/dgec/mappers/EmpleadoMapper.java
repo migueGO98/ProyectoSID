@@ -31,7 +31,6 @@ public interface EmpleadoMapper {
                 .rfc(personaDto.getRfc())
                 .numeroSeguroSocial(personaDto.getNumeroSeguroSocial())
                 .fechaNacimiento(personaDto.getFechaNacimiento())
-                .edad(personaDto.getEdad())
                 .genero(PersonaMapper.INSTANCE.toGenerosEnum(personaDto.getGenero()))
                 .telefonoPersonal(personaDto.getTelefonoPersonal())
                 .correoElectronicoPersonal(personaDto.getCorreoElectronicoPersonal())
@@ -58,12 +57,6 @@ public interface EmpleadoMapper {
                 .build();
     }
 
-    @Mapping(target = "nombreCompleto", expression = "java(concatenarNombreCompleto(empleado))")
-    EmpleadoDto toEmpleadoDto(Empleado empleado);
-
-    // Método para concatenar el nombre y apellidos
-    default String concatenarNombreCompleto(Empleado empleado) {
-        // Implementa la lógica para concatenar nombre y apellido
-        return String.format("%s %s %s", empleado.getNombre(), empleado.getApellidoPaterno(), empleado.getApellidoMaterno());
-    }
+    @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")
+    EmpleadoDto toEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
 }

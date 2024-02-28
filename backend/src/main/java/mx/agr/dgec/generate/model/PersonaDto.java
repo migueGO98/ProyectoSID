@@ -44,8 +44,6 @@ public class PersonaDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaNacimiento;
 
-  private Integer edad;
-
   private GeneroEnumDto genero;
 
   private String telefonoPersonal;
@@ -67,7 +65,7 @@ public class PersonaDto {
   /**
    * Constructor with only required parameters
    */
-  public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, Integer edad, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
+  public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
     this.nombre = nombre;
     this.apellidoPaterno = apellidoPaterno;
     this.apellidoMaterno = apellidoMaterno;
@@ -75,7 +73,6 @@ public class PersonaDto {
     this.rfc = rfc;
     this.numeroSeguroSocial = numeroSeguroSocial;
     this.fechaNacimiento = fechaNacimiento;
-    this.edad = edad;
     this.genero = genero;
     this.telefonoPersonal = telefonoPersonal;
     this.correoElectronicoPersonal = correoElectronicoPersonal;
@@ -223,26 +220,6 @@ public class PersonaDto {
 
   public void setFechaNacimiento(LocalDate fechaNacimiento) {
     this.fechaNacimiento = fechaNacimiento;
-  }
-
-  public PersonaDto edad(Integer edad) {
-    this.edad = edad;
-    return this;
-  }
-
-  /**
-   * Get edad
-   * @return edad
-  */
-  @NotNull 
-  @Schema(name = "edad", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("edad")
-  public Integer getEdad() {
-    return edad;
-  }
-
-  public void setEdad(Integer edad) {
-    this.edad = edad;
   }
 
   public PersonaDto genero(GeneroEnumDto genero) {
@@ -401,7 +378,6 @@ public class PersonaDto {
         Objects.equals(this.rfc, persona.rfc) &&
         Objects.equals(this.numeroSeguroSocial, persona.numeroSeguroSocial) &&
         Objects.equals(this.fechaNacimiento, persona.fechaNacimiento) &&
-        Objects.equals(this.edad, persona.edad) &&
         Objects.equals(this.genero, persona.genero) &&
         Objects.equals(this.telefonoPersonal, persona.telefonoPersonal) &&
         Objects.equals(this.correoElectronicoPersonal, persona.correoElectronicoPersonal) &&
@@ -413,7 +389,7 @@ public class PersonaDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(nombre, apellidoPaterno, apellidoMaterno, curp, rfc, numeroSeguroSocial, fechaNacimiento, edad, genero, telefonoPersonal, correoElectronicoPersonal, estadoCivil, hijos, contactoEmergenciaNombre, contactoEmergenciaTelefono);
+    return Objects.hash(nombre, apellidoPaterno, apellidoMaterno, curp, rfc, numeroSeguroSocial, fechaNacimiento, genero, telefonoPersonal, correoElectronicoPersonal, estadoCivil, hijos, contactoEmergenciaNombre, contactoEmergenciaTelefono);
   }
 
   @Override
@@ -427,7 +403,6 @@ public class PersonaDto {
     sb.append("    rfc: ").append(toIndentedString(rfc)).append("\n");
     sb.append("    numeroSeguroSocial: ").append(toIndentedString(numeroSeguroSocial)).append("\n");
     sb.append("    fechaNacimiento: ").append(toIndentedString(fechaNacimiento)).append("\n");
-    sb.append("    edad: ").append(toIndentedString(edad)).append("\n");
     sb.append("    genero: ").append(toIndentedString(genero)).append("\n");
     sb.append("    telefonoPersonal: ").append(toIndentedString(telefonoPersonal)).append("\n");
     sb.append("    correoElectronicoPersonal: ").append(toIndentedString(correoElectronicoPersonal)).append("\n");

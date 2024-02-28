@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor Usuario as user
+box #LightPink
+    participant ":Frontend" as front
+end box
+box #LightGreen
+    participant ":Backend" as backend
+end box
+box "Azure" #LightBlue
+    database ":PostgreSQL" as db
+end box
+
+user -> front: Ingresa a agregar empleado
+front -> backend++: POST /api/empleados
+  backend -> backend: Validar datos (forma)
+  backend -> backend: Validar datos (fondo)
+  backend -> db: Insertar datos
+  backend <-- db: Empleado
+front <-- backend--: EmpleadoDto
+
+@enduml

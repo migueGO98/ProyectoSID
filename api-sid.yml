@@ -73,7 +73,6 @@ paths:
                     rfc: LOEF111111FG9
                     numeroSeguroSocial: '11111111111'
                     fechaNacimiento: '2019-08-24'
-                    edad: 20
                     genero: MASCULINO
                     telefonoPersonal: '1234567890'
                     correoElectronicoPersonal: user@example.com
@@ -119,7 +118,6 @@ components:
             rfc: LOEF111111FG9
             numeroSeguroSocial: '11111111111'
             fechaNacimiento: '2019-08-24'
-            edad: 20
             genero: MASCULINO
             telefonoPersonal: '1234567890'
             correoElectronicoPersonal: user@example.com
@@ -260,7 +258,6 @@ components:
           rfc: LOEF111111FG9
           numeroSeguroSocial: '11111111111'
           fechaNacimiento: '2019-08-24'
-          edad: 20
           genero: MASCULINO
           telefonoPersonal: '1234567890'
           correoElectronicoPersonal: user@example.com
@@ -276,7 +273,6 @@ components:
         - rfc
         - numeroSeguroSocial
         - fechaNacimiento
-        - edad
         - genero
         - telefonoPersonal
         - correoElectronicoPersonal
@@ -320,10 +316,6 @@ components:
           x-stoplight:
             id: j56xlbv53ik12
           format: date
-        edad:
-          type: integer
-          x-stoplight:
-            id: qi3sk0u2ui1xi
         genero:
           $ref: '#/components/schemas/GeneroEnum'
           x-stoplight:
@@ -427,14 +419,14 @@ components:
       type: object
       description: Error a mostrar en caso de alguna anomalía
       examples:
-        - codigo: 12
+        - codigo: ERROR1
           mensaje: Aquí va el mensaje del error personalizado.
       required:
         - codigo
         - mensaje
       properties:
         codigo:
-          type: integer
+          type: string
           x-stoplight:
             id: ovrpmxh6eo3w8
         mensaje:
@@ -577,4 +569,3 @@ components:
   responses: {}
   securitySchemes: {}
 x-extension-1: null
-

@@ -9,6 +9,6 @@ import java.util.List;
 public class TipoPlaza {
     private String idTipoPlaza;
     private String nombre;
-    private List<Empleado> Empleados;
+    private List<Empleado> empleados;
     private List<Puesto> puestos;
 }

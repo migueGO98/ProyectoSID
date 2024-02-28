@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class ErrorDto {
 
-  private Integer codigo;
+  private String codigo;
 
   private String mensaje;
 
@@ -35,12 +35,12 @@ public class ErrorDto {
   /**
    * Constructor with only required parameters
    */
-  public ErrorDto(Integer codigo, String mensaje) {
+  public ErrorDto(String codigo, String mensaje) {
     this.codigo = codigo;
     this.mensaje = mensaje;
   }
 
-  public ErrorDto codigo(Integer codigo) {
+  public ErrorDto codigo(String codigo) {
     this.codigo = codigo;
     return this;
   }
@@ -52,11 +52,11 @@ public class ErrorDto {
   @NotNull 
   @Schema(name = "codigo", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("codigo")
-  public Integer getCodigo() {
+  public String getCodigo() {
     return codigo;
   }
 
-  public void setCodigo(Integer codigo) {
+  public void setCodigo(String codigo) {
     this.codigo = codigo;
   }
 
