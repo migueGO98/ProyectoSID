@@ -2,6 +2,10 @@ openapi: 3.1.0
 tags:
   - name: Empleados
     description: Funciones sobre empleados de la DGEC
+  - name: Escolaridades
+    description: Funciones sobre niveles escolares
+  - name: Personas
+    description: Funciones sobre personas
 x-stoplight:
   id: zub4eo4y641wl
 info:
@@ -37,12 +41,6 @@ paths:
               description: Ubicación del empleado creado
         '400':
           description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
           content:
             application/json:
               schema:
@@ -102,6 +100,137 @@ paths:
         description: ''
         required: true
     parameters: []
+  /api/escolaridades/niveles:
+    get:
+      summary: Recuperar niveles escolares
+      tags:
+        - Escolaridades
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: 39fxklslk1ly7
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarNivelesEscolares
+      x-stoplight:
+        id: di5m34j0w9d67
+      description: Recupera los niveles escolares permitidos por el sistema
+  /api/escolaridades/niveles/estados:
+    get:
+      summary: Recuperar estados niveles escolares
+      tags:
+        - Escolaridades
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: bvcml4az1eq2q
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarEstadosNivelesEscolares
+      x-stoplight:
+        id: wyhkrt1n1gvri
+      description: 'Recupera los estados de los niveles escolares permitidos por el sistema '
+    parameters: []
+  /api/personas/generos:
+    get:
+      summary: Recuperar generos para una persona
+      tags:
+        - Personas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: lfyscwo3nnhce
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarGeneros
+      x-stoplight:
+        id: 6teh52jdswyc6
+      description: Recupera los géneros de una persona permitidos por el sistema
+  /api/personas/estadosCiviles:
+    get:
+      summary: Recupera los estados civiles de una persona
+      tags:
+        - Personas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: 5h8rkqqjpsd53
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarEstadosCiviles
+      x-stoplight:
+        id: 6s4jsqwp700pk
+      description: Recupera los estados civiles de una persona permitidos por el sistema
+  /api/empleados/motivosBaja:
+    get:
+      summary: Recuperar motivos de baja
+      tags:
+        - Empleados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: rhf16g14b4qdu
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarMotivosBaja
+      x-stoplight:
+        id: q3kkppwbfgatj
+      description: Recupera los motivos de bajas de un empleado permitidos por el sistema
 components:
   schemas:
     NewEmpleado:
@@ -441,7 +570,7 @@ components:
         - MASCULINO
         - FEMENINO
         - NO_BINARIO
-        - DESCONOCIDO
+        - NO_DECIRLO
       description: Valores permitidos para el género de una persona.
       example: MASCULINO
     Escolaridad:
@@ -517,19 +646,19 @@ components:
       x-stoplight:
         id: fthrm3hcau1dq
       type: object
+      description: 'Obtiene los campos registrados, en pares ordenados'
       required:
         - id
-        - nombre
+        - descripcion
       properties:
         id:
           type: string
           x-stoplight:
             id: m35sa3z03os56
-        nombre:
+        descripcion:
           type: string
           x-stoplight:
             id: cr3563tmajs4v
-      description: 'Obtiene los campos registrados, en pares ordenados'
     TipoPlazaEnum:
       title: TipoPlazaEnum
       x-stoplight:

@@ -29,7 +29,7 @@ public enum GeneroEnumDto {
   
   NO_BINARIO("NO_BINARIO"),
   
-  DESCONOCIDO("DESCONOCIDO");
+  NO_DECIRLO("NO_DECIRLO");
 
   private String value;
 

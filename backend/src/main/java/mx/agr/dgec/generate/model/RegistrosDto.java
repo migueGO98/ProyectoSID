@@ -26,7 +26,7 @@ public class RegistrosDto {
 
   private String id;
 
-  private String nombre;
+  private String descripcion;
 
   public RegistrosDto() {
     super();
@@ -35,9 +35,9 @@ public class RegistrosDto {
   /**
    * Constructor with only required parameters
    */
-  public RegistrosDto(String id, String nombre) {
+  public RegistrosDto(String id, String descripcion) {
     this.id = id;
-    this.nombre = nombre;
+    this.descripcion = descripcion;
   }
 
   public RegistrosDto id(String id) {
@@ -60,24 +60,24 @@ public class RegistrosDto {
     this.id = id;
   }
 
-  public RegistrosDto nombre(String nombre) {
-    this.nombre = nombre;
+  public RegistrosDto descripcion(String descripcion) {
+    this.descripcion = descripcion;
     return this;
   }
 
   /**
-   * Get nombre
-   * @return nombre
+   * Get descripcion
+   * @return descripcion
   */
   @NotNull 
-  @Schema(name = "nombre", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("nombre")
-  public String getNombre() {
-    return nombre;
+  @Schema(name = "descripcion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("descripcion")
+  public String getDescripcion() {
+    return descripcion;
   }
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
   }
 
   @Override
@@ -90,12 +90,12 @@ public class RegistrosDto {
     }
     RegistrosDto registros = (RegistrosDto) o;
     return Objects.equals(this.id, registros.id) &&
-        Objects.equals(this.nombre, registros.nombre);
+        Objects.equals(this.descripcion, registros.descripcion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nombre);
+    return Objects.hash(id, descripcion);
   }
 
   @Override
@@ -103,7 +103,7 @@ public class RegistrosDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class RegistrosDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    nombre: ").append(toIndentedString(nombre)).append("\n");
+    sb.append("    descripcion: ").append(toIndentedString(descripcion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

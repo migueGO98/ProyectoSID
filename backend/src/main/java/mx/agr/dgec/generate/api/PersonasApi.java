@@ -5,9 +5,7 @@
  */
 package mx.agr.dgec.generate.api;
 
-import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.ErrorDto;
-import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,58 +35,21 @@ import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 @Validated
-@Tag(name = "Empleados", description = "Funciones sobre empleados de la DGEC")
-public interface EmpleadosApi {
+@Tag(name = "Personas", description = "Funciones sobre personas")
+public interface PersonasApi {
 
     /**
-     * POST /api/empleados : Crear un nuevo empleado
-     * Crea un nuevo empleado
-     *
-     * @param newEmpleadoDto  (required)
-     * @return Created (status code 201)
-     *         or Bad Request (status code 400)
-     *         or Forbidden (status code 403)
-     */
-    @Operation(
-        operationId = "crearEmpleado",
-        summary = "Crear un nuevo empleado",
-        description = "Crea un nuevo empleado",
-        tags = { "Empleados" },
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Created", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = EmpleadoDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
-            }),
-            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/api/empleados",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    ResponseEntity<EmpleadoDto> crearEmpleado(
-        @Parameter(name = "NewEmpleadoDto", description = "", required = true) @Valid @RequestBody NewEmpleadoDto newEmpleadoDto
-    );
-
-
-    /**
-     * GET /api/empleados/motivosBaja : Recuperar motivos de baja
-     * Recupera los motivos de bajas de un empleado permitidos por el sistema
+     * GET /api/personas/estadosCiviles : Recupera los estados civiles de una persona
+     * Recupera los estados civiles de una persona permitidos por el sistema
      *
      * @return OK (status code 200)
      *         or Forbidden (status code 403)
      */
     @Operation(
-        operationId = "recuperarMotivosBaja",
-        summary = "Recuperar motivos de baja",
-        description = "Recupera los motivos de bajas de un empleado permitidos por el sistema",
-        tags = { "Empleados" },
+        operationId = "recuperarEstadosCiviles",
+        summary = "Recupera los estados civiles de una persona",
+        description = "Recupera los estados civiles de una persona permitidos por el sistema",
+        tags = { "Personas" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
@@ -100,10 +61,41 @@ public interface EmpleadosApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/empleados/motivosBaja",
+        value = "/api/personas/estadosCiviles",
         produces = { "application/json" }
     )
-    ResponseEntity<List<RegistrosDto>> recuperarMotivosBaja(
+    ResponseEntity<List<RegistrosDto>> recuperarEstadosCiviles(
+        
+    );
+
+
+    /**
+     * GET /api/personas/generos : Recuperar generos para una persona
+     * Recupera los géneros de una persona permitidos por el sistema
+     *
+     * @return OK (status code 200)
+     *         or Forbidden (status code 403)
+     */
+    @Operation(
+        operationId = "recuperarGeneros",
+        summary = "Recuperar generos para una persona",
+        description = "Recupera los géneros de una persona permitidos por el sistema",
+        tags = { "Personas" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/api/personas/generos",
+        produces = { "application/json" }
+    )
+    ResponseEntity<List<RegistrosDto>> recuperarGeneros(
         
     );
 
