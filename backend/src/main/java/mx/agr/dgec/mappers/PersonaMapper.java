@@ -8,7 +8,6 @@ import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;
-
 import java.util.List;
 
 
