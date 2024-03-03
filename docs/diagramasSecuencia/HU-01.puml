@@ -13,11 +13,68 @@ box "Azure" #LightBlue
 end box
 
 user -> front: Ingresa a agregar empleado
-front -> backend++: POST /api/empleados
+front -> backend++: POST /api/empleados + JSON
+rnote over front
+{
+  "persona": {
+    "nombre": "Antonio",
+    "apellidoPaterno": "Aguilar",
+    "apellidoMaterno": "Aguilar",
+    "curp": "AAAA999999DDDDD12F",
+    "rfc": "AAAA999999BBB",
+    "numeroSeguroSocial": "11111111111",
+    "fechaNacimiento": "2000-02-25",
+    "genero": "MASCULINO",
+    "telefonoPersonal": "1111111111",
+    "correoElectronicoPersonal": "correo@correo.mx",
+    "estadoCivil": "CASADO",
+    "hijos": true,
+    "contactoEmergenciaNombre": "Felipe Aguilar Aguilar",
+    "contactoEmergenciaTelefono": "9999999999"
+  },
+  "domicilio": {
+    "calle": "Prolongación",
+    "codigoPostal": "99999",
+    "colonia": "Prolongación",
+    "municipio": "Iztapalapa",
+    "ciudad": "CDMX",
+    "estado": "CDMX"
+  },
+  "escolaridad": [
+    {
+      "nivel": "TECNICO",
+      "carrera": "Informática",
+      "estadoNivel": "CREDITOS_CUBIERTOS",
+      "conCedulaProfesional": true,
+      "cedulaProfesional": "1111111"
+    }
+  ],
+  "fechaIngreso": "2024-02-16",
+  "idTipoPlaza": "SP",
+  "idRegion": "OC",
+  "idDireccion": "DGCE",
+  "idSubdireccion": "SDGCE",
+  "idPuesto": "SJD1"
+}
+
+end note
   backend -> backend: Validar datos (forma)
   backend -> backend: Validar datos (fondo)
   backend -> db: Insertar datos
   backend <-- db: Empleado
-front <-- backend--: EmpleadoDto
+front <-- backend--: 201 + JSON
+rnote over backend
+{
+  "idEmpleado": "stri2022024",
+  "nombreCompleto": "string string string",
+  "activo": true,
+  "fechaIngreso": "2024-02-28",
+  "idTipoPlaza": "SP",
+  "idRegion": "OC",
+  "idDireccion": "DGCE",
+  "idSubdireccion": "SDGCE",
+  "idPuesto": "SJD1"
+}
+end note
 
 @enduml
