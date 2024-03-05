@@ -55,14 +55,16 @@ rnote over front
   "idDireccion": "DGCE",
   "idSubdireccion": "SDGCE",
   "idPuesto": "SJD1"
+  "roles": ["RH1", "IP3"]
 }
-
 end note
+
   backend -> backend: Validar datos (forma)
   backend -> backend: Validar datos (fondo)
   backend -> db: Insertar datos
   backend <-- db: Empleado
 front <-- backend--: 201 + JSON
+
 rnote over backend
 {
   "idEmpleado": "stri2022024",
@@ -74,6 +76,7 @@ rnote over backend
   "idDireccion": "DGCE",
   "idSubdireccion": "SDGCE",
   "idPuesto": "SJD1"
+  "roles": ["RH1", "IP3"]
 }
 end note
 

@@ -6,6 +6,8 @@ tags:
     description: Funciones sobre niveles escolares
   - name: Personas
     description: Funciones sobre personas
+  - name: Roles
+    description: Funciones sobre roles
 x-stoplight:
   id: zub4eo4y641wl
 info:
@@ -19,6 +21,7 @@ info:
   license:
     name: MIT
     url: 'https://migueGO98.github.io/license'
+  summary: ''
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -97,6 +100,9 @@ paths:
                   idDireccion: DGEC
                   idSubdireccion: SDGEC
                   idPuesto: SJD1
+                  roles:
+                    - RH1
+                    - IP3
         description: ''
         required: true
     parameters: []
@@ -231,6 +237,26 @@ paths:
       x-stoplight:
         id: q3kkppwbfgatj
       description: Recupera los motivos de bajas de un empleado permitidos por el sistema
+  /api/roles:
+    get:
+      summary: Recuperar roles
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Roles'
+                  x-stoplight:
+                    id: dxs3rvgbz8wcw
+      operationId: recuperarRoles
+      x-stoplight:
+        id: 5v6oxwmkhksvo
+      description: Recupera los roles registrados en el sistema
 components:
   schemas:
     NewEmpleado:
@@ -273,6 +299,9 @@ components:
           idDireccion: DGEC
           idSubdireccion: SDGEC
           idPuesto: SJD1
+          roles:
+            - RH1
+            - IP3
       required:
         - persona
         - domicilio
@@ -283,6 +312,7 @@ components:
         - idDireccion
         - idSubdireccion
         - idPuesto
+        - roles
       properties:
         persona:
           $ref: '#/components/schemas/Persona'
@@ -326,6 +356,14 @@ components:
           type: string
           x-stoplight:
             id: 3vyfm67aisq6x
+        roles:
+          type: array
+          x-stoplight:
+            id: p4pdc8ryk01az
+          items:
+            x-stoplight:
+              id: li8e4b4htn561
+            type: string
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
@@ -483,6 +521,19 @@ components:
       x-stoplight:
         id: 9m99cxtgz3q1c
       type: object
+      examples:
+        - idEmpleado: LOEF2082019
+          nombreCompleto: Lopez Estrada Fabian
+          activo: true
+          fechaIngreso: '2019-08-24'
+          idTipoPlaza: SP
+          idRegion: OC
+          idDireccion: DGEC
+          idSubdireccion: SDGEC
+          idPuesto: SJD1
+          roles:
+            - RH1
+            - IP3
       required:
         - idEmpleado
         - nombreCompleto
@@ -531,16 +582,14 @@ components:
           type: string
           x-stoplight:
             id: v09aa1w1k4ti4
-      examples:
-        - idEmpleado: LOEF2082019
-          nombreCompleto: Lopez Estrada Fabian
-          activo: true
-          fechaIngreso: '2019-08-24'
-          idTipoPlaza: SP
-          idRegion: OC
-          idDireccion: DGEC
-          idSubdireccion: SDGEC
-          idPuesto: SJD1
+        roles:
+          type: array
+          x-stoplight:
+            id: vvt6sojc9n64x
+          items:
+            x-stoplight:
+              id: 261sa6g7b09gb
+            type: string
     Error:
       title: Error
       x-stoplight:
@@ -570,7 +619,7 @@ components:
         - MASCULINO
         - FEMENINO
         - NO_BINARIO
-        - NO_DECIRLO
+        - OTRO
       description: Valores permitidos para el género de una persona.
       example: MASCULINO
     Escolaridad:
@@ -694,6 +743,23 @@ components:
         - TERMINO_CONTRATO
         - RENUNCIA
         - LIQUIDACION
+    Roles:
+      title: Roles
+      x-stoplight:
+        id: dovbwbara82m8
+      type: object
+      required:
+        - id
+        - descripcion
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: e8pak79samym4
+        descripcion:
+          type: string
+          x-stoplight:
+            id: iedylln8v8piv
   requestBodies: {}
   responses: {}
   securitySchemes: {}
