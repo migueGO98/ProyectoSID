@@ -32,7 +32,7 @@ public interface PersonaMapper {
     @ValueMapping(source = "MASCULINO", target = "MASCULINO")
     @ValueMapping(source = "FEMENINO", target = "FEMENINO")
     @ValueMapping(source = "NO_BINARIO", target = "NO_BINARIO")
-    @ValueMapping(source = "NO_DECIRLO", target = "NO_DECIRLO")
+    @ValueMapping(source = "OTRO", target = "OTRO")
     GenerosEnum toGenerosEnum(GeneroEnumDto genero);
 
     default List<RegistrosDto> estadosCivilesEnumToRegistrosDto(List<EstadoCivilEnum> estadosCiviles){

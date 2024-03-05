@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -43,6 +46,9 @@ public class EmpleadoDto {
   private String idSubdireccion;
 
   private String idPuesto;
+
+  @Valid
+  private List<String> roles;
 
   public EmpleadoDto() {
     super();
@@ -243,6 +249,34 @@ public class EmpleadoDto {
     this.idPuesto = idPuesto;
   }
 
+  public EmpleadoDto roles(List<String> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public EmpleadoDto addRolesItem(String rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<>();
+    }
+    this.roles.add(rolesItem);
+    return this;
+  }
+
+  /**
+   * Get roles
+   * @return roles
+  */
+  
+  @Schema(name = "roles", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("roles")
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -260,12 +294,13 @@ public class EmpleadoDto {
         Objects.equals(this.idRegion, empleado.idRegion) &&
         Objects.equals(this.idDireccion, empleado.idDireccion) &&
         Objects.equals(this.idSubdireccion, empleado.idSubdireccion) &&
-        Objects.equals(this.idPuesto, empleado.idPuesto);
+        Objects.equals(this.idPuesto, empleado.idPuesto) &&
+        Objects.equals(this.roles, empleado.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idEmpleado, nombreCompleto, activo, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto);
+    return Objects.hash(idEmpleado, nombreCompleto, activo, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, roles);
   }
 
   @Override
@@ -281,6 +316,7 @@ public class EmpleadoDto {
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
     sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");
     sb.append("    idPuesto: ").append(toIndentedString(idPuesto)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }
