@@ -11,9 +11,9 @@ end box
 controller -> service: crearNuevoEmpleado(newEmpleadoDto)
 service -> service: validarDatosForma(newEmpleadoDto)
 service -> service: generarIdEmpleado(rfc, fechaIngreso)
+service -> service: validarDatosFondo(nuevoEmpleado)
 service -> mapper: toEmpleado(idEmpleado, newEmpleadoDto)
 mapper --> service: Empleado
-service -> service: validarDatosFondo(nuevoEmpleado)
 service -> service: nuevoEmpleado.calcularEdad()
 service -> repository: save(nuevoEmpleado)
 repository --> service: Empleado
