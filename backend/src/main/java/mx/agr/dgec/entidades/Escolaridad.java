@@ -8,7 +8,6 @@ import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Escolaridad {
     private String idEmpleado;
     private NivelesEscolaridadesEnum nivel;

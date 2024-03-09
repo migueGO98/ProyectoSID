@@ -1,62 +1,48 @@
 package mx.agr.dgec.mappers;
 
+import mx.agr.dgec.entidades.Domicilio;
 import mx.agr.dgec.entidades.Empleado;
+import mx.agr.dgec.entidades.Escolaridad;
 import mx.agr.dgec.enums.MotivoBajaEnum;
-import mx.agr.dgec.generate.model.EmpleadoDto;
-import mx.agr.dgec.generate.model.NewEmpleadoDto;
-import mx.agr.dgec.generate.model.RegistrosDto;
+import mx.agr.dgec.generate.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {PersonaMapper.class, DomicilioMapper.class, JsonNullableMapper.class, EscolaridadMapper.class, RolMapper.class})
 public interface EmpleadoMapper {
+
     EmpleadoMapper INSTANCE = Mappers.getMapper(EmpleadoMapper.class);
 
-    default Empleado toEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo,
-                                LocalDate fechaBaja, String correoElectronico, String telefono,
-                                String extensionTelefono, int diasVacacionesDisponibles,
-                                int diasVacacionesTomados, MotivoBajaEnum motivoBaja
-    ) {
-        var personaDto = newEmpleadoDto.getPersona();
-        var domicilioDto = newEmpleadoDto.getDomicilio();
-        var escolaridadDto = newEmpleadoDto.getEscolaridad();
+    @Mapping(target = "nombre", source = "newEmpleadoDto.persona.nombre")
+    @Mapping(target = "apellidoPaterno", source = "newEmpleadoDto.persona.apellidoPaterno")
+    @Mapping(target = "apellidoMaterno", source = "newEmpleadoDto.persona.apellidoMaterno")
+    @Mapping(target = "curp", source = "newEmpleadoDto.persona.curp")
+    @Mapping(target = "rfc", source = "newEmpleadoDto.persona.rfc")
+    @Mapping(target = "numeroSeguroSocial", source = "newEmpleadoDto.persona.numeroSeguroSocial")
+    @Mapping(target = "fechaNacimiento", source = "newEmpleadoDto.persona.fechaNacimiento")
+    @Mapping(target = "genero", source = "newEmpleadoDto.persona.genero")
+    @Mapping(target = "telefonoPersonal", source = "newEmpleadoDto.persona.telefonoPersonal")
+    @Mapping(target = "correoElectronicoPersonal", source = "newEmpleadoDto.persona.correoElectronicoPersonal")
+    @Mapping(target = "estadoCivil", source = "newEmpleadoDto.persona.estadoCivil")
+    @Mapping(target = "hijos", source = "newEmpleadoDto.persona.hijos")
+    @Mapping(target = "contactoEmergenciaNombre", source = "newEmpleadoDto.persona.contactoEmergenciaNombre")
+    @Mapping(target = "contactoEmergenciaTelefono", source = "newEmpleadoDto.persona.contactoEmergenciaTelefono")
+    @Mapping(target = "domicilio", expression = "java(toDomicilio(idEmpleado, newEmpleadoDto.getDomicilio()))")
+    @Mapping(target = "escolaridades", expression = "java(toEscolaridades(idEmpleado, newEmpleadoDto.getEscolaridades()))")
+    Empleado newEmpleadoDtoToEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo,
+                                      LocalDate fechaBaja, String correoElectronico, String telefono,
+                                      String extensionTelefono, int diasVacacionesDisponibles,
+                                      int diasVacacionesTomados, MotivoBajaEnum motivoBaja);
 
-        return Empleado.builder()
-                .idEmpleado(idEmpleado)
-                .nombre(personaDto.getNombre())
-                .apellidoPaterno(personaDto.getApellidoPaterno())
-                .apellidoMaterno(personaDto.getApellidoMaterno())
-                .curp(personaDto.getCurp())
-                .rfc(personaDto.getRfc())
-                .numeroSeguroSocial(personaDto.getNumeroSeguroSocial())
-                .fechaNacimiento(personaDto.getFechaNacimiento())
-                .genero(PersonaMapper.INSTANCE.toGenerosEnum(personaDto.getGenero()))
-                .telefonoPersonal(personaDto.getTelefonoPersonal())
-                .correoElectronicoPersonal(personaDto.getCorreoElectronicoPersonal())
-                .estadoCivil(PersonaMapper.INSTANCE.toEstadoCivilEnum(personaDto.getEstadoCivil()))
-                .hijos(personaDto.getHijos())
-                .contactoEmergenciaNombre(personaDto.getContactoEmergenciaNombre())
-                .contactoEmergenciaTelefono(personaDto.getContactoEmergenciaTelefono())
-                .domicilio(DomicilioMapper.INSTANCE.toDomicilio(idEmpleado, domicilioDto))
-                .escolaridades(EscolaridadMapper.INSTANCE.toEscolaridad(idEmpleado, escolaridadDto))
-                .activo(activo)
-                .fechaIngreso(newEmpleadoDto.getFechaIngreso())
-                .fechaBaja(fechaBaja)
-                .correoElectronico(correoElectronico)
-                .telefono(telefono)
-                .extensionTelefono(extensionTelefono)
-                .diasVacacionesDisponibles(diasVacacionesDisponibles)
-                .diasVacacionesTomados(diasVacacionesTomados)
-                .motivoBaja(motivoBaja)
-                .idTipoPlaza(newEmpleadoDto.getIdTipoPlaza().getValue())
-                .idPuesto(newEmpleadoDto.getIdPuesto())
-                .idRegion(newEmpleadoDto.getIdRegion())
-                .idDireccion(newEmpleadoDto.getIdDireccion())
-                .idSubdireccion(newEmpleadoDto.getIdSubdireccion())
-                .build();
+    default Domicilio toDomicilio(String idEmpleado, DomicilioDto domicilioDto) {
+        return DomicilioMapper.INSTANCE.domicilioDtoToDomicilio(idEmpleado, domicilioDto);
+    }
+
+    default List<Escolaridad> toEscolaridades(String idEmpleado, List<EscolaridadDto> escolaridadesDto) {
+        return EscolaridadMapper.INSTANCE.listEscolaridadDtoToListEscolaridad(idEmpleado, escolaridadesDto);
     }
 
     @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")

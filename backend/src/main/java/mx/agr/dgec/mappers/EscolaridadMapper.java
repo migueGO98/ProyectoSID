@@ -8,44 +8,22 @@ import mx.agr.dgec.generate.model.EstadosNivelesEscolaridadesEnumDto;
 import mx.agr.dgec.generate.model.NivelesEscolaridadesEnumDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {JsonNullableMapper.class})
 public interface EscolaridadMapper {
+
     EscolaridadMapper INSTANCE = Mappers.getMapper(EscolaridadMapper.class);
 
-    @ValueMapping(source = "TECNICO", target = "TECNICO")
-    @ValueMapping(source = "LICENCIATURA", target = "LICENCIATURA")
-    @ValueMapping(source = "MAESTRIA", target = "MAESTRIA")
-    @ValueMapping(source = "ESPECIALIDAD", target = "ESPECIALIDAD")
-    @ValueMapping(source = "DOCTORADO", target = "DOCTORADO")
-    @ValueMapping(source = "BACHILLERATO", target = "BACHILLERATO")
-    @ValueMapping(source = "DIPLOMADO", target = "DIPLOMADO")
     NivelesEscolaridadesEnum toNivelesEscolaridadesEnum(NivelesEscolaridadesEnumDto nivel);
 
-    @ValueMapping(source = "CREDITOS_CUBIERTOS", target = "CREDITOS_CUBIERTOS")
-    @ValueMapping(source = "CERTIFICADO", target = "CERTIFICADO")
-    @ValueMapping(source = "PASANTE", target = "PASANTE")
-    @ValueMapping(source = "TITULADO", target = "TITULADO")
-    @ValueMapping(source = "TRAMITE_TITULACION", target = "TRAMITE_TITULACION")
-    @ValueMapping(source = "TRUNCA", target = "TRUNCA")
     EstadosNivelesEscolaridadesEnum toEstadosNivelesEscolaridadesEnum(EstadosNivelesEscolaridadesEnumDto estadoNivel);
 
+    Escolaridad escolaridadDtoToEscolaridad(String idEmpleado, EscolaridadDto escolaridad);
 
-    // Metodo para parsear de EscolaridadDto a Escolaridad por los enums
-    default List<Escolaridad> toEscolaridad(String idEmpleado, List<EscolaridadDto> escolaridadDto) {
-        return escolaridadDto.stream().map(escolaridad ->
-            new Escolaridad(
-                idEmpleado,
-                toNivelesEscolaridadesEnum(escolaridad.getNivel()),
-                escolaridad.getCarrera(),
-                toEstadosNivelesEscolaridadesEnum(escolaridad.getEstadoNivel()),
-                escolaridad.getConCedulaProfesional(),
-                escolaridad.getCedulaProfesional()
-            )
-        ).toList();
+    default List<Escolaridad> listEscolaridadDtoToListEscolaridad(String idEmpleado, List<EscolaridadDto> escolaridades){
+        return escolaridades.stream().map(escolaridad -> escolaridadDtoToEscolaridad(idEmpleado, escolaridad)).toList();
     }
 
     default List<RegistrosDto> nivelesEscolaridadesEnumToRegistrosDto(List<NivelesEscolaridadesEnum> niveles){
@@ -55,5 +33,4 @@ public interface EscolaridadMapper {
     default List<RegistrosDto> estadosNivelesEscolaridadesEnumToRegistrosDto(List<EstadosNivelesEscolaridadesEnum> estados){
         return estados.stream().map(estado -> new RegistrosDto(estado.name(), estado.getEstadoNivel())).toList();
     }
-
 }

@@ -10,6 +10,5 @@ import org.mapstruct.factory.Mappers;
 public interface DomicilioMapper {
     DomicilioMapper INSTANCE = Mappers.getMapper(DomicilioMapper.class);
 
-    @Mapping(target = "idEmpleado", source = "idEmpleado")
-    Domicilio toDomicilio(String idEmpleado, DomicilioDto domicilioDto);
+    Domicilio domicilioDtoToDomicilio(String idEmpleado, DomicilioDto domicilioDto);
 }

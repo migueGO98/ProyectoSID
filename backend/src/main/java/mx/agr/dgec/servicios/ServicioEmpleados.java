@@ -2,9 +2,7 @@ package mx.agr.dgec.servicios;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.enums.MotivoBajaEnum;
-import mx.agr.dgec.generate.model.EmpleadoDto;
-import mx.agr.dgec.generate.model.NewEmpleadoDto;
-import mx.agr.dgec.generate.model.RegistrosDto;
+import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -15,20 +13,22 @@ import java.util.List;
 @Slf4j
 public class ServicioEmpleados {
 
-    public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleado) {
+    public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleadoDto) {
+        final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), nuevoEmpleadoDto.getFechaIngreso());
 
-        final var idEmpleado = generarIdEmpleado(nuevoEmpleado.getPersona().getRfc(), nuevoEmpleado.getFechaIngreso());
         // Validar que el empleado no exista en la base de datos
 
         // Las asignaciones true y null son por Reglas de Negocio
-        final var empleado = EmpleadoMapper.INSTANCE.toEmpleado(idEmpleado, nuevoEmpleado, true,null,
-                null, null,null, 0,0, null);
-        empleado.calcularEdad();
-        var nombreCompleto = String.format("%s %s %s", empleado.getNombre(), empleado.getApellidoPaterno(), empleado.getApellidoMaterno());
+        final var nuevoEmpleado = EmpleadoMapper.INSTANCE.newEmpleadoDtoToEmpleado(idEmpleado, nuevoEmpleadoDto, true,null,
+               null, null,null, 0,0, null);
+        nuevoEmpleado.calcularEdad();
 
-        log.info("Empleado creado: " + nombreCompleto.toUpperCase() + " con ID: " + idEmpleado + "y su edad es: " + empleado.getEdad() + " años");
+        log.info("NewEmpleadoDto: {}", nuevoEmpleado);
 
-        return EmpleadoMapper.INSTANCE.toEmpleadoDto(nombreCompleto, empleado);
+        var nombreCompleto = String.format("%s %s %s", nuevoEmpleado.getNombre(), nuevoEmpleado.getApellidoPaterno(), nuevoEmpleado.getApellidoMaterno());
+
+        log.info("Empleado creado: {} con ID {}", nombreCompleto.toUpperCase(), idEmpleado);
+        return EmpleadoMapper.INSTANCE.toEmpleadoDto(nombreCompleto, nuevoEmpleado);
     }
 
     private String generarIdEmpleado(String rfc, LocalDate fechaIngreso) {

@@ -8,13 +8,14 @@ import lombok.experimental.SuperBuilder;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
 @AllArgsConstructor
 @SuperBuilder
-public class Empleado extends Persona{
+public class Empleado extends Persona {
     private String idEmpleado;
     private Boolean activo;
 
@@ -35,6 +36,7 @@ public class Empleado extends Persona{
     private String idRegion;
     private String idDireccion;
     private String idSubdireccion;
+    private List<String> roles;
 
     public void calcularEdad() {
         super.calcularEdadPersona();
