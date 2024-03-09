@@ -38,7 +38,7 @@ public class NewEmpleadoDto {
   private DomicilioDto domicilio;
 
   @Valid
-  private List<@Valid EscolaridadDto> escolaridad = new ArrayList<>();
+  private List<@Valid EscolaridadDto> escolaridades = new ArrayList<>();
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
@@ -63,10 +63,10 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridad, LocalDate fechaIngreso, TipoPlazaEnumDto idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, TipoPlazaEnumDto idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
     this.persona = persona;
     this.domicilio = domicilio;
-    this.escolaridad = escolaridad;
+    this.escolaridades = escolaridades;
     this.fechaIngreso = fechaIngreso;
     this.idTipoPlaza = idTipoPlaza;
     this.idRegion = idRegion;
@@ -116,32 +116,32 @@ public class NewEmpleadoDto {
     this.domicilio = domicilio;
   }
 
-  public NewEmpleadoDto escolaridad(List<@Valid EscolaridadDto> escolaridad) {
-    this.escolaridad = escolaridad;
+  public NewEmpleadoDto escolaridades(List<@Valid EscolaridadDto> escolaridades) {
+    this.escolaridades = escolaridades;
     return this;
   }
 
-  public NewEmpleadoDto addEscolaridadItem(EscolaridadDto escolaridadItem) {
-    if (this.escolaridad == null) {
-      this.escolaridad = new ArrayList<>();
+  public NewEmpleadoDto addEscolaridadesItem(EscolaridadDto escolaridadesItem) {
+    if (this.escolaridades == null) {
+      this.escolaridades = new ArrayList<>();
     }
-    this.escolaridad.add(escolaridadItem);
+    this.escolaridades.add(escolaridadesItem);
     return this;
   }
 
   /**
-   * Get escolaridad
-   * @return escolaridad
+   * Get escolaridades
+   * @return escolaridades
   */
   @NotNull @Valid 
-  @Schema(name = "escolaridad", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("escolaridad")
-  public List<@Valid EscolaridadDto> getEscolaridad() {
-    return escolaridad;
+  @Schema(name = "escolaridades", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("escolaridades")
+  public List<@Valid EscolaridadDto> getEscolaridades() {
+    return escolaridades;
   }
 
-  public void setEscolaridad(List<@Valid EscolaridadDto> escolaridad) {
-    this.escolaridad = escolaridad;
+  public void setEscolaridades(List<@Valid EscolaridadDto> escolaridades) {
+    this.escolaridades = escolaridades;
   }
 
   public NewEmpleadoDto fechaIngreso(LocalDate fechaIngreso) {
@@ -303,7 +303,7 @@ public class NewEmpleadoDto {
     NewEmpleadoDto newEmpleado = (NewEmpleadoDto) o;
     return Objects.equals(this.persona, newEmpleado.persona) &&
         Objects.equals(this.domicilio, newEmpleado.domicilio) &&
-        Objects.equals(this.escolaridad, newEmpleado.escolaridad) &&
+        Objects.equals(this.escolaridades, newEmpleado.escolaridades) &&
         Objects.equals(this.fechaIngreso, newEmpleado.fechaIngreso) &&
         Objects.equals(this.idTipoPlaza, newEmpleado.idTipoPlaza) &&
         Objects.equals(this.idRegion, newEmpleado.idRegion) &&
@@ -315,7 +315,7 @@ public class NewEmpleadoDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(persona, domicilio, escolaridad, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, roles);
+    return Objects.hash(persona, domicilio, escolaridades, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, roles);
   }
 
   @Override
@@ -324,7 +324,7 @@ public class NewEmpleadoDto {
     sb.append("class NewEmpleadoDto {\n");
     sb.append("    persona: ").append(toIndentedString(persona)).append("\n");
     sb.append("    domicilio: ").append(toIndentedString(domicilio)).append("\n");
-    sb.append("    escolaridad: ").append(toIndentedString(escolaridad)).append("\n");
+    sb.append("    escolaridades: ").append(toIndentedString(escolaridades)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
     sb.append("    idTipoPlaza: ").append(toIndentedString(idTipoPlaza)).append("\n");
     sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");

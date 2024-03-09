@@ -35,7 +35,7 @@ public class EscolaridadDto {
 
   private Boolean conCedulaProfesional;
 
-  private String cedulaProfesional;
+  private JsonNullable<String> cedulaProfesional = JsonNullable.<String>undefined();
 
   public EscolaridadDto() {
     super();
@@ -49,7 +49,7 @@ public class EscolaridadDto {
     this.carrera = carrera;
     this.estadoNivel = estadoNivel;
     this.conCedulaProfesional = conCedulaProfesional;
-    this.cedulaProfesional = cedulaProfesional;
+    this.cedulaProfesional = JsonNullable.of(cedulaProfesional);
   }
 
   public EscolaridadDto nivel(NivelesEscolaridadesEnumDto nivel) {
@@ -133,7 +133,7 @@ public class EscolaridadDto {
   }
 
   public EscolaridadDto cedulaProfesional(String cedulaProfesional) {
-    this.cedulaProfesional = cedulaProfesional;
+    this.cedulaProfesional = JsonNullable.of(cedulaProfesional);
     return this;
   }
 
@@ -144,11 +144,11 @@ public class EscolaridadDto {
   @NotNull @Size(min = 7, max = 8) 
   @Schema(name = "cedulaProfesional", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("cedulaProfesional")
-  public String getCedulaProfesional() {
+  public JsonNullable<String> getCedulaProfesional() {
     return cedulaProfesional;
   }
 
-  public void setCedulaProfesional(String cedulaProfesional) {
+  public void setCedulaProfesional(JsonNullable<String> cedulaProfesional) {
     this.cedulaProfesional = cedulaProfesional;
   }
 

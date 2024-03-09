@@ -33,7 +33,7 @@ public class PersonaDto {
 
   private String apellidoPaterno;
 
-  private String apellidoMaterno;
+  private JsonNullable<String> apellidoMaterno = JsonNullable.<String>undefined();
 
   private String curp;
 
@@ -68,7 +68,7 @@ public class PersonaDto {
   public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
     this.nombre = nombre;
     this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = apellidoMaterno;
+    this.apellidoMaterno = JsonNullable.of(apellidoMaterno);
     this.curp = curp;
     this.rfc = rfc;
     this.numeroSeguroSocial = numeroSeguroSocial;
@@ -123,7 +123,7 @@ public class PersonaDto {
   }
 
   public PersonaDto apellidoMaterno(String apellidoMaterno) {
-    this.apellidoMaterno = apellidoMaterno;
+    this.apellidoMaterno = JsonNullable.of(apellidoMaterno);
     return this;
   }
 
@@ -134,11 +134,11 @@ public class PersonaDto {
   @NotNull 
   @Schema(name = "apellidoMaterno", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoMaterno")
-  public String getApellidoMaterno() {
+  public JsonNullable<String> getApellidoMaterno() {
     return apellidoMaterno;
   }
 
-  public void setApellidoMaterno(String apellidoMaterno) {
+  public void setApellidoMaterno(JsonNullable<String> apellidoMaterno) {
     this.apellidoMaterno = apellidoMaterno;
   }
 

@@ -88,7 +88,7 @@ paths:
                     municipio: Iztapalapa
                     ciudad: CDMX
                     estado: CDMX
-                  escolaridad:
+                  escolaridades:
                     - nivel: LICENCIATURA
                       carrera: COMPUTACION
                       estadoNivel: TRAMITE_TITULACION
@@ -253,6 +253,12 @@ paths:
                   $ref: '#/components/schemas/Roles'
                   x-stoplight:
                     id: dxs3rvgbz8wcw
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       operationId: recuperarRoles
       x-stoplight:
         id: 5v6oxwmkhksvo
@@ -287,7 +293,7 @@ components:
             municipio: Iztapalapa
             ciudad: CDMX
             estado: CDMX
-          escolaridad:
+          escolaridades:
             - nivel: LICENCIATURA
               carrera: COMPUTACION
               estadoNivel: TRAMITE_TITULACION
@@ -305,7 +311,7 @@ components:
       required:
         - persona
         - domicilio
-        - escolaridad
+        - escolaridades
         - fechaIngreso
         - idTipoPlaza
         - idRegion
@@ -322,7 +328,7 @@ components:
           $ref: '#/components/schemas/Domicilio'
           x-stoplight:
             id: 0yjlcc812o9o1
-        escolaridad:
+        escolaridades:
           type: array
           x-stoplight:
             id: 5d72q7jwipk1b
@@ -457,7 +463,9 @@ components:
           x-stoplight:
             id: jezjc4droemva
         apellidoMaterno:
-          type: string
+          type:
+            - string
+            - 'null'
           x-stoplight:
             id: z6okx1m1lgx6p
         curp:
@@ -658,7 +666,9 @@ components:
           x-stoplight:
             id: cdax02p05vavh
         cedulaProfesional:
-          type: string
+          type:
+            - string
+            - 'null'
           x-stoplight:
             id: i008hrw387hye
           minLength: 7

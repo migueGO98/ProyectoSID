@@ -5,6 +5,7 @@
  */
 package mx.agr.dgec.generate.api;
 
+import mx.agr.dgec.generate.model.ErrorDto;
 import mx.agr.dgec.generate.model.RolesDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,6 +43,7 @@ public interface RolesApi {
      * Recupera los roles registrados en el sistema
      *
      * @return OK (status code 200)
+     *         or Forbidden (status code 403)
      */
     @Operation(
         operationId = "recuperarRoles",
@@ -51,6 +53,9 @@ public interface RolesApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RolesDto.class)))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
         }
     )
