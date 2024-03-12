@@ -14,3 +14,6 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: create
     show-sql: true
+    #properties:
+    #  hibernate:
+    #    format_sql: true
