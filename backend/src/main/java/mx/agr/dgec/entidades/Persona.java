@@ -21,22 +21,33 @@ import java.util.List;
 public abstract class Persona {
 
     @Id
+    @Column(length = 30)
     private String idPersona;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellidoPaterno;
+    @Column(length = 50)
     private String apellidoMaterno;
+    @Column(length = 18)
     private String curp;
+    @Column(length = 13)
     private String rfc;
+    @Column(length = 11)
     private String numeroSeguroSocial;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaNacimiento;
-    private int edad;
+    private byte edad;
+    @Enumerated(EnumType.STRING)
     private GenerosEnum genero;
+    @Column(length = 10)
     private String telefonoPersonal;
     private String correoElectronicoPersonal;
+    @Enumerated(EnumType.STRING)
     private EstadoCivilEnum estadoCivil;
     private Boolean hijos;
     private String contactoEmergenciaNombre;
+    @Column(length = 10)
     private String contactoEmergenciaTelefono;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "persona")
@@ -51,6 +62,6 @@ public abstract class Persona {
 
     protected final void calcularEdadPersona() {
         LocalDate fechaActual = LocalDate.now();
-        this.edad = Period.between(fechaNacimiento, fechaActual).getYears();
+        this.edad = (byte) Period.between(fechaNacimiento, fechaActual).getYears();
     }
 }

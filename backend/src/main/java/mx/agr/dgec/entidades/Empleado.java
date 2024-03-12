@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Empleado extends Persona {
 
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = false, updatable = false, length = 30)
     private String idEmpleado;
     private Boolean activo;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -26,10 +26,13 @@ public class Empleado extends Persona {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaBaja;
     private String correoElectronico;
+    @Column(length = 10)
     private String telefono;
+    @Column(length = 10)
     private String extensionTelefono;
-    private int diasVacacionesDisponibles;
-    private int diasVacacionesTomados;
+    private byte diasVacacionesDisponibles;
+    private byte diasVacacionesTomados;
+    @Enumerated(EnumType.STRING)
     private MotivoBajaEnum motivoBaja;
 
     @ManyToOne

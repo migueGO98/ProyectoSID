@@ -18,14 +18,17 @@ import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 public class Escolaridad {
 
     @Id
+    @Column(length = 30)
     private String idPersona;
     @Id
     @Enumerated(EnumType.STRING)
     private NivelesEscolaridadesEnum nivel;
     @Id
     private String carrera;
+    @Enumerated(EnumType.STRING)
     private EstadosNivelesEscolaridadesEnum estadoNivel;
     private Boolean conCedulaProfesional;
+    @Column(length = 10)
     private String cedulaProfesional;
 
     @MapsId(value = "idPersona")

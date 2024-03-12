@@ -15,7 +15,7 @@ import java.util.List;
 public class Region {
 
     @Id
-    @Column(length = 10)
+    @Column(length = 30)
     private String idRegion;
     private String nombre;
 

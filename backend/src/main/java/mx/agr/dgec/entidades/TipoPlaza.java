@@ -15,6 +15,7 @@ import java.util.List;
 public class TipoPlaza {
 
     @Id
+    @Column(length = 30)
     private String idTipoPlaza;
     private String nombre;
 

@@ -15,6 +15,7 @@ import java.util.List;
 public class Estado {
 
     @Id
+    @Column(length = 30)
     private String idEstado;
     private String nombre;
 

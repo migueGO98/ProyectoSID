@@ -15,6 +15,7 @@ import java.util.Set;
 public class Rol {
 
     @Id
+    @Column(length = 30)
     private String idRol;
     private String descripcion;
 

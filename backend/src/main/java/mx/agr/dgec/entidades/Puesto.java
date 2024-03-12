@@ -16,6 +16,7 @@ import java.util.List;
 public class Puesto {
 
     @Id
+    @Column(length = 30)
     private String idPuesto;
     private String nombre;
     private float salarioBruto;

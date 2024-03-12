@@ -15,6 +15,7 @@ import java.util.List;
 public class Subdireccion {
 
     @Id
+    @Column(length = 30)
     private String idSubdireccion;
     private String nombre;
 

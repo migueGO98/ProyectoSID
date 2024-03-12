@@ -14,12 +14,18 @@ import lombok.NoArgsConstructor;
 public class Domicilio {
 
     @Id
+    @Column(length = 30)
     private String idPersona;
     private String calle;
+    @Column(length = 5)
     private String codigoPostal;
+    @Column(length = 150)
     private String colonia;
+    @Column(length = 150)
     private String municipio;
+    @Column(length = 150)
     private String ciudad;
+    @Column(length = 50)
     private String estado;
 
     @MapsId(value = "idPersona")

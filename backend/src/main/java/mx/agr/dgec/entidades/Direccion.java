@@ -15,6 +15,7 @@ import java.util.List;
 public class Direccion {
 
     @Id
+    @Column(length = 30)
     private String idDireccion;
     private String nombre;
 
