@@ -17,6 +17,7 @@ public interface EmpleadoMapper {
     EmpleadoMapper INSTANCE = Mappers.getMapper(EmpleadoMapper.class);
 
     @Mapping(target = "idPersona", source = "idEmpleado")
+    @Mapping(target = "idEmpleado", source = "idEmpleado")
     @Mapping(target = "nombre", source = "newEmpleadoDto.persona.nombre")
     @Mapping(target = "apellidoPaterno", source = "newEmpleadoDto.persona.apellidoPaterno")
     @Mapping(target = "apellidoMaterno", source = "newEmpleadoDto.persona.apellidoMaterno")

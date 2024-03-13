@@ -1,18 +1,18 @@
 package mx.agr.dgec.mappers;
 
-import mx.agr.dgec.enums.TipoPlazaEnum;
-import mx.agr.dgec.generate.model.TipoPlazaEnumDto;
+import mx.agr.dgec.entidades.TipoPlaza;
+import mx.agr.dgec.generate.model.RegistrosDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;
+import java.util.List;
 
 @Mapper
 public interface TipoPlazaMapper {
 
     TipoPlazaMapper INSTANCE = Mappers.getMapper(TipoPlazaMapper.class);
 
-    TipoPlazaEnum tipoPlazaEnumDtoToTipoPlazaEnum(TipoPlazaEnumDto tipoPlazaEnumDto);
-
-    TipoPlazaEnumDto tipoPlazaEnumToTipoPlazaEnumDto(TipoPlazaEnum tipoPlazaEnum);
+    default List<RegistrosDto> tipoPlazasToRegistrosDto(List<TipoPlaza> tiposPlazas){
+        return tiposPlazas.stream().map(tipoPlaza -> new RegistrosDto(tipoPlaza.getIdTipoPlaza(), tipoPlaza.getNombre())).toList();
+    }
 
 }

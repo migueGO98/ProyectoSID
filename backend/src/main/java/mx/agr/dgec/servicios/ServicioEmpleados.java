@@ -14,6 +14,7 @@ import java.util.List;
 public class ServicioEmpleados {
 
     public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleadoDto) {
+
         final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), nuevoEmpleadoDto.getFechaIngreso());
 
         // Validar que el empleado no exista en la base de datos
@@ -23,12 +24,12 @@ public class ServicioEmpleados {
                null, null,null, 0,0, null);
         nuevoEmpleado.calcularEdad();
 
-        log.info("NewEmpleadoDto: {}", nuevoEmpleado);
+        log.info("Nuevo Empleado: {}", nuevoEmpleado);
 
         var nombreCompleto = String.format("%s %s %s", nuevoEmpleado.getNombre(), nuevoEmpleado.getApellidoPaterno(), nuevoEmpleado.getApellidoMaterno());
 
         log.info("Empleado creado: {} con ID {}", nombreCompleto.toUpperCase(), idEmpleado);
-        return EmpleadoMapper.INSTANCE.toEmpleadoDto(nombreCompleto, nuevoEmpleado);
+        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(nombreCompleto, nuevoEmpleado);
     }
 
     private String generarIdEmpleado(String rfc, LocalDate fechaIngreso) {
