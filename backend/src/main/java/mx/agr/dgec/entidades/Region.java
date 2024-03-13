@@ -20,11 +20,13 @@ public class Region {
     private String nombre;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Empleado> empleados;
+    private List<Estado> estados;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Direccion> direcciones;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Estado> estados;
+    private List<Empleado> empleados;
+
+
 }

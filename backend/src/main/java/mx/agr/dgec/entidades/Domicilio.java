@@ -1,10 +1,7 @@
 package mx.agr.dgec.entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
@@ -31,5 +28,6 @@ public class Domicilio {
     @MapsId(value = "idPersona")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona", nullable = false, foreignKey = @ForeignKey(name = "FK_DOMICILIO_PERSONA"))
+    @ToString.Exclude
     private Persona persona;
 }

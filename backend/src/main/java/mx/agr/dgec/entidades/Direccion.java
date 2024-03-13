@@ -23,11 +23,11 @@ public class Direccion {
     private List<Empleado> empleados;
 
     @ManyToOne
-    @JoinColumn(name = "idRegion", referencedColumnName = "idRegion", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_Direccion_Region"))
+    @JoinColumn(name = "idRegion", referencedColumnName = "idRegion", nullable = false, foreignKey = @ForeignKey(name = "FK_Direccion_Region"))
     private Region region;
 
     @ManyToOne
-    @JoinColumn(name = "idEstado", referencedColumnName = "idEstado", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_Direccion_Estado"))
+    @JoinColumn(name = "idEstado", referencedColumnName = "idEstado", nullable = false, foreignKey = @ForeignKey(name = "FK_Direccion_Estado"))
     private Estado estado;
 
     @OneToMany(mappedBy = "direccion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

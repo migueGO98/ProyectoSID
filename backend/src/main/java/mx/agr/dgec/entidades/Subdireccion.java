@@ -23,10 +23,10 @@ public class Subdireccion {
     private List<Empleado> empleados;
 
     @ManyToOne
-    @JoinColumn(name = "idDireccion", referencedColumnName = "idDireccion", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_Subdireccion_Direccion"))
+    @JoinColumn(name = "idDireccion", referencedColumnName = "idDireccion", nullable = false, foreignKey = @ForeignKey(name = "FK_Subdireccion_Direccion"))
     private Direccion direccion;
 
     @ManyToOne
-    @JoinColumn(name = "idEstado", referencedColumnName = "idEstado", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_Subdireccion_Estado"))
+    @JoinColumn(name = "idEstado", referencedColumnName = "idEstado", nullable = false, foreignKey = @ForeignKey(name = "FK_Subdireccion_Estado"))
     private Estado estado;
 }

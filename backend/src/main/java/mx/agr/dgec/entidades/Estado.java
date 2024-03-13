@@ -20,7 +20,7 @@ public class Estado {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "idRegion", referencedColumnName = "idRegion", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_Estado_Region"))
+    @JoinColumn(name = "idRegion", referencedColumnName = "idRegion", nullable = false, foreignKey = @ForeignKey(name = "FK_Estado_Region"))
     private Region region;
 
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

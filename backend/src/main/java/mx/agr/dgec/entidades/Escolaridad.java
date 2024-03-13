@@ -1,10 +1,7 @@
 package mx.agr.dgec.entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import mx.agr.dgec.entidades.primary_key.EscolaridadPK;
 import mx.agr.dgec.enums.EstadosNivelesEscolaridadesEnum;
 import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
@@ -34,5 +31,6 @@ public class Escolaridad {
     @MapsId(value = "idPersona")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona", insertable = false, updatable = false, nullable = false, foreignKey = @ForeignKey(name = "FK_ESCOLARIDAD_PERSONA"))
+    @ToString.Exclude
     private Persona persona;
 }

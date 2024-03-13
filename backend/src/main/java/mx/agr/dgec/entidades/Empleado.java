@@ -23,8 +23,6 @@ public class Empleado extends Persona {
     private Boolean activo;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaIngreso;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate fechaBaja;
     private String correoElectronico;
     @Column(length = 10)
     private String telefono;
@@ -32,6 +30,8 @@ public class Empleado extends Persona {
     private String extensionTelefono;
     private byte diasVacacionesDisponibles;
     private byte diasVacacionesTomados;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate fechaBaja;
     @Enumerated(EnumType.STRING)
     private MotivoBajaEnum motivoBaja;
 
