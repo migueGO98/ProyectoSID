@@ -21,7 +21,7 @@ rnote over front
     "apellidoPaterno": "Aguilar",
     "apellidoMaterno": "Aguilar",
     "curp": "AAAA999999DDDDD12F",
-    "rfc": "AAAA999999BBB",
+    "rfc": "AGAA999999BBB",
     "numeroSeguroSocial": "11111111111",
     "fechaNacimiento": "2000-02-25",
     "genero": "MASCULINO",
@@ -67,8 +67,8 @@ front <-- backend--: 201 + JSON
 
 rnote over backend
 {
-  "idEmpleado": "stri2022024",
-  "nombreCompleto": "string string string",
+  "idEmpleado": "AGAA2022024",
+  "nombreCompleto": "Antonio Aguilar Aguilar",
   "activo": true,
   "fechaIngreso": "2024-02-28",
   "idTipoPlaza": "SP",
