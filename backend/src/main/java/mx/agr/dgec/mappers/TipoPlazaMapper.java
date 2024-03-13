@@ -8,16 +8,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface TipoPlazaMapper {
+
     TipoPlazaMapper INSTANCE = Mappers.getMapper(TipoPlazaMapper.class);
 
-    @ValueMapping(source = "SP", target = "SP")
-    @ValueMapping(source = "EE", target = "EE")
-    @ValueMapping(source = "INCA", target = "INCA")
-    TipoPlazaEnum toTipoPlazaEnum(TipoPlazaEnumDto tipoPlazaEnumDto);
+    TipoPlazaEnum tipoPlazaEnumDtoToTipoPlazaEnum(TipoPlazaEnumDto tipoPlazaEnumDto);
 
-    @ValueMapping(source = "SP", target = "SP")
-    @ValueMapping(source = "EE", target = "EE")
-    @ValueMapping(source = "INCA", target = "INCA")
-    TipoPlazaEnumDto toTipoPlazaEnumDto(TipoPlazaEnum tipoPlazaEnum);
+    TipoPlazaEnumDto tipoPlazaEnumToTipoPlazaEnumDto(TipoPlazaEnum tipoPlazaEnum);
 
 }

@@ -9,7 +9,8 @@ public interface JsonNullableMapper {
 
     JsonNullableMapper INSTANCE = Mappers.getMapper(JsonNullableMapper.class);
 
-    default String mapJsonNullableToGeneric(JsonNullable<String> campoDto) {
+    default <T> T mapJsonNullableToGeneric(JsonNullable<T> campoDto) {
         return campoDto.orElse(null);
     }
+
 }

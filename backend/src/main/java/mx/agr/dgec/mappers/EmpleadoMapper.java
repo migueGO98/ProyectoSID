@@ -16,6 +16,7 @@ public interface EmpleadoMapper {
 
     EmpleadoMapper INSTANCE = Mappers.getMapper(EmpleadoMapper.class);
 
+    @Mapping(target = "idPersona", source = "idEmpleado")
     @Mapping(target = "nombre", source = "newEmpleadoDto.persona.nombre")
     @Mapping(target = "apellidoPaterno", source = "newEmpleadoDto.persona.apellidoPaterno")
     @Mapping(target = "apellidoMaterno", source = "newEmpleadoDto.persona.apellidoMaterno")
@@ -30,23 +31,25 @@ public interface EmpleadoMapper {
     @Mapping(target = "hijos", source = "newEmpleadoDto.persona.hijos")
     @Mapping(target = "contactoEmergenciaNombre", source = "newEmpleadoDto.persona.contactoEmergenciaNombre")
     @Mapping(target = "contactoEmergenciaTelefono", source = "newEmpleadoDto.persona.contactoEmergenciaTelefono")
-    @Mapping(target = "domicilio", expression = "java(toDomicilio(idEmpleado, newEmpleadoDto.getDomicilio()))")
-    @Mapping(target = "escolaridades", expression = "java(toEscolaridades(idEmpleado, newEmpleadoDto.getEscolaridades()))")
+    @Mapping(target = "domicilio", expression = "java(domicilioDtoToDomicilio(idEmpleado, newEmpleadoDto.getDomicilio()))")
+    @Mapping(target = "escolaridades", expression = "java(listEscolaridadDtoToListEscolaridad(idEmpleado, newEmpleadoDto.getEscolaridades()))")
+    @Mapping(target = "roles", ignore = true)
     Empleado newEmpleadoDtoToEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo,
                                       LocalDate fechaBaja, String correoElectronico, String telefono,
                                       String extensionTelefono, int diasVacacionesDisponibles,
                                       int diasVacacionesTomados, MotivoBajaEnum motivoBaja);
 
-    default Domicilio toDomicilio(String idEmpleado, DomicilioDto domicilioDto) {
+    default Domicilio domicilioDtoToDomicilio(String idEmpleado, DomicilioDto domicilioDto) {
         return DomicilioMapper.INSTANCE.domicilioDtoToDomicilio(idEmpleado, domicilioDto);
     }
 
-    default List<Escolaridad> toEscolaridades(String idEmpleado, List<EscolaridadDto> escolaridadesDto) {
+    default List<Escolaridad> listEscolaridadDtoToListEscolaridad(String idEmpleado, List<EscolaridadDto> escolaridadesDto) {
         return EscolaridadMapper.INSTANCE.listEscolaridadDtoToListEscolaridad(idEmpleado, escolaridadesDto);
     }
 
     @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")
-    EmpleadoDto toEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
+    @Mapping(target = "roles", ignore = true)
+    EmpleadoDto empleadoToEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
 
     default List<RegistrosDto> motivosBajaEnumtoRegistrosDto(List<MotivoBajaEnum> motivosBaja){
         return motivosBaja.stream().map(motivo -> new RegistrosDto(motivo.name(), motivo.getMotivoBaja())).toList();

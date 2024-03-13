@@ -16,14 +16,14 @@ public interface EscolaridadMapper {
 
     EscolaridadMapper INSTANCE = Mappers.getMapper(EscolaridadMapper.class);
 
-    NivelesEscolaridadesEnum toNivelesEscolaridadesEnum(NivelesEscolaridadesEnumDto nivel);
+    NivelesEscolaridadesEnum nivelesEscolaridadesEnumDtoToNivelesEscolaridadesEnum(NivelesEscolaridadesEnumDto nivel);
 
-    EstadosNivelesEscolaridadesEnum toEstadosNivelesEscolaridadesEnum(EstadosNivelesEscolaridadesEnumDto estadoNivel);
+    EstadosNivelesEscolaridadesEnum estadosNivelesEscolaridadesEnumDtoToEstadosNivelesEscolaridadesEnum(EstadosNivelesEscolaridadesEnumDto estadoNivel);
 
-    Escolaridad escolaridadDtoToEscolaridad(String idEmpleado, EscolaridadDto escolaridad);
+    Escolaridad escolaridadDtoToEscolaridad(String idPersona, EscolaridadDto escolaridad);
 
-    default List<Escolaridad> listEscolaridadDtoToListEscolaridad(String idEmpleado, List<EscolaridadDto> escolaridades){
-        return escolaridades.stream().map(escolaridad -> escolaridadDtoToEscolaridad(idEmpleado, escolaridad)).toList();
+    default List<Escolaridad> listEscolaridadDtoToListEscolaridad(String idPersona, List<EscolaridadDto> escolaridades){
+        return escolaridades.stream().map(escolaridad -> escolaridadDtoToEscolaridad(idPersona, escolaridad)).toList();
     }
 
     default List<RegistrosDto> nivelesEscolaridadesEnumToRegistrosDto(List<NivelesEscolaridadesEnum> niveles){
