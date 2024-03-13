@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +12,6 @@ import java.util.List;
 import mx.agr.dgec.generate.model.DomicilioDto;
 import mx.agr.dgec.generate.model.EscolaridadDto;
 import mx.agr.dgec.generate.model.PersonaDto;
-import mx.agr.dgec.generate.model.TipoPlazaEnumDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -43,7 +41,7 @@ public class NewEmpleadoDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
-  private TipoPlazaEnumDto idTipoPlaza;
+  private String idTipoPlaza;
 
   private String idRegion;
 
@@ -63,7 +61,7 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, TipoPlazaEnumDto idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridades = escolaridades;
@@ -164,7 +162,7 @@ public class NewEmpleadoDto {
     this.fechaIngreso = fechaIngreso;
   }
 
-  public NewEmpleadoDto idTipoPlaza(TipoPlazaEnumDto idTipoPlaza) {
+  public NewEmpleadoDto idTipoPlaza(String idTipoPlaza) {
     this.idTipoPlaza = idTipoPlaza;
     return this;
   }
@@ -173,14 +171,14 @@ public class NewEmpleadoDto {
    * Get idTipoPlaza
    * @return idTipoPlaza
   */
-  @NotNull @Valid 
+  @NotNull 
   @Schema(name = "idTipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idTipoPlaza")
-  public TipoPlazaEnumDto getIdTipoPlaza() {
+  public String getIdTipoPlaza() {
     return idTipoPlaza;
   }
 
-  public void setIdTipoPlaza(TipoPlazaEnumDto idTipoPlaza) {
+  public void setIdTipoPlaza(String idTipoPlaza) {
     this.idTipoPlaza = idTipoPlaza;
   }
 

@@ -8,6 +8,8 @@ tags:
     description: Funciones sobre personas
   - name: Roles
     description: Funciones sobre roles
+  - name: TiposPlazas
+    description: Funciones sobre los tipos de plazas
 x-stoplight:
   id: zub4eo4y641wl
 info:
@@ -263,6 +265,32 @@ paths:
       x-stoplight:
         id: 5v6oxwmkhksvo
       description: Recupera los roles registrados en el sistema
+  /api/tipos-plazas:
+    get:
+      summary: Recuperar tipos de plazas
+      tags:
+        - TiposPlazas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: 4u0645xzvqo5z
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarTiposPlazas
+      x-stoplight:
+        id: fu3vqpljo1q1n
+      description: Recupera los tipos de plazas registrados en el sistema
 components:
   schemas:
     NewEmpleado:
@@ -343,9 +371,9 @@ components:
             id: wdy6ow3fslntt
           format: date
         idTipoPlaza:
-          $ref: '#/components/schemas/TipoPlazaEnum'
           x-stoplight:
             id: ik7wg04lltcgg
+          type: string
         idRegion:
           type: string
           x-stoplight:
@@ -718,16 +746,6 @@ components:
           type: string
           x-stoplight:
             id: cr3563tmajs4v
-    TipoPlazaEnum:
-      title: TipoPlazaEnum
-      x-stoplight:
-        id: yx0yt7b5j2jic
-      enum:
-        - SP
-        - EE
-        - INCA
-      description: Tipos de contratación que pueda ser un empleado
-      example: SP
     EstadoCivilEnum:
       title: EstadoCivilEnum
       x-stoplight:
