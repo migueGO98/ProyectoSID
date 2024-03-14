@@ -94,7 +94,6 @@ paths:
                     - nivel: LICENCIATURA
                       carrera: COMPUTACION
                       estadoNivel: TRAMITE_TITULACION
-                      conCedulaProfesional: true
                       cedulaProfesional: '1234567'
                   fechaIngreso: '2019-08-24'
                   idTipoPlaza: SP
@@ -325,7 +324,6 @@ components:
             - nivel: LICENCIATURA
               carrera: COMPUTACION
               estadoNivel: TRAMITE_TITULACION
-              conCedulaProfesional: true
               cedulaProfesional: '1234567'
           fechaIngreso: '2019-08-24'
           idTipoPlaza: SP
@@ -668,13 +666,11 @@ components:
         - nivel: LICENCIATURA
           carrera: COMPUTACION
           estadoNivel: TRAMITE_TITULACION
-          conCedulaProfesional: true
           cedulaProfesional: '1234567'
       required:
         - nivel
         - carrera
         - estadoNivel
-        - conCedulaProfesional
         - cedulaProfesional
       properties:
         nivel:
@@ -689,10 +685,6 @@ components:
           $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
             id: eoc1unktk22m0
-        conCedulaProfesional:
-          type: boolean
-          x-stoplight:
-            id: cdax02p05vavh
         cedulaProfesional:
           type:
             - string

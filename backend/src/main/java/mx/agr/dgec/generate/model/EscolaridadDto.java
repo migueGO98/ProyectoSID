@@ -33,8 +33,6 @@ public class EscolaridadDto {
 
   private EstadosNivelesEscolaridadesEnumDto estadoNivel;
 
-  private Boolean conCedulaProfesional;
-
   private JsonNullable<String> cedulaProfesional = JsonNullable.<String>undefined();
 
   public EscolaridadDto() {
@@ -44,11 +42,10 @@ public class EscolaridadDto {
   /**
    * Constructor with only required parameters
    */
-  public EscolaridadDto(NivelesEscolaridadesEnumDto nivel, String carrera, EstadosNivelesEscolaridadesEnumDto estadoNivel, Boolean conCedulaProfesional, String cedulaProfesional) {
+  public EscolaridadDto(NivelesEscolaridadesEnumDto nivel, String carrera, EstadosNivelesEscolaridadesEnumDto estadoNivel, String cedulaProfesional) {
     this.nivel = nivel;
     this.carrera = carrera;
     this.estadoNivel = estadoNivel;
-    this.conCedulaProfesional = conCedulaProfesional;
     this.cedulaProfesional = JsonNullable.of(cedulaProfesional);
   }
 
@@ -112,26 +109,6 @@ public class EscolaridadDto {
     this.estadoNivel = estadoNivel;
   }
 
-  public EscolaridadDto conCedulaProfesional(Boolean conCedulaProfesional) {
-    this.conCedulaProfesional = conCedulaProfesional;
-    return this;
-  }
-
-  /**
-   * Get conCedulaProfesional
-   * @return conCedulaProfesional
-  */
-  @NotNull 
-  @Schema(name = "conCedulaProfesional", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("conCedulaProfesional")
-  public Boolean getConCedulaProfesional() {
-    return conCedulaProfesional;
-  }
-
-  public void setConCedulaProfesional(Boolean conCedulaProfesional) {
-    this.conCedulaProfesional = conCedulaProfesional;
-  }
-
   public EscolaridadDto cedulaProfesional(String cedulaProfesional) {
     this.cedulaProfesional = JsonNullable.of(cedulaProfesional);
     return this;
@@ -164,13 +141,12 @@ public class EscolaridadDto {
     return Objects.equals(this.nivel, escolaridad.nivel) &&
         Objects.equals(this.carrera, escolaridad.carrera) &&
         Objects.equals(this.estadoNivel, escolaridad.estadoNivel) &&
-        Objects.equals(this.conCedulaProfesional, escolaridad.conCedulaProfesional) &&
         Objects.equals(this.cedulaProfesional, escolaridad.cedulaProfesional);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nivel, carrera, estadoNivel, conCedulaProfesional, cedulaProfesional);
+    return Objects.hash(nivel, carrera, estadoNivel, cedulaProfesional);
   }
 
   @Override
@@ -180,7 +156,6 @@ public class EscolaridadDto {
     sb.append("    nivel: ").append(toIndentedString(nivel)).append("\n");
     sb.append("    carrera: ").append(toIndentedString(carrera)).append("\n");
     sb.append("    estadoNivel: ").append(toIndentedString(estadoNivel)).append("\n");
-    sb.append("    conCedulaProfesional: ").append(toIndentedString(conCedulaProfesional)).append("\n");
     sb.append("    cedulaProfesional: ").append(toIndentedString(cedulaProfesional)).append("\n");
     sb.append("}");
     return sb.toString();

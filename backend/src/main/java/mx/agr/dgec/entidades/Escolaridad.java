@@ -24,7 +24,6 @@ public class Escolaridad {
     private String carrera;
     @Enumerated(EnumType.STRING)
     private EstadosNivelesEscolaridadesEnum estadoNivel;
-    private Boolean conCedulaProfesional;
     @Column(length = 10)
     private String cedulaProfesional;
 
