@@ -6,7 +6,7 @@
 package mx.agr.dgec.generate.api;
 
 import mx.agr.dgec.generate.model.ErrorDto;
-import mx.agr.dgec.generate.model.RolesDto;
+import mx.agr.dgec.generate.model.RolDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,7 +52,7 @@ public interface RolesApi {
         tags = { "Roles" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RolesDto.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RolDto.class)))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
@@ -64,7 +64,7 @@ public interface RolesApi {
         value = "/api/roles",
         produces = { "application/json" }
     )
-    ResponseEntity<List<RolesDto>> recuperarRoles(
+    ResponseEntity<List<RolDto>> recuperarRoles(
         
     );
 
