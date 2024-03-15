@@ -3,7 +3,7 @@ package mx.agr.dgec.enums;
 import lombok.Getter;
 
 @Getter
-public enum GenerosEnum {
+public enum GeneroEnum {
 
     MASCULINO("Masculino"),
     FEMENINO("Femenino"),
@@ -12,5 +12,5 @@ public enum GenerosEnum {
 
     private final String genero;
 
-    GenerosEnum(String genero) { this.genero = genero; }
+    GeneroEnum(String genero) { this.genero = genero; }
 }

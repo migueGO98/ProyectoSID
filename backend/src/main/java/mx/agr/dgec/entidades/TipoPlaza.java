@@ -1,10 +1,8 @@
 package mx.agr.dgec.entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
@@ -20,8 +18,10 @@ public class TipoPlaza {
     private String nombre;
 
     @OneToMany(mappedBy = "tipoPlaza", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Empleado> empleados;
 
     @OneToMany(mappedBy = "tipoPlaza", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Puesto> puestos;
 }

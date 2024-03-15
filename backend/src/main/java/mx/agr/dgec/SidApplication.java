@@ -4,7 +4,7 @@ import jakarta.annotation.PostConstruct;
 import mx.agr.dgec.entidades.*;
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.EstadosNivelesEscolaridadesEnum;
-import mx.agr.dgec.enums.GenerosEnum;
+import mx.agr.dgec.enums.GeneroEnum;
 import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 import mx.agr.dgec.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,7 +195,7 @@ public class SidApplication {
 				.numeroSeguroSocial("12345678901")
 				.fechaNacimiento(LocalDate.of(1980, 10, 17))
 				.edad((byte) 44)
-				.genero(GenerosEnum.MASCULINO)
+				.genero(GeneroEnum.MASCULINO)
 				.telefonoPersonal("1234567890")
 				.correoElectronicoPersonal("migue@correo.com")
 				.estadoCivil(EstadoCivilEnum.SOLTERO)

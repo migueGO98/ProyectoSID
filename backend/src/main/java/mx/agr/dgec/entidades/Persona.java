@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import mx.agr.dgec.enums.EstadoCivilEnum;
-import mx.agr.dgec.enums.GenerosEnum;
+import mx.agr.dgec.enums.GeneroEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -39,7 +39,7 @@ public abstract class Persona {
     private LocalDate fechaNacimiento;
     private byte edad;
     @Enumerated(EnumType.STRING)
-    private GenerosEnum genero;
+    private GeneroEnum genero;
     @Column(length = 10)
     private String telefonoPersonal;
     private String correoElectronicoPersonal;

@@ -1,10 +1,8 @@
 package mx.agr.dgec.entidades;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
@@ -20,6 +18,7 @@ public class Subdireccion {
     private String nombre;
 
     @OneToMany(mappedBy = "subdireccion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Empleado> empleados;
 
     @ManyToOne

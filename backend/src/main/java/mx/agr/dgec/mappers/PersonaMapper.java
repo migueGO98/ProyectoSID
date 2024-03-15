@@ -1,7 +1,7 @@
 package mx.agr.dgec.mappers;
 
 import mx.agr.dgec.enums.EstadoCivilEnum;
-import mx.agr.dgec.enums.GenerosEnum;
+import mx.agr.dgec.enums.GeneroEnum;
 import mx.agr.dgec.generate.model.EstadoCivilEnumDto;
 import mx.agr.dgec.generate.model.GeneroEnumDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
@@ -17,13 +17,13 @@ public interface PersonaMapper {
 
     EstadoCivilEnum estadoCivilEnumDtoToEstadoCivilEnum(EstadoCivilEnumDto estadoCivil);
 
-    GenerosEnum generosEnumDtoToGenerosEnum(GeneroEnumDto genero);
+    GeneroEnum generosEnumDtoToGenerosEnum(GeneroEnumDto genero);
 
     default List<RegistrosDto> estadosCivilesEnumToRegistrosDto(List<EstadoCivilEnum> estadosCiviles){
         return estadosCiviles.stream().map(estadoCivil -> new RegistrosDto(estadoCivil.name(), estadoCivil.getEstadoCivil())).toList();
     }
 
-    default List<RegistrosDto> generosEnumToRegistrosDto(List<GenerosEnum> generos){
+    default List<RegistrosDto> generosEnumToRegistrosDto(List<GeneroEnum> generos){
         return generos.stream().map(genero -> new RegistrosDto(genero.name(), genero.getGenero())).toList();
     }
 }

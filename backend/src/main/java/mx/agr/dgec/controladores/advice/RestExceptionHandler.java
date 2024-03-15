@@ -14,6 +14,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.util.List;
@@ -39,7 +40,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .orElse(null); // Si no hay errores, error será null
 
         if(error != null) log.info("Error de validación: " + error.getMensaje());
-
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
@@ -75,6 +75,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .filter(fieldName -> fieldName != null && !fieldName.isEmpty())
                 .collect(Collectors.joining("."));
         var mensajeError = "El valor proporcionado para " + fieldPath + " no es válido";
-        return new ErrorDto("ERROR", mensajeError);
+        return new ErrorDto("ERROR_JSON", mensajeError);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorDto> handleIllegalArgumentException(IllegalArgumentException ex) {
+        var error = new ErrorDto("ERROR_ARGUMENT", ex.getMessage());
+        log.info("Error de argumento ilegal: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

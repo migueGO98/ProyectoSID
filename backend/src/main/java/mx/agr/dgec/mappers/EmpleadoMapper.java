@@ -1,8 +1,6 @@
 package mx.agr.dgec.mappers;
 
-import mx.agr.dgec.entidades.Domicilio;
-import mx.agr.dgec.entidades.Empleado;
-import mx.agr.dgec.entidades.Escolaridad;
+import mx.agr.dgec.entidades.*;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.*;
 import org.mapstruct.Mapper;
@@ -10,8 +8,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
-@Mapper(uses = {PersonaMapper.class, DomicilioMapper.class, JsonNullableMapper.class, EscolaridadMapper.class, RolMapper.class})
+@Mapper(uses = {PersonaMapper.class, DomicilioMapper.class, JsonNullableMapper.class, EscolaridadMapper.class, RolMapper.class,
+                RegionMapper.class, DireccionMapper.class, SubdireccionMapper.class, TipoPlazaMapper.class, PuestoMapper.class
+})
 public interface EmpleadoMapper {
 
     EmpleadoMapper INSTANCE = Mappers.getMapper(EmpleadoMapper.class);
@@ -34,11 +35,16 @@ public interface EmpleadoMapper {
     @Mapping(target = "contactoEmergenciaTelefono", source = "newEmpleadoDto.persona.contactoEmergenciaTelefono")
     @Mapping(target = "domicilio", expression = "java(domicilioDtoToDomicilio(idEmpleado, newEmpleadoDto.getDomicilio()))")
     @Mapping(target = "escolaridades", expression = "java(listEscolaridadDtoToListEscolaridad(idEmpleado, newEmpleadoDto.getEscolaridades()))")
-    @Mapping(target = "roles", ignore = true)
-    Empleado newEmpleadoDtoToEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo,
-                                      LocalDate fechaBaja, String correoElectronico, String telefono,
-                                      String extensionTelefono, int diasVacacionesDisponibles,
-                                      int diasVacacionesTomados, MotivoBajaEnum motivoBaja);
+    @Mapping(target = "region", source = "region")
+    @Mapping(target = "direccion", source = "direccion")
+    @Mapping(target = "roles", source = "rolesSet")
+    @Mapping(target = "subdireccion", source = "subdireccion")
+    @Mapping(target = "tipoPlaza", source = "tipoPlaza")
+    @Mapping(target = "puesto", source = "puesto")
+    Empleado newEmpleadoDtoToEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo, LocalDate fechaBaja,
+                                      String correoElectronico, String telefono, String extensionTelefono, int diasVacacionesDisponibles,
+                                      int diasVacacionesTomados, MotivoBajaEnum motivoBaja, TipoPlaza tipoPlaza, Region region,
+                                      Direccion direccion, Subdireccion subdireccion, Puesto puesto, Set<Rol> rolesSet);
 
     default Domicilio domicilioDtoToDomicilio(String idEmpleado, DomicilioDto domicilioDto) {
         return DomicilioMapper.INSTANCE.domicilioDtoToDomicilio(idEmpleado, domicilioDto);
@@ -49,10 +55,14 @@ public interface EmpleadoMapper {
     }
 
     @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")
-    @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "idRegion", source = "empleado.region")
+    @Mapping(target = "idDireccion", source = "empleado.direccion")
+    @Mapping(target = "idSubdireccion", source = "empleado.subdireccion")
+    @Mapping(target = "idTipoPlaza", source = "empleado.tipoPlaza")
+    @Mapping(target = "idPuesto", source = "empleado.puesto")
     EmpleadoDto empleadoToEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
 
-    default List<RegistrosDto> motivosBajaEnumtoRegistrosDto(List<MotivoBajaEnum> motivosBaja){
+    default List<RegistrosDto> motivosBajaEnumtoRegistrosDto(List<MotivoBajaEnum> motivosBaja) {
         return motivosBaja.stream().map(motivo -> new RegistrosDto(motivo.name(), motivo.getMotivoBaja())).toList();
     }
 }
