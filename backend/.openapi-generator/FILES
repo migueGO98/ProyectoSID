@@ -15,4 +15,4 @@ src/main/java/mx/agr/dgec/generate/model/NewEmpleadoDto.java
 src/main/java/mx/agr/dgec/generate/model/NivelesEscolaridadesEnumDto.java
 src/main/java/mx/agr/dgec/generate/model/PersonaDto.java
 src/main/java/mx/agr/dgec/generate/model/RegistrosDto.java
-src/main/java/mx/agr/dgec/generate/model/RolesDto.java
+src/main/java/mx/agr/dgec/generate/model/RolDto.java

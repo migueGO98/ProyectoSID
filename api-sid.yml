@@ -11,7 +11,7 @@ tags:
   - name: TiposPlazas
     description: Funciones sobre los tipos de plazas
 x-stoplight:
-  id: zub4eo4y641wl
+  id: hddsj7t9ehil6
 info:
   title: Sistema Integración Divisional API
   version: '1.0'
@@ -19,7 +19,11 @@ info:
     name: Proyect SID
     email: gzm98.miguel@gmail.com
     url: 'https://github.com/migueGO98/ProyectoSID'
-  description: Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para la empresa Agricultura en la Dirección General de Enlace y Coordinación (DGEC). Esta API está elaborada solo con fines educativos y de practica personal.
+  description: >-
+    Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para
+    la empresa Agricultura en la Dirección General de Enlace y Coordinación
+    (DGEC). Esta API está elaborada solo con fines educativos y de practica
+    personal.
   license:
     name: MIT
     url: 'https://migueGO98.github.io/license'
@@ -58,7 +62,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: crearEmpleado
       x-stoplight:
-        id: kl20364k5fm8r
+        id: g8zzrql0p43i6
       description: Crea un nuevo empleado
       requestBody:
         content:
@@ -122,7 +126,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: 39fxklslk1ly7
+                    id: wzzjb87h8ad9p
         '403':
           description: Forbidden
           content:
@@ -131,7 +135,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarNivelesEscolares
       x-stoplight:
-        id: di5m34j0w9d67
+        id: ff0ov0pzdeitc
       description: Recupera los niveles escolares permitidos por el sistema
   /api/escolaridades/niveles/estados:
     get:
@@ -148,7 +152,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: bvcml4az1eq2q
+                    id: ssi7j11ucuqvp
         '403':
           description: Forbidden
           content:
@@ -157,7 +161,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarEstadosNivelesEscolares
       x-stoplight:
-        id: wyhkrt1n1gvri
+        id: bd0bu6mobfk9c
       description: 'Recupera los estados de los niveles escolares permitidos por el sistema '
     parameters: []
   /api/personas/generos:
@@ -175,7 +179,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: lfyscwo3nnhce
+                    id: dcv5pni4s6696
         '403':
           description: Forbidden
           content:
@@ -184,7 +188,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarGeneros
       x-stoplight:
-        id: 6teh52jdswyc6
+        id: vfws9ptf8vy5d
       description: Recupera los géneros de una persona permitidos por el sistema
   /api/personas/estadosCiviles:
     get:
@@ -201,7 +205,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: 5h8rkqqjpsd53
+                    id: elhly52ffz7rr
         '403':
           description: Forbidden
           content:
@@ -210,7 +214,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarEstadosCiviles
       x-stoplight:
-        id: 6s4jsqwp700pk
+        id: hglovsmemr138
       description: Recupera los estados civiles de una persona permitidos por el sistema
   /api/empleados/motivosBaja:
     get:
@@ -227,7 +231,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: rhf16g14b4qdu
+                    id: 4xf2d40682cgr
         '403':
           description: Forbidden
           content:
@@ -236,7 +240,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarMotivosBaja
       x-stoplight:
-        id: q3kkppwbfgatj
+        id: 0wxak70cdkylm
       description: Recupera los motivos de bajas de un empleado permitidos por el sistema
   /api/roles:
     get:
@@ -251,9 +255,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Roles'
+                  $ref: '#/components/schemas/Rol'
                   x-stoplight:
-                    id: dxs3rvgbz8wcw
+                    id: 08zr7z9adkpms
         '403':
           description: Forbidden
           content:
@@ -262,7 +266,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarRoles
       x-stoplight:
-        id: 5v6oxwmkhksvo
+        id: kwh6k4f4iklf6
       description: Recupera los roles registrados en el sistema
   /api/tipos-plazas:
     get:
@@ -279,7 +283,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: 4u0645xzvqo5z
+                    id: lvgnr074le70t
         '403':
           description: Forbidden
           content:
@@ -288,14 +292,14 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarTiposPlazas
       x-stoplight:
-        id: fu3vqpljo1q1n
+        id: 2ubc8ibrtti7j
       description: Recupera los tipos de plazas registrados en el sistema
 components:
   schemas:
     NewEmpleado:
       title: NewEmpleado
       x-stoplight:
-        id: 8yun4ny2yjvcl
+        id: 3dxce9kg4hfhg
       type: object
       examples:
         - persona:
@@ -349,57 +353,57 @@ components:
         persona:
           $ref: '#/components/schemas/Persona'
           x-stoplight:
-            id: 1yvd9d9gpzspk
+            id: 9q89m9wlb5liw
         domicilio:
           $ref: '#/components/schemas/Domicilio'
           x-stoplight:
-            id: 0yjlcc812o9o1
+            id: vo8vmmnq6acdc
         escolaridades:
           type: array
           x-stoplight:
-            id: 5d72q7jwipk1b
+            id: a7yq6ui1k54wr
           minItems: 1
           items:
             $ref: '#/components/schemas/Escolaridad'
             x-stoplight:
-              id: qer2gzyyk8okf
+              id: mh7ixewnkryly
         fechaIngreso:
           type: string
           x-stoplight:
-            id: wdy6ow3fslntt
+            id: 3fmji1594uguu
           format: date
         idTipoPlaza:
           x-stoplight:
-            id: ik7wg04lltcgg
+            id: xu6qknuz1xsrl
           type: string
         idRegion:
           type: string
           x-stoplight:
-            id: a1q7dz7v5mdq9
+            id: espz0fiykbvke
         idDireccion:
           type: string
           x-stoplight:
-            id: boowi8vzpkton
+            id: ugg64wrqsohv8
         idSubdireccion:
           type: string
           x-stoplight:
-            id: zh9m61v7pyyzq
+            id: n82s6oafp3hp1
         idPuesto:
           type: string
           x-stoplight:
-            id: 3vyfm67aisq6x
+            id: tqc5ltfb36tvc
         roles:
           type: array
           x-stoplight:
-            id: p4pdc8ryk01az
+            id: 2n3mkesrrjct7
           items:
             x-stoplight:
-              id: li8e4b4htn561
+              id: ahpjv64r975s1
             type: string
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
-        id: dsm6yd1sxwctg
+        id: d1fwq466naaom
       type: object
       description: Domicilio particular del empleado
       required:
@@ -413,29 +417,29 @@ components:
         calle:
           type: string
           x-stoplight:
-            id: chbn8upr51erf
+            id: jkyrqsikpj4wn
         codigoPostal:
           type: string
           x-stoplight:
-            id: 056p06a2j714p
+            id: 696fgan820zkx
           minLength: 5
           maxLength: 5
         colonia:
           type: string
           x-stoplight:
-            id: 8x4osm8qnfns4
+            id: nnei75eods4w1
         municipio:
           type: string
           x-stoplight:
-            id: ruu95nkca4g1h
+            id: barnbw50g9fxb
         ciudad:
           type: string
           x-stoplight:
-            id: pvbducyurysn9
+            id: zpzknpxvrfn7i
         estado:
           type: string
           x-stoplight:
-            id: dmhqr9a3xstf8
+            id: 9325lx1msfb6u
       examples:
         - calle: Izta
           codigoPostal: '99999'
@@ -446,7 +450,7 @@ components:
     Persona:
       title: Persona
       x-stoplight:
-        id: 0iql6hgq28bre
+        id: j9wg5f8jypnn3
       type: object
       description: Atributos que tiene una persona
       examples:
@@ -483,77 +487,77 @@ components:
         nombre:
           type: string
           x-stoplight:
-            id: 4vxs42tgyyole
+            id: b90loeejjgmsa
         apellidoPaterno:
           type: string
           x-stoplight:
-            id: jezjc4droemva
+            id: ktza3nbhnofy9
         apellidoMaterno:
           type:
             - string
             - 'null'
           x-stoplight:
-            id: z6okx1m1lgx6p
+            id: 7nqdktp6celc3
         curp:
           type: string
           x-stoplight:
-            id: ezkzkta9jq8ux
+            id: o29k6cwwsb0ju
           minLength: 18
           maxLength: 18
         rfc:
           type: string
           x-stoplight:
-            id: zddhtkawg3h78
+            id: 8e0814486ffte
           minLength: 13
           maxLength: 13
         numeroSeguroSocial:
           type: string
           x-stoplight:
-            id: un0t2eeiu2k0s
+            id: b7bgnarj9w1lg
           minLength: 11
           maxLength: 11
         fechaNacimiento:
           type: string
           x-stoplight:
-            id: j56xlbv53ik12
+            id: 1ww8739j4a2r0
           format: date
         genero:
           $ref: '#/components/schemas/GeneroEnum'
           x-stoplight:
-            id: d3hrreuqel3uq
+            id: 29mt91j8292b1
         telefonoPersonal:
           type: string
           x-stoplight:
-            id: aovoq7ifm4w78
+            id: c4kdhd8ruow27
           minLength: 10
           maxLength: 10
         correoElectronicoPersonal:
           type: string
           x-stoplight:
-            id: j049ngdf3718t
+            id: gui6ysgf0ydnh
           format: email
         estadoCivil:
           $ref: '#/components/schemas/EstadoCivilEnum'
           x-stoplight:
-            id: h4e6kk9f8popy
+            id: q2q2mou04jbgq
         hijos:
           type: boolean
           x-stoplight:
-            id: bj5ztpk3thvne
+            id: f0zun6agsnn52
         contactoEmergenciaNombre:
           type: string
           x-stoplight:
-            id: qhhzyzz4t5qc0
+            id: yzojflxr6welo
         contactoEmergenciaTelefono:
           type: string
           x-stoplight:
-            id: qcxvhfup30ouq
+            id: rxolvz91j0kd8
           minLength: 10
           maxLength: 10
     Empleado:
       title: Empleado
       x-stoplight:
-        id: 9m99cxtgz3q1c
+        id: p5p8ccicflpny
       type: object
       examples:
         - idEmpleado: LOEF2082019
@@ -582,52 +586,52 @@ components:
         idEmpleado:
           type: string
           x-stoplight:
-            id: rh1yparzqepfj
+            id: 02gerq8b2x393
         nombreCompleto:
           type: string
           x-stoplight:
-            id: m3wjs9vpsjhdt
+            id: 95ed3d0e9xhtp
         activo:
           type: boolean
           x-stoplight:
-            id: in0s8o0z6fdi1
+            id: 615a9n3dqeeu8
         fechaIngreso:
           type: string
           x-stoplight:
-            id: olfmt84xdsjc1
+            id: fiadx90z4dou6
           format: date
         idTipoPlaza:
           type: string
           x-stoplight:
-            id: 9vomj8jmlg8az
+            id: wglijvrzmv68f
         idRegion:
           type: string
           x-stoplight:
-            id: wilf6fku1ufgo
+            id: 7hyh6jr1zr0aq
         idDireccion:
           type: string
           x-stoplight:
-            id: 1wl5q5frp4orx
+            id: 09rt6rr2j4ot7
         idSubdireccion:
           type: string
           x-stoplight:
-            id: hz1n048geshpu
+            id: 4ce5uo73issjv
         idPuesto:
           type: string
           x-stoplight:
-            id: v09aa1w1k4ti4
+            id: aqht6yxnukc0e
         roles:
           type: array
           x-stoplight:
-            id: vvt6sojc9n64x
+            id: jya7mqv5s0cwd
           items:
             x-stoplight:
-              id: 261sa6g7b09gb
+              id: aguh0yz83x2sz
             type: string
     Error:
       title: Error
       x-stoplight:
-        id: 6g2k21cuqycj0
+        id: 8ckb2ttym4uk7
       type: object
       description: Error a mostrar en caso de alguna anomalía
       examples:
@@ -640,15 +644,15 @@ components:
         codigo:
           type: string
           x-stoplight:
-            id: ovrpmxh6eo3w8
+            id: r0evzjzh2n8du
         mensaje:
           type: string
           x-stoplight:
-            id: l9nb3gjt8aehy
+            id: 0qi598gry1pzq
     GeneroEnum:
       title: GeneroEnum
       x-stoplight:
-        id: 2hngh3fp26t3k
+        id: 52ximc65chxkc
       enum:
         - MASCULINO
         - FEMENINO
@@ -659,7 +663,7 @@ components:
     Escolaridad:
       title: Escolaridad
       x-stoplight:
-        id: 45bqtlnoej3gh
+        id: 03ic97hwyomyw
       type: object
       description: Escolaridad de una persona u empleado
       examples:
@@ -676,27 +680,27 @@ components:
         nivel:
           $ref: '#/components/schemas/NivelesEscolaridadesEnum'
           x-stoplight:
-            id: v6plghb2z1y2h
+            id: b72sii7hlfp4s
         carrera:
           type: string
           x-stoplight:
-            id: 4mgvs6bze6az6
+            id: 8zcu5pa5dqyxp
         estadoNivel:
           $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
-            id: eoc1unktk22m0
+            id: vbz22uqdbpw81
         cedulaProfesional:
           type:
             - string
             - 'null'
           x-stoplight:
-            id: i008hrw387hye
+            id: tb99yofdm139k
           minLength: 7
           maxLength: 8
     NivelesEscolaridadesEnum:
       title: NivelesEscolaridadesEnum
       x-stoplight:
-        id: b0vkgsn675z45
+        id: ef7z3c15khf2y
       enum:
         - TECNICO
         - LICENCIATURA
@@ -710,7 +714,7 @@ components:
     EstadosNivelesEscolaridadesEnum:
       title: EstadosNivelesEscolaridadesEnum
       x-stoplight:
-        id: jtzmbyk1m4drc
+        id: 652poievakefu
       enum:
         - CREDITOS_CUBIERTOS
         - CERTIFICADO
@@ -723,7 +727,7 @@ components:
     Registros:
       title: Registros
       x-stoplight:
-        id: fthrm3hcau1dq
+        id: asfdusa7yggio
       type: object
       description: 'Obtiene los campos registrados, en pares ordenados'
       required:
@@ -733,15 +737,15 @@ components:
         id:
           type: string
           x-stoplight:
-            id: m35sa3z03os56
+            id: 9bchusxx6tszf
         descripcion:
           type: string
           x-stoplight:
-            id: cr3563tmajs4v
+            id: ie7bk1ok7ps04
     EstadoCivilEnum:
       title: EstadoCivilEnum
       x-stoplight:
-        id: len2iwhy926um
+        id: uwcpfz698kggx
       enum:
         - CASADO
         - CASADA
@@ -758,15 +762,15 @@ components:
     MotivoBajaEnum:
       title: MotivoBajaEnum
       x-stoplight:
-        id: cpyoo4aner4ew
+        id: gopbogysduw72
       enum:
         - TERMINO_CONTRATO
         - RENUNCIA
         - LIQUIDACION
-    Roles:
-      title: Roles
+    Rol:
+      title: Rol
       x-stoplight:
-        id: dovbwbara82m8
+        id: blnek0qhpctct
       type: object
       required:
         - id
@@ -775,11 +779,11 @@ components:
         id:
           type: string
           x-stoplight:
-            id: e8pak79samym4
+            id: tocecp0tjh4pm
         descripcion:
           type: string
           x-stoplight:
-            id: iedylln8v8piv
+            id: l0e0ibimjpafe
   requestBodies: {}
   responses: {}
   securitySchemes: {}
