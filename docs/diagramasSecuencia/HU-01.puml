@@ -45,7 +45,6 @@ rnote over front
       "nivel": "TECNICO",
       "carrera": "Informática",
       "estadoNivel": "CREDITOS_CUBIERTOS",
-      "conCedulaProfesional": true,
       "cedulaProfesional": "1111111"
     }
   ],
