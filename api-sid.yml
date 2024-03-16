@@ -19,11 +19,7 @@ info:
     name: Proyect SID
     email: gzm98.miguel@gmail.com
     url: 'https://github.com/migueGO98/ProyectoSID'
-  description: >-
-    Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para
-    la empresa Agricultura en la Dirección General de Enlace y Coordinación
-    (DGEC). Esta API está elaborada solo con fines educativos y de practica
-    personal.
+  description: Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para la empresa Agricultura en la Dirección General de Enlace y Coordinación (DGEC). Esta API está elaborada solo con fines educativos y de practica personal.
   license:
     name: MIT
     url: 'https://migueGO98.github.io/license'
@@ -76,7 +72,7 @@ paths:
                     nombre: Fabian
                     apellidoPaterno: Lopez
                     apellidoMaterno: Estrada
-                    curp: LOEF111111HDFASDXX
+                    curp: LOEF111111HDFASD01
                     rfc: LOEF111111FG9
                     numeroSeguroSocial: '11111111111'
                     fechaNacimiento: '2019-08-24'
@@ -98,12 +94,12 @@ paths:
                     - nivel: LICENCIATURA
                       carrera: COMPUTACION
                       estadoNivel: TRAMITE_TITULACION
-                      cedulaProfesional: '1234567'
+                      cedulaProfesional: '12345678'
                   fechaIngreso: '2019-08-24'
                   idTipoPlaza: SP
                   idRegion: OC
                   idDireccion: DGEC
-                  idSubdireccion: SDGEC
+                  idSubdireccion: SUBADMONOC
                   idPuesto: SJD1
                   roles:
                     - RH1
@@ -328,15 +324,15 @@ components:
             - nivel: LICENCIATURA
               carrera: COMPUTACION
               estadoNivel: TRAMITE_TITULACION
-              cedulaProfesional: '1234567'
+              cedulaProfesional: '12345678'
           fechaIngreso: '2019-08-24'
-          idTipoPlaza: SP
+          idTipoPlaza: sp
           idRegion: OC
           idDireccion: DGEC
-          idSubdireccion: SDGEC
-          idPuesto: SJD1
+          idSubdireccion: SUBADMONOC
+          idPuesto: SjD1
           roles:
-            - RH1
+            - rh1
             - IP3
       required:
         - persona
@@ -372,40 +368,61 @@ components:
           x-stoplight:
             id: 3fmji1594uguu
           format: date
+          example: '2020-01-01'
         idTipoPlaza:
           x-stoplight:
             id: xu6qknuz1xsrl
           type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: SPC
         idRegion:
           type: string
           x-stoplight:
             id: espz0fiykbvke
+          pattern: '^[a-zA-Z0-9]+$'
+          example: oc
         idDireccion:
           type: string
           x-stoplight:
             id: ugg64wrqsohv8
+          pattern: '^[a-zA-Z0-9]+$'
+          example: DGEC
         idSubdireccion:
           type: string
           x-stoplight:
             id: n82s6oafp3hp1
+          pattern: '^[a-zA-Z0-9]+$'
+          example: SUBAdmonOC
         idPuesto:
           type: string
           x-stoplight:
             id: tqc5ltfb36tvc
+          pattern: '^[a-zA-Z0-9]+$'
+          example: sjd1
         roles:
           type: array
           x-stoplight:
             id: 2n3mkesrrjct7
+          minItems: 1
           items:
             x-stoplight:
               id: ahpjv64r975s1
             type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: admin
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
         id: d1fwq466naaom
       type: object
       description: Domicilio particular del empleado
+      examples:
+        - calle: Izta
+          codigoPostal: '99999'
+          colonia: Prolongacion
+          municipio: Iztapalapa
+          ciudad: CDMX
+          estado: CDMX
       required:
         - calle
         - codigoPostal
@@ -418,35 +435,40 @@ components:
           type: string
           x-stoplight:
             id: jkyrqsikpj4wn
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Izta No 40
         codigoPostal:
           type: string
           x-stoplight:
             id: 696fgan820zkx
           minLength: 5
           maxLength: 5
+          pattern: '^[0-9]+$'
+          example: '01111'
         colonia:
           type: string
           x-stoplight:
             id: nnei75eods4w1
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Prolongación de Noñora
         municipio:
           type: string
           x-stoplight:
             id: barnbw50g9fxb
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Gustavo A. Madero
         ciudad:
           type: string
           x-stoplight:
             id: zpzknpxvrfn7i
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Ciudad de México
         estado:
           type: string
           x-stoplight:
             id: 9325lx1msfb6u
-      examples:
-        - calle: Izta
-          codigoPostal: '99999'
-          colonia: Prolongacion
-          municipio: Iztapalapa
-          ciudad: CDMX
-          estado: CDMX
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Ciudad de México
     Persona:
       title: Persona
       x-stoplight:
@@ -457,7 +479,7 @@ components:
         - nombre: Fabian
           apellidoPaterno: Lopez
           apellidoMaterno: Estrada
-          curp: LOEF111111HDFASDXX
+          curp: LOEF111111HDFASD01
           rfc: LOEF111111FG9
           numeroSeguroSocial: '11111111111'
           fechaNacimiento: '2019-08-24'
@@ -488,39 +510,52 @@ components:
           type: string
           x-stoplight:
             id: b90loeejjgmsa
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Fabian Carlos
         apellidoPaterno:
           type: string
           x-stoplight:
             id: ktza3nbhnofy9
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: de la López
         apellidoMaterno:
           type:
             - string
             - 'null'
           x-stoplight:
             id: 7nqdktp6celc3
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Estrada
         curp:
           type: string
           x-stoplight:
             id: o29k6cwwsb0ju
           minLength: 18
           maxLength: 18
+          pattern: '^[a-zA-ZÑñ]{4}\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\d$'
+          example: LOEF111111HDFASD01
         rfc:
           type: string
           x-stoplight:
             id: 8e0814486ffte
           minLength: 13
           maxLength: 13
+          pattern: '^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$'
+          example: loef111111fg9
         numeroSeguroSocial:
           type: string
           x-stoplight:
             id: b7bgnarj9w1lg
           minLength: 11
           maxLength: 11
+          pattern: '^[0-9]+$'
+          example: '11111111111'
         fechaNacimiento:
           type: string
           x-stoplight:
             id: 1ww8739j4a2r0
           format: date
+          example: '2000-01-01'
         genero:
           $ref: '#/components/schemas/GeneroEnum'
           x-stoplight:
@@ -531,11 +566,14 @@ components:
             id: c4kdhd8ruow27
           minLength: 10
           maxLength: 10
+          pattern: '^[0-9]+$'
+          example: '1234567890'
         correoElectronicoPersonal:
           type: string
           x-stoplight:
             id: gui6ysgf0ydnh
           format: email
+          example: user@example.com
         estadoCivil:
           $ref: '#/components/schemas/EstadoCivilEnum'
           x-stoplight:
@@ -544,16 +582,21 @@ components:
           type: boolean
           x-stoplight:
             id: f0zun6agsnn52
+          default: false
         contactoEmergenciaNombre:
           type: string
           x-stoplight:
             id: yzojflxr6welo
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Martina Estrada Martínez
         contactoEmergenciaTelefono:
           type: string
           x-stoplight:
             id: rxolvz91j0kd8
           minLength: 10
           maxLength: 10
+          pattern: '^[0-9]+$'
+          example: '9876543210'
     Empleado:
       title: Empleado
       x-stoplight:
@@ -582,6 +625,7 @@ components:
         - idDireccion
         - idSubdireccion
         - idPuesto
+        - roles
       properties:
         idEmpleado:
           type: string
@@ -685,6 +729,8 @@ components:
           type: string
           x-stoplight:
             id: 8zcu5pa5dqyxp
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Licenciatura en Computación
         estadoNivel:
           $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
@@ -697,6 +743,8 @@ components:
             id: tb99yofdm139k
           minLength: 7
           maxLength: 8
+          pattern: '^[0-9]+$'
+          example: '12345678'
     NivelesEscolaridadesEnum:
       title: NivelesEscolaridadesEnum
       x-stoplight:
@@ -773,10 +821,10 @@ components:
         id: blnek0qhpctct
       type: object
       required:
-        - id
+        - idRol
         - descripcion
       properties:
-        id:
+        idRol:
           type: string
           x-stoplight:
             id: tocecp0tjh4pm

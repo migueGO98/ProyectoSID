@@ -48,7 +48,7 @@ public class EmpleadoDto {
   private String idPuesto;
 
   @Valid
-  private List<String> roles;
+  private List<String> roles = new ArrayList<>();
 
   public EmpleadoDto() {
     super();
@@ -57,7 +57,7 @@ public class EmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto) {
+  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
     this.idEmpleado = idEmpleado;
     this.nombreCompleto = nombreCompleto;
     this.activo = activo;
@@ -67,6 +67,7 @@ public class EmpleadoDto {
     this.idDireccion = idDireccion;
     this.idSubdireccion = idSubdireccion;
     this.idPuesto = idPuesto;
+    this.roles = roles;
   }
 
   public EmpleadoDto idEmpleado(String idEmpleado) {
@@ -266,8 +267,8 @@ public class EmpleadoDto {
    * Get roles
    * @return roles
   */
-  
-  @Schema(name = "roles", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
   public List<String> getRoles() {
     return roles;

@@ -21,8 +21,8 @@ public class ServicioRoles {
 
     public List<RolDto> recuperarRoles() {
         var roles = repositorioRoles.findAll();
-        log.info("Se recuperaron los roles");
-        return RolMapper.INSTANCE.rolesDtoToRoles(roles);
+        log.info("Se recuperaron los roles {}", roles);
+        return RolMapper.INSTANCE.rolesToRolesDto(roles);
     }
 
     public Set<Rol> obtenerRoles(List<String> roles){

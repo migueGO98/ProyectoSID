@@ -61,8 +61,8 @@ public class DomicilioDto {
    * Get calle
    * @return calle
   */
-  @NotNull 
-  @Schema(name = "calle", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "calle", example = "Izta No 40", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("calle")
   public String getCalle() {
     return calle;
@@ -81,8 +81,8 @@ public class DomicilioDto {
    * Get codigoPostal
    * @return codigoPostal
   */
-  @NotNull @Size(min = 5, max = 5) 
-  @Schema(name = "codigoPostal", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 5, max = 5) 
+  @Schema(name = "codigoPostal", example = "01111", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("codigoPostal")
   public String getCodigoPostal() {
     return codigoPostal;
@@ -101,8 +101,8 @@ public class DomicilioDto {
    * Get colonia
    * @return colonia
   */
-  @NotNull 
-  @Schema(name = "colonia", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "colonia", example = "Prolongación de Noñora", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("colonia")
   public String getColonia() {
     return colonia;
@@ -121,8 +121,8 @@ public class DomicilioDto {
    * Get municipio
    * @return municipio
   */
-  @NotNull 
-  @Schema(name = "municipio", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "municipio", example = "Gustavo A. Madero", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("municipio")
   public String getMunicipio() {
     return municipio;
@@ -141,8 +141,8 @@ public class DomicilioDto {
    * Get ciudad
    * @return ciudad
   */
-  @NotNull 
-  @Schema(name = "ciudad", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "ciudad", example = "Ciudad de México", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("ciudad")
   public String getCiudad() {
     return ciudad;
@@ -161,8 +161,8 @@ public class DomicilioDto {
    * Get estado
    * @return estado
   */
-  @NotNull 
-  @Schema(name = "estado", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "estado", example = "Ciudad de México", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("estado")
   public String getEstado() {
     return estado;

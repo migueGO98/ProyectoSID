@@ -152,7 +152,7 @@ public class NewEmpleadoDto {
    * @return fechaIngreso
   */
   @NotNull @Valid 
-  @Schema(name = "fechaIngreso", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "fechaIngreso", example = "2020-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fechaIngreso")
   public LocalDate getFechaIngreso() {
     return fechaIngreso;
@@ -171,8 +171,8 @@ public class NewEmpleadoDto {
    * Get idTipoPlaza
    * @return idTipoPlaza
   */
-  @NotNull 
-  @Schema(name = "idTipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @Schema(name = "idTipoPlaza", example = "SPC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idTipoPlaza")
   public String getIdTipoPlaza() {
     return idTipoPlaza;
@@ -191,8 +191,8 @@ public class NewEmpleadoDto {
    * Get idRegion
    * @return idRegion
   */
-  @NotNull 
-  @Schema(name = "idRegion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @Schema(name = "idRegion", example = "oc", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idRegion")
   public String getIdRegion() {
     return idRegion;
@@ -211,8 +211,8 @@ public class NewEmpleadoDto {
    * Get idDireccion
    * @return idDireccion
   */
-  @NotNull 
-  @Schema(name = "idDireccion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @Schema(name = "idDireccion", example = "DGEC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idDireccion")
   public String getIdDireccion() {
     return idDireccion;
@@ -231,8 +231,8 @@ public class NewEmpleadoDto {
    * Get idSubdireccion
    * @return idSubdireccion
   */
-  @NotNull 
-  @Schema(name = "idSubdireccion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @Schema(name = "idSubdireccion", example = "SUBAdmonOC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idSubdireccion")
   public String getIdSubdireccion() {
     return idSubdireccion;
@@ -251,8 +251,8 @@ public class NewEmpleadoDto {
    * Get idPuesto
    * @return idPuesto
   */
-  @NotNull 
-  @Schema(name = "idPuesto", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @Schema(name = "idPuesto", example = "sjd1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idPuesto")
   public String getIdPuesto() {
     return idPuesto;

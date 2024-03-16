@@ -23,7 +23,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class RolDto {
 
-  private String id;
+  private String idRol;
 
   private String descripcion;
 
@@ -34,29 +34,29 @@ public class RolDto {
   /**
    * Constructor with only required parameters
    */
-  public RolDto(String id, String descripcion) {
-    this.id = id;
+  public RolDto(String idRol, String descripcion) {
+    this.idRol = idRol;
     this.descripcion = descripcion;
   }
 
-  public RolDto id(String id) {
-    this.id = id;
+  public RolDto idRol(String idRol) {
+    this.idRol = idRol;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get idRol
+   * @return idRol
   */
   @NotNull 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("id")
-  public String getId() {
-    return id;
+  @Schema(name = "idRol", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("idRol")
+  public String getIdRol() {
+    return idRol;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setIdRol(String idRol) {
+    this.idRol = idRol;
   }
 
   public RolDto descripcion(String descripcion) {
@@ -88,20 +88,20 @@ public class RolDto {
       return false;
     }
     RolDto rol = (RolDto) o;
-    return Objects.equals(this.id, rol.id) &&
+    return Objects.equals(this.idRol, rol.idRol) &&
         Objects.equals(this.descripcion, rol.descripcion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, descripcion);
+    return Objects.hash(idRol, descripcion);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RolDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    idRol: ").append(toIndentedString(idRol)).append("\n");
     sb.append("    descripcion: ").append(toIndentedString(descripcion)).append("\n");
     sb.append("}");
     return sb.toString();

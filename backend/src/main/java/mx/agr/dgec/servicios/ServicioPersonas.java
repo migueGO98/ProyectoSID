@@ -26,14 +26,16 @@ public class ServicioPersonas {
         return PersonaMapper.INSTANCE.generosEnumToRegistrosDto(generos);
     }
 
-    public GeneroEnum recuperarGenero(String genero) {
+    public GeneroEnum recuperarGenero(String generoValue) {
+        var genero = generoValue.toUpperCase();
         return Stream.of(GeneroEnum.values())
                 .filter(g -> g.name().equals(genero))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("El valor " + genero + " no es un género válido."));
     }
 
-    public EstadoCivilEnum recuperarEstadoCivil(String estadoCivil) {
+    public EstadoCivilEnum recuperarEstadoCivil(String estadoCivilValue) {
+        var estadoCivil = estadoCivilValue.toUpperCase();
         return Stream.of(EstadoCivilEnum.values())
                 .filter(e -> e.name().equals(estadoCivil))
                 .findFirst()
@@ -49,9 +51,6 @@ public class ServicioPersonas {
         if (personaDto.getCurp().isBlank()) throw new IllegalArgumentException("El CURP no puede ser vacío");
         if (personaDto.getRfc().isBlank()) throw new IllegalArgumentException("El RFC no puede ser vacío");
         if (personaDto.getNumeroSeguroSocial().isBlank()) throw new IllegalArgumentException("El número de seguro social no puede ser vacío");
-        if (personaDto.getFechaNacimiento() == null) {
-            throw new IllegalArgumentException("La fecha de nacimiento no puede vacío");
-        }
         if (personaDto.getTelefonoPersonal().isBlank()) throw new IllegalArgumentException("El teléfono personal no puede ser vacío");
         if (personaDto.getCorreoElectronicoPersonal().isBlank()) throw new IllegalArgumentException("El correo electrónico no puede ser vacío");
         if (personaDto.getContactoEmergenciaNombre().isBlank()) throw new IllegalArgumentException("El nombre del contacto de emergencia no puede ser vacío");

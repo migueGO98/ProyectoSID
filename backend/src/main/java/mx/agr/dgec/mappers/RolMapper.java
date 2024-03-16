@@ -12,7 +12,7 @@ public interface RolMapper {
 
     RolMapper INSTANCE = Mappers.getMapper(RolMapper.class);
 
-    List<RolDto> rolesDtoToRoles(List<Rol> roles);
+    List<RolDto> rolesToRolesDto(List<Rol> roles);
 
     default List<String> rolesToIdRoles(Set<Rol> roles){
         return roles.stream().map(Rol::getIdRol).toList();

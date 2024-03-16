@@ -78,8 +78,8 @@ public class EscolaridadDto {
    * Get carrera
    * @return carrera
   */
-  @NotNull 
-  @Schema(name = "carrera", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @Schema(name = "carrera", example = "Licenciatura en Computación", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("carrera")
   public String getCarrera() {
     return carrera;
@@ -118,8 +118,8 @@ public class EscolaridadDto {
    * Get cedulaProfesional
    * @return cedulaProfesional
   */
-  @NotNull @Size(min = 7, max = 8) 
-  @Schema(name = "cedulaProfesional", requiredMode = Schema.RequiredMode.REQUIRED)
+  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) 
+  @Schema(name = "cedulaProfesional", example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("cedulaProfesional")
   public JsonNullable<String> getCedulaProfesional() {
     return cedulaProfesional;
