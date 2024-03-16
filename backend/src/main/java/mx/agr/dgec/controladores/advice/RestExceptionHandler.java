@@ -69,7 +69,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         // Para tipos de datos no válidos
         if (ex.getCause() instanceof InvalidFormatException ife) {
             var error = getError(ife);
-            error.setMensaje(error.getMensaje() + " debe ser de tipo " + ife.getTargetType().getSimpleName());
             log.info("Error de tipo de dato: {}", error.getMensaje());
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
