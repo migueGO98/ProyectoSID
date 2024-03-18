@@ -1,6 +1,7 @@
 package mx.agr.dgec.servicios;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.agr.dgec.entidades.Puesto;
 import mx.agr.dgec.entidades.TipoPlaza;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.mappers.TipoPlazaMapper;
@@ -28,5 +29,11 @@ public class ServicioTiposPlazas {
         var tipoPlaza = repositorioTipoPlaza.findById(idTipoPlazaValue.toUpperCase());
         if (tipoPlaza.isEmpty()) throw new IllegalArgumentException("El idTipoPlaza no es válido o es inexistente");
         return tipoPlaza.get();
+    }
+
+    // Valida que el puesto pertenezca al tipo de plaza
+    public void validarPuestoPertenezcaToTipoPlaza(TipoPlaza tipoPlaza, Puesto puesto) {
+        if(!puesto.getTipoPlaza().equals(tipoPlaza))
+            throw new IllegalArgumentException("El puesto no pertenece al tipo de plaza");
     }
 }

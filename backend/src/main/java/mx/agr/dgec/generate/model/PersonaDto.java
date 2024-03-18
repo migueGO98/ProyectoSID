@@ -92,7 +92,7 @@ public class PersonaDto {
    * @return nombre
   */
   @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
-  @Schema(name = "nombre", example = "Fabian Carlos ", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "nombre", example = "Fabian Carlos", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nombre")
   public String getNombre() {
     return nombre;

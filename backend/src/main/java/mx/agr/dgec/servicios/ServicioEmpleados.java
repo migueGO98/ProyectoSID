@@ -1,6 +1,7 @@
 package mx.agr.dgec.servicios;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.agr.dgec.entidades.Empleado;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
@@ -48,14 +49,17 @@ public class ServicioEmpleados {
 
     private static final float PROMEDIO_DIAS_POR_MES = 30.4375f;
 
+
+
+    public List<RegistrosDto> recuperarMotivosBaja() {
+        var motivosBaja = Arrays.stream(MotivoBajaEnum.values()).toList();
+        log.info("Se recuperaron los motivos de baja");
+        return EmpleadoMapper.INSTANCE.motivosBajaEnumtoRegistrosDto(motivosBaja);
+    }
+
     public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleadoDto) {
         // Validaciones de forma
         servicioPersonas.validarPersonaDto(nuevoEmpleadoDto.getPersona());
-        final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), nuevoEmpleadoDto.getFechaIngreso());
-        if (existeEmpleado(idEmpleado)) { // Regla de Negocio
-            log.error("El empleado con ID {} ya existe", idEmpleado);
-            throw new IllegalArgumentException("El empleado ya existe");
-        }
         servicioDomicilios.validarDomicilioDto(nuevoEmpleadoDto.getDomicilio());
         servicioEscolaridades.validarEscolaridadesDto(nuevoEmpleadoDto.getEscolaridades());
         var tipoPlaza = servicioTiposPlazas.obtenerTipoPlaza(nuevoEmpleadoDto.getIdTipoPlaza());
@@ -65,28 +69,40 @@ public class ServicioEmpleados {
         var puesto = servicioPuestos.obtenerPuesto(nuevoEmpleadoDto.getIdPuesto());
         var roles = servicioRoles.obtenerRoles(nuevoEmpleadoDto.getRoles());
 
-        // Validaciones de fondo (Reglas de Negocio)
-        validarReglasNegocioNuevoEmpleado(nuevoEmpleadoDto.getFechaIngreso());
+        var fechaIngresoValue = nuevoEmpleadoDto.getFechaIngreso();
+        final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), nuevoEmpleadoDto.getFechaIngreso());
 
-        // Las asignaciones true y null son por Reglas de Negocio
-        final var nuevoEmpleado = EmpleadoMapper.INSTANCE.newEmpleadoDtoToEmpleado(idEmpleado, nuevoEmpleadoDto, true,null,
-               null, null,null, 0,0, null,
+        // Validaciones de fondo (Reglas de Negocio)
+        if (existeEmpleado(idEmpleado)) {
+            log.error("El empleado con ID {} ya existe", idEmpleado);
+            throw new IllegalArgumentException("El empleado ya existe");
+        }
+        servicioTiposPlazas.validarPuestoPertenezcaToTipoPlaza(tipoPlaza, puesto);
+        servicioRegiones.validarDireccionPertenezcaToRegion(region, direccion);
+        servicioDirecciones.validarSubdireccionPertenezcaToDireccion(direccion, subdireccion);
+        validarDiaFechaIngreso(fechaIngresoValue);
+        validarNoHaPasado1MesFechaIngreso(fechaIngresoValue);
+        validarNoPasaDe1MesFuturoFechaIngreso(fechaIngresoValue);
+
+        var estadoActivo = obtenerEstadoNuevoEmpleado(nuevoEmpleadoDto.getFechaIngreso());
+        // Las asignaciones null son por Reglas de Negocio
+        final var nuevoEmpleado = EmpleadoMapper.INSTANCE.newEmpleadoDtoToEmpleado(idEmpleado, nuevoEmpleadoDto, estadoActivo,null,
+                null, null,null, 0,0, null,
                 tipoPlaza, region, direccion, subdireccion, puesto, roles);
 
         nuevoEmpleado.calcularEdad();
+        nuevoEmpleado.formatearDatos();
 
-        log.info("Nuevo Empleado: {}", nuevoEmpleado);
+        var empleado = repositorioEmpleado.save(nuevoEmpleado);
 
-        String nombreCompleto;
-
-        if (nuevoEmpleado.getApellidoMaterno() == null)
-            nombreCompleto = String.format("%s %s", nuevoEmpleado.getNombre(), nuevoEmpleado.getApellidoPaterno());
-        else
-            nombreCompleto = String.format("%s %s %s", nuevoEmpleado.getNombre(), nuevoEmpleado.getApellidoPaterno(), nuevoEmpleado.getApellidoMaterno());
+        var nombreCompleto = obtenerNombreCompletoEmpleado(nuevoEmpleado);
 
         log.info("Empleado creado: {} con ID {}", nombreCompleto.toUpperCase(), idEmpleado);
-        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(nombreCompleto, nuevoEmpleado);
+        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(nombreCompleto, empleado);
     }
+
+
+
 
     private String generarIdEmpleado(String rfc, LocalDate fechaIngreso) {
         var rfcInicio = rfc.substring(0, 4);
@@ -95,19 +111,7 @@ public class ServicioEmpleados {
         var diaIngreso = fechaIngreso.getDayOfMonth();
         var periodoQuincenalIngreso = (diaIngreso <= 15) ? 1 : 2;
 
-        return rfcInicio + periodoQuincenalIngreso + String.format("%02d", mesIngreso) + anioIngreso;
-    }
-
-    public List<RegistrosDto> recuperarMotivosBaja() {
-        var motivosBaja = Arrays.stream(MotivoBajaEnum.values()).toList();
-        log.info("Se recuperaron los motivos de baja");
-        return EmpleadoMapper.INSTANCE.motivosBajaEnumtoRegistrosDto(motivosBaja);
-    }
-
-    private void validarReglasNegocioNuevoEmpleado(LocalDate fechaIngresoValue) {
-        validarDiaFechaIngreso(fechaIngresoValue);
-        validarNoHaPasado1MesFechaIngreso(fechaIngresoValue);
-        validarNoHaPasado1MesFuturoFechaIngreso(fechaIngresoValue);
+        return (rfcInicio + periodoQuincenalIngreso + String.format("%02d", mesIngreso) + anioIngreso).toUpperCase();
     }
 
     private boolean existeEmpleado(String idEmpleado){
@@ -121,26 +125,33 @@ public class ServicioEmpleados {
     }
 
     private void validarNoHaPasado1MesFechaIngreso(LocalDate fechaIngreso) {
-        var fechaPeriodoActual = obtenerFechaPeriodoActual(fechaIngreso);
-        var diferenciaEnDias = (byte) ChronoUnit.DAYS.between(fechaIngreso, fechaPeriodoActual);
+        var fechaPeriodoActual = obtenerFechaPeriodoActual();
+        var diferenciaEnDias = ChronoUnit.DAYS.between(fechaIngreso, fechaPeriodoActual);
         float diferenciaEnMeses = diferenciaEnDias / PROMEDIO_DIAS_POR_MES;
-        log.info("Diferencia en meses: {}", diferenciaEnMeses);
         if (diferenciaEnMeses > 1.0f) throw new IllegalArgumentException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales anteriores del periodo quincenal actual");
     }
 
-    private void validarNoHaPasado1MesFuturoFechaIngreso(LocalDate fechaIngreso) {
-        var fechaPeriodoActual = obtenerFechaPeriodoActual(fechaIngreso);
-        var diferenciaEnDias = (byte) ChronoUnit.DAYS.between(fechaPeriodoActual, fechaIngreso);
+    private void validarNoPasaDe1MesFuturoFechaIngreso(LocalDate fechaIngreso) {
+        var fechaPeriodoActual = obtenerFechaPeriodoActual();
+        var diferenciaEnDias = ChronoUnit.DAYS.between(fechaPeriodoActual, fechaIngreso);
         float diferenciaEnMeses = diferenciaEnDias / PROMEDIO_DIAS_POR_MES;
-        log.info("Diferencia en meses: {}", diferenciaEnMeses);
         if (diferenciaEnMeses > 1.2f) throw new IllegalArgumentException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales posteriores del periodo quincenal actual");
     }
 
-    private LocalDate obtenerFechaPeriodoActual(LocalDate fechaIngreso) {
+    private LocalDate obtenerFechaPeriodoActual() {
         // Obtener si es el primer o segundo periodo quincenal
         LocalDate fechaActual = LocalDate.now();
         int primerDiaPeriodoActual = (fechaActual.getDayOfMonth() <= 15) ? 1 : 16;
         return LocalDate.of(fechaActual.getYear(), fechaActual.getMonth(), primerDiaPeriodoActual);
     }
 
+    private boolean obtenerEstadoNuevoEmpleado(LocalDate fechaIngreso) {
+        return !fechaIngreso.isAfter(LocalDate.now());
+    }
+
+    private String obtenerNombreCompletoEmpleado(Empleado empleado) {
+        if (empleado.getApellidoMaterno() == null)
+            return String.format("%s %s", empleado.getNombre(), empleado.getApellidoPaterno());
+        return String.format("%s %s %s", empleado.getNombre(), empleado.getApellidoPaterno(), empleado.getApellidoMaterno());
+    }
 }

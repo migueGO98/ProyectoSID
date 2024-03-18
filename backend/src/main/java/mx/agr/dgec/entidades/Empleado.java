@@ -63,9 +63,11 @@ public class Empleado extends Persona {
     )
     private Set<Rol> roles;
 
-
-
     public void calcularEdad() {
         super.calcularEdadPersona();
+    }
+
+    public void formatearDatos() {
+        super.formatearDatosPersona();
     }
 }

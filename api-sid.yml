@@ -11,7 +11,7 @@ tags:
   - name: TiposPlazas
     description: Funciones sobre los tipos de plazas
 x-stoplight:
-  id: hddsj7t9ehil6
+  id: q54z857tlv2o2
 info:
   title: Sistema Integración Divisional API
   version: '1.0'
@@ -58,52 +58,14 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: crearEmpleado
       x-stoplight:
-        id: g8zzrql0p43i6
+        id: 6a088zwq07klw
       description: Crea un nuevo empleado
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/NewEmpleado'
-            examples:
-              Example 1:
-                value:
-                  persona:
-                    nombre: Fabian
-                    apellidoPaterno: Lopez
-                    apellidoMaterno: Estrada
-                    curp: LOEF111111HDFASD01
-                    rfc: LOEF111111FG9
-                    numeroSeguroSocial: '11111111111'
-                    fechaNacimiento: '2019-08-24'
-                    genero: MASCULINO
-                    telefonoPersonal: '1234567890'
-                    correoElectronicoPersonal: user@example.com
-                    estadoCivil: CASADO
-                    hijos: true
-                    contactoEmergenciaNombre: Martina
-                    contactoEmergenciaTelefono: '9876543210'
-                  domicilio:
-                    calle: Izta
-                    codigoPostal: '99999'
-                    colonia: Prolongacion
-                    municipio: Iztapalapa
-                    ciudad: CDMX
-                    estado: CDMX
-                  escolaridades:
-                    - nivel: LICENCIATURA
-                      carrera: COMPUTACION
-                      estadoNivel: TRAMITE_TITULACION
-                      cedulaProfesional: '12345678'
-                  fechaIngreso: '2019-08-24'
-                  idTipoPlaza: SP
-                  idRegion: OC
-                  idDireccion: DGEC
-                  idSubdireccion: SUBADMONOC
-                  idPuesto: SJD1
-                  roles:
-                    - RH1
-                    - IP3
+            examples: {}
         description: ''
         required: true
     parameters: []
@@ -122,7 +84,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: wzzjb87h8ad9p
+                    id: ydit3efh5ekd2
         '403':
           description: Forbidden
           content:
@@ -131,7 +93,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarNivelesEscolares
       x-stoplight:
-        id: ff0ov0pzdeitc
+        id: 12i98woyeppwa
       description: Recupera los niveles escolares permitidos por el sistema
   /api/escolaridades/niveles/estados:
     get:
@@ -148,7 +110,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: ssi7j11ucuqvp
+                    id: xnfkv4e7hdv0w
         '403':
           description: Forbidden
           content:
@@ -157,7 +119,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarEstadosNivelesEscolares
       x-stoplight:
-        id: bd0bu6mobfk9c
+        id: bb3c850gnrndh
       description: 'Recupera los estados de los niveles escolares permitidos por el sistema '
     parameters: []
   /api/personas/generos:
@@ -175,7 +137,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: dcv5pni4s6696
+                    id: is13k7cz5nxkw
         '403':
           description: Forbidden
           content:
@@ -184,7 +146,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarGeneros
       x-stoplight:
-        id: vfws9ptf8vy5d
+        id: q88dlsgtsqtn2
       description: Recupera los géneros de una persona permitidos por el sistema
   /api/personas/estadosCiviles:
     get:
@@ -201,7 +163,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: elhly52ffz7rr
+                    id: 36afykzvneb21
         '403':
           description: Forbidden
           content:
@@ -210,7 +172,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarEstadosCiviles
       x-stoplight:
-        id: hglovsmemr138
+        id: j8e12vndanrtq
       description: Recupera los estados civiles de una persona permitidos por el sistema
   /api/empleados/motivosBaja:
     get:
@@ -227,7 +189,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: 4xf2d40682cgr
+                    id: hchhjxjdjf6f5
         '403':
           description: Forbidden
           content:
@@ -236,7 +198,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarMotivosBaja
       x-stoplight:
-        id: 0wxak70cdkylm
+        id: 76bkg7log5l7o
       description: Recupera los motivos de bajas de un empleado permitidos por el sistema
   /api/roles:
     get:
@@ -253,7 +215,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Rol'
                   x-stoplight:
-                    id: 08zr7z9adkpms
+                    id: 3l9rrjpewfkzp
         '403':
           description: Forbidden
           content:
@@ -262,7 +224,7 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarRoles
       x-stoplight:
-        id: kwh6k4f4iklf6
+        id: cfdso2buckduj
       description: Recupera los roles registrados en el sistema
   /api/tipos-plazas:
     get:
@@ -279,7 +241,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
-                    id: lvgnr074le70t
+                    id: paojb7zlxa5jz
         '403':
           description: Forbidden
           content:
@@ -288,52 +250,15 @@ paths:
                 $ref: '#/components/schemas/Error'
       operationId: recuperarTiposPlazas
       x-stoplight:
-        id: 2ubc8ibrtti7j
+        id: 0zvrwsofztb5s
       description: Recupera los tipos de plazas registrados en el sistema
 components:
   schemas:
     NewEmpleado:
       title: NewEmpleado
       x-stoplight:
-        id: 3dxce9kg4hfhg
+        id: tj1ar29q44f77
       type: object
-      examples:
-        - persona:
-            nombre: Fabian
-            apellidoPaterno: Lopez
-            apellidoMaterno: Estrada
-            curp: LOEF111111HDFASDXX
-            rfc: LOEF111111FG9
-            numeroSeguroSocial: '11111111111'
-            fechaNacimiento: '2019-08-24'
-            genero: MASCULINO
-            telefonoPersonal: '1234567890'
-            correoElectronicoPersonal: user@example.com
-            estadoCivil: CASADO
-            hijos: true
-            contactoEmergenciaNombre: Martina
-            contactoEmergenciaTelefono: '9876543210'
-          domicilio:
-            calle: Izta
-            codigoPostal: '99999'
-            colonia: Prolongacion
-            municipio: Iztapalapa
-            ciudad: CDMX
-            estado: CDMX
-          escolaridades:
-            - nivel: LICENCIATURA
-              carrera: COMPUTACION
-              estadoNivel: TRAMITE_TITULACION
-              cedulaProfesional: '12345678'
-          fechaIngreso: '2019-08-24'
-          idTipoPlaza: sp
-          idRegion: OC
-          idDireccion: DGEC
-          idSubdireccion: SUBADMONOC
-          idPuesto: SjD1
-          roles:
-            - rh1
-            - IP3
       required:
         - persona
         - domicilio
@@ -349,80 +274,73 @@ components:
         persona:
           $ref: '#/components/schemas/Persona'
           x-stoplight:
-            id: 9q89m9wlb5liw
+            id: 2hgbqzq3o3gtk
         domicilio:
           $ref: '#/components/schemas/Domicilio'
           x-stoplight:
-            id: vo8vmmnq6acdc
+            id: acomoy90v5w7j
         escolaridades:
           type: array
           x-stoplight:
-            id: a7yq6ui1k54wr
+            id: jnj1lgomijflr
           minItems: 1
           items:
             $ref: '#/components/schemas/Escolaridad'
             x-stoplight:
-              id: mh7ixewnkryly
+              id: ypsxrwa91td9u
         fechaIngreso:
           type: string
           x-stoplight:
-            id: 3fmji1594uguu
+            id: pw4oaxlrpk2e2
           format: date
           example: '2020-01-01'
         idTipoPlaza:
           x-stoplight:
-            id: xu6qknuz1xsrl
+            id: ifi0xx9kex23v
           type: string
           pattern: '^[a-zA-Z0-9]+$'
           example: SPC
         idRegion:
           type: string
           x-stoplight:
-            id: espz0fiykbvke
+            id: f62jthv07ffhl
           pattern: '^[a-zA-Z0-9]+$'
           example: oc
         idDireccion:
           type: string
           x-stoplight:
-            id: ugg64wrqsohv8
+            id: i1iswdtq8on34
           pattern: '^[a-zA-Z0-9]+$'
           example: DGEC
         idSubdireccion:
           type: string
           x-stoplight:
-            id: n82s6oafp3hp1
+            id: 6lh2qgh72njny
           pattern: '^[a-zA-Z0-9]+$'
           example: SUBAdmonOC
         idPuesto:
           type: string
           x-stoplight:
-            id: tqc5ltfb36tvc
+            id: z3iuknlq4r94q
           pattern: '^[a-zA-Z0-9]+$'
-          example: sjd1
+          example: na1
         roles:
           type: array
           x-stoplight:
-            id: 2n3mkesrrjct7
+            id: qh38vks47p61n
           minItems: 1
           items:
             x-stoplight:
-              id: ahpjv64r975s1
+              id: h5dgq5agowm4b
             type: string
             pattern: '^[a-zA-Z0-9]+$'
             example: admin
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
-        id: d1fwq466naaom
+        id: yql0d9fa0qfo1
       type: object
       description: Domicilio particular del empleado
-      examples:
-        - calle: Izta
-          codigoPostal: '99999'
-          colonia: Prolongacion
-          municipio: Iztapalapa
-          ciudad: CDMX
-          estado: CDMX
       required:
         - calle
         - codigoPostal
@@ -434,13 +352,13 @@ components:
         calle:
           type: string
           x-stoplight:
-            id: jkyrqsikpj4wn
+            id: bidhdl0twq0b9
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Izta No 40
         codigoPostal:
           type: string
           x-stoplight:
-            id: 696fgan820zkx
+            id: a3x7dkyt3wjae
           minLength: 5
           maxLength: 5
           pattern: '^[0-9]+$'
@@ -448,48 +366,33 @@ components:
         colonia:
           type: string
           x-stoplight:
-            id: nnei75eods4w1
+            id: djarovc2rpflv
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Prolongación de Noñora
         municipio:
           type: string
           x-stoplight:
-            id: barnbw50g9fxb
+            id: dnok4daqngu4d
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Gustavo A. Madero
         ciudad:
           type: string
           x-stoplight:
-            id: zpzknpxvrfn7i
+            id: 1f2n8slgvpkfu
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Ciudad de México
         estado:
           type: string
           x-stoplight:
-            id: 9325lx1msfb6u
+            id: 93imtpm3u3p6l
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Ciudad de México
     Persona:
       title: Persona
       x-stoplight:
-        id: j9wg5f8jypnn3
+        id: w5upcksed0scb
       type: object
       description: Atributos que tiene una persona
-      examples:
-        - nombre: Fabian
-          apellidoPaterno: Lopez
-          apellidoMaterno: Estrada
-          curp: LOEF111111HDFASD01
-          rfc: LOEF111111FG9
-          numeroSeguroSocial: '11111111111'
-          fechaNacimiento: '2019-08-24'
-          genero: MASCULINO
-          telefonoPersonal: '1234567890'
-          correoElectronicoPersonal: user@example.com
-          estadoCivil: CASADO
-          hijos: true
-          contactoEmergenciaNombre: Martina
-          contactoEmergenciaTelefono: '9876543210'
       required:
         - nombre
         - apellidoPaterno
@@ -509,13 +412,13 @@ components:
         nombre:
           type: string
           x-stoplight:
-            id: b90loeejjgmsa
+            id: 1i7ebs4qwdbkq
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Fabian Carlos
         apellidoPaterno:
           type: string
           x-stoplight:
-            id: ktza3nbhnofy9
+            id: 94jnyfa3k6rqa
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: de la López
         apellidoMaterno:
@@ -523,13 +426,13 @@ components:
             - string
             - 'null'
           x-stoplight:
-            id: 7nqdktp6celc3
+            id: kmlxoqjb3lf9r
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Estrada
         curp:
           type: string
           x-stoplight:
-            id: o29k6cwwsb0ju
+            id: qbsccpyrbfoay
           minLength: 18
           maxLength: 18
           pattern: '^[a-zA-ZÑñ]{4}\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\d$'
@@ -537,7 +440,7 @@ components:
         rfc:
           type: string
           x-stoplight:
-            id: 8e0814486ffte
+            id: wxl0c9s4k7w0c
           minLength: 13
           maxLength: 13
           pattern: '^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$'
@@ -545,7 +448,7 @@ components:
         numeroSeguroSocial:
           type: string
           x-stoplight:
-            id: b7bgnarj9w1lg
+            id: spq24ibgs5ty8
           minLength: 11
           maxLength: 11
           pattern: '^[0-9]+$'
@@ -553,17 +456,17 @@ components:
         fechaNacimiento:
           type: string
           x-stoplight:
-            id: 1ww8739j4a2r0
+            id: sgzydws72hx8j
           format: date
           example: '2000-01-01'
         genero:
           $ref: '#/components/schemas/GeneroEnum'
           x-stoplight:
-            id: 29mt91j8292b1
+            id: hh6g2lif4vzhz
         telefonoPersonal:
           type: string
           x-stoplight:
-            id: c4kdhd8ruow27
+            id: or7pwd0unwaka
           minLength: 10
           maxLength: 10
           pattern: '^[0-9]+$'
@@ -571,28 +474,28 @@ components:
         correoElectronicoPersonal:
           type: string
           x-stoplight:
-            id: gui6ysgf0ydnh
+            id: 1p5pumjd6snhz
           format: email
           example: user@example.com
         estadoCivil:
           $ref: '#/components/schemas/EstadoCivilEnum'
           x-stoplight:
-            id: q2q2mou04jbgq
+            id: zntuk9p7zhpwp
         hijos:
           type: boolean
           x-stoplight:
-            id: f0zun6agsnn52
+            id: hogfnpvrnn4au
           default: false
         contactoEmergenciaNombre:
           type: string
           x-stoplight:
-            id: yzojflxr6welo
+            id: nz3br88i2bgp5
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Martina Estrada Martínez
         contactoEmergenciaTelefono:
           type: string
           x-stoplight:
-            id: rxolvz91j0kd8
+            id: 3o9viaperyc06
           minLength: 10
           maxLength: 10
           pattern: '^[0-9]+$'
@@ -600,21 +503,8 @@ components:
     Empleado:
       title: Empleado
       x-stoplight:
-        id: p5p8ccicflpny
+        id: 6w0d2ye2s4n6k
       type: object
-      examples:
-        - idEmpleado: LOEF2082019
-          nombreCompleto: Lopez Estrada Fabian
-          activo: true
-          fechaIngreso: '2019-08-24'
-          idTipoPlaza: SP
-          idRegion: OC
-          idDireccion: DGEC
-          idSubdireccion: SDGEC
-          idPuesto: SJD1
-          roles:
-            - RH1
-            - IP3
       required:
         - idEmpleado
         - nombreCompleto
@@ -630,57 +520,54 @@ components:
         idEmpleado:
           type: string
           x-stoplight:
-            id: 02gerq8b2x393
+            id: 38afwu5wdbb4y
         nombreCompleto:
           type: string
           x-stoplight:
-            id: 95ed3d0e9xhtp
+            id: 1ttctipmd7ccu
         activo:
           type: boolean
           x-stoplight:
-            id: 615a9n3dqeeu8
+            id: 3zpx9nwap4h07
         fechaIngreso:
           type: string
           x-stoplight:
-            id: fiadx90z4dou6
+            id: s16d5wqwy5rg0
           format: date
         idTipoPlaza:
           type: string
           x-stoplight:
-            id: wglijvrzmv68f
+            id: tmlbplh9oppnx
         idRegion:
           type: string
           x-stoplight:
-            id: 7hyh6jr1zr0aq
+            id: qq7w395bnycmu
         idDireccion:
           type: string
           x-stoplight:
-            id: 09rt6rr2j4ot7
+            id: 2vluu69gkh6c1
         idSubdireccion:
           type: string
           x-stoplight:
-            id: 4ce5uo73issjv
+            id: la7q29il78wgh
         idPuesto:
           type: string
           x-stoplight:
-            id: aqht6yxnukc0e
+            id: s4l2zkg02a509
         roles:
           type: array
           x-stoplight:
-            id: jya7mqv5s0cwd
+            id: 2ebexb3jsrxpp
           items:
             x-stoplight:
-              id: aguh0yz83x2sz
+              id: wp7u4acbwt3fb
             type: string
     Error:
       title: Error
       x-stoplight:
-        id: 8ckb2ttym4uk7
+        id: xajwbur82fuw4
       type: object
       description: Error a mostrar en caso de alguna anomalía
-      examples:
-        - codigo: ERROR1
-          mensaje: Aquí va el mensaje del error personalizado.
       required:
         - codigo
         - mensaje
@@ -688,15 +575,15 @@ components:
         codigo:
           type: string
           x-stoplight:
-            id: r0evzjzh2n8du
+            id: u1eba0v9n17w4
         mensaje:
           type: string
           x-stoplight:
-            id: 0qi598gry1pzq
+            id: 06cmsn3mqy7m1
     GeneroEnum:
       title: GeneroEnum
       x-stoplight:
-        id: 52ximc65chxkc
+        id: x9szta9ltxpbz
       enum:
         - MASCULINO
         - FEMENINO
@@ -707,14 +594,9 @@ components:
     Escolaridad:
       title: Escolaridad
       x-stoplight:
-        id: 03ic97hwyomyw
+        id: yxrtoid4n6rj2
       type: object
       description: Escolaridad de una persona u empleado
-      examples:
-        - nivel: LICENCIATURA
-          carrera: COMPUTACION
-          estadoNivel: TRAMITE_TITULACION
-          cedulaProfesional: '1234567'
       required:
         - nivel
         - carrera
@@ -724,23 +606,23 @@ components:
         nivel:
           $ref: '#/components/schemas/NivelesEscolaridadesEnum'
           x-stoplight:
-            id: b72sii7hlfp4s
+            id: m6ocpf01asaf0
         carrera:
           type: string
           x-stoplight:
-            id: 8zcu5pa5dqyxp
+            id: ylz3r9h0kdcjm
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Licenciatura en Computación
         estadoNivel:
           $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
-            id: vbz22uqdbpw81
+            id: sqmdnf0tdf1cq
         cedulaProfesional:
           type:
             - string
             - 'null'
           x-stoplight:
-            id: tb99yofdm139k
+            id: aqb2bqf26t0we
           minLength: 7
           maxLength: 8
           pattern: '^[0-9]+$'
@@ -748,7 +630,7 @@ components:
     NivelesEscolaridadesEnum:
       title: NivelesEscolaridadesEnum
       x-stoplight:
-        id: ef7z3c15khf2y
+        id: fdm9gpiywfte3
       enum:
         - TECNICO
         - LICENCIATURA
@@ -762,7 +644,7 @@ components:
     EstadosNivelesEscolaridadesEnum:
       title: EstadosNivelesEscolaridadesEnum
       x-stoplight:
-        id: 652poievakefu
+        id: lp23oi2nezd0u
       enum:
         - CREDITOS_CUBIERTOS
         - CERTIFICADO
@@ -775,7 +657,7 @@ components:
     Registros:
       title: Registros
       x-stoplight:
-        id: asfdusa7yggio
+        id: dskx3lmhwlqty
       type: object
       description: 'Obtiene los campos registrados, en pares ordenados'
       required:
@@ -785,15 +667,15 @@ components:
         id:
           type: string
           x-stoplight:
-            id: 9bchusxx6tszf
+            id: xh17snizskvlc
         descripcion:
           type: string
           x-stoplight:
-            id: ie7bk1ok7ps04
+            id: cgh4j5oaj60pv
     EstadoCivilEnum:
       title: EstadoCivilEnum
       x-stoplight:
-        id: uwcpfz698kggx
+        id: kho7ayv5c1fj4
       enum:
         - CASADO
         - CASADA
@@ -810,7 +692,7 @@ components:
     MotivoBajaEnum:
       title: MotivoBajaEnum
       x-stoplight:
-        id: gopbogysduw72
+        id: olyxewhx5e1vk
       enum:
         - TERMINO_CONTRATO
         - RENUNCIA
@@ -818,7 +700,7 @@ components:
     Rol:
       title: Rol
       x-stoplight:
-        id: blnek0qhpctct
+        id: biwwue5e63r0u
       type: object
       required:
         - idRol
@@ -827,11 +709,11 @@ components:
         idRol:
           type: string
           x-stoplight:
-            id: tocecp0tjh4pm
+            id: c4zd8ds89lf29
         descripcion:
           type: string
           x-stoplight:
-            id: l0e0ibimjpafe
+            id: 5fb5v3omhsc6j
   requestBodies: {}
   responses: {}
   securitySchemes: {}

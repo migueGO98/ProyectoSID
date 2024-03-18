@@ -32,4 +32,10 @@ public class Escolaridad {
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona", insertable = false, updatable = false, nullable = false, foreignKey = @ForeignKey(name = "FK_ESCOLARIDAD_PERSONA"))
     @ToString.Exclude
     private Persona persona;
+
+
+
+    public void formatearCarrera() {
+        carrera = carrera.trim();
+    }
 }

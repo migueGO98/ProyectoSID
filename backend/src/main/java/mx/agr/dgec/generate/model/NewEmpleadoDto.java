@@ -252,7 +252,7 @@ public class NewEmpleadoDto {
    * @return idPuesto
   */
   @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
-  @Schema(name = "idPuesto", example = "sjd1", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "idPuesto", example = "na1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idPuesto")
   public String getIdPuesto() {
     return idPuesto;

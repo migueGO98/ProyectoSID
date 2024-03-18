@@ -64,4 +64,14 @@ public abstract class Persona {
         LocalDate fechaActual = LocalDate.now();
         this.edad = (byte) Period.between(fechaNacimiento, fechaActual).getYears();
     }
+
+    protected final void formatearDatosPersona() {
+        nombre = nombre.trim();
+        apellidoPaterno = apellidoPaterno.trim();
+        if(apellidoMaterno != null) apellidoMaterno = apellidoMaterno.trim();
+        curp = curp.toUpperCase();
+        rfc = rfc.toUpperCase();
+        contactoEmergenciaNombre = contactoEmergenciaNombre.trim();
+        escolaridades.forEach(Escolaridad::formatearCarrera);
+    }
 }

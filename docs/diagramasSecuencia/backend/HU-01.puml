@@ -9,15 +9,16 @@ box "Backend" #LightGreen
 end box
 
 controller -> service: crearNuevoEmpleado(newEmpleadoDto)
-service -> service: validarDatosForma(newEmpleadoDto)
+service -> service: validarDatosForma
 service -> service: generarIdEmpleado(rfc, fechaIngreso)
-service -> service: validarDatosFondo(nuevoEmpleado)
-service -> mapper: toEmpleado(idEmpleado, newEmpleadoDto)
+service -> service: validarReglasNegocio
+service -> mapper: newEmpleadoDtoToEmpleado(idEmpleado, newEmpleadoDto)
 mapper --> service: Empleado
 service -> service: nuevoEmpleado.calcularEdad()
+service -> service: nuevoEmpleado.formatearDatos()
 service -> repository: save(nuevoEmpleado)
 repository --> service: Empleado
-service -> mapper: toEmpleadoDto(empleado)
+service -> mapper: empleadoToEmpleadoDto(empleado)
 mapper --> service: EmpleadoDto
 service --> controller: EmpleadoDto
 @enduml
