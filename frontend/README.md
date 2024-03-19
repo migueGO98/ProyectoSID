@@ -1,27 +1,39 @@
-# Frontend
+# Instalación del Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+El proyecto está construido en [Angular 16](https://angular.io/).
 
-## Development server
+## Requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **Node.js versión 18**
+2. **npm**
 
-## Code scaffolding
+## Pasos de Instalación
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+El proceso de instalación se realiza en la carpeta `ProyectoSID/frontend`
 
-## Build
+1. Instalar pnpm (Performance Node Package Manager) utilizando:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install -g pnpm
+```
 
-## Running unit tests
+2. Instalar las dependencias utilizando:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+pnpm install
+```
 
-## Running end-to-end tests
+## Ejecución del proyecto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+La ejecución se realiza en la carpeta `ProyectoSID/frontend`
 
-## Further help
+1. Ejecutar el proyecto utilizando:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+pnpm start
+```
+
+2. Abrir el sitio http://localhost:4200/
+
+# Instalar Backend
+1. Seguir las instrucciones del [README](../backend/README.md) para iniciar con la instalación.
