@@ -10,10 +10,6 @@
   "overrides": [
     {
       "files": ["*.ts"],
-      "parserOptions": {
-        "project": ["tsconfig.json"],
-        "createDefaultProgram": true
-      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -44,7 +40,16 @@
           "warn"
         ],
         "@typescript-eslint/member-ordering": 0,
-        "@typescript-eslint/naming-convention": 0
+        "@typescript-eslint/naming-convention": 0,
+        "@angular-eslint/no-empty-lifecycle-method": [
+          "error"
+        ],
+        "@angular-eslint/component-class-suffix": [
+          "error"
+        ],
+        "@angular-eslint/contextual-decorator": [
+          "error"
+        ]
       }
     },
     {
