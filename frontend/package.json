@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "prepare": "cd .. && husky install ./frontend/.husky",
-    "generate:api": "openapi-generator-cli generate -i ../api-sid.yml -g typescript-angular -o src/app/generate/openapi"
+    "generate:api": "openapi-generator-cli generate -i ../api-sid.yml -g typescript-angular -o src/app/generate/openapi --additional-properties=ngVersion=16.2.12"
   },
   "private": true,
   "dependencies": {
