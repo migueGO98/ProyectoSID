@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './features/home/home.module';
+import { ApiModule, BASE_PATH } from './generate/openapi';
+import { environment } from './environments/environment.development';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, BrowserAnimationsModule, BrowserModule, HomeModule],
-  providers: [],
+  imports: [ApiModule, AppRoutingModule, BrowserAnimationsModule, BrowserModule, HomeModule],
+  providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
