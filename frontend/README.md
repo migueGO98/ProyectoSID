@@ -6,6 +6,7 @@ El proyecto está construido en [Angular 16](https://angular.io/).
 
 1. **Node.js versión 18**
 2. **npm**
+3. **Angular CLI v16**
 
 ## Pasos de Instalación
 
