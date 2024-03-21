@@ -8,9 +8,11 @@ import { HomeModule } from './features/home/home.module';
 import { ApiModule, BASE_PATH } from './generate/openapi';
 import { environment } from './environments/environment.development';
 import { HttpClientModule } from '@angular/common/http';
+import { NewEmpleadoModule } from './features/crearNewEmpleado/new-empleado.module';
+import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     ApiModule,
     AppRoutingModule,
@@ -18,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HomeModule,
     HttpClientModule,
+    NewEmpleadoModule,
   ],
   providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }],
   bootstrap: [AppComponent],
