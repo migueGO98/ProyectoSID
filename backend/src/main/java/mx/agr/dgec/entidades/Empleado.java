@@ -10,10 +10,9 @@ import java.util.Set;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idEmpleado", referencedColumnName = "idPersona", foreignKey = @ForeignKey(name = "FK_EMPLEADO_PERSONA"))
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 @SuperBuilder
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Empleado extends Persona {

@@ -70,7 +70,7 @@ public class ServicioEmpleados {
         var roles = servicioRoles.obtenerRoles(nuevoEmpleadoDto.getRoles());
 
         var fechaIngresoValue = nuevoEmpleadoDto.getFechaIngreso();
-        final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), nuevoEmpleadoDto.getFechaIngreso());
+        final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), fechaIngresoValue);
 
         // Validaciones de fondo (Reglas de Negocio)
         if (existeEmpleado(idEmpleado)) {

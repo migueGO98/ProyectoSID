@@ -6,3 +6,4 @@ backend:
 
 cambia-codigo-autogenerado-API:
 - 'backend/src/main/java/mx/agr/dgec/generate/**'
+- 'fronetend/src/app/generate/**'

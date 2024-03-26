@@ -3,7 +3,6 @@ package mx.agr.dgec.servicios;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Direccion;
 import mx.agr.dgec.entidades.Subdireccion;
-import mx.agr.dgec.mappers.DireccionMapper;
 import mx.agr.dgec.repositorios.RepositorioDireccion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
