@@ -4,6 +4,8 @@ tags:
     description: Funciones sobre empleados de la DGEC
   - name: Escolaridades
     description: Funciones sobre niveles escolares
+  - name: Numeros
+    description: Funciones de la entrevista
   - name: Personas
     description: Funciones sobre personas
   - name: Roles
@@ -252,6 +254,66 @@ paths:
       x-stoplight:
         id: 0zvrwsofztb5s
       description: Recupera los tipos de plazas registrados en el sistema
+  /numeros:
+    post:
+      summary: Insertar colección numeros
+      tags:
+        - Numeros
+      responses:
+        '200':
+          description: OK
+      operationId: insertarArregloNumeros
+      x-stoplight:
+        id: 2t3kxzxpds19l
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                x-stoplight:
+                  id: 0bsyu5tgaqatn
+                type: integer
+      description: Inserta enteros
+    get:
+      summary: Recuperar colección ordenada
+      tags:
+        - Numeros
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  x-stoplight:
+                    id: wsw5hf63sb2qq
+                  type: integer
+      operationId: recuperarNumerosSorft
+      x-stoplight:
+        id: fkfk0a1kla313
+      description: Recupera la colección ordenada de menor a mayor
+  /numeros/count:
+    get:
+      summary: Obtener lenght colección
+      tags:
+        - Numeros
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  x-stoplight:
+                    id: wh56pw1wvfgr9
+                  type: integer
+      operationId: obtenerLenght
+      x-stoplight:
+        id: cgfw40hwxq3i9
+      description: Obtiene el tamaño del array.
 components:
   schemas:
     NewEmpleado:

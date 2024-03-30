@@ -50,7 +50,7 @@ public class SidApplication {
 	}
 
 
-	//@PostConstruct
+	@PostConstruct
 	public void init() {
 		agregarRegiones();
 		agregarTiposPlaza();

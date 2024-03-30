@@ -1,0 +1,105 @@
+<form [formGroup]="myForm" (ngSubmit)="onSave()">
+  <div class="flex flex-column gap-2">
+    <label for="nombre">Nombre</label>
+    <input type="text" pInputText id="nombre" formControlName="nombre" />
+    <span class="p-error block"> El precio debe de ser 0 o mayor </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="apellidoPaterno">Apellido Paterno</label>
+    <input pInputText id="apellidoPaterno" formControlName="apellidoPaterno" />
+    <span> El precio debe de ser 0 o mayor </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="apellidoMaterno">Apellido Materno</label>
+    <input pInputText id="apellidoMaterno" formControlName="apellidoMaterno" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="curp">CURP</label>
+    <input pInputText id="curp" formControlName="curp" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="rfc">RFC</label>
+    <input pInputText id="rfc" formControlName="rfc" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="numeroSeguroSocial">Número de Seguro Social</label>
+    <input pInputText id="numeroSeguroSocial" formControlName="numeroSeguroSocial" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+    <p-calendar
+      [showIcon]="true"
+      dateFormat="dd-mm-yy"
+      [readonlyInput]="true"
+      [showTime]="false"
+      formControlName="fechaNacimiento" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="genero">Género</label>
+    <p-dropdown
+      [options]="generos()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el género"
+      formControlName="genero" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="telefonoPersonal">Número Telefónico Personal</label>
+    <p-inputMask
+      mask="99 9999 9999"
+      placeholder="55 1234 5678"
+      formControlName="telefonoPersonal" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="correoElectronicoPersonal">Correo Electrónico Personal</label>
+    <input pInputText id="correoElectronicoPersonal" formControlName="correoElectronicoPersonal" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="estadoCivil">Estado Civil</label>
+    <p-dropdown
+      [options]="estadosCiviles()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el estado civil"
+      formControlName="estadoCivil" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="hijos">¿Tiene hijos?</label>
+    <div class="flex flex-wrap gap-3">
+      <div class="flex align-items-center">
+        <p-radioButton value="true" label="Sí" formControlName="hijos" />
+      </div>
+      <div class="flex align-items-center">
+        <p-radioButton value="false" label="No" formControlName="hijos" />
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="contactoEmergenciaNombre"
+      >Nombre completo de una persona de confianza en caso de emergencia</label
+    >
+    <input pInputText id="contactoEmergenciaNombre" formControlName="contactoEmergenciaNombre" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="contactoEmergenciaTelefono">Número Telefónico de la persona de confianza</label>
+    <p-inputMask
+      mask="99 9999 9999"
+      placeholder="55 1234 5678"
+      formControlName="contactoEmergenciaTelefono" />
+  </div>
+
+  <p-button type="submit" label="Crear" />
+</form>
