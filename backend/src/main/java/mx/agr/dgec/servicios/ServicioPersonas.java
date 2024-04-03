@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class ServicioPersonas {
     public List<RegistrosDto> recuperarEstadosCiviles() {
-        var estadosCiviles = Arrays.stream(EstadoCivilEnum.values()).toList();
+        var estadosCiviles = Arrays.asList((EstadoCivilEnum.values()));
         log.info("Se recuperaron los estados civiles");
         return PersonaMapper.INSTANCE.estadosCivilesEnumToRegistrosDto(estadosCiviles);
     }
@@ -24,22 +24,6 @@ public class ServicioPersonas {
         var generos = Arrays.stream(GeneroEnum.values()).toList();
         log.info("Se recuperaron los géneros");
         return PersonaMapper.INSTANCE.generosEnumToRegistrosDto(generos);
-    }
-
-    public GeneroEnum recuperarGenero(String generoValue) {
-        var genero = generoValue.toUpperCase();
-        return Stream.of(GeneroEnum.values())
-                .filter(g -> g.name().equals(genero))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("El valor " + genero + " no es un género válido."));
-    }
-
-    public EstadoCivilEnum recuperarEstadoCivil(String estadoCivilValue) {
-        var estadoCivil = estadoCivilValue.toUpperCase();
-        return Stream.of(EstadoCivilEnum.values())
-                .filter(e -> e.name().equals(estadoCivil))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("El valor " + estadoCivil + " no es un estado civil válido."));
     }
 
     public void validarPersonaDto(PersonaDto personaDto) {
