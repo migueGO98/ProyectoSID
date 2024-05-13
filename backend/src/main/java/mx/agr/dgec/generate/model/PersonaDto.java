@@ -21,10 +21,9 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Atributos que tiene una persona
+ * PersonaDto
  */
 
-@Schema(name = "Persona", description = "Atributos que tiene una persona")
 @JsonTypeName("Persona")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class PersonaDto {

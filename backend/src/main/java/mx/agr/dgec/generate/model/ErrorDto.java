@@ -16,10 +16,9 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Error a mostrar en caso de alguna anomalía
+ * ErrorDto
  */
 
-@Schema(name = "Error", description = "Error a mostrar en caso de alguna anomalía")
 @JsonTypeName("Error")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class ErrorDto {

@@ -19,10 +19,9 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Escolaridad de una persona u empleado
+ * EscolaridadDto
  */
 
-@Schema(name = "Escolaridad", description = "Escolaridad de una persona u empleado")
 @JsonTypeName("Escolaridad")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class EscolaridadDto {
