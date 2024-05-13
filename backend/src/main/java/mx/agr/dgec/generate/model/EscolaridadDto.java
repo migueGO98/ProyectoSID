@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Escolaridad", description = "Escolaridad de una persona u empleado")
 @JsonTypeName("Escolaridad")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class EscolaridadDto {
 
   private NivelesEscolaridadesEnumDto nivel;
@@ -33,7 +33,7 @@ public class EscolaridadDto {
 
   private EstadosNivelesEscolaridadesEnumDto estadoNivel;
 
-  private JsonNullable<String> cedulaProfesional = JsonNullable.<String>undefined();
+  private JsonNullable<@Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) String> cedulaProfesional = JsonNullable.<String>undefined();
 
   public EscolaridadDto() {
     super();
@@ -121,7 +121,7 @@ public class EscolaridadDto {
   @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) 
   @Schema(name = "cedulaProfesional", example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("cedulaProfesional")
-  public JsonNullable<String> getCedulaProfesional() {
+  public JsonNullable<@Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) String> getCedulaProfesional() {
     return cedulaProfesional;
   }
 

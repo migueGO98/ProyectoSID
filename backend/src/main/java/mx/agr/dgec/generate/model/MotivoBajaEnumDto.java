@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets MotivoBajaEnum
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public enum MotivoBajaEnumDto {
   
   TERMINO_CONTRATO("TERMINO_CONTRATO"),
@@ -48,7 +48,7 @@ public enum MotivoBajaEnumDto {
   @JsonCreator
   public static MotivoBajaEnumDto fromValue(String value) {
     for (MotivoBajaEnumDto b : MotivoBajaEnumDto.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equalsIgnoreCase(value)) {
         return b;
       }
     }

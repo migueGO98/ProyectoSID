@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets EstadoCivilEnum
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public enum EstadoCivilEnumDto {
   
   CASADO("CASADO"),
@@ -64,7 +64,7 @@ public enum EstadoCivilEnumDto {
   @JsonCreator
   public static EstadoCivilEnumDto fromValue(String value) {
     for (EstadoCivilEnumDto b : EstadoCivilEnumDto.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equalsIgnoreCase(value)) {
         return b;
       }
     }

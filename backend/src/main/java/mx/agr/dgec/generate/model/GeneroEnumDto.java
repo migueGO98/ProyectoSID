@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Valores permitidos para el género de una persona.
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public enum GeneroEnumDto {
   
   MASCULINO("MASCULINO"),
@@ -50,7 +50,7 @@ public enum GeneroEnumDto {
   @JsonCreator
   public static GeneroEnumDto fromValue(String value) {
     for (GeneroEnumDto b : GeneroEnumDto.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equalsIgnoreCase(value)) {
         return b;
       }
     }

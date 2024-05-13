@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Estado que tiene una escolaridad
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public enum EstadosNivelesEscolaridadesEnumDto {
   
   CREDITOS_CUBIERTOS("CREDITOS_CUBIERTOS"),
@@ -54,7 +54,7 @@ public enum EstadosNivelesEscolaridadesEnumDto {
   @JsonCreator
   public static EstadosNivelesEscolaridadesEnumDto fromValue(String value) {
     for (EstadosNivelesEscolaridadesEnumDto b : EstadosNivelesEscolaridadesEnumDto.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equalsIgnoreCase(value)) {
         return b;
       }
     }

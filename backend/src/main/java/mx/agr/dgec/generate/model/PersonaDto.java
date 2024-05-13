@@ -26,14 +26,14 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Persona", description = "Atributos que tiene una persona")
 @JsonTypeName("Persona")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class PersonaDto {
 
   private String nombre;
 
   private String apellidoPaterno;
 
-  private JsonNullable<String> apellidoMaterno = JsonNullable.<String>undefined();
+  private JsonNullable<@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> apellidoMaterno = JsonNullable.<String>undefined();
 
   private String curp;
 
@@ -134,7 +134,7 @@ public class PersonaDto {
   @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "apellidoMaterno", example = "Estrada", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoMaterno")
-  public JsonNullable<String> getApellidoMaterno() {
+  public JsonNullable<@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> getApellidoMaterno() {
     return apellidoMaterno;
   }
 
@@ -271,7 +271,7 @@ public class PersonaDto {
    * Get correoElectronicoPersonal
    * @return correoElectronicoPersonal
   */
-  @NotNull @jakarta.validation.constraints.Email
+  @NotNull @jakarta.validation.constraints.Email 
   @Schema(name = "correoElectronicoPersonal", example = "user@example.com", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("correoElectronicoPersonal")
   public String getCorreoElectronicoPersonal() {

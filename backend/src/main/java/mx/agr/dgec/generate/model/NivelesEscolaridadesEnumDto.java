@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Escolaridades permitidas
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public enum NivelesEscolaridadesEnumDto {
   
   TECNICO("TECNICO"),
@@ -56,7 +56,7 @@ public enum NivelesEscolaridadesEnumDto {
   @JsonCreator
   public static NivelesEscolaridadesEnumDto fromValue(String value) {
     for (NivelesEscolaridadesEnumDto b : NivelesEscolaridadesEnumDto.values()) {
-      if (b.value.equals(value)) {
+      if (b.value.equalsIgnoreCase(value)) {
         return b;
       }
     }

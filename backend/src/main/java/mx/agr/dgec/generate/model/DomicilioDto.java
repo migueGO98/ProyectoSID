@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Domicilio", description = "Domicilio particular del empleado")
 @JsonTypeName("Domicilio")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class DomicilioDto {
 
   private String calle;

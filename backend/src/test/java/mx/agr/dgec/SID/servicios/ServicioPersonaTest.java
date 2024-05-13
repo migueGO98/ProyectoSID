@@ -9,8 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -56,6 +54,27 @@ class ServicioPersonaTest {
         for (RegistrosDto genero : generos) {
             assertEquals(valoresEsperados[i++], genero.getDescripcion());
         }
+    }
+
+    @Test
+    void probarExcepcionesParavalidarPersonaDto() {
+        // Simulación de llamada al método
+        var personaDto = new PersonaDto();
+        personaDto.setNombre("");
+        personaDto.setApellidoPaterno("");
+        personaDto.setApellidoMaterno(JsonNullable.of(""));
+        personaDto.setCurp("");
+        personaDto.setRfc("");
+        personaDto.setNumeroSeguroSocial("");
+        personaDto.setTelefonoPersonal("");
+        personaDto.setCorreoElectronicoPersonal("");
+        personaDto.setContactoEmergenciaNombre("");
+        personaDto.setContactoEmergenciaTelefono("");
+
+        // Verificación de que se lance una excepción
+        var exception = assertThrows(IllegalArgumentException.class, () -> servicioPersonas.validarPersonaDto(personaDto));
+        var mensajeEsperado = "El nombre no puede ser nulo o vacío";
+        assertEquals(mensajeEsperado, exception.getMessage());
     }
 
 }

@@ -28,7 +28,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("NewEmpleado")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 public class NewEmpleadoDto {
 
   private PersonaDto persona;
@@ -52,7 +52,7 @@ public class NewEmpleadoDto {
   private String idPuesto;
 
   @Valid
-  private List<String> roles = new ArrayList<>();
+  private List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles = new ArrayList<>();
 
   public NewEmpleadoDto() {
     super();
@@ -61,7 +61,7 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridades = escolaridades;
@@ -131,7 +131,7 @@ public class NewEmpleadoDto {
    * Get escolaridades
    * @return escolaridades
   */
-  @NotNull @Valid 
+  @NotNull @Valid @Size(min = 1) 
   @Schema(name = "escolaridades", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("escolaridades")
   public List<@Valid EscolaridadDto> getEscolaridades() {
@@ -262,7 +262,7 @@ public class NewEmpleadoDto {
     this.idPuesto = idPuesto;
   }
 
-  public NewEmpleadoDto roles(List<String> roles) {
+  public NewEmpleadoDto roles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
     this.roles = roles;
     return this;
   }
@@ -279,14 +279,14 @@ public class NewEmpleadoDto {
    * Get roles
    * @return roles
   */
-  @NotNull 
+  @NotNull @Size(min = 1) 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
-  public List<String> getRoles() {
+  public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getRoles() {
     return roles;
   }
 
-  public void setRoles(List<String> roles) {
+  public void setRoles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
     this.roles = roles;
   }
 

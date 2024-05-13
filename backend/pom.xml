@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.4</version>
+		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,12 +22,13 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<swagger-ui.version>4.15.5</swagger-ui.version>
-		<springdoc.version>2.2.0</springdoc.version>
+		<springdoc.version>2.5.0</springdoc.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 		<org.projectlombok.version>1.18.30</org.projectlombok.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<junit.version>5.9.3</junit.version>
 		<mockito.version>5.10.0</mockito.version>
+		<postgresql.version>42.6.1</postgresql.version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +79,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -192,7 +194,7 @@
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.0.1</version>
+				<version>7.5.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -215,11 +217,12 @@
 							<supportingFilesToGenerate>enum</supportingFilesToGenerate>
 
 							<configOptions>
-								<useSpringBoot3>true</useSpringBoot3>
-								<interfaceOnly>true</interfaceOnly>
-								<skipDefaultInterface>true</skipDefaultInterface>
 								<configPackage>mx.agr.dgec.config</configPackage>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<useEnumCaseInsensitive>true</useEnumCaseInsensitive>
+								<useSpringBoot3>true</useSpringBoot3>
 								<useTags>true</useTags>
 							</configOptions>
 						</configuration>
