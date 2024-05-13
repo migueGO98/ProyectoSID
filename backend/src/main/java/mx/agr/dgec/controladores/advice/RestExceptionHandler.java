@@ -56,7 +56,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 })
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
-        if(error != null) log.info("Error de validación: " + error.getMensaje());
+        if(error != null) log.info("Error de validación: {}", error.getMensaje());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
