@@ -331,10 +331,10 @@ components:
           minItems: 1
           items:
             x-stoplight:
-              id: h5dgq5agowm4b
+              id: scggn1zeiuadl
             type: string
+            example: rh1
             pattern: '^[a-zA-Z0-9]+$'
-            example: admin
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
