@@ -340,7 +340,6 @@ components:
       x-stoplight:
         id: yql0d9fa0qfo1
       type: object
-      description: Domicilio particular del empleado
       required:
         - calle
         - codigoPostal
@@ -392,7 +391,6 @@ components:
       x-stoplight:
         id: w5upcksed0scb
       type: object
-      description: Atributos que tiene una persona
       required:
         - nombre
         - apellidoPaterno
@@ -567,7 +565,6 @@ components:
       x-stoplight:
         id: xajwbur82fuw4
       type: object
-      description: Error a mostrar en caso de alguna anomalía
       required:
         - codigo
         - mensaje
@@ -589,14 +586,12 @@ components:
         - FEMENINO
         - NO_BINARIO
         - OTRO
-      description: Valores permitidos para el género de una persona.
       example: MASCULINO
     Escolaridad:
       title: Escolaridad
       x-stoplight:
         id: yxrtoid4n6rj2
       type: object
-      description: Escolaridad de una persona u empleado
       required:
         - nivel
         - carrera
@@ -639,7 +634,6 @@ components:
         - DOCTORADO
         - BACHILLERATO
         - DIPLOMADO
-      description: Escolaridades permitidas
       example: LICENCIATURA
     EstadosNivelesEscolaridadesEnum:
       title: EstadosNivelesEscolaridadesEnum
@@ -652,14 +646,12 @@ components:
         - TITULADO
         - TRAMITE_TITULACION
         - TRUNCA
-      description: Estado que tiene una escolaridad
       example: TRAMITE_TITULACION
     Registros:
       title: Registros
       x-stoplight:
         id: dskx3lmhwlqty
       type: object
-      description: 'Obtiene los campos registrados, en pares ordenados'
       required:
         - id
         - descripcion
