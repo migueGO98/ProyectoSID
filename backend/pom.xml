@@ -206,6 +206,10 @@
 							<inputSpec>${project.basedir}/../api-sid.yml</inputSpec>
 							<output>.</output>
 
+							<templateDirectory>
+								${project.basedir}/src/main/resources/openapi/templates
+							</templateDirectory>
+
 							<groupId>mx.agr.dgec</groupId>
 
 							<packageName>mx.agr.dgec.generate</packageName>
