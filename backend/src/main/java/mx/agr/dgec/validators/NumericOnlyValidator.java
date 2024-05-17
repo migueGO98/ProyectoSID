@@ -13,8 +13,7 @@ public class NumericOnlyValidator implements ConstraintValidator<NumericOnly, St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null || value.isEmpty())
-            return false;
-        return "^[0-9]+$".matches(value);
+        if(value == null || value.isEmpty() || value.isBlank()) return false;
+        return value.matches("^\\d+$"); // El \\d es igual que [0-9]
     }
 }

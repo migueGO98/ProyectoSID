@@ -24,13 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String NUMERO_SEGURO_SOCIAL = "persona.numeroSeguroSocial";
-    private static final String TELEFONO_PERSONAL = "persona.telefonoPersonal";
-    private static final String CONTACTO_EMERGENCIA_TELEFONO = "persona.contactoEmergenciaTelefono";
-    private static final String CODIGO_POSTAL = "domicilio.codigoPostal";
-    private static final String CEDULA_PROFESIONAL = "escolaridad.cedulaProfesional";
     private static final String ERROR_VALIDATOR = "ERROR_VALIDATOR";
-    private static final String PATTERN = "Pattern";
 
     // Error personalizado de validación @Valid
     @Override
@@ -43,20 +37,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         List<FieldError> erroresFiles = ex.getBindingResult().getFieldErrors();
 
         ErrorDto error = erroresFiles.stream()
-                .map(errorFile -> {
-                    if((errorFile.getField().equals(NUMERO_SEGURO_SOCIAL) || errorFile.getField().equals(TELEFONO_PERSONAL)
-                            || errorFile.getField().equals(CONTACTO_EMERGENCIA_TELEFONO) || errorFile.getField().equals(CODIGO_POSTAL)
-                            || errorFile.getField().equals(CEDULA_PROFESIONAL)
-                       ) && PATTERN.equals(errorFile.getCode())
-                    ) { return new ErrorDto(ERROR_VALIDATOR, errorFile.getField() + " solo debe tener caracteres numéricos"); }
-
-                    if(PATTERN.equals(errorFile.getCode())) { return new ErrorDto(ERROR_VALIDATOR, errorFile.getField() + " tiene un formato inválido"); }
-
-                    return new ErrorDto(ERROR_VALIDATOR, errorFile.getField() + " " + errorFile.getDefaultMessage());
-                })
+                .map(errorFile -> new ErrorDto(ERROR_VALIDATOR, errorFile.getField() + " " + errorFile.getDefaultMessage()))
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
+
         if(error != null) log.info("Error de validación: {}", error.getMensaje());
+
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
@@ -76,7 +62,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         // Para los enums
         if(ex.getCause() instanceof ValueInstantiationException vie) {
             var error = getError(vie);
-            error.setMensaje(error.getMensaje() + ", el valor debe estar en la lista de valores permitidos y en mayúsculas");
+            error.setMensaje(error.getMensaje() + ", el valor debe estar en la lista de valores permitidos");
             log.info("Error de valor permitido (Enum): {}", error.getMensaje());
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
