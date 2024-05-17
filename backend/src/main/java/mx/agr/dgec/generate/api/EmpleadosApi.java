@@ -29,6 +29,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +76,8 @@ public interface EmpleadosApi {
     )
     
     ResponseEntity<EmpleadoDto> crearEmpleado(
-        @Parameter(name = "NewEmpleadoDto", description = "", required = true) @Valid @RequestBody NewEmpleadoDto newEmpleadoDto
+        @Parameter(name = "NewEmpleadoDto", description = "", required = true) @Valid
+ @RequestBody NewEmpleadoDto newEmpleadoDto
     );
 
 

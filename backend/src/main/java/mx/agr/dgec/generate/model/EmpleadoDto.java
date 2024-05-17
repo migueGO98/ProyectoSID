@@ -13,6 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -80,6 +82,7 @@ public class EmpleadoDto {
    * @return idEmpleado
   */
   @NotNull 
+
   @Schema(name = "idEmpleado", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idEmpleado")
   public String getIdEmpleado() {
@@ -100,6 +103,7 @@ public class EmpleadoDto {
    * @return nombreCompleto
   */
   @NotNull 
+
   @Schema(name = "nombreCompleto", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nombreCompleto")
   public String getNombreCompleto() {
@@ -120,6 +124,7 @@ public class EmpleadoDto {
    * @return activo
   */
   @NotNull 
+
   @Schema(name = "activo", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("activo")
   public Boolean getActivo() {
@@ -140,6 +145,7 @@ public class EmpleadoDto {
    * @return fechaIngreso
   */
   @NotNull @Valid 
+
   @Schema(name = "fechaIngreso", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fechaIngreso")
   public LocalDate getFechaIngreso() {
@@ -160,6 +166,7 @@ public class EmpleadoDto {
    * @return idTipoPlaza
   */
   @NotNull 
+
   @Schema(name = "idTipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idTipoPlaza")
   public String getIdTipoPlaza() {
@@ -180,6 +187,7 @@ public class EmpleadoDto {
    * @return idRegion
   */
   @NotNull 
+
   @Schema(name = "idRegion", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idRegion")
   public String getIdRegion() {
@@ -200,6 +208,7 @@ public class EmpleadoDto {
    * @return idDireccion
   */
   @NotNull 
+
   @Schema(name = "idDireccion", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idDireccion")
   public String getIdDireccion() {
@@ -220,6 +229,7 @@ public class EmpleadoDto {
    * @return idSubdireccion
   */
   @NotNull 
+
   @Schema(name = "idSubdireccion", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idSubdireccion")
   public String getIdSubdireccion() {
@@ -240,6 +250,7 @@ public class EmpleadoDto {
    * @return idPuesto
   */
   @NotNull 
+
   @Schema(name = "idPuesto", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idPuesto")
   public String getIdPuesto() {
@@ -268,6 +279,7 @@ public class EmpleadoDto {
    * @return roles
   */
   @NotNull 
+
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
   public List<String> getRoles() {

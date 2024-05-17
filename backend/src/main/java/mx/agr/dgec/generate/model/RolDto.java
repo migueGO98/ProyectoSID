@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -49,6 +51,7 @@ public class RolDto {
    * @return idRol
   */
   @NotNull 
+
   @Schema(name = "idRol", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idRol")
   public String getIdRol() {
@@ -69,6 +72,7 @@ public class RolDto {
    * @return descripcion
   */
   @NotNull 
+
   @Schema(name = "descripcion", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("descripcion")
   public String getDescripcion() {

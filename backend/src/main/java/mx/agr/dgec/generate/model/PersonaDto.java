@@ -13,6 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -32,7 +34,8 @@ public class PersonaDto {
 
   private String apellidoPaterno;
 
-  private JsonNullable<@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> apellidoMaterno = JsonNullable.<String>undefined();
+  private JsonNullable<@NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> apellidoMaterno = JsonNullable.<String>undefined();
 
   private String curp;
 
@@ -90,7 +93,8 @@ public class PersonaDto {
    * Get nombre
    * @return nombre
   */
-  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "nombre", example = "Fabian Carlos", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nombre")
   public String getNombre() {
@@ -110,7 +114,8 @@ public class PersonaDto {
    * Get apellidoPaterno
    * @return apellidoPaterno
   */
-  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "apellidoPaterno", example = "de la López", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoPaterno")
   public String getApellidoPaterno() {
@@ -130,10 +135,12 @@ public class PersonaDto {
    * Get apellidoMaterno
    * @return apellidoMaterno
   */
-  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "apellidoMaterno", example = "Estrada", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoMaterno")
-  public JsonNullable<@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> getApellidoMaterno() {
+  public JsonNullable<@NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> getApellidoMaterno() {
     return apellidoMaterno;
   }
 
@@ -150,7 +157,8 @@ public class PersonaDto {
    * Get curp
    * @return curp
   */
-  @NotNull @Pattern(regexp = "^[a-zA-ZÑñ]{4}\\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\\d$") @Size(min = 18, max = 18) 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-ZÑñ]{4}\\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\\d$") @Size(min = 18, max = 18) 
   @Schema(name = "curp", example = "LOEF111111HDFASD01", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("curp")
   public String getCurp() {
@@ -170,7 +178,8 @@ public class PersonaDto {
    * Get rfc
    * @return rfc
   */
-  @NotNull @Pattern(regexp = "^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$") @Size(min = 13, max = 13) 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$") @Size(min = 13, max = 13) 
   @Schema(name = "rfc", example = "loef111111fg9", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("rfc")
   public String getRfc() {
@@ -190,7 +199,8 @@ public class PersonaDto {
    * Get numeroSeguroSocial
    * @return numeroSeguroSocial
   */
-  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 11, max = 11) 
+  @NotNull @NotBlank @NotEmpty @NumericOnly
+@Size(min = 11, max = 11) 
   @Schema(name = "numeroSeguroSocial", example = "11111111111", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("numeroSeguroSocial")
   public String getNumeroSeguroSocial() {
@@ -211,6 +221,7 @@ public class PersonaDto {
    * @return fechaNacimiento
   */
   @NotNull @Valid 
+
   @Schema(name = "fechaNacimiento", example = "2000-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fechaNacimiento")
   public LocalDate getFechaNacimiento() {
@@ -231,6 +242,7 @@ public class PersonaDto {
    * @return genero
   */
   @NotNull @Valid 
+
   @Schema(name = "genero", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("genero")
   public GeneroEnumDto getGenero() {
@@ -250,7 +262,8 @@ public class PersonaDto {
    * Get telefonoPersonal
    * @return telefonoPersonal
   */
-  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 10, max = 10) 
+  @NotNull @NotBlank @NotEmpty @NumericOnly
+@Size(min = 10, max = 10) 
   @Schema(name = "telefonoPersonal", example = "1234567890", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("telefonoPersonal")
   public String getTelefonoPersonal() {
@@ -270,7 +283,8 @@ public class PersonaDto {
    * Get correoElectronicoPersonal
    * @return correoElectronicoPersonal
   */
-  @NotNull @jakarta.validation.constraints.Email 
+  @NotNull @NotBlank @NotEmpty
+@jakarta.validation.constraints.Email 
   @Schema(name = "correoElectronicoPersonal", example = "user@example.com", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("correoElectronicoPersonal")
   public String getCorreoElectronicoPersonal() {
@@ -291,6 +305,7 @@ public class PersonaDto {
    * @return estadoCivil
   */
   @NotNull @Valid 
+
   @Schema(name = "estadoCivil", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("estadoCivil")
   public EstadoCivilEnumDto getEstadoCivil() {
@@ -311,6 +326,7 @@ public class PersonaDto {
    * @return hijos
   */
   @NotNull 
+
   @Schema(name = "hijos", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("hijos")
   public Boolean getHijos() {
@@ -330,7 +346,8 @@ public class PersonaDto {
    * Get contactoEmergenciaNombre
    * @return contactoEmergenciaNombre
   */
-  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "contactoEmergenciaNombre", example = "Martina Estrada Martínez", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("contactoEmergenciaNombre")
   public String getContactoEmergenciaNombre() {
@@ -350,7 +367,8 @@ public class PersonaDto {
    * Get contactoEmergenciaTelefono
    * @return contactoEmergenciaTelefono
   */
-  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 10, max = 10) 
+  @NotNull @NotBlank @NotEmpty @NumericOnly
+@Size(min = 10, max = 10) 
   @Schema(name = "contactoEmergenciaTelefono", example = "9876543210", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("contactoEmergenciaTelefono")
   public String getContactoEmergenciaTelefono() {

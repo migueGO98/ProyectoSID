@@ -16,6 +16,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -84,6 +86,7 @@ public class NewEmpleadoDto {
    * @return persona
   */
   @NotNull @Valid 
+
   @Schema(name = "persona", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("persona")
   public PersonaDto getPersona() {
@@ -104,6 +107,7 @@ public class NewEmpleadoDto {
    * @return domicilio
   */
   @NotNull @Valid 
+
   @Schema(name = "domicilio", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("domicilio")
   public DomicilioDto getDomicilio() {
@@ -131,7 +135,8 @@ public class NewEmpleadoDto {
    * Get escolaridades
    * @return escolaridades
   */
-  @NotNull @Valid @Size(min = 1) 
+  @NotNull @Valid 
+@Size(min = 1) 
   @Schema(name = "escolaridades", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("escolaridades")
   public List<@Valid EscolaridadDto> getEscolaridades() {
@@ -152,6 +157,7 @@ public class NewEmpleadoDto {
    * @return fechaIngreso
   */
   @NotNull @Valid 
+
   @Schema(name = "fechaIngreso", example = "2020-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fechaIngreso")
   public LocalDate getFechaIngreso() {
@@ -171,7 +177,8 @@ public class NewEmpleadoDto {
    * Get idTipoPlaza
    * @return idTipoPlaza
   */
-  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idTipoPlaza", example = "SPC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idTipoPlaza")
   public String getIdTipoPlaza() {
@@ -191,7 +198,8 @@ public class NewEmpleadoDto {
    * Get idRegion
    * @return idRegion
   */
-  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idRegion", example = "oc", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idRegion")
   public String getIdRegion() {
@@ -211,7 +219,8 @@ public class NewEmpleadoDto {
    * Get idDireccion
    * @return idDireccion
   */
-  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idDireccion", example = "DGEC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idDireccion")
   public String getIdDireccion() {
@@ -231,7 +240,8 @@ public class NewEmpleadoDto {
    * Get idSubdireccion
    * @return idSubdireccion
   */
-  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idSubdireccion", example = "SUBAdmonOC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idSubdireccion")
   public String getIdSubdireccion() {
@@ -251,7 +261,8 @@ public class NewEmpleadoDto {
    * Get idPuesto
    * @return idPuesto
   */
-  @NotNull @Pattern(regexp = "^[a-zA-Z0-9]+$") 
+  @NotNull @NotBlank @NotEmpty
+@Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idPuesto", example = "na1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idPuesto")
   public String getIdPuesto() {
@@ -279,7 +290,8 @@ public class NewEmpleadoDto {
    * Get roles
    * @return roles
   */
-  @NotNull @Size(min = 1) 
+  @NotNull 
+@Size(min = 1) 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
   public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getRoles() {

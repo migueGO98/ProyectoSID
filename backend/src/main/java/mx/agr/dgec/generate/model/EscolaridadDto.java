@@ -11,6 +11,8 @@ import mx.agr.dgec.generate.model.NivelesEscolaridadesEnumDto;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
+import mx.agr.dgec.validators.annotation.*;
+import mx.agr.dgec.validators.*;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -32,7 +34,8 @@ public class EscolaridadDto {
 
   private EstadosNivelesEscolaridadesEnumDto estadoNivel;
 
-  private JsonNullable<@Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) String> cedulaProfesional = JsonNullable.<String>undefined();
+  private JsonNullable<@NotBlank @NotEmpty @NumericOnly
+@Size(min = 7, max = 8) String> cedulaProfesional = JsonNullable.<String>undefined();
 
   public EscolaridadDto() {
     super();
@@ -58,6 +61,7 @@ public class EscolaridadDto {
    * @return nivel
   */
   @NotNull @Valid 
+
   @Schema(name = "nivel", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nivel")
   public NivelesEscolaridadesEnumDto getNivel() {
@@ -77,7 +81,8 @@ public class EscolaridadDto {
    * Get carrera
    * @return carrera
   */
-  @NotNull @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
+  @NotNull 
+@Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "carrera", example = "Licenciatura en Computación", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("carrera")
   public String getCarrera() {
@@ -98,6 +103,7 @@ public class EscolaridadDto {
    * @return estadoNivel
   */
   @NotNull @Valid 
+
   @Schema(name = "estadoNivel", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("estadoNivel")
   public EstadosNivelesEscolaridadesEnumDto getEstadoNivel() {
@@ -117,10 +123,12 @@ public class EscolaridadDto {
    * Get cedulaProfesional
    * @return cedulaProfesional
   */
-  @NotNull @Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) 
+  @NotNull @NotBlank @NotEmpty @NumericOnly
+@Size(min = 7, max = 8) 
   @Schema(name = "cedulaProfesional", example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("cedulaProfesional")
-  public JsonNullable<@Pattern(regexp = "^[0-9]+$") @Size(min = 7, max = 8) String> getCedulaProfesional() {
+  public JsonNullable<@NotBlank @NotEmpty @NumericOnly
+@Size(min = 7, max = 8) String> getCedulaProfesional() {
     return cedulaProfesional;
   }
 
