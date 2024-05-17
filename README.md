@@ -16,8 +16,15 @@ el siguiente enlace [Memoria de Diseño](https://docs.google.com/document/d/143P
 2. Aprender a utilizar herramientas de desarrollo de software.
 3. Utilizar servicios de la nube como AWS, Azure o Google Cloud.
 
+# Requisitos
+1. Solicitar a un administrador del proyecto, dar de alta en el Tenant **agricultura-dgec** de Auth0.
+2. Instalar [AuthO CLI](https://developer.auth0.com/resources/labs/tools/auth0-cli-basics#access-your-tenant) para la autenticación de usuarios.
+3. Iniciar sesión en Auth0 con el comando `auth0 login` con el correo dado de alta en el Tenant **agricultura-dgec**.
+
+
 ## Instalación
 1. Para el backend consultar el archivo [README.md](backend/README.md)
 2. Para el frontend consultar el archivo [README.md](frontend/README.md)
+
 
 
