@@ -2,6 +2,7 @@ package mx.agr.dgec.controladores.advice;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String ERROR_IN_ATTRIBUTE = "ERROR_IN_ATTRIBUTE";
 
-    // Error personalizado de validación @Valid
+    // Error personalizado de validación @Valid (Para los Dto)
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
@@ -46,7 +47,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Error personalizado para errores de formato en JSON, ejemplo, recibir un booleano en lugar de un número
+    // Error personalizado para errores de formato en JSON, ejemplo, recibir un booleano en lugar de un número (Para el body request)
     @Override
     public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                @Nonnull HttpHeaders headers,
@@ -67,10 +68,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
 
-        // Para errores en el JSON
-        var error = new ErrorDto("ERROR", "Error en la solicitud, verifica las propiedades del objeto JSON");
+        // Errores en parsear el objeto JSON a un Dto (errores en el tipo de dato)
+        if(ex.getCause() instanceof MismatchedInputException mie) {
+            var error = getError(mie);
+            error.setMensaje(error.getMensaje() + ", tipo de dato incorrecto");
+            log.info("Errores en el cuerpo de la petición: {}", error.getMensaje());
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
 
-        log.info("Error en la solicitud causado por MessageNotReadableException");
+        // Error por default por no detectar que Exception es lanzada por Jackson
+        var error = new ErrorDto("ERROR", "Error en la solicitud, verifica el cuerpo de la petición");
+
+        log.error("Errores en el cuerpo de la petición, exception general by MessageNotReadableException, Throw by {}, msj: {}", ex.getCause(), ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
@@ -81,7 +90,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .filter(fieldName -> fieldName != null && !fieldName.isEmpty())
                 .collect(Collectors.joining("."));
         var mensajeError = "El valor proporcionado para " + fieldPath + " no es válido";
-        return new ErrorDto("ERROR_JSON", mensajeError);
+        return new ErrorDto("ERROR_BODY_REQUEST", mensajeError);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
