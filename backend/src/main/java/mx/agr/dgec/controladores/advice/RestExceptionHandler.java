@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String ERROR_VALIDATOR = "ERROR_VALIDATOR";
+    private static final String ERROR_IN_ATTRIBUTE = "ERROR_IN_ATTRIBUTE";
 
     // Error personalizado de validación @Valid
     @Override
@@ -37,11 +37,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         List<FieldError> erroresFiles = ex.getBindingResult().getFieldErrors();
 
         ErrorDto error = erroresFiles.stream()
-                .map(errorFile -> new ErrorDto(ERROR_VALIDATOR, errorFile.getField() + " " + errorFile.getDefaultMessage()))
+                .map(errorFile -> new ErrorDto(ERROR_IN_ATTRIBUTE, errorFile.getField() + " " + errorFile.getDefaultMessage()))
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
 
-        if(error != null) log.info("Error de validación: {}", error.getMensaje());
+        if(error != null) log.info("Error en el campo {}", error.getMensaje());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
