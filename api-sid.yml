@@ -17,7 +17,7 @@ info:
   version: '1.0'
   contact:
     name: Proyect SID
-    email: gzm98.miguel@gmail.com
+    email: cbi2193011275@izt.uam.mx
     url: 'https://github.com/migueGO98/ProyectoSID'
   description: Proyecto personal de Miguel Guzman. "Sistema de Integración Divisional" para la empresa Agricultura en la Dirección General de Enlace y Coordinación (DGEC). Esta API está elaborada solo con fines educativos y de practica personal.
   license:
@@ -300,30 +300,35 @@ components:
           type: string
           pattern: '^[a-zA-Z0-9]+$'
           example: SPC
+          x-constraints: '@NotBlank @NotEmpty'
         idRegion:
           type: string
           x-stoplight:
             id: f62jthv07ffhl
           pattern: '^[a-zA-Z0-9]+$'
           example: oc
+          x-constraints: '@NotBlank @NotEmpty'
         idDireccion:
           type: string
           x-stoplight:
             id: i1iswdtq8on34
           pattern: '^[a-zA-Z0-9]+$'
           example: DGEC
+          x-constraints: '@NotBlank @NotEmpty'
         idSubdireccion:
           type: string
           x-stoplight:
             id: 6lh2qgh72njny
           pattern: '^[a-zA-Z0-9]+$'
           example: SUBAdmonOC
+          x-constraints: '@NotBlank @NotEmpty'
         idPuesto:
           type: string
           x-stoplight:
             id: z3iuknlq4r94q
           pattern: '^[a-zA-Z0-9]+$'
           example: na1
+          x-constraints: '@NotBlank @NotEmpty'
         roles:
           type: array
           x-stoplight:
@@ -335,6 +340,7 @@ components:
             type: string
             example: rh1
             pattern: '^[a-zA-Z0-9]+$'
+            x-constraints: '@NotBlank @NotEmpty @NotNull'
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
@@ -354,38 +360,43 @@ components:
             id: bidhdl0twq0b9
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Izta No 40
+          x-constraints: '@NotBlank @NotEmpty'
         codigoPostal:
           type: string
           x-stoplight:
             id: a3x7dkyt3wjae
           minLength: 5
           maxLength: 5
-          pattern: '^[0-9]+$'
           example: '01111'
+          x-constraints: '@NotBlank @NotEmpty @NumericOnly'
         colonia:
           type: string
           x-stoplight:
             id: djarovc2rpflv
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Prolongación de Noñora
+          x-constraints: '@NotBlank @NotEmpty'
         municipio:
           type: string
           x-stoplight:
             id: dnok4daqngu4d
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Gustavo A. Madero
+          x-constraints: '@NotBlank @NotEmpty'
         ciudad:
           type: string
           x-stoplight:
             id: 1f2n8slgvpkfu
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Ciudad de México
+          x-constraints: '@NotBlank @NotEmpty'
         estado:
           type: string
           x-stoplight:
             id: 93imtpm3u3p6l
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Ciudad de México
+          x-constraints: '@NotBlank @NotEmpty'
     Persona:
       title: Persona
       x-stoplight:
@@ -413,12 +424,14 @@ components:
             id: 1i7ebs4qwdbkq
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Fabian Carlos
+          x-constraints: '@NotBlank @NotEmpty'
         apellidoPaterno:
           type: string
           x-stoplight:
             id: 94jnyfa3k6rqa
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: de la López
+          x-constraints: '@NotBlank @NotEmpty'
         apellidoMaterno:
           type:
             - string
@@ -427,6 +440,7 @@ components:
             id: kmlxoqjb3lf9r
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Estrada
+          x-constraints: '@NotBlank @NotEmpty'
         curp:
           type: string
           x-stoplight:
@@ -435,6 +449,7 @@ components:
           maxLength: 18
           pattern: '^[a-zA-ZÑñ]{4}\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\d$'
           example: LOEF111111HDFASD01
+          x-constraints: '@NotBlank @NotEmpty'
         rfc:
           type: string
           x-stoplight:
@@ -443,14 +458,15 @@ components:
           maxLength: 13
           pattern: '^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$'
           example: loef111111fg9
+          x-constraints: '@NotBlank @NotEmpty'
         numeroSeguroSocial:
           type: string
           x-stoplight:
             id: spq24ibgs5ty8
           minLength: 11
           maxLength: 11
-          pattern: '^[0-9]+$'
           example: '11111111111'
+          x-constraints: '@NotBlank @NotEmpty @NumericOnly'
         fechaNacimiento:
           type: string
           x-stoplight:
@@ -467,14 +483,15 @@ components:
             id: or7pwd0unwaka
           minLength: 10
           maxLength: 10
-          pattern: '^[0-9]+$'
           example: '1234567890'
+          x-constraints: '@NotBlank @NotEmpty @NumericOnly'
         correoElectronicoPersonal:
           type: string
           x-stoplight:
             id: 1p5pumjd6snhz
           format: email
           example: user@example.com
+          x-constraints: '@NotBlank @NotEmpty'
         estadoCivil:
           $ref: '#/components/schemas/EstadoCivilEnum'
           x-stoplight:
@@ -490,14 +507,15 @@ components:
             id: nz3br88i2bgp5
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Martina Estrada Martínez
+          x-constraints: '@NotBlank @NotEmpty'
         contactoEmergenciaTelefono:
           type: string
           x-stoplight:
             id: 3o9viaperyc06
           minLength: 10
           maxLength: 10
-          pattern: '^[0-9]+$'
           example: '9876543210'
+          x-constraints: '@NotBlank @NotEmpty @NumericOnly'
     Empleado:
       title: Empleado
       x-stoplight:
@@ -620,8 +638,8 @@ components:
             id: aqb2bqf26t0we
           minLength: 7
           maxLength: 8
-          pattern: '^[0-9]+$'
           example: '12345678'
+          x-constraints: '@NotBlank @NotEmpty @NumericOnly'
     NivelesEscolaridadesEnum:
       title: NivelesEscolaridadesEnum
       x-stoplight:
@@ -709,4 +727,4 @@ components:
   requestBodies: {}
   responses: {}
   securitySchemes: {}
-x-extension-1: null
+x-constraints: x-constraints
