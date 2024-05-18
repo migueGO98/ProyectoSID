@@ -59,6 +59,9 @@ public interface EscolaridadesApi {
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
         }
     )
     @RequestMapping(
@@ -91,6 +94,9 @@ public interface EscolaridadesApi {
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
         }
     )
     @RequestMapping(

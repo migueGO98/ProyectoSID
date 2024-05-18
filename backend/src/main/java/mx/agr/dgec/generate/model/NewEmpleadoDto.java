@@ -135,8 +135,8 @@ public class NewEmpleadoDto {
    * Get escolaridades
    * @return escolaridades
   */
-  @NotNull @Valid 
-@Size(min = 1) 
+  @NotNull @Valid @NonNullElement
+@Size(min = 1, max = 5) 
   @Schema(name = "escolaridades", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("escolaridades")
   public List<@Valid EscolaridadDto> getEscolaridades() {
@@ -291,7 +291,7 @@ public class NewEmpleadoDto {
    * @return roles
   */
   @NotNull 
-@Size(min = 1) 
+@Size(min = 1, max = 10) 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
   public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getRoles() {

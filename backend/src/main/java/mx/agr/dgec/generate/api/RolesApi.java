@@ -59,6 +59,9 @@ public interface RolesApi {
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
         }
     )
     @RequestMapping(
