@@ -284,6 +284,8 @@ components:
           x-stoplight:
             id: jnj1lgomijflr
           minItems: 1
+          maxItems: 5
+          x-constraints: '@NonNullElement'
           items:
             $ref: '#/components/schemas/Escolaridad'
             x-stoplight:
@@ -334,13 +336,15 @@ components:
           x-stoplight:
             id: qh38vks47p61n
           minItems: 1
+          maxItems: 10
+          x-constraints: '@NonNullElement'
           items:
             x-stoplight:
               id: scggn1zeiuadl
             type: string
             example: rh1
             pattern: '^[a-zA-Z0-9]+$'
-            x-constraints: '@NotBlank @NotEmpty @NotNull'
+            x-constraints: '@NotBlank @NotEmpty'
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
@@ -626,6 +630,7 @@ components:
             id: ylz3r9h0kdcjm
           pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
           example: Licenciatura en Computación
+          x-constraints: '@NotBlank @NotEmpty'
         estadoNivel:
           $ref: '#/components/schemas/EstadosNivelesEscolaridadesEnum'
           x-stoplight:
@@ -726,5 +731,10 @@ components:
             id: 5fb5v3omhsc6j
   requestBodies: {}
   responses: {}
-  securitySchemes: {}
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
 x-constraints: x-constraints
+security:
+  - jwt: []
