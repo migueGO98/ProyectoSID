@@ -81,7 +81,7 @@ public class EscolaridadDto {
    * Get carrera
    * @return carrera
   */
-  @NotNull @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank @NotEmpty
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "carrera", example = "Licenciatura en Computación", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("carrera")

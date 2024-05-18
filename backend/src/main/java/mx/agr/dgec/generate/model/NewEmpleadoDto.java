@@ -290,7 +290,7 @@ public class NewEmpleadoDto {
    * Get roles
    * @return roles
   */
-  @NotNull 
+  @NotNull @NonNullElement
 @Size(min = 1, max = 10) 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
