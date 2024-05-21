@@ -16,7 +16,7 @@ import java.util.Set;
 public class ServicioRoles {
 
     @Autowired
-    RepositorioRol repositorioRoles;
+    private RepositorioRol repositorioRoles;
 
     public List<RolDto> recuperarRoles() {
         var roles = repositorioRoles.findAll();
@@ -25,9 +25,12 @@ public class ServicioRoles {
     }
 
     public Set<Rol> obtenerRoles(List<String> roles) {
-        var listaRoles = repositorioRoles.findAllById(roles);
+        var rolesUpper = roles.stream()
+                .map(String::toUpperCase)
+                .toList();
+        var listaRoles = repositorioRoles.findAllById(rolesUpper);
 
-        if(listaRoles.size() != roles.size()) throw new IllegalArgumentException("La lista de roles contiene roles no válidos o inexistentes");
+        if(listaRoles.size() != rolesUpper.size()) throw new IllegalArgumentException("La lista de roles contiene roles no válidos o inexistentes");
 
         return new HashSet<>(listaRoles);
     }
