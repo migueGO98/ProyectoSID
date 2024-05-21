@@ -337,7 +337,7 @@ components:
             id: qh38vks47p61n
           minItems: 1
           maxItems: 20
-          x-constraints: '@NotNullElement @NotBlankElement'
+          x-constraints: '@NotNullElement @NotBlankElement @NotDuplicateElement'
           items:
             x-stoplight:
               id: h22crxmou783y
@@ -736,4 +736,4 @@ components:
       scheme: bearer
 x-constraints: x-constraints
 security:
-  - jwt: [
+  - jwt: []
