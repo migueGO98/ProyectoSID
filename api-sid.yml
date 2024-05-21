@@ -408,7 +408,6 @@ components:
       required:
         - nombre
         - apellidoPaterno
-        - apellidoMaterno
         - curp
         - rfc
         - numeroSeguroSocial
@@ -617,7 +616,6 @@ components:
         - nivel
         - carrera
         - estadoNivel
-        - cedulaProfesional
       properties:
         nivel:
           $ref: '#/components/schemas/NivelesEscolaridadesEnum'

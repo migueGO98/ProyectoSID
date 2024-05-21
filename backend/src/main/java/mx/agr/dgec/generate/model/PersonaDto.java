@@ -7,9 +7,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
+import java.util.Arrays;
 import mx.agr.dgec.generate.model.EstadoCivilEnumDto;
 import mx.agr.dgec.generate.model.GeneroEnumDto;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.springframework.format.annotation.DateTimeFormat;
+import java.util.NoSuchElementException;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -67,10 +70,9 @@ public class PersonaDto {
   /**
    * Constructor with only required parameters
    */
-  public PersonaDto(String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
+  public PersonaDto(String nombre, String apellidoPaterno, String curp, String rfc, String numeroSeguroSocial, LocalDate fechaNacimiento, GeneroEnumDto genero, String telefonoPersonal, String correoElectronicoPersonal, EstadoCivilEnumDto estadoCivil, Boolean hijos, String contactoEmergenciaNombre, String contactoEmergenciaTelefono) {
     this.nombre = nombre;
     this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = JsonNullable.of(apellidoMaterno);
     this.curp = curp;
     this.rfc = rfc;
     this.numeroSeguroSocial = numeroSeguroSocial;
@@ -135,9 +137,9 @@ public class PersonaDto {
    * Get apellidoMaterno
    * @return apellidoMaterno
   */
-  @NotNull @NotBlank
+  @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
-  @Schema(name = "apellidoMaterno", example = "Estrada", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "apellidoMaterno", example = "Estrada", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("apellidoMaterno")
   public JsonNullable<@NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> getApellidoMaterno() {
@@ -390,7 +392,7 @@ public class PersonaDto {
     PersonaDto persona = (PersonaDto) o;
     return Objects.equals(this.nombre, persona.nombre) &&
         Objects.equals(this.apellidoPaterno, persona.apellidoPaterno) &&
-        Objects.equals(this.apellidoMaterno, persona.apellidoMaterno) &&
+        equalsNullable(this.apellidoMaterno, persona.apellidoMaterno) &&
         Objects.equals(this.curp, persona.curp) &&
         Objects.equals(this.rfc, persona.rfc) &&
         Objects.equals(this.numeroSeguroSocial, persona.numeroSeguroSocial) &&
@@ -404,9 +406,20 @@ public class PersonaDto {
         Objects.equals(this.contactoEmergenciaTelefono, persona.contactoEmergenciaTelefono);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(nombre, apellidoPaterno, apellidoMaterno, curp, rfc, numeroSeguroSocial, fechaNacimiento, genero, telefonoPersonal, correoElectronicoPersonal, estadoCivil, hijos, contactoEmergenciaNombre, contactoEmergenciaTelefono);
+    return Objects.hash(nombre, apellidoPaterno, hashCodeNullable(apellidoMaterno), curp, rfc, numeroSeguroSocial, fechaNacimiento, genero, telefonoPersonal, correoElectronicoPersonal, estadoCivil, hijos, contactoEmergenciaNombre, contactoEmergenciaTelefono);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
