@@ -34,7 +34,7 @@ public class EscolaridadDto {
 
   private EstadosNivelesEscolaridadesEnumDto estadoNivel;
 
-  private JsonNullable<@NotBlank @NotEmpty @NumericOnly
+  private JsonNullable<@NotBlank @NumericOnly
 @Size(min = 7, max = 8) String> cedulaProfesional = JsonNullable.<String>undefined();
 
   public EscolaridadDto() {
@@ -81,7 +81,7 @@ public class EscolaridadDto {
    * Get carrera
    * @return carrera
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "carrera", example = "Licenciatura en Computación", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("carrera")
@@ -123,11 +123,11 @@ public class EscolaridadDto {
    * Get cedulaProfesional
    * @return cedulaProfesional
   */
-  @NotNull @NotBlank @NotEmpty @NumericOnly
+  @NotNull @NotBlank @NumericOnly
 @Size(min = 7, max = 8) 
   @Schema(name = "cedulaProfesional", example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("cedulaProfesional")
-  public JsonNullable<@NotBlank @NotEmpty @NumericOnly
+  public JsonNullable<@NotBlank @NumericOnly
 @Size(min = 7, max = 8) String> getCedulaProfesional() {
     return cedulaProfesional;
   }

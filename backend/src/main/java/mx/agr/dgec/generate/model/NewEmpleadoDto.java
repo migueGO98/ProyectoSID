@@ -135,7 +135,7 @@ public class NewEmpleadoDto {
    * Get escolaridades
    * @return escolaridades
   */
-  @NotNull @Valid @NonNullElement
+  @NotNull @Valid @NotNullElement
 @Size(min = 1, max = 5) 
   @Schema(name = "escolaridades", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("escolaridades")
@@ -177,7 +177,7 @@ public class NewEmpleadoDto {
    * Get idTipoPlaza
    * @return idTipoPlaza
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idTipoPlaza", example = "SPC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idTipoPlaza")
@@ -198,7 +198,7 @@ public class NewEmpleadoDto {
    * Get idRegion
    * @return idRegion
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idRegion", example = "oc", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idRegion")
@@ -219,7 +219,7 @@ public class NewEmpleadoDto {
    * Get idDireccion
    * @return idDireccion
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idDireccion", example = "DGEC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idDireccion")
@@ -240,7 +240,7 @@ public class NewEmpleadoDto {
    * Get idSubdireccion
    * @return idSubdireccion
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idSubdireccion", example = "SUBAdmonOC", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idSubdireccion")
@@ -261,7 +261,7 @@ public class NewEmpleadoDto {
    * Get idPuesto
    * @return idPuesto
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-Z0-9]+$") 
   @Schema(name = "idPuesto", example = "na1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("idPuesto")
@@ -290,8 +290,8 @@ public class NewEmpleadoDto {
    * Get roles
    * @return roles
   */
-  @NotNull @NonNullElement
-@Size(min = 1, max = 10) 
+  @NotNull @NotNullElement @NotBlankElement
+@Size(min = 1, max = 20) 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
   public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getRoles() {

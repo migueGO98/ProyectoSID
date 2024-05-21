@@ -62,7 +62,7 @@ public class DomicilioDto {
    * Get calle
    * @return calle
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "calle", example = "Izta No 40", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("calle")
@@ -83,7 +83,7 @@ public class DomicilioDto {
    * Get codigoPostal
    * @return codigoPostal
   */
-  @NotNull @NotBlank @NotEmpty @NumericOnly
+  @NotNull @NotBlank @NumericOnly
 @Size(min = 5, max = 5) 
   @Schema(name = "codigoPostal", example = "01111", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("codigoPostal")
@@ -104,7 +104,7 @@ public class DomicilioDto {
    * Get colonia
    * @return colonia
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "colonia", example = "Prolongación de Noñora", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("colonia")
@@ -125,7 +125,7 @@ public class DomicilioDto {
    * Get municipio
    * @return municipio
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "municipio", example = "Gustavo A. Madero", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("municipio")
@@ -146,7 +146,7 @@ public class DomicilioDto {
    * Get ciudad
    * @return ciudad
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "ciudad", example = "Ciudad de México", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("ciudad")
@@ -167,7 +167,7 @@ public class DomicilioDto {
    * Get estado
    * @return estado
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "estado", example = "Ciudad de México", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("estado")

@@ -34,7 +34,7 @@ public class PersonaDto {
 
   private String apellidoPaterno;
 
-  private JsonNullable<@NotBlank @NotEmpty
+  private JsonNullable<@NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> apellidoMaterno = JsonNullable.<String>undefined();
 
   private String curp;
@@ -93,7 +93,7 @@ public class PersonaDto {
    * Get nombre
    * @return nombre
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "nombre", example = "Fabian Carlos", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("nombre")
@@ -114,7 +114,7 @@ public class PersonaDto {
    * Get apellidoPaterno
    * @return apellidoPaterno
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "apellidoPaterno", example = "de la López", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoPaterno")
@@ -135,11 +135,11 @@ public class PersonaDto {
    * Get apellidoMaterno
    * @return apellidoMaterno
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "apellidoMaterno", example = "Estrada", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("apellidoMaterno")
-  public JsonNullable<@NotBlank @NotEmpty
+  public JsonNullable<@NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") String> getApellidoMaterno() {
     return apellidoMaterno;
   }
@@ -157,7 +157,7 @@ public class PersonaDto {
    * Get curp
    * @return curp
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[a-zA-ZÑñ]{4}\\d{6}[a-zA-ZÑñ]{6}[a-zA-Z0-9Ññ]\\d$") @Size(min = 18, max = 18) 
   @Schema(name = "curp", example = "LOEF111111HDFASD01", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("curp")
@@ -178,7 +178,7 @@ public class PersonaDto {
    * Get rfc
    * @return rfc
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[A-Za-z&ñÑ]{4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Za-z0-9]{2}[0-9Aa]$") @Size(min = 13, max = 13) 
   @Schema(name = "rfc", example = "loef111111fg9", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("rfc")
@@ -199,7 +199,7 @@ public class PersonaDto {
    * Get numeroSeguroSocial
    * @return numeroSeguroSocial
   */
-  @NotNull @NotBlank @NotEmpty @NumericOnly
+  @NotNull @NotBlank @NumericOnly
 @Size(min = 11, max = 11) 
   @Schema(name = "numeroSeguroSocial", example = "11111111111", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("numeroSeguroSocial")
@@ -262,7 +262,7 @@ public class PersonaDto {
    * Get telefonoPersonal
    * @return telefonoPersonal
   */
-  @NotNull @NotBlank @NotEmpty @NumericOnly
+  @NotNull @NotBlank @NumericOnly
 @Size(min = 10, max = 10) 
   @Schema(name = "telefonoPersonal", example = "1234567890", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("telefonoPersonal")
@@ -283,7 +283,7 @@ public class PersonaDto {
    * Get correoElectronicoPersonal
    * @return correoElectronicoPersonal
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @jakarta.validation.constraints.Email 
   @Schema(name = "correoElectronicoPersonal", example = "user@example.com", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("correoElectronicoPersonal")
@@ -346,7 +346,7 @@ public class PersonaDto {
    * Get contactoEmergenciaNombre
    * @return contactoEmergenciaNombre
   */
-  @NotNull @NotBlank @NotEmpty
+  @NotNull @NotBlank
 @Pattern(regexp = "^[\\p{L}\\s'-ñÑÁÉÍÓÚáéíóú]+$") 
   @Schema(name = "contactoEmergenciaNombre", example = "Martina Estrada Martínez", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("contactoEmergenciaNombre")
@@ -367,7 +367,7 @@ public class PersonaDto {
    * Get contactoEmergenciaTelefono
    * @return contactoEmergenciaTelefono
   */
-  @NotNull @NotBlank @NotEmpty @NumericOnly
+  @NotNull @NotBlank @NumericOnly
 @Size(min = 10, max = 10) 
   @Schema(name = "contactoEmergenciaTelefono", example = "9876543210", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("contactoEmergenciaTelefono")
