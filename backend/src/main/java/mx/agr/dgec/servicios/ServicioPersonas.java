@@ -3,13 +3,11 @@ package mx.agr.dgec.servicios;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GeneroEnum;
-import mx.agr.dgec.generate.model.PersonaDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.mappers.PersonaMapper;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -24,20 +22,5 @@ public class ServicioPersonas {
         var generos = Arrays.stream(GeneroEnum.values()).toList();
         log.info("Se recuperaron los géneros");
         return PersonaMapper.INSTANCE.generosEnumToRegistrosDto(generos);
-    }
-
-    public void validarPersonaDto(PersonaDto personaDto) {
-        if (personaDto.getNombre().isBlank()) throw new IllegalArgumentException("El nombre no puede ser nulo o vacío");
-        if (personaDto.getApellidoPaterno().isBlank()) throw new IllegalArgumentException("El apellido paterno no puede ser nulo o vacío");
-        if (personaDto.getApellidoMaterno().isPresent() && (personaDto.getApellidoMaterno().get().isBlank())) {
-            throw new IllegalArgumentException("El apellido materno no puede ser vacío");
-        }
-        if (personaDto.getCurp().isBlank()) throw new IllegalArgumentException("El CURP no puede ser vacío");
-        if (personaDto.getRfc().isBlank()) throw new IllegalArgumentException("El RFC no puede ser vacío");
-        if (personaDto.getNumeroSeguroSocial().isBlank()) throw new IllegalArgumentException("El número de seguro social no puede ser vacío");
-        if (personaDto.getTelefonoPersonal().isBlank()) throw new IllegalArgumentException("El teléfono personal no puede ser vacío");
-        if (personaDto.getCorreoElectronicoPersonal().isBlank()) throw new IllegalArgumentException("El correo electrónico no puede ser vacío");
-        if (personaDto.getContactoEmergenciaNombre().isBlank()) throw new IllegalArgumentException("El nombre del contacto de emergencia no puede ser vacío");
-        if (personaDto.getContactoEmergenciaTelefono().isBlank()) throw new IllegalArgumentException("El teléfono del contacto de emergencia no puede ser vacío");
     }
 }

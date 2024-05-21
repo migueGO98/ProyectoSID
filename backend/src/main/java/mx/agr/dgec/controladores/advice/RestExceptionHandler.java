@@ -38,7 +38,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         List<FieldError> erroresFiles = ex.getBindingResult().getFieldErrors();
 
         ErrorDto error = erroresFiles.stream()
-                .map(errorFile -> new ErrorDto(ERROR_IN_ATTRIBUTE, errorFile.getField() + " " + errorFile.getDefaultMessage()))
+                .map(errorFile -> new ErrorDto(ERROR_IN_ATTRIBUTE, errorFile.getField() + ": " + errorFile.getDefaultMessage()))
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
 

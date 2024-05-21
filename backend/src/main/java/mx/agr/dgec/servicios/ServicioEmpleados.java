@@ -58,10 +58,7 @@ public class ServicioEmpleados {
     }
 
     public EmpleadoDto crearNuevoEmpleado(NewEmpleadoDto nuevoEmpleadoDto) {
-        // Validaciones de forma
-        servicioPersonas.validarPersonaDto(nuevoEmpleadoDto.getPersona());
-        servicioDomicilios.validarDomicilioDto(nuevoEmpleadoDto.getDomicilio());
-        servicioEscolaridades.validarEscolaridadesDto(nuevoEmpleadoDto.getEscolaridades());
+        // Validaciones de forma (recuperar entidades)
         var tipoPlaza = servicioTiposPlazas.obtenerTipoPlaza(nuevoEmpleadoDto.getIdTipoPlaza());
         var region = servicioRegiones.obtenerRegion(nuevoEmpleadoDto.getIdRegion());
         var direccion = servicioDirecciones.obtenerDireccion(nuevoEmpleadoDto.getIdDireccion());

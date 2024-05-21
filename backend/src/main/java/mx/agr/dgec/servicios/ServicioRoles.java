@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -25,26 +24,10 @@ public class ServicioRoles {
         return RolMapper.INSTANCE.rolesToRolesDto(roles);
     }
 
-    public Set<Rol> obtenerRoles(List<String> roles){
+    public Set<Rol> obtenerRoles(List<String> roles) {
+        var listaRoles = repositorioRoles.findAllById(roles);
 
-        Objects.requireNonNull(roles, "La lista de roles no puede ser nula");
-        if(roles.isEmpty()) throw new IllegalArgumentException("La lista de roles no puede estar vacía");
-
-        roles.forEach(r -> {
-            if(r == null) throw new IllegalArgumentException("La lista de roles no puede tener valores nulos");
-            if(r.isBlank()) throw new IllegalArgumentException("La lista de roles no puede tener valores vacíos");
-        });
-
-        var rolesSinDuplicados = roles.stream()
-                .map(String::toUpperCase)
-                .distinct()
-                .toList();
-
-        if(rolesSinDuplicados.size() != roles.size()) throw new IllegalArgumentException("La lista de roles contiene roles duplicados");
-
-        var listaRoles = repositorioRoles.findAllById(rolesSinDuplicados);
-
-        if(listaRoles.size() != rolesSinDuplicados.size()) throw new IllegalArgumentException("La lista de roles contiene roles no válidos o inexistentes");
+        if(listaRoles.size() != roles.size()) throw new IllegalArgumentException("La lista de roles contiene roles no válidos o inexistentes");
 
         return new HashSet<>(listaRoles);
     }
