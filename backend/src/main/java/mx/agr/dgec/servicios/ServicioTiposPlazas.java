@@ -1,22 +1,22 @@
 package mx.agr.dgec.servicios;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Puesto;
 import mx.agr.dgec.entidades.TipoPlaza;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.mappers.TipoPlazaMapper;
 import mx.agr.dgec.repositorios.RepositorioTipoPlaza;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ServicioTiposPlazas {
 
-    @Autowired
-    RepositorioTipoPlaza repositorioTipoPlaza;
+    private final RepositorioTipoPlaza repositorioTipoPlaza;
 
     public List<RegistrosDto> recuperarTiposPlazas() {
         var tiposPlazas = repositorioTipoPlaza.findAll();

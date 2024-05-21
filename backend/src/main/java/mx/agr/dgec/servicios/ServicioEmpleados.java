@@ -1,12 +1,12 @@
 package mx.agr.dgec.servicios;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Empleado;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
 import mx.agr.dgec.repositorios.RepositorioEmpleado;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -15,37 +15,16 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ServicioEmpleados {
 
-    @Autowired
-    RepositorioEmpleado repositorioEmpleado;
-
-    @Autowired
-    ServicioEscolaridades servicioEscolaridades;
-
-    @Autowired
-    ServicioRoles servicioRoles;
-
-    @Autowired
-    ServicioRegiones servicioRegiones;
-
-    @Autowired
-    ServicioDirecciones servicioDirecciones;
-
-    @Autowired
-    ServicioSubdirecciones servicioSubdirecciones;
-
-    @Autowired
-    ServicioTiposPlazas servicioTiposPlazas;
-
-    @Autowired
-    ServicioDomicilios servicioDomicilios;
-
-    @Autowired
-    ServicioPuestos servicioPuestos;
-
-    @Autowired
-    ServicioPersonas servicioPersonas;
+    private final RepositorioEmpleado repositorioEmpleado;
+    private final ServicioRoles servicioRoles;
+    private final ServicioRegiones servicioRegiones;
+    private final ServicioDirecciones servicioDirecciones;
+    private final ServicioSubdirecciones servicioSubdirecciones;
+    private final ServicioTiposPlazas servicioTiposPlazas;
+    private final ServicioPuestos servicioPuestos;
 
     private static final float PROMEDIO_DIAS_POR_MES = 30.4375f;
 

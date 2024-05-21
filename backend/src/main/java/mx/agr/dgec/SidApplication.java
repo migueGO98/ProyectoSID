@@ -1,13 +1,13 @@
 package mx.agr.dgec;
 
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import mx.agr.dgec.entidades.*;
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.EstadosNivelesEscolaridadesEnum;
 import mx.agr.dgec.enums.GeneroEnum;
 import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 import mx.agr.dgec.repositorios.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDate;
@@ -24,24 +24,17 @@ import java.util.stream.Stream;
  * @since 1.0.0-SNAPSHOT
  */
 @SpringBootApplication
+@RequiredArgsConstructor
 public class SidApplication {
 
-	@Autowired
-	private RepositorioRol repositorioRol;
-	@Autowired
-	private RepositorioEmpleado repositorioEmpleado;
-	@Autowired
-	private RepositorioRegion repositorioRegion;
-	@Autowired
-	private RepositorioEstado repositorioEstado;
-	@Autowired
-	private RepositorioDireccion repositorioDireccion;
-	@Autowired
-	private RepositorioSubdireccion repositorioSubdireccion;
-	@Autowired
-	private RepositorioTipoPlaza repositorioTipoPlaza;
-	@Autowired
-	private RepositorioPuesto repositorioPuesto;
+	private final RepositorioRol repositorioRol;
+	private final RepositorioEmpleado repositorioEmpleado;
+	private final RepositorioRegion repositorioRegion;
+	private final RepositorioEstado repositorioEstado;
+	private final RepositorioDireccion repositorioDireccion;
+	private final RepositorioSubdireccion repositorioSubdireccion;
+	private final RepositorioTipoPlaza repositorioTipoPlaza;
+	private final RepositorioPuesto repositorioPuesto;
 
 
 

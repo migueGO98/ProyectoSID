@@ -15,12 +15,14 @@ public class Config {
     public JsonNullableModule jsonNullableModule() {
         return new JsonNullableModule();
     }
+
     @Bean
     public RestTemplate restTemplate(ObjectMapper objectMapper) {
         var converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(objectMapper);
         return new RestTemplateBuilder().additionalMessageConverters(converter).build();
     }
+
     @Bean
     public ModelResolver modelResolver(ObjectMapper objectMapper) {
         return new ModelResolver(objectMapper);
