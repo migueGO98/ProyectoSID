@@ -41,7 +41,7 @@ class EstadoCivilEnumTest {
         var estadosCivilesEsperados = Arrays.stream(EstadoCivilEnum.values()).map(EstadoCivilEnum::name).collect(Collectors.toSet());
         var estadosCivilesDto = Arrays.stream(EstadoCivilEnumDto.values()).map(EstadoCivilEnumDto::name).collect(Collectors.toSet());
 
-        // Act with stream
+        // Act
             // Validar que los valores de EstadosCivilesEnumDto estén en EstadosCivilesEnum
         boolean estadosCivilesDtoInEstadosCiviles = estadosCivilesEsperados.containsAll(estadosCivilesDto);
             // Validar que los valores de EstadosCivilesEnum estén en EstadosCivilesEnumDto
