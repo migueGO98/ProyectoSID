@@ -10,12 +10,14 @@ import { environment } from './environments/environment.development';
 import { HttpClientModule } from '@angular/common/http';
 import { NewEmpleadoModule } from './features/crearNewEmpleado/new-empleado.module';
 import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     ApiModule,
     AppRoutingModule,
+    AuthService,
     BrowserAnimationsModule,
     BrowserModule,
     HomeModule,
