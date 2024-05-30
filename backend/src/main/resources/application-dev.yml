@@ -17,6 +17,13 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://agricultura-dgec-dev.us.auth0.com/
+          jwk-set-uri: https://agricultura-dgec-dev.us.auth0.com/.well-known/jwks.json
+          audiences: http://localhost:8080/v1
 
 springdoc:
   api-docs:

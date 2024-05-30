@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Sistema Integración Divisional API",
+                title = "Sistema de Integración Divisional API",
                 version = "1.0",
                 description = "Proyecto personal de Miguel Guzman. \"Sistema de Integración Divisional\" para la empresa Agricultura en la Dirección General de Enlace y Coordinación (DGEC). Esta API está elaborada solo con fines educativos y de practica personal.",
                 termsOfService = "http://example.com/terms",
@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
         )
 )
 @SecurityScheme(
-        name = "JWT",
+        name = "jwt",
         type = SecuritySchemeType.HTTP,
         scheme = "bearer",
         bearerFormat = "JWT"
