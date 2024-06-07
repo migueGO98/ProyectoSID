@@ -21,9 +21,16 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: https://agricultura-dgec-dev.us.auth0.com/
-          jwk-set-uri: https://agricultura-dgec-dev.us.auth0.com/.well-known/jwks.json
-          audiences: http://localhost:8080/v1
+          issuer-uri: https://agriculturadgec.b2clogin.com/6ac852c4-0fec-4c09-8f6d-72857f0c87b8/v2.0/
+          jwk-set-uri: https://agriculturadgec.b2clogin.com/agriculturadgec.onmicrosoft.com/discovery/v2.0/keys?p=b2c_1_login_email-password
+          jws-algorithms: RS256
+
+azure:
+  ad:
+    b2c:
+      tenant: agriculturadgec.onmicrosoft.com
+      client-id: 7a8d7a23-e2a8-4d6b-900c-c26391441802
+      client-secret: ${AZURE_TENANT_CLIENT_SECRET}
 
 springdoc:
   api-docs:
