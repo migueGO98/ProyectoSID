@@ -39,15 +39,15 @@ public class EmpleadoDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
-  private String idTipoPlaza;
+  private String tipoPlaza;
 
-  private String idRegion;
+  private String region;
 
-  private String idDireccion;
+  private String direccion;
 
-  private String idSubdireccion;
+  private String subdireccion;
 
-  private String idPuesto;
+  private String puesto;
 
   @Valid
   private List<String> roles = new ArrayList<>();
@@ -59,16 +59,16 @@ public class EmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<String> roles) {
+  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String tipoPlaza, String region, String direccion, String subdireccion, String puesto, List<String> roles) {
     this.idEmpleado = idEmpleado;
     this.nombreCompleto = nombreCompleto;
     this.activo = activo;
     this.fechaIngreso = fechaIngreso;
-    this.idTipoPlaza = idTipoPlaza;
-    this.idRegion = idRegion;
-    this.idDireccion = idDireccion;
-    this.idSubdireccion = idSubdireccion;
-    this.idPuesto = idPuesto;
+    this.tipoPlaza = tipoPlaza;
+    this.region = region;
+    this.direccion = direccion;
+    this.subdireccion = subdireccion;
+    this.puesto = puesto;
     this.roles = roles;
   }
 
@@ -156,109 +156,109 @@ public class EmpleadoDto {
     this.fechaIngreso = fechaIngreso;
   }
 
-  public EmpleadoDto idTipoPlaza(String idTipoPlaza) {
-    this.idTipoPlaza = idTipoPlaza;
+  public EmpleadoDto tipoPlaza(String tipoPlaza) {
+    this.tipoPlaza = tipoPlaza;
     return this;
   }
 
   /**
-   * Get idTipoPlaza
-   * @return idTipoPlaza
+   * Get tipoPlaza
+   * @return tipoPlaza
   */
   @NotNull 
 
-  @Schema(name = "idTipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idTipoPlaza")
-  public String getIdTipoPlaza() {
-    return idTipoPlaza;
+  @Schema(name = "tipoPlaza", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("tipoPlaza")
+  public String getTipoPlaza() {
+    return tipoPlaza;
   }
 
-  public void setIdTipoPlaza(String idTipoPlaza) {
-    this.idTipoPlaza = idTipoPlaza;
+  public void setTipoPlaza(String tipoPlaza) {
+    this.tipoPlaza = tipoPlaza;
   }
 
-  public EmpleadoDto idRegion(String idRegion) {
-    this.idRegion = idRegion;
+  public EmpleadoDto region(String region) {
+    this.region = region;
     return this;
   }
 
   /**
-   * Get idRegion
-   * @return idRegion
+   * Get region
+   * @return region
   */
   @NotNull 
 
-  @Schema(name = "idRegion", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idRegion")
-  public String getIdRegion() {
-    return idRegion;
+  @Schema(name = "region", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("region")
+  public String getRegion() {
+    return region;
   }
 
-  public void setIdRegion(String idRegion) {
-    this.idRegion = idRegion;
+  public void setRegion(String region) {
+    this.region = region;
   }
 
-  public EmpleadoDto idDireccion(String idDireccion) {
-    this.idDireccion = idDireccion;
+  public EmpleadoDto direccion(String direccion) {
+    this.direccion = direccion;
     return this;
   }
 
   /**
-   * Get idDireccion
-   * @return idDireccion
+   * Get direccion
+   * @return direccion
   */
   @NotNull 
 
-  @Schema(name = "idDireccion", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idDireccion")
-  public String getIdDireccion() {
-    return idDireccion;
+  @Schema(name = "direccion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("direccion")
+  public String getDireccion() {
+    return direccion;
   }
 
-  public void setIdDireccion(String idDireccion) {
-    this.idDireccion = idDireccion;
+  public void setDireccion(String direccion) {
+    this.direccion = direccion;
   }
 
-  public EmpleadoDto idSubdireccion(String idSubdireccion) {
-    this.idSubdireccion = idSubdireccion;
+  public EmpleadoDto subdireccion(String subdireccion) {
+    this.subdireccion = subdireccion;
     return this;
   }
 
   /**
-   * Get idSubdireccion
-   * @return idSubdireccion
+   * Get subdireccion
+   * @return subdireccion
   */
   @NotNull 
 
-  @Schema(name = "idSubdireccion", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idSubdireccion")
-  public String getIdSubdireccion() {
-    return idSubdireccion;
+  @Schema(name = "subdireccion", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("subdireccion")
+  public String getSubdireccion() {
+    return subdireccion;
   }
 
-  public void setIdSubdireccion(String idSubdireccion) {
-    this.idSubdireccion = idSubdireccion;
+  public void setSubdireccion(String subdireccion) {
+    this.subdireccion = subdireccion;
   }
 
-  public EmpleadoDto idPuesto(String idPuesto) {
-    this.idPuesto = idPuesto;
+  public EmpleadoDto puesto(String puesto) {
+    this.puesto = puesto;
     return this;
   }
 
   /**
-   * Get idPuesto
-   * @return idPuesto
+   * Get puesto
+   * @return puesto
   */
   @NotNull 
 
-  @Schema(name = "idPuesto", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("idPuesto")
-  public String getIdPuesto() {
-    return idPuesto;
+  @Schema(name = "puesto", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("puesto")
+  public String getPuesto() {
+    return puesto;
   }
 
-  public void setIdPuesto(String idPuesto) {
-    this.idPuesto = idPuesto;
+  public void setPuesto(String puesto) {
+    this.puesto = puesto;
   }
 
   public EmpleadoDto roles(List<String> roles) {
@@ -303,17 +303,17 @@ public class EmpleadoDto {
         Objects.equals(this.nombreCompleto, empleado.nombreCompleto) &&
         Objects.equals(this.activo, empleado.activo) &&
         Objects.equals(this.fechaIngreso, empleado.fechaIngreso) &&
-        Objects.equals(this.idTipoPlaza, empleado.idTipoPlaza) &&
-        Objects.equals(this.idRegion, empleado.idRegion) &&
-        Objects.equals(this.idDireccion, empleado.idDireccion) &&
-        Objects.equals(this.idSubdireccion, empleado.idSubdireccion) &&
-        Objects.equals(this.idPuesto, empleado.idPuesto) &&
+        Objects.equals(this.tipoPlaza, empleado.tipoPlaza) &&
+        Objects.equals(this.region, empleado.region) &&
+        Objects.equals(this.direccion, empleado.direccion) &&
+        Objects.equals(this.subdireccion, empleado.subdireccion) &&
+        Objects.equals(this.puesto, empleado.puesto) &&
         Objects.equals(this.roles, empleado.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idEmpleado, nombreCompleto, activo, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, roles);
+    return Objects.hash(idEmpleado, nombreCompleto, activo, fechaIngreso, tipoPlaza, region, direccion, subdireccion, puesto, roles);
   }
 
   @Override
@@ -324,11 +324,11 @@ public class EmpleadoDto {
     sb.append("    nombreCompleto: ").append(toIndentedString(nombreCompleto)).append("\n");
     sb.append("    activo: ").append(toIndentedString(activo)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
-    sb.append("    idTipoPlaza: ").append(toIndentedString(idTipoPlaza)).append("\n");
-    sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");
-    sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
-    sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");
-    sb.append("    idPuesto: ").append(toIndentedString(idPuesto)).append("\n");
+    sb.append("    tipoPlaza: ").append(toIndentedString(tipoPlaza)).append("\n");
+    sb.append("    region: ").append(toIndentedString(region)).append("\n");
+    sb.append("    direccion: ").append(toIndentedString(direccion)).append("\n");
+    sb.append("    subdireccion: ").append(toIndentedString(subdireccion)).append("\n");
+    sb.append("    puesto: ").append(toIndentedString(puesto)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -49,6 +49,7 @@ public interface EmpleadosApi {
      * @param newEmpleadoDto  (required)
      * @return Created (status code 201)
      *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
@@ -61,6 +62,9 @@ public interface EmpleadosApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = EmpleadoDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
@@ -85,10 +89,50 @@ public interface EmpleadosApi {
 
 
     /**
+     * GET /api/empleados : Recuperar empleados
+     * Recupera todos los empleados registrados
+     *
+     * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     */
+    @Operation(
+        operationId = "recuperarEmpleados",
+        summary = "Recuperar empleados",
+        description = "Recupera todos los empleados registrados",
+        tags = { "Empleados" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = EmpleadoDto.class)))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/api/empleados",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<List<EmpleadoDto>> recuperarEmpleados(
+        
+    );
+
+
+    /**
      * GET /api/empleados/motivosBaja : Recuperar motivos de baja
      * Recupera los motivos de bajas de un empleado permitidos por el sistema
      *
      * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
@@ -99,6 +143,9 @@ public interface EmpleadosApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))

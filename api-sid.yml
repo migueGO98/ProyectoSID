@@ -50,6 +50,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -69,6 +75,37 @@ paths:
         description: ''
         required: true
     parameters: []
+    get:
+      summary: Recuperar empleados
+      tags:
+        - Empleados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Empleado'
+                  x-stoplight:
+                    id: 4uji0c9gxh4pr
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarEmpleados
+      x-stoplight:
+        id: o3kbw90rqp4if
+      description: Recupera todos los empleados registrados
   /api/escolaridades/niveles:
     get:
       summary: Recuperar niveles escolares
@@ -85,6 +122,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: ydit3efh5ekd2
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -111,6 +154,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: xnfkv4e7hdv0w
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -138,6 +187,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: is13k7cz5nxkw
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -164,6 +219,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: 36afykzvneb21
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -190,6 +251,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: hchhjxjdjf6f5
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -216,6 +283,12 @@ paths:
                   $ref: '#/components/schemas/Rol'
                   x-stoplight:
                     id: 3l9rrjpewfkzp
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -242,6 +315,12 @@ paths:
                   $ref: '#/components/schemas/Registros'
                   x-stoplight:
                     id: paojb7zlxa5jz
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -528,11 +607,11 @@ components:
         - nombreCompleto
         - activo
         - fechaIngreso
-        - idTipoPlaza
-        - idRegion
-        - idDireccion
-        - idSubdireccion
-        - idPuesto
+        - tipoPlaza
+        - region
+        - direccion
+        - subdireccion
+        - puesto
         - roles
       properties:
         idEmpleado:
@@ -552,23 +631,23 @@ components:
           x-stoplight:
             id: s16d5wqwy5rg0
           format: date
-        idTipoPlaza:
+        tipoPlaza:
           type: string
           x-stoplight:
             id: tmlbplh9oppnx
-        idRegion:
+        region:
           type: string
           x-stoplight:
             id: qq7w395bnycmu
-        idDireccion:
+        direccion:
           type: string
           x-stoplight:
             id: 2vluu69gkh6c1
-        idSubdireccion:
+        subdireccion:
           type: string
           x-stoplight:
             id: la7q29il78wgh
-        idPuesto:
+        puesto:
           type: string
           x-stoplight:
             id: s4l2zkg02a509

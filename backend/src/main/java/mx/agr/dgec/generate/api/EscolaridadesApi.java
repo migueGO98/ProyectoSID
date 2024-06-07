@@ -45,6 +45,7 @@ public interface EscolaridadesApi {
      * Recupera los estados de los niveles escolares permitidos por el sistema 
      *
      * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
@@ -55,6 +56,9 @@ public interface EscolaridadesApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
@@ -80,6 +84,7 @@ public interface EscolaridadesApi {
      * Recupera los niveles escolares permitidos por el sistema
      *
      * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
@@ -90,6 +95,9 @@ public interface EscolaridadesApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))

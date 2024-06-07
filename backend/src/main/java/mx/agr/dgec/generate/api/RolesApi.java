@@ -45,6 +45,7 @@ public interface RolesApi {
      * Recupera los roles registrados en el sistema
      *
      * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
@@ -55,6 +56,9 @@ public interface RolesApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RolDto.class)))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
