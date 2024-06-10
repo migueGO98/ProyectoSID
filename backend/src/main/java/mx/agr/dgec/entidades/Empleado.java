@@ -3,6 +3,7 @@ package mx.agr.dgec.entidades;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import mx.agr.dgec.entidades.interfaces.PersonaInterface;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
@@ -12,10 +13,10 @@ import java.util.Set;
 @PrimaryKeyJoinColumn(name = "idEmpleado", referencedColumnName = "idPersona", foreignKey = @ForeignKey(name = "FK_EMPLEADO_PERSONA"))
 @SuperBuilder
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Empleado extends Persona {
+public class Empleado extends Persona implements PersonaInterface {
 
     @Column(insertable = false, updatable = false, length = 30)
     private String idEmpleado;
@@ -62,11 +63,20 @@ public class Empleado extends Persona {
     )
     private Set<Rol> roles;
 
+
+
+    @Override
     public void calcularEdad() {
         super.calcularEdadPersona();
     }
 
+    @Override
     public void formatearDatos() {
         super.formatearDatosPersona();
+    }
+
+    @Override
+    public void concatenarNombreAndApellidos() {
+        super.concatenarNombreAndApellidosPersona();
     }
 }

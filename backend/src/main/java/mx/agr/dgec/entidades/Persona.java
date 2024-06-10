@@ -29,6 +29,8 @@ public abstract class Persona {
     private String apellidoPaterno;
     @Column(length = 50)
     private String apellidoMaterno;
+    @Column(length = 150)
+    private String nombreCompleto;
     @Column(length = 18)
     private String curp;
     @Column(length = 13)
@@ -73,5 +75,11 @@ public abstract class Persona {
         rfc = rfc.toUpperCase();
         contactoEmergenciaNombre = contactoEmergenciaNombre.trim();
         escolaridades.forEach(Escolaridad::formatearCarrera);
+    }
+
+    protected final void concatenarNombreAndApellidosPersona() {
+        if (apellidoMaterno == null)
+            nombreCompleto = String.format("%s %s", nombre, apellidoPaterno);
+        nombreCompleto = String.format("%s %s %s", nombre, apellidoPaterno, apellidoMaterno);
     }
 }

@@ -17,7 +17,7 @@ public class Rol {
     private String idRol;
     private String descripcion;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "roles")
     @ToString.Exclude
     private Set<Empleado> empleados;
 }
