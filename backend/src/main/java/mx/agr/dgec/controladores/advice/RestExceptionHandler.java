@@ -99,4 +99,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Error de argumento ilegal: {}", error.getMensaje());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    /**
+     * El log es un warn porque es un error que no debería ocurrir y es un error de programación
+     */
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ErrorDto> handleNullPointerException(NullPointerException ex) {
+        var error = new ErrorDto("ERROR_NPE", "Ha ocurrido un error, comunicate con el administrador");
+        log.warn("Ha ocurrido un error de puntero nulo: {}", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
