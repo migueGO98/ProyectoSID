@@ -54,7 +54,7 @@ public class NewEmpleadoDto {
   private String idPuesto;
 
   @Valid
-  private List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles = new ArrayList<>();
+  private List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles = new ArrayList<>();
 
   public NewEmpleadoDto() {
     super();
@@ -63,7 +63,7 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridades = escolaridades;
@@ -73,7 +73,7 @@ public class NewEmpleadoDto {
     this.idDireccion = idDireccion;
     this.idSubdireccion = idSubdireccion;
     this.idPuesto = idPuesto;
-    this.roles = roles;
+    this.idRoles = idRoles;
   }
 
   public NewEmpleadoDto persona(PersonaDto persona) {
@@ -273,33 +273,33 @@ public class NewEmpleadoDto {
     this.idPuesto = idPuesto;
   }
 
-  public NewEmpleadoDto roles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
-    this.roles = roles;
+  public NewEmpleadoDto idRoles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles) {
+    this.idRoles = idRoles;
     return this;
   }
 
-  public NewEmpleadoDto addRolesItem(String rolesItem) {
-    if (this.roles == null) {
-      this.roles = new ArrayList<>();
+  public NewEmpleadoDto addIdRolesItem(String idRolesItem) {
+    if (this.idRoles == null) {
+      this.idRoles = new ArrayList<>();
     }
-    this.roles.add(rolesItem);
+    this.idRoles.add(idRolesItem);
     return this;
   }
 
   /**
-   * Get roles
-   * @return roles
+   * Get idRoles
+   * @return idRoles
   */
   @NotNull @NotNullElement @NotBlankElement @NotDuplicateElement
 @Size(min = 1, max = 20) 
-  @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("roles")
-  public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getRoles() {
-    return roles;
+  @Schema(name = "idRoles", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("idRoles")
+  public List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> getIdRoles() {
+    return idRoles;
   }
 
-  public void setRoles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> roles) {
-    this.roles = roles;
+  public void setIdRoles(List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles) {
+    this.idRoles = idRoles;
   }
 
   @Override
@@ -320,12 +320,12 @@ public class NewEmpleadoDto {
         Objects.equals(this.idDireccion, newEmpleado.idDireccion) &&
         Objects.equals(this.idSubdireccion, newEmpleado.idSubdireccion) &&
         Objects.equals(this.idPuesto, newEmpleado.idPuesto) &&
-        Objects.equals(this.roles, newEmpleado.roles);
+        Objects.equals(this.idRoles, newEmpleado.idRoles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(persona, domicilio, escolaridades, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, roles);
+    return Objects.hash(persona, domicilio, escolaridades, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, idRoles);
   }
 
   @Override
@@ -341,7 +341,7 @@ public class NewEmpleadoDto {
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
     sb.append("    idSubdireccion: ").append(toIndentedString(idSubdireccion)).append("\n");
     sb.append("    idPuesto: ").append(toIndentedString(idPuesto)).append("\n");
-    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
+    sb.append("    idRoles: ").append(toIndentedString(idRoles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -5,10 +5,10 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -50,7 +50,7 @@ public class EmpleadoDto {
   private String puesto;
 
   @Valid
-  private List<String> roles = new ArrayList<>();
+  private Set<String> roles = new LinkedHashSet<>();
 
   public EmpleadoDto() {
     super();
@@ -59,7 +59,7 @@ public class EmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String tipoPlaza, String region, String direccion, String subdireccion, String puesto, List<String> roles) {
+  public EmpleadoDto(String idEmpleado, String nombreCompleto, Boolean activo, LocalDate fechaIngreso, String tipoPlaza, String region, String direccion, String subdireccion, String puesto, Set<String> roles) {
     this.idEmpleado = idEmpleado;
     this.nombreCompleto = nombreCompleto;
     this.activo = activo;
@@ -261,14 +261,14 @@ public class EmpleadoDto {
     this.puesto = puesto;
   }
 
-  public EmpleadoDto roles(List<String> roles) {
+  public EmpleadoDto roles(Set<String> roles) {
     this.roles = roles;
     return this;
   }
 
   public EmpleadoDto addRolesItem(String rolesItem) {
     if (this.roles == null) {
-      this.roles = new ArrayList<>();
+      this.roles = new LinkedHashSet<>();
     }
     this.roles.add(rolesItem);
     return this;
@@ -282,11 +282,12 @@ public class EmpleadoDto {
 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("roles")
-  public List<String> getRoles() {
+  public Set<String> getRoles() {
     return roles;
   }
 
-  public void setRoles(List<String> roles) {
+  @JsonDeserialize(as = LinkedHashSet.class)
+  public void setRoles(Set<String> roles) {
     this.roles = roles;
   }
 

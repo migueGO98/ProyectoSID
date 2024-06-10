@@ -348,7 +348,7 @@ components:
         - idDireccion
         - idSubdireccion
         - idPuesto
-        - roles
+        - idRoles
       properties:
         persona:
           $ref: '#/components/schemas/Persona'
@@ -410,7 +410,7 @@ components:
           pattern: '^[a-zA-Z0-9]+$'
           example: na1
           x-constraints: '@NotBlank'
-        roles:
+        idRoles:
           type: array
           x-stoplight:
             id: qh38vks47p61n
@@ -655,6 +655,7 @@ components:
           type: array
           x-stoplight:
             id: 2ebexb3jsrxpp
+          uniqueItems: true
           items:
             x-stoplight:
               id: wp7u4acbwt3fb
