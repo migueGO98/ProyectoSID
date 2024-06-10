@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper
 public interface RolMapper {
@@ -14,8 +15,12 @@ public interface RolMapper {
 
     List<RolDto> rolesToRolesDto(List<Rol> roles);
 
-    default List<String> rolesToIdRoles(Set<Rol> roles){
-        return roles.stream().map(Rol::getIdRol).toList();
+    /**
+     * Este método solo recupera su descripción, es muy usado en el servicio de empleados
+     * cuando se recuperan los empleados o se crea un nuevo empleado
+     */
+    default Set<String> rolesToDescripcion(Set<Rol> roles){
+        return roles.stream().map(Rol::getDescripcion).collect(Collectors.toSet());
     }
 
 }

@@ -6,6 +6,7 @@ import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.servicios.ServicioEmpleados;
+import mx.agr.dgec.servicios.externos.ServicioAzureGraph;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,12 @@ public class ControlEmpleados implements EmpleadosApi {
     public ResponseEntity<EmpleadoDto> crearEmpleado(NewEmpleadoDto newEmpleadoDto) {
         var empleado = servicioEmpleados.crearNuevoEmpleado(newEmpleadoDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(empleado);
+    }
+
+    @Override
+    public ResponseEntity<List<EmpleadoDto>> recuperarEmpleados() {
+        var empleados = servicioEmpleados.recuperarEmpleados();
+        return ResponseEntity.status(HttpStatus.OK).body(empleados);
     }
 
     @Override

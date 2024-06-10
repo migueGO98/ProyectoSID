@@ -17,6 +17,7 @@ public interface EmpleadoMapper {
 
     EmpleadoMapper INSTANCE = Mappers.getMapper(EmpleadoMapper.class);
 
+    @SuppressWarnings("java:S107") // Buscar una mejor solución
     @Mapping(target = "idPersona", source = "idEmpleado")
     @Mapping(target = "idEmpleado", source = "idEmpleado")
     @Mapping(target = "nombre", source = "newEmpleadoDto.persona.nombre")
@@ -46,21 +47,27 @@ public interface EmpleadoMapper {
                                       int diasVacacionesTomados, MotivoBajaEnum motivoBaja, TipoPlaza tipoPlaza, Region region,
                                       Direccion direccion, Subdireccion subdireccion, Puesto puesto, Set<Rol> rolesSet);
 
+    // Sí se usa en el metodo de newEmpleadoDtoToEmpleado
+    @SuppressWarnings("unused")
     default Domicilio domicilioDtoToDomicilio(String idEmpleado, DomicilioDto domicilioDto) {
         return DomicilioMapper.INSTANCE.domicilioDtoToDomicilio(idEmpleado, domicilioDto);
     }
 
+    // Sí se usa en el metodo de newEmpleadoDtoToEmpleado
+    @SuppressWarnings("unused")
     default List<Escolaridad> listEscolaridadDtoToListEscolaridad(String idEmpleado, List<EscolaridadDto> escolaridadesDto) {
         return EscolaridadMapper.INSTANCE.listEscolaridadDtoToListEscolaridad(idEmpleado, escolaridadesDto);
     }
 
-    @Mapping(target = "nombreCompleto", source = "nombreCompletoEmpleado")
-    @Mapping(target = "idRegion", source = "empleado.region")
-    @Mapping(target = "idDireccion", source = "empleado.direccion")
-    @Mapping(target = "idSubdireccion", source = "empleado.subdireccion")
-    @Mapping(target = "idTipoPlaza", source = "empleado.tipoPlaza")
-    @Mapping(target = "idPuesto", source = "empleado.puesto")
-    EmpleadoDto empleadoToEmpleadoDto(String nombreCompletoEmpleado, Empleado empleado);
+    @Mapping(target = "nombreCompleto", source = "empleado.nombreCompleto")
+    @Mapping(target = "region", source = "empleado.region.nombre")
+    @Mapping(target = "direccion", source = "empleado.direccion.nombre")
+    @Mapping(target = "subdireccion", source = "empleado.subdireccion.nombre")
+    @Mapping(target = "tipoPlaza", source = "empleado.tipoPlaza.nombre")
+    @Mapping(target = "puesto", source = "empleado.puesto.nombre")
+    EmpleadoDto empleadoToEmpleadoDto(Empleado empleado);
+
+    List<EmpleadoDto> listEmpleadosToListEmpleadosDto(List<Empleado> empleados);
 
     default List<RegistrosDto> motivosBajaEnumtoRegistrosDto(List<MotivoBajaEnum> motivosBaja) {
         return motivosBaja.stream().map(motivo -> new RegistrosDto(motivo.name(), motivo.getMotivoBaja())).toList();

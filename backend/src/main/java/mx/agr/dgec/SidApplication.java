@@ -11,6 +11,9 @@ import mx.agr.dgec.repositorios.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -89,7 +92,7 @@ public class SidApplication {
 						Rol.builder().idRol("RH3").descripcion("Recursos Humanos Nivel 3")
 				)
 				.map(Rol.RolBuilder::build)
-				.toList();
+				.collect(Collectors.toSet());
 		repositorioRol.saveAll(roles);
 	}
 
@@ -176,6 +179,12 @@ public class SidApplication {
 
 		var tipoPlaza = TipoPlaza.builder().idTipoPlaza("INCA").nombre("Personal del Instituto Nacional de Carrera").build();
 		var puesto = Puesto.builder().idPuesto("SJD1").nombre("Subjefe de Departamento 1").tipoPlaza(tipoPlaza).salarioBruto(15478.49f).build();
+		var roles = Stream.of(
+						Rol.builder().idRol("ADMIN").descripcion("Administrador"),
+						Rol.builder().idRol("RH1").descripcion("Recursos Humanos Nivel 1")
+				)
+				.map(Rol.RolBuilder::build)
+				.collect(Collectors.toSet());
 
 
 		var empleado = Empleado.builder()
@@ -183,6 +192,7 @@ public class SidApplication {
 				.nombre("Manuel")
 				.apellidoPaterno("Guerrero")
 				.apellidoMaterno("Ortiz")
+				.nombreCompleto("Manuel Guerrero Ortiz")
 				.curp("GUOM123456HDFRTR01")
 				.rfc("GUOM123456GP9")
 				.numeroSeguroSocial("12345678901")
@@ -233,6 +243,7 @@ public class SidApplication {
 				.subdireccion(subdireccion)
 				.tipoPlaza(tipoPlaza)
 				.puesto(puesto)
+				.roles(roles)
 				.build();
 		repositorioEmpleado.save(empleado);
 	}

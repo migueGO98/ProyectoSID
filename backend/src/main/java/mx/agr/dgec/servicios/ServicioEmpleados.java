@@ -2,7 +2,6 @@ package mx.agr.dgec.servicios;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mx.agr.dgec.entidades.Empleado;
 import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
@@ -43,14 +42,15 @@ public class ServicioEmpleados {
         var direccion = servicioDirecciones.obtenerDireccion(nuevoEmpleadoDto.getIdDireccion());
         var subdireccion = servicioSubdirecciones.obtenerSubdireccion(nuevoEmpleadoDto.getIdSubdireccion());
         var puesto = servicioPuestos.obtenerPuesto(nuevoEmpleadoDto.getIdPuesto());
-        var roles = servicioRoles.obtenerRoles(nuevoEmpleadoDto.getRoles());
+        var roles = servicioRoles.obtenerRoles(nuevoEmpleadoDto.getIdRoles());
 
+        // Generar ID de empleado, Regla de Negocio
         var fechaIngresoValue = nuevoEmpleadoDto.getFechaIngreso();
         final var idEmpleado = generarIdEmpleado(nuevoEmpleadoDto.getPersona().getRfc(), fechaIngresoValue);
 
         // Validaciones de fondo (Reglas de Negocio)
         if (existeEmpleado(idEmpleado)) {
-            log.error("El empleado con ID {} ya existe", idEmpleado);
+            log.info("El empleado con ID {} ya existe", idEmpleado);
             throw new IllegalArgumentException("El empleado ya existe");
         }
         servicioTiposPlazas.validarPuestoPertenezcaToTipoPlaza(tipoPlaza, puesto);
@@ -68,15 +68,19 @@ public class ServicioEmpleados {
 
         nuevoEmpleado.calcularEdad();
         nuevoEmpleado.formatearDatos();
+        nuevoEmpleado.concatenarNombreAndApellidos();
 
         var empleado = repositorioEmpleado.save(nuevoEmpleado);
 
-        var nombreCompleto = obtenerNombreCompletoEmpleado(nuevoEmpleado);
-
-        log.info("Empleado creado: {} con ID {}", nombreCompleto.toUpperCase(), idEmpleado);
-        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(nombreCompleto, empleado);
+        log.info("Empleado creado: {} con ID {}", empleado.getNombreCompleto().toUpperCase(), idEmpleado);
+        return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(empleado);
     }
 
+    public List<EmpleadoDto> recuperarEmpleados() {
+        var empleados = repositorioEmpleado.findAll();
+        log.info("Se recuperaron todos los empleados");
+        return EmpleadoMapper.INSTANCE.listEmpleadosToListEmpleadosDto(empleados);
+    }
 
 
 
@@ -122,12 +126,7 @@ public class ServicioEmpleados {
     }
 
     private boolean obtenerEstadoNuevoEmpleado(LocalDate fechaIngreso) {
+        // Si la fecha de ingreso es igual o anterior a la fecha actual, el empleado está activo, de lo contrario, está inactivo
         return !fechaIngreso.isAfter(LocalDate.now());
-    }
-
-    private String obtenerNombreCompletoEmpleado(Empleado empleado) {
-        if (empleado.getApellidoMaterno() == null)
-            return String.format("%s %s", empleado.getNombre(), empleado.getApellidoPaterno());
-        return String.format("%s %s %s", empleado.getNombre(), empleado.getApellidoPaterno(), empleado.getApellidoMaterno());
     }
 }
