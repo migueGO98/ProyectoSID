@@ -4,9 +4,7 @@ El proyecto está construido en [Spring Boot](https://spring.io/projects/spring-
 
 ## Requisitos
 - Java 17 
-- Solicitar a un administrador del proyecto, dar de alta en el Tenant **agricultura-dgec** de Microsoft Azure B2C. 
-- Instalar [Azure CLI](https://learn.microsoft.com/es-es/cli/azure/install-azure-cli) para la autenticación de usuarios. 
-  - Iniciar sesión en Azure CLI con el comando `auth0 login` con el correo dado de alta en el Tenant **agricultura-dgec**.
+- Solicitar a un administrador del proyecto, dar de alta en el Tenant **agricultura-dgec** de Microsoft Azure B2C.
 
 ## Instrucciones
 El proceso de instalación se realiza en la carpeta `ProyectoSID/backend`
@@ -19,7 +17,11 @@ El proceso de instalación se realiza en la carpeta `ProyectoSID/backend`
 ```bash
 ./mvnw spring-boot:run
 ```
-3. Abrir el sitio http://localhost:8080/swagger-ui/index.html#/
+3. Solicitar a un lider del proyecto dar de alta un usuario en el Tenant **agricultura-dgec** de Microsoft Azure B2C desde el endpoint ```/api/empleados```
+4. Solicita a un miembro del proyecto el comando correspodiente para obtener un token de autenticación del servicio de Azure B2C.
+5. Abrir el sitio http://localhost:8080/doc
+6. Loguearse con el token obtenido en el paso 4.
+7. Listo, ya puedes probar los servicios del backend.
 
 # Instalar Frontend
 1. Seguir las instrucciones del [README](../frontend/README.md) para iniciar con la instalación.
