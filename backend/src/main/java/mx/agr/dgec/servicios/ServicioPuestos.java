@@ -3,6 +3,7 @@ package mx.agr.dgec.servicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Puesto;
+import mx.agr.dgec.exceptions.ElementoNoEncontradoException;
 import mx.agr.dgec.repositorios.RepositorioPuesto;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,8 @@ public class ServicioPuestos {
     private final RepositorioPuesto repositorioPuesto;
 
     public Puesto obtenerPuesto(String idPuestoValue) {
-        if(idPuestoValue.isBlank()) throw new IllegalArgumentException("El idPuesto no puede estar vacío");
-        var puesto = repositorioPuesto.findById(idPuestoValue.toUpperCase());
-        if (puesto.isEmpty()) throw new IllegalArgumentException("El idPuesto no es válido o es inexistente");
+        final var puesto = repositorioPuesto.findById(idPuestoValue.toUpperCase());
+        if (puesto.isEmpty()) throw new ElementoNoEncontradoException("No existe el Puesto con el id proporcionado");
         return puesto.get();
     }
 }

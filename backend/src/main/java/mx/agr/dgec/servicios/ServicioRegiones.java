@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Direccion;
 import mx.agr.dgec.entidades.Region;
+import mx.agr.dgec.exceptions.ElementoNoPerteneceException;
 import mx.agr.dgec.repositorios.RepositorioRegion;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,14 @@ public class ServicioRegiones {
     private final RepositorioRegion repositorioRegion;
 
     public Region obtenerRegion(String regionValue) {
-        if(regionValue.isBlank()) throw new IllegalArgumentException("El idRegión no puede estar vacío");
-        var region = repositorioRegion.findById(regionValue.toUpperCase());
-        if (region.isEmpty()) throw new IllegalArgumentException("El idRegión no es válido o es inexistente");
+        final var region = repositorioRegion.findById(regionValue.toUpperCase());
+        if (region.isEmpty()) throw new IllegalArgumentException("No existe la Región con el id proporcionado");
         return region.get();
     }
 
     // Valida que la Dirección pertenezca  la Region
     public void validarDireccionPertenezcaToRegion(Region region, Direccion direccion) {
         if(!direccion.getRegion().equals(region))
-            throw new IllegalArgumentException("La Dirección no pertenece a la Región");
+            throw new ElementoNoPerteneceException("La Dirección no pertenece a la Región");
     }
 }

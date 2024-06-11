@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
+import mx.agr.dgec.exceptions.ElementoNoEncontradoException;
+import mx.agr.dgec.exceptions.ElementoNoPerteneceException;
+import mx.agr.dgec.exceptions.ReglaNegocioException;
 import mx.agr.dgec.generate.model.ErrorDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -97,6 +100,27 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDto> handleIllegalArgumentException(IllegalArgumentException ex) {
         var error = new ErrorDto("ERROR_ARGUMENT", ex.getMessage());
         log.info("Error de argumento ilegal: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ReglaNegocioException.class)
+    public ResponseEntity<ErrorDto> handleReglaNegocioException(ReglaNegocioException ex) {
+        var error = new ErrorDto("ERROR_REG_NG", ex.getMessage());
+        log.info("No cumple con la Regla de negocio: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ElementoNoEncontradoException.class)
+    public ResponseEntity<ErrorDto> handleElementoNoEncontradoException(ElementoNoEncontradoException ex) {
+        var error = new ErrorDto("ERROR_ELEMENT_NOT_EXIST", ex.getMessage());
+        log.info("Elemento no encontrado: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ElementoNoPerteneceException.class)
+    public ResponseEntity<ErrorDto> handleElementoNoPerteneceException(ElementoNoPerteneceException ex) {
+        var error = new ErrorDto("ERROR_ELEMENT_NOT_BELONG", ex.getMessage());
+        log.info("Elemento no pertenece: {}", error.getMensaje());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 

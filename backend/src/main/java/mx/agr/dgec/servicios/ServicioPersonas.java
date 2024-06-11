@@ -13,13 +13,13 @@ import java.util.List;
 @Slf4j
 public class ServicioPersonas {
     public List<RegistrosDto> recuperarEstadosCiviles() {
-        var estadosCiviles = Arrays.asList((EstadoCivilEnum.values()));
+        final var estadosCiviles = Arrays.asList((EstadoCivilEnum.values()));
         log.info("Se recuperaron los estados civiles");
         return PersonaMapper.INSTANCE.estadosCivilesEnumToRegistrosDto(estadosCiviles);
     }
 
     public List<RegistrosDto> recuperarGeneros() {
-        var generos = Arrays.stream(GeneroEnum.values()).toList();
+        final var generos = Arrays.stream(GeneroEnum.values()).toList();
         log.info("Se recuperaron los géneros");
         return PersonaMapper.INSTANCE.generosEnumToRegistrosDto(generos);
     }

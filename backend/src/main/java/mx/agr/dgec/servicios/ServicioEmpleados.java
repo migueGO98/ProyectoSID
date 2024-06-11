@@ -3,6 +3,7 @@ package mx.agr.dgec.servicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.enums.MotivoBajaEnum;
+import mx.agr.dgec.exceptions.ReglaNegocioException;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
 import mx.agr.dgec.repositorios.RepositorioEmpleado;
@@ -51,7 +52,7 @@ public class ServicioEmpleados {
         // Validaciones de fondo (Reglas de Negocio)
         if (existeEmpleado(idEmpleado)) {
             log.info("El empleado con ID {} ya existe", idEmpleado);
-            throw new IllegalArgumentException("El empleado ya existe");
+            throw new ReglaNegocioException("El empleado ya existe");
         }
         servicioTiposPlazas.validarPuestoPertenezcaToTipoPlaza(tipoPlaza, puesto);
         servicioRegiones.validarDireccionPertenezcaToRegion(region, direccion);
@@ -70,14 +71,14 @@ public class ServicioEmpleados {
         nuevoEmpleado.formatearDatos();
         nuevoEmpleado.concatenarNombreAndApellidos();
 
-        var empleado = repositorioEmpleado.save(nuevoEmpleado);
+        final var empleado = repositorioEmpleado.save(nuevoEmpleado);
 
         log.info("Empleado creado: {} con ID {}", empleado.getNombreCompleto().toUpperCase(), idEmpleado);
         return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(empleado);
     }
 
     public List<EmpleadoDto> recuperarEmpleados() {
-        var empleados = repositorioEmpleado.findAll();
+        final var empleados = repositorioEmpleado.findAll();
         log.info("Se recuperaron todos los empleados");
         return EmpleadoMapper.INSTANCE.listEmpleadosToListEmpleadosDto(empleados);
     }
@@ -101,21 +102,21 @@ public class ServicioEmpleados {
 
     private void validarDiaFechaIngreso(LocalDate fechaIngreso) {
         var diaIngreso = fechaIngreso.getDayOfMonth();
-        if (diaIngreso != 1 && diaIngreso != 16) throw new IllegalArgumentException("El día de la fecha ingreso debe ser 01 ó 16");
+        if (diaIngreso != 1 && diaIngreso != 16) throw new ReglaNegocioException("El día de la fecha ingreso debe ser 01 ó 16");
     }
 
     private void validarNoHaPasado1MesFechaIngreso(LocalDate fechaIngreso) {
         var fechaPeriodoActual = obtenerFechaPeriodoActual();
         var diferenciaEnDias = ChronoUnit.DAYS.between(fechaIngreso, fechaPeriodoActual);
         float diferenciaEnMeses = diferenciaEnDias / PROMEDIO_DIAS_POR_MES;
-        if (diferenciaEnMeses > 1.0f) throw new IllegalArgumentException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales anteriores del periodo quincenal actual");
+        if (diferenciaEnMeses > 1.0f) throw new ReglaNegocioException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales anteriores del periodo quincenal actual");
     }
 
     private void validarNoPasaDe1MesFuturoFechaIngreso(LocalDate fechaIngreso) {
         var fechaPeriodoActual = obtenerFechaPeriodoActual();
         var diferenciaEnDias = ChronoUnit.DAYS.between(fechaPeriodoActual, fechaIngreso);
         float diferenciaEnMeses = diferenciaEnDias / PROMEDIO_DIAS_POR_MES;
-        if (diferenciaEnMeses > 1.2f) throw new IllegalArgumentException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales posteriores del periodo quincenal actual");
+        if (diferenciaEnMeses > 1.2f) throw new ReglaNegocioException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales posteriores del periodo quincenal actual");
     }
 
     private LocalDate obtenerFechaPeriodoActual() {

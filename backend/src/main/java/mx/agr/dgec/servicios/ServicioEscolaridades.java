@@ -14,13 +14,13 @@ import java.util.List;
 public class ServicioEscolaridades {
 
     public List<RegistrosDto> recuperarNivelesEscolares() {
-        var niveles = Arrays.stream(NivelesEscolaridadesEnum.values()).toList();
+        final var niveles = Arrays.stream(NivelesEscolaridadesEnum.values()).toList();
         log.info("Se recuperaron los niveles escolares");
         return EscolaridadMapper.INSTANCE.nivelesEscolaridadesEnumToRegistrosDto(niveles);
     }
 
     public List<RegistrosDto> recuperarEstadosNivelesEscolares() {
-        var estadosNiveles = Arrays.stream(EstadosNivelesEscolaridadesEnum.values()).toList();
+        final var estadosNiveles = Arrays.stream(EstadosNivelesEscolaridadesEnum.values()).toList();
         log.info("Se recuperaron los estados de los niveles escolares");
         return EscolaridadMapper.INSTANCE.estadosNivelesEscolaridadesEnumToRegistrosDto(estadosNiveles);
     }

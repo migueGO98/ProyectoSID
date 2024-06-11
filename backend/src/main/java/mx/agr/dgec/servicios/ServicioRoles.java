@@ -3,6 +3,7 @@ package mx.agr.dgec.servicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Rol;
+import mx.agr.dgec.exceptions.ElementoNoEncontradoException;
 import mx.agr.dgec.generate.model.RolDto;
 import mx.agr.dgec.mappers.RolMapper;
 import mx.agr.dgec.repositorios.RepositorioRol;
@@ -30,7 +31,7 @@ public class ServicioRoles {
                 .toList();
         var listaRoles = repositorioRoles.findAllById(rolesUpper);
 
-        if(listaRoles.size() != rolesUpper.size()) throw new IllegalArgumentException("La lista de roles contiene roles no válidos o inexistentes");
+        if(listaRoles.size() != rolesUpper.size()) throw new ElementoNoEncontradoException("La lista de roles tiene id's no existentes");
 
         return new HashSet<>(listaRoles);
     }

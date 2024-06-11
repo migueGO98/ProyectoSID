@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.entidades.Puesto;
 import mx.agr.dgec.entidades.TipoPlaza;
+import mx.agr.dgec.exceptions.ElementoNoEncontradoException;
+import mx.agr.dgec.exceptions.ElementoNoPerteneceException;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.mappers.TipoPlazaMapper;
 import mx.agr.dgec.repositorios.RepositorioTipoPlaza;
@@ -25,15 +27,14 @@ public class ServicioTiposPlazas {
     }
 
     public TipoPlaza obtenerTipoPlaza(String idTipoPlazaValue) {
-        if(idTipoPlazaValue.isBlank()) throw new IllegalArgumentException("El idTipoPlaza no puede estar vacío");
         var tipoPlaza = repositorioTipoPlaza.findById(idTipoPlazaValue.toUpperCase());
-        if (tipoPlaza.isEmpty()) throw new IllegalArgumentException("El idTipoPlaza no es válido o es inexistente");
+        if (tipoPlaza.isEmpty()) throw new ElementoNoEncontradoException("No existe el Tipo de Plaza con el id proporcionado");
         return tipoPlaza.get();
     }
 
     // Valida que el puesto pertenezca al tipo de plaza
     public void validarPuestoPertenezcaToTipoPlaza(TipoPlaza tipoPlaza, Puesto puesto) {
         if(!puesto.getTipoPlaza().equals(tipoPlaza))
-            throw new IllegalArgumentException("El puesto no pertenece al tipo de plaza");
+            throw new ElementoNoPerteneceException("El puesto no pertenece al tipo de plaza");
     }
 }
