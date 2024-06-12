@@ -6,7 +6,6 @@ import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.servicios.ServicioEmpleados;
-import mx.agr.dgec.servicios.externos.ServicioAzureGraph;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

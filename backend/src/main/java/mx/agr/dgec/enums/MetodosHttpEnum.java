@@ -4,5 +4,6 @@ public enum MetodosHttpEnum {
     GET,
     POST,
     PUT,
+    PATCH,
     DELETE
 }
