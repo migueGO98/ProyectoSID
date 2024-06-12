@@ -20,4 +20,8 @@ public class Rol {
     @ManyToMany(mappedBy = "roles")
     @ToString.Exclude
     private Set<Empleado> empleados;
+
+    @ManyToMany(mappedBy = "roles")
+    @ToString.Exclude
+    private Set<Features> features;
 }

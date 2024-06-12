@@ -3,10 +3,7 @@ package mx.agr.dgec;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import mx.agr.dgec.entidades.*;
-import mx.agr.dgec.enums.EstadoCivilEnum;
-import mx.agr.dgec.enums.EstadosNivelesEscolaridadesEnum;
-import mx.agr.dgec.enums.GeneroEnum;
-import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
+import mx.agr.dgec.enums.*;
 import mx.agr.dgec.repositorios.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,6 +35,7 @@ public class SidApplication {
 	private final RepositorioSubdireccion repositorioSubdireccion;
 	private final RepositorioTipoPlaza repositorioTipoPlaza;
 	private final RepositorioPuesto repositorioPuesto;
+	private final RepositorioFeatures repositorioFeatures;
 
 
 
@@ -51,6 +49,7 @@ public class SidApplication {
 		agregarRegiones();
 		agregarTiposPlaza();
 		agregarRoles();
+		agregarFeatures();
 		agregarPuestos();
 		agregarEstados();
 		agregarDirecciones();
@@ -94,6 +93,21 @@ public class SidApplication {
 				.map(Rol.RolBuilder::build)
 				.collect(Collectors.toSet());
 		repositorioRol.saveAll(roles);
+	}
+
+	public void agregarFeatures() {
+		var listaRoles = Stream.of(Rol.builder().idRol("ADMIN").descripcion("Administrador").build(),
+				Rol.builder().idRol("RH1").descripcion("Recursos Humanos Nivel 1").build())
+				.collect(Collectors.toSet());
+
+		var rolRh2 = Rol.builder().idRol("RH2").descripcion("Recursos Humanos Nivel 2").build();
+		var features = Stream.of(
+						Features.builder().metodoHttp(MetodosHttpEnum.POST).endpoint("/api/empleados").description("Obtener todos los empleados").roles(listaRoles),
+						Features.builder().metodoHttp(MetodosHttpEnum.GET).endpoint("/api/empleados").description("Crear un empleado").roles(Set.of(rolRh2))
+				)
+				.map(Features.FeaturesBuilder::build)
+				.toList();
+		repositorioFeatures.saveAll(features);
 	}
 
 	public void agregarRegiones() {
