@@ -7,6 +7,7 @@ import mx.agr.dgec.exceptions.ReglaNegocioException;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
 import mx.agr.dgec.repositorios.RepositorioEmpleado;
+import mx.agr.dgec.servicios.externos.ServicioAzureGraph;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -25,6 +26,7 @@ public class ServicioEmpleados {
     private final ServicioSubdirecciones servicioSubdirecciones;
     private final ServicioTiposPlazas servicioTiposPlazas;
     private final ServicioPuestos servicioPuestos;
+    private final ServicioAzureGraph servicioAzureGraph;
 
     private static final float PROMEDIO_DIAS_POR_MES = 30.4375f;
 
@@ -64,16 +66,20 @@ public class ServicioEmpleados {
         var estadoActivo = obtenerEstadoNuevoEmpleado(nuevoEmpleadoDto.getFechaIngreso());
         // Las asignaciones null son por Reglas de Negocio
         final var nuevoEmpleado = EmpleadoMapper.INSTANCE.newEmpleadoDtoToEmpleado(idEmpleado, nuevoEmpleadoDto, estadoActivo,null,
-                null, null,null, 0,0, null,
+                null,null, 0,0, null,
                 tipoPlaza, region, direccion, subdireccion, puesto, roles);
 
         nuevoEmpleado.calcularEdad();
         nuevoEmpleado.formatearDatos();
         nuevoEmpleado.concatenarNombreAndApellidos();
 
-        final var empleado = repositorioEmpleado.save(nuevoEmpleado);
+        // Crear usuario en Azure AD B2C
+        servicioAzureGraph.crearUsuario(nuevoEmpleado);
 
-        log.info("Empleado creado: {} con ID {}", empleado.getNombreCompleto().toUpperCase(), idEmpleado);
+        // Guardar en BD
+        final var empleado = repositorioEmpleado.save(nuevoEmpleado);
+        log.info("Empleado creado: {} con ID {} en la BD de Postgre", empleado.getNombreCompleto().toUpperCase(), idEmpleado);
+
         return EmpleadoMapper.INSTANCE.empleadoToEmpleadoDto(empleado);
     }
 

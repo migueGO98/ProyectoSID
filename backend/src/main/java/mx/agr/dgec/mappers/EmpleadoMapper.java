@@ -36,6 +36,7 @@ public interface EmpleadoMapper {
     @Mapping(target = "contactoEmergenciaTelefono", source = "newEmpleadoDto.persona.contactoEmergenciaTelefono")
     @Mapping(target = "domicilio", expression = "java(domicilioDtoToDomicilio(idEmpleado, newEmpleadoDto.getDomicilio()))")
     @Mapping(target = "escolaridades", expression = "java(listEscolaridadDtoToListEscolaridad(idEmpleado, newEmpleadoDto.getEscolaridades()))")
+    @Mapping(target = "correoElectronico", source = "newEmpleadoDto.correoElectronicoInstitucional")
     @Mapping(target = "region", source = "region")
     @Mapping(target = "direccion", source = "direccion")
     @Mapping(target = "roles", source = "rolesSet")
@@ -43,7 +44,7 @@ public interface EmpleadoMapper {
     @Mapping(target = "tipoPlaza", source = "tipoPlaza")
     @Mapping(target = "puesto", source = "puesto")
     Empleado newEmpleadoDtoToEmpleado(String idEmpleado, NewEmpleadoDto newEmpleadoDto, Boolean activo, LocalDate fechaBaja,
-                                      String correoElectronico, String telefono, String extensionTelefono, int diasVacacionesDisponibles,
+                                      String telefono, String extensionTelefono, int diasVacacionesDisponibles,
                                       int diasVacacionesTomados, MotivoBajaEnum motivoBaja, TipoPlaza tipoPlaza, Region region,
                                       Direccion direccion, Subdireccion subdireccion, Puesto puesto, Set<Rol> rolesSet);
 

@@ -79,4 +79,9 @@ public class Empleado extends Persona implements PersonaInterface {
     public void concatenarNombreAndApellidos() {
         super.concatenarNombreAndApellidosPersona();
     }
+
+    @Override
+    public String concatenarApellidos() {
+        return super.concatenarApellidosPersona();
+    }
 }

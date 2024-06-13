@@ -80,4 +80,8 @@ public abstract class Persona {
     protected final void concatenarNombreAndApellidosPersona() {
         nombreCompleto = (apellidoMaterno == null) ? String.format("%s %s", nombre, apellidoPaterno) : String.format("%s %s %s", nombre, apellidoPaterno, apellidoMaterno);
     }
+
+    protected final String concatenarApellidosPersona() {
+        return (apellidoMaterno == null) ? apellidoPaterno : String.format("%s %s", apellidoPaterno, apellidoMaterno);
+    }
 }
