@@ -343,6 +343,7 @@ components:
         - domicilio
         - escolaridades
         - fechaIngreso
+        - correoElectronicoInstitucional
         - idTipoPlaza
         - idRegion
         - idDireccion
@@ -375,6 +376,12 @@ components:
             id: pw4oaxlrpk2e2
           format: date
           example: '2020-01-01'
+        correoElectronicoInstitucional:
+          type: string
+          x-stoplight:
+            id: 5t939dpkqiy1s
+          format: email
+          example: fabian.estarda@agricultura.com.mx
         idTipoPlaza:
           x-stoplight:
             id: ifi0xx9kex23v

@@ -43,6 +43,8 @@ public class NewEmpleadoDto {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate fechaIngreso;
 
+  private String correoElectronicoInstitucional;
+
   private String idTipoPlaza;
 
   private String idRegion;
@@ -63,11 +65,12 @@ public class NewEmpleadoDto {
   /**
    * Constructor with only required parameters
    */
-  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles) {
+  public NewEmpleadoDto(PersonaDto persona, DomicilioDto domicilio, List<@Valid EscolaridadDto> escolaridades, LocalDate fechaIngreso, String correoElectronicoInstitucional, String idTipoPlaza, String idRegion, String idDireccion, String idSubdireccion, String idPuesto, List<@Pattern(regexp = "^[a-zA-Z0-9]+$")String> idRoles) {
     this.persona = persona;
     this.domicilio = domicilio;
     this.escolaridades = escolaridades;
     this.fechaIngreso = fechaIngreso;
+    this.correoElectronicoInstitucional = correoElectronicoInstitucional;
     this.idTipoPlaza = idTipoPlaza;
     this.idRegion = idRegion;
     this.idDireccion = idDireccion;
@@ -166,6 +169,27 @@ public class NewEmpleadoDto {
 
   public void setFechaIngreso(LocalDate fechaIngreso) {
     this.fechaIngreso = fechaIngreso;
+  }
+
+  public NewEmpleadoDto correoElectronicoInstitucional(String correoElectronicoInstitucional) {
+    this.correoElectronicoInstitucional = correoElectronicoInstitucional;
+    return this;
+  }
+
+  /**
+   * Get correoElectronicoInstitucional
+   * @return correoElectronicoInstitucional
+  */
+  @NotNull 
+@jakarta.validation.constraints.Email 
+  @Schema(name = "correoElectronicoInstitucional", example = "fabian.estarda@agricultura.com.mx", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("correoElectronicoInstitucional")
+  public String getCorreoElectronicoInstitucional() {
+    return correoElectronicoInstitucional;
+  }
+
+  public void setCorreoElectronicoInstitucional(String correoElectronicoInstitucional) {
+    this.correoElectronicoInstitucional = correoElectronicoInstitucional;
   }
 
   public NewEmpleadoDto idTipoPlaza(String idTipoPlaza) {
@@ -315,6 +339,7 @@ public class NewEmpleadoDto {
         Objects.equals(this.domicilio, newEmpleado.domicilio) &&
         Objects.equals(this.escolaridades, newEmpleado.escolaridades) &&
         Objects.equals(this.fechaIngreso, newEmpleado.fechaIngreso) &&
+        Objects.equals(this.correoElectronicoInstitucional, newEmpleado.correoElectronicoInstitucional) &&
         Objects.equals(this.idTipoPlaza, newEmpleado.idTipoPlaza) &&
         Objects.equals(this.idRegion, newEmpleado.idRegion) &&
         Objects.equals(this.idDireccion, newEmpleado.idDireccion) &&
@@ -325,7 +350,7 @@ public class NewEmpleadoDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(persona, domicilio, escolaridades, fechaIngreso, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, idRoles);
+    return Objects.hash(persona, domicilio, escolaridades, fechaIngreso, correoElectronicoInstitucional, idTipoPlaza, idRegion, idDireccion, idSubdireccion, idPuesto, idRoles);
   }
 
   @Override
@@ -336,6 +361,7 @@ public class NewEmpleadoDto {
     sb.append("    domicilio: ").append(toIndentedString(domicilio)).append("\n");
     sb.append("    escolaridades: ").append(toIndentedString(escolaridades)).append("\n");
     sb.append("    fechaIngreso: ").append(toIndentedString(fechaIngreso)).append("\n");
+    sb.append("    correoElectronicoInstitucional: ").append(toIndentedString(correoElectronicoInstitucional)).append("\n");
     sb.append("    idTipoPlaza: ").append(toIndentedString(idTipoPlaza)).append("\n");
     sb.append("    idRegion: ").append(toIndentedString(idRegion)).append("\n");
     sb.append("    idDireccion: ").append(toIndentedString(idDireccion)).append("\n");
