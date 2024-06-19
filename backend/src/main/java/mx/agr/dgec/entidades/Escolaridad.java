@@ -28,7 +28,7 @@ public class Escolaridad {
     private String cedulaProfesional;
 
     @MapsId(value = "idPersona")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona", insertable = false, updatable = false, nullable = false, foreignKey = @ForeignKey(name = "FK_ESCOLARIDAD_PERSONA"))
     @ToString.Exclude
     private Persona persona;

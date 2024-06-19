@@ -26,7 +26,7 @@ public class Domicilio {
     private String estado;
 
     @MapsId(value = "idPersona")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPersona", referencedColumnName = "idPersona", nullable = false, foreignKey = @ForeignKey(name = "FK_DOMICILIO_PERSONA"))
     @ToString.Exclude
     private Persona persona;
