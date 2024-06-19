@@ -15,6 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,7 +32,32 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String ERROR_IN_ATTRIBUTE = "ERROR_IN_ATTRIBUTE";
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex) {
+
+        if(ex instanceof InsufficientAuthenticationException) {
+            var error = new ErrorDto("ERROR_AUTH", "No se ha proporcionado un medio de autenticación");
+            log.info("No se ha proporcionado alguna autentificación: {}", ex.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        }
+
+        if(ex instanceof CredentialsExpiredException) {
+            var error = new ErrorDto("ERROR_AUTH_CRED", "Credencial expirada");
+            log.info("Credencial expirada: {}", ex.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        }
+
+        var error = new ErrorDto("ERROR_AUTH", "Error de autenticación");
+        log.info("Error de autenticación: {}", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
+        var error = new ErrorDto("ERROR_ACCESS_DENIED", "No tienes permisos para acceder a este recurso");
+        log.info("Acceso denegado: {}", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
 
     // Error personalizado de validación @Valid (Para los Dto)
     @Override
@@ -41,7 +70,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         List<FieldError> erroresFiles = ex.getBindingResult().getFieldErrors();
 
         ErrorDto error = erroresFiles.stream()
-                .map(errorFile -> new ErrorDto(ERROR_IN_ATTRIBUTE, errorFile.getField() + ": " + errorFile.getDefaultMessage()))
+                .map(errorFile -> new ErrorDto("ERROR_IN_ATTRIBUTE", errorFile.getField() + ": " + errorFile.getDefaultMessage()))
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
 
@@ -96,12 +125,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorDto("ERROR_BODY_REQUEST", mensajeError);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorDto> handleIllegalArgumentException(IllegalArgumentException ex) {
-        var error = new ErrorDto("ERROR_ARGUMENT", ex.getMessage());
-        log.info("Error de argumento ilegal: {}", error.getMensaje());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
 
     @ExceptionHandler(ReglaNegocioException.class)
     public ResponseEntity<ErrorDto> handleReglaNegocioException(ReglaNegocioException ex) {
@@ -124,13 +147,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * El log es un warn porque es un error que no debería ocurrir y es un error de programación
+    /*********************************
+     * Las siguientes exception se marcan con log.WARN porque es un error que no debería ocurrir y es un error de programación
+     *********************************
      */
+
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorDto> handleNullPointerException(NullPointerException ex) {
         var error = new ErrorDto("ERROR_NPE", "Ha ocurrido un error, comunicate con el administrador");
         log.warn("Ha ocurrido un error de puntero nulo: {}", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorDto> handleIllegalArgumentException(IllegalArgumentException ex) {
+        var error = new ErrorDto("ERROR_IAE", ex.getMessage());
+        log.warn("Error de argumento ilegal: {}", error.getMensaje());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

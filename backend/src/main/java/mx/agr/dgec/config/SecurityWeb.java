@@ -2,7 +2,7 @@ package mx.agr.dgec.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mx.agr.dgec.seguridad.SecurityExceptionHandler;
+import mx.agr.dgec.controladores.advice.SecurityExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,14 +19,13 @@ import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(
-        jsr250Enabled = true
-)
+@EnableMethodSecurity
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityWeb {
 
     private final SecurityExceptionHandler securityExceptionHandler;
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -60,21 +59,4 @@ public class SecurityWeb {
         });
         return converter;
     }
-
-    /*
-    private void authenticationEntryPoint(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        ErrorDto errorDto = new ErrorDto(HttpStatus.UNAUTHORIZED.toString(), "No te encuentras autentificado");
-        response.setContentType("application/json");
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getOutputStream().println(new ObjectMapper().writeValueAsString(errorDto));
-    }
-
-    private void accessDeniedHandler(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-        ErrorDto errorDto = new ErrorDto(HttpStatus.FORBIDDEN.toString(), "No tienes permiso para acceder a este recurso");
-        response.setContentType("application/json");
-        response.setStatus(HttpStatus.FORBIDDEN.value());
-        response.getOutputStream().println(new ObjectMapper().writeValueAsString(errorDto));
-    }
-    */
-
 }
