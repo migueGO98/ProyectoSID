@@ -10,16 +10,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true
+)
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityWeb {
@@ -46,17 +54,27 @@ public class SecurityWeb {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
-            List<String> roles = jwt.getClaimAsStringList("extension_idRoles");
+        JwtGrantedAuthoritiesConverter defaultGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            Collection<GrantedAuthority> authorities = defaultGrantedAuthoritiesConverter.convert(jwt);
+
+            var roles = jwt.getClaimAsString("extension_idRoles");
             var idEmpleado = jwt.getClaimAsString("extension_idEmpleado");
 
-            log.info("Usuario con ID {} accediendo con roles: {}", idEmpleado, roles);
-
-            return roles.stream()
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
+            if (roles == null || roles.isEmpty()) {
+                log.info("El empleado {} tiene lista de roles vacía o no tiene asignado el claim extension_idRoles", idEmpleado);
+                return authorities;
+            }
+            authorities.addAll(
+                    Stream.of(roles.split(","))
+                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.trim()))
+                            .toList()
+            );
+            log.info("Permitiendo acceso al empleado {} con roles {}", idEmpleado, authorities);
+            return authorities;
         });
-        return converter;
+        return jwtAuthenticationConverter;
     }
 }
