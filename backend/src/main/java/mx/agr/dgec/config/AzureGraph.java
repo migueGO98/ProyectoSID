@@ -9,20 +9,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AzureGraph {
     @Value("${azure.ad.b2c.client-id}")
-    private String CLIENT_ID;
+    private String cliendId;
 
     @Value("${azure.ad.b2c.client-secret}")
-    private String CLIENT_SECRET;
+    private String clientSecret;
 
     @Value("${azure.ad.b2c.tenant}")
-    private String TENANT_ID;
+    private String tenantId;
 
     @Bean
     public GraphServiceClient graphClient() {
         var credential = new ClientSecretCredentialBuilder()
-                .clientId(CLIENT_ID)
-                .clientSecret(CLIENT_SECRET)
-                .tenantId(TENANT_ID)
+                .clientId(cliendId)
+                .clientSecret(clientSecret)
+                .tenantId(tenantId)
                 .build();
         return new GraphServiceClient(credential);
     }
