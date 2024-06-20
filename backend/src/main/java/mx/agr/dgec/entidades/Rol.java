@@ -23,5 +23,5 @@ public class Rol {
 
     @ManyToMany(mappedBy = "roles")
     @ToString.Exclude
-    private Set<Features> features;
+    private Set<Endpoint> endpoints;
 }

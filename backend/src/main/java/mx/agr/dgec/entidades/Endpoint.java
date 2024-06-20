@@ -11,21 +11,21 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Features {
+public class Endpoint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idFeature;
+    private int idEndpoint;
     @Enumerated(EnumType.STRING)
     private MetodosHttpEnum metodoHttp;
-    private String endpoint;
+    private String rutaEndpoint;
     private String description;
 
     @ManyToMany
     @JoinTable(
-            name = "FeaturesRoles",
-            joinColumns = @JoinColumn(name = "idFeature", referencedColumnName = "idFeature", foreignKey = @ForeignKey(name = "FK_Feature_Roles")),
-            inverseJoinColumns = @JoinColumn(name = "idRol", referencedColumnName = "idRol", foreignKey = @ForeignKey(name = "FK_Roles_Feature"))
+            name = "EndpointsRoles",
+            joinColumns = @JoinColumn(name = "idEndpoint", referencedColumnName = "idEndpoint", foreignKey = @ForeignKey(name = "FK_Endpoints_Roles")),
+            inverseJoinColumns = @JoinColumn(name = "idRol", referencedColumnName = "idRol", foreignKey = @ForeignKey(name = "FK_Roles_Endpoints"))
     )
     private Set<Rol> roles;
 

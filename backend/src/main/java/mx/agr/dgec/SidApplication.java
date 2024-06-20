@@ -8,7 +8,6 @@ import mx.agr.dgec.repositorios.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,7 +34,7 @@ public class SidApplication {
 	private final RepositorioSubdireccion repositorioSubdireccion;
 	private final RepositorioTipoPlaza repositorioTipoPlaza;
 	private final RepositorioPuesto repositorioPuesto;
-	private final RepositorioFeatures repositorioFeatures;
+	private final RepositorioEndpoint repositorioEndpoint;
 
 
 
@@ -49,7 +48,7 @@ public class SidApplication {
 		agregarRegiones();
 		agregarTiposPlaza();
 		agregarRoles();
-		agregarFeatures();
+		agregarEndpoints();
 		agregarPuestos();
 		agregarEstados();
 		agregarDirecciones();
@@ -95,19 +94,19 @@ public class SidApplication {
 		repositorioRol.saveAll(roles);
 	}
 
-	public void agregarFeatures() {
+	public void agregarEndpoints() {
 		var listaRoles = Stream.of(Rol.builder().idRol("ADMIN").descripcion("Administrador").build(),
 				Rol.builder().idRol("RH1").descripcion("Recursos Humanos Nivel 1").build())
 				.collect(Collectors.toSet());
 
 		var rolRh2 = Rol.builder().idRol("RH2").descripcion("Recursos Humanos Nivel 2").build();
-		var features = Stream.of(
-						Features.builder().metodoHttp(MetodosHttpEnum.POST).endpoint("/api/empleados").description("Obtener todos los empleados").roles(listaRoles),
-						Features.builder().metodoHttp(MetodosHttpEnum.GET).endpoint("/api/empleados").description("Crear un empleado").roles(Set.of(rolRh2))
+		var endpoints = Stream.of(
+						Endpoint.builder().metodoHttp(MetodosHttpEnum.GET).rutaEndpoint("/api/empleados").description("Obtener todos los empleados").roles(listaRoles),
+						Endpoint.builder().metodoHttp(MetodosHttpEnum.POST).rutaEndpoint("/api/empleados").description("Crear un empleado").roles(Set.of(rolRh2))
 				)
-				.map(Features.FeaturesBuilder::build)
+				.map(Endpoint.EndpointBuilder::build)
 				.toList();
-		repositorioFeatures.saveAll(features);
+		repositorioEndpoint.saveAll(endpoints);
 	}
 
 	public void agregarRegiones() {
