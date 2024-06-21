@@ -54,7 +54,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
-        var error = new ErrorDto("ERROR_ACCESS_DENIED", "No tienes permisos para acceder a este recurso");
+        var error = new ErrorDto("ERROR_ACCESS_DENIED", ex.getMessage());
         log.info("Acceso denegado: {}", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
