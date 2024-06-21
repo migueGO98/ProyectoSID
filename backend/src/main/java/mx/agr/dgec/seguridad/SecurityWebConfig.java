@@ -1,8 +1,7 @@
-package mx.agr.dgec.config;
+package mx.agr.dgec.seguridad;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mx.agr.dgec.controladores.advice.SecurityExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -17,20 +16,15 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true
-)
+@EnableMethodSecurity
 @RequiredArgsConstructor
 @Slf4j
-public class SecurityWeb {
+public class SecurityWebConfig {
 
     private final SecurityExceptionHandler securityExceptionHandler;
 
@@ -69,7 +63,7 @@ public class SecurityWeb {
             }
             authorities.addAll(
                     Stream.of(roles.split(","))
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.trim()))
+                            .map(role -> new SimpleGrantedAuthority(role.trim()))
                             .toList()
             );
             log.info("Permitiendo acceso al empleado {} con roles {}", idEmpleado, authorities);

@@ -1,4 +1,4 @@
-package mx.agr.dgec.config;
+package mx.agr.dgec.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.core.jackson.ModelResolver;

@@ -1,4 +1,4 @@
-package mx.agr.dgec.controladores.advice;
+package mx.agr.dgec.seguridad;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
