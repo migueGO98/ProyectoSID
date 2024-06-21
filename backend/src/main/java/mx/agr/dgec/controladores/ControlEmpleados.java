@@ -1,6 +1,5 @@
 package mx.agr.dgec.controladores;
 
-import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import mx.agr.dgec.enums.MetodosHttpEnum;
 import mx.agr.dgec.generate.api.EmpleadosApi;
