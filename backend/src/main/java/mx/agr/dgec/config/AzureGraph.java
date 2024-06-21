@@ -1,4 +1,4 @@
-package mx.agr.dgec.configs;
+package mx.agr.dgec.config;
 
 import com.azure.identity.ClientSecretCredentialBuilder;
 import com.microsoft.graph.serviceclient.GraphServiceClient;

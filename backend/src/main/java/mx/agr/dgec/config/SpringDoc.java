@@ -1,4 +1,4 @@
-package mx.agr.dgec.configs;
+package mx.agr.dgec.config;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
