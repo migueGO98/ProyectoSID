@@ -16,9 +16,8 @@ public class ServicioEndpoints {
     private final RepositorioEndpoint repositorioEndpoint;
 
     public Set<String> obtenerRolesPermitidosDelEndpoint(MetodosHttpEnum metodoHttp, String endPoint) {
-        var rolesPermitidos = repositorioEndpoint.findIdRolesByMetodoHttpAndEndpoint(metodoHttp, endPoint);
-        log.info("Se recuperaron los roles permitidos para el método {} y la ruta {}", metodoHttp, endPoint);
-        log.info("Roles permitidos: {}", rolesPermitidos);
-        return rolesPermitidos;
+        var rolesPermitidosEndpoint = repositorioEndpoint.findIdRolesByMetodoHttpAndEndpoint(metodoHttp, endPoint);
+        log.info("Se recuperaron los roles permitidos para el endpoint {} {}", metodoHttp, endPoint);
+        return (rolesPermitidosEndpoint != null && !rolesPermitidosEndpoint.isEmpty()) ? rolesPermitidosEndpoint : Set.of();
     }
 }

@@ -25,8 +25,12 @@ public class ServicioAzureGraph {
     private final GraphServiceClient graphClient;
 
     @Value("${azure.ad.b2c.tenant}")
-    private String TENANT_ID;
+    private String tenantId;
 
+    /*
+    * La documentacion de Azure B2C con Graph, indica que para agregar un atributo personalizado a un usuario,
+    * se debe agregar un prefijo 'extension_' seguido de un GUID que se obtiene de la aplicacion de extensiones
+    * */
     private static final String EXTENSION_CLIENT_ID = "extension_2d2c645787b3430e9749c9546ace41d4_";
 
 
@@ -43,7 +47,7 @@ public class ServicioAzureGraph {
         nuevoUsuario.setSurname(empleado.concatenarApellidos());
 
         ObjectIdentity identidad = new ObjectIdentity();
-        identidad.setIssuer(TENANT_ID);
+        identidad.setIssuer(tenantId);
         identidad.setSignInType("emailAddress");
         identidad.setIssuerAssignedId(empleado.getCorreoElectronico());
         nuevoUsuario.setIdentities(List.of(identidad));
@@ -85,7 +89,7 @@ public class ServicioAzureGraph {
         usuarios.forEach(usuario -> log.info("User: {}", usuario.getUserType()));
     }
 
-    // Genera una contraseña temporal para el usuario = Temporal + {2 últimos dígitos del año actual}
+    // Genera una contraseña temporal para el usuario, la contraseña es "Temporal" + ultimos 2 digitos del año actual
     private String generarPassword() {
         return "Temporal" + String.valueOf(java.time.LocalDate.now().getYear()).substring(2);
     }
