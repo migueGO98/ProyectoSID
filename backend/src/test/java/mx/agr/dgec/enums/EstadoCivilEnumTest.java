@@ -1,4 +1,4 @@
-package mx.agr.dgec.SID.enums;
+package mx.agr.dgec.enums;
 
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.generate.model.EstadoCivilEnumDto;

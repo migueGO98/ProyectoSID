@@ -1,4 +1,4 @@
-package mx.agr.dgec.SID;
+package mx.agr.dgec;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

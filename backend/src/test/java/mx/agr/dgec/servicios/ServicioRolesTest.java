@@ -1,4 +1,4 @@
-package mx.agr.dgec.SID.servicios;
+package mx.agr.dgec.servicios;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

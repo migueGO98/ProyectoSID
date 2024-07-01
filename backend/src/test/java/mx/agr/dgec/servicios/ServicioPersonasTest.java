@@ -1,4 +1,4 @@
-package mx.agr.dgec.SID.servicios;
+package mx.agr.dgec.servicios;
 
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GeneroEnum;

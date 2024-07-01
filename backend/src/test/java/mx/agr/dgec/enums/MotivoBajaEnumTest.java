@@ -1,4 +1,4 @@
-package mx.agr.dgec.SID.enums;
+package mx.agr.dgec.enums;
 
 import mx.agr.dgec.enums.GeneroEnum;
 import mx.agr.dgec.enums.MotivoBajaEnum;
