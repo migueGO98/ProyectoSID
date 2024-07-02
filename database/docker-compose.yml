@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PGPASSWORD}
       POSTGRES_DB: ${DB_PGDATABASE}
     ports:
-      - "5432:5432"
+      - ${DB_PGPORT}:${DB_PGPORT}
     volumes:
       - ./postgres_volume:/var/lib/postgresql/data
 
