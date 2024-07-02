@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# No es necesario esto debido a que el principal está en la carpeta raíz
+# es necesario para la imagen de docker, pero se copia en la carpeta backend
+# cuando se crea la imagen con Integracion Continua
+api-sid.yml
