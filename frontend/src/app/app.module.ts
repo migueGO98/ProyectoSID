@@ -10,15 +10,12 @@ import { ApiModule } from './generate/openapi';
 import { HttpClientModule } from '@angular/common/http';
 import { NewEmpleadoModule } from './features/crearNewEmpleado/new-empleado.module';
 import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.component';
-import { AuthModule } from '@auth0/auth0-angular';
-import { environment } from './environments/environment.development';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     ApiModule,
     AppRoutingModule,
-    AuthModule.forRoot({ ...environment.auth }),
     BrowserAnimationsModule,
     BrowserModule,
     HomeModule,
