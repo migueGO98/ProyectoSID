@@ -2,3 +2,6 @@
 .idea
 .DS_Store
 .vscode
+
+postgres_volume/
+pgadmin_volume/

@@ -1,0 +1,51 @@
+services:
+
+  database:
+    container_name: ${DB_PGHOST}
+    image: postgres:16.3
+    #restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PGPASSWORD}
+      POSTGRES_DB: ${DB_PGDATABASE}
+    ports:
+      - ${DB_PGPORT}:${DB_PGPORT}
+    volumes:
+      - ./postgres_volume:/var/lib/postgresql/data
+
+
+  # Construye la imagen y la usa para crear el contenedor
+  backend-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      tags:
+        - backend-sid:0.0.1
+      args:
+        - DB_PGHOST=${DB_PGHOST}
+        - DB_PGDATABASE=${DB_PGDATABASE}
+        - DB_PGPASSWORD=${DB_PGPASSWORD}
+        - DB_PGPORT=${DB_PGPORT}
+        - DB_PGUSER=${DB_PGUSER}
+        - AZURE_TENANT_CLIENT_SECRET=${AZURE_TENANT_CLIENT_SECRET}
+    depends_on:
+        - database
+    container_name: backend_sid
+    ports:
+      - 8080:8080
+    environment:
+      DB_PGHOST: ${DB_PGHOST}
+      DB_PGDATABASE: ${DB_PGDATABASE}
+      DB_PGPASSWORD: ${DB_PGPASSWORD}
+      DB_PGPORT: ${DB_PGPORT}
+      DB_PGUSER: ${DB_PGUSER}
+      AZURE_TENANT_CLIENT_SECRET: ${AZURE_TENANT_CLIENT_SECRET}
+
+  #pgadmin:
+    #image: dpage/pgadmin4
+    #container_name: pgadmin4_container
+    #restart: always
+    #ports:
+      #- "8888:80"
+    #environment:
+      #PGADMIN_DEFAULT_EMAIL: miguel@correo.mx
+      #PGADMIN_DEFAULT_PASSWORD: 1234

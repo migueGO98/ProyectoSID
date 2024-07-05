@@ -10,6 +10,7 @@ WORKDIR /app/backend
 # Copiar los archivos necesarios para instalar las dependencias
 COPY pom.xml mvnw mvnw.cmd ./
 COPY .mvn .mvn
+COPY api-sid.yml .
 
 # Descargar todas las dependencias sin construir el archivo JAR final
 RUN ./mvnw dependency:go-offline
@@ -17,11 +18,8 @@ RUN ./mvnw dependency:go-offline
 # Copiar el código fuente
 COPY src ./src
 
-# Compilar y ejecutar pruebas unitarias
-#RUN ./mvnw clean test
-
-# Compilar y empaquetar la aplicación
-RUN ./mvnw clean package -DskipTests
+# Compilar, testear y empaquetar la aplicación
+RUN ./mvnw clean package
 
 
 
@@ -29,5 +27,5 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:17.0.11_9-jre-alpine
 WORKDIR /app
 EXPOSE 8080
-COPY --from=build /app/backend/target/*.jar app.jar
+COPY --from=build /app/backend/target/*.jar ./app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
