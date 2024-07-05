@@ -1,16 +1,16 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_PGHOST}:${DB_PGPORT}/${DB_PGDATABASE}
-    driver-class-name: org.postgresql.Driver
-    username: ${DB_PGUSER}
-    password: ${DB_PGPASSWORD}
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: create
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -28,7 +28,7 @@ azure:
     b2c:
       tenant: agriculturadgec.onmicrosoft.com
       client-id: 7a8d7a23-e2a8-4d6b-900c-c26391441802
-      client-secret: ${AZURE_TENANT_CLIENT_SECRET} # Tiene una fecha de expiración
+      client-secret: client-secret
 
 springdoc:
   api-docs:

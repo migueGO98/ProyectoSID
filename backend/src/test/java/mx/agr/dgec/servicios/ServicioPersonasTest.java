@@ -3,7 +3,6 @@ package mx.agr.dgec.servicios;
 import mx.agr.dgec.enums.EstadoCivilEnum;
 import mx.agr.dgec.enums.GeneroEnum;
 import mx.agr.dgec.generate.model.RegistrosDto;
-import mx.agr.dgec.servicios.ServicioPersonas;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

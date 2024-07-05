@@ -1,7 +1,5 @@
 package mx.agr.dgec.enums;
 
-import mx.agr.dgec.enums.GeneroEnum;
-import mx.agr.dgec.enums.MotivoBajaEnum;
 import mx.agr.dgec.generate.model.GeneroEnumDto;
 import mx.agr.dgec.generate.model.MotivoBajaEnumDto;
 import org.junit.jupiter.api.Test;
