@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './features/home/home.module';
-import { ApiModule } from './generate/openapi';
+import { ApiModule, BASE_PATH } from './generate/openapi';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NewEmpleadoModule } from './features/crearNewEmpleado/new-empleado.module';
 import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.component';
+import { environment } from './environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
@@ -21,8 +23,9 @@ import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.comp
     HomeModule,
     HttpClientModule,
     NewEmpleadoModule,
+    SharedModule,
   ],
-  providers: [],
+  providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

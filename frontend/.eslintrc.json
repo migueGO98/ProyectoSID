@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "src/generated/**"],
+  "ignorePatterns": ["projects/**/*", "src/app/generate/"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "rules": {
     "no-console": "warn",
