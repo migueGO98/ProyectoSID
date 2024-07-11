@@ -7,6 +7,8 @@ import mx.agr.dgec.servicios.ServicioPersonas;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -25,5 +27,15 @@ public class ControlPersonas implements PersonasApi {
     public ResponseEntity<List<RegistrosDto>> recuperarGeneros() {
         var generos = servicioPersonas.recuperarGeneros();
         return ResponseEntity.status(HttpStatus.OK).body(generos);
+    }
+
+    @Override
+    public ResponseEntity<Void> subirDocumentos(String id, MultipartFile ine, MultipartFile actaNacimiento, MultipartFile numeroSeguroSocial, MultipartFile curp, MultipartFile rfc, MultipartFile comprobanteDomicilio, List<MultipartFile> titulosProfesionales, List<MultipartFile> cedulasProfesionales) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> recuperarDocumentos(String id) {
+        return null;
     }
 }

@@ -27,6 +27,141 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
+  /api/personas/estadosCiviles:
+    get:
+      summary: Recupera los estados civiles de una persona
+      tags:
+        - Personas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: 36afykzvneb21
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarEstadosCiviles
+      x-stoplight:
+        id: j8e12vndanrtq
+      description: Recupera los estados civiles de una persona permitidos por el sistema
+  /api/personas/generos:
+    get:
+      summary: Recuperar generos para una persona
+      tags:
+        - Personas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: is13k7cz5nxkw
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarGeneros
+      x-stoplight:
+        id: q88dlsgtsqtn2
+      description: Recupera los géneros de una persona permitidos por el sistema
+  '/api/persona/{id}/documentos':
+    post:
+      summary: Subir documentos persona
+      tags:
+        - Personas
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: subirDocumentos
+      x-stoplight:
+        id: 54w1jjcfohb7k
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentosPersona'
+      description: Sube los documentos oficiales de una persona
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID de la persona
+    get:
+      summary: Recuperar documentos persona
+      tags:
+        - Personas
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarDocumentos
+      x-stoplight:
+        id: 6nobuukzgykuq
+      description: Recupera los documentos oficiales de una persona
   /api/empleados:
     post:
       summary: Crear un nuevo empleado
@@ -106,6 +241,38 @@ paths:
       x-stoplight:
         id: o3kbw90rqp4if
       description: Recupera todos los empleados registrados
+  /api/empleados/motivosBaja:
+    get:
+      summary: Recuperar motivos de baja
+      tags:
+        - Empleados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registros'
+                  x-stoplight:
+                    id: hchhjxjdjf6f5
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarMotivosBaja
+      x-stoplight:
+        id: 76bkg7log5l7o
+      description: Recupera los motivos de bajas de un empleado permitidos por el sistema
   /api/escolaridades/niveles:
     get:
       summary: Recuperar niveles escolares
@@ -171,102 +338,6 @@ paths:
         id: bb3c850gnrndh
       description: 'Recupera los estados de los niveles escolares permitidos por el sistema '
     parameters: []
-  /api/personas/generos:
-    get:
-      summary: Recuperar generos para una persona
-      tags:
-        - Personas
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Registros'
-                  x-stoplight:
-                    id: is13k7cz5nxkw
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: recuperarGeneros
-      x-stoplight:
-        id: q88dlsgtsqtn2
-      description: Recupera los géneros de una persona permitidos por el sistema
-  /api/personas/estadosCiviles:
-    get:
-      summary: Recupera los estados civiles de una persona
-      tags:
-        - Personas
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Registros'
-                  x-stoplight:
-                    id: 36afykzvneb21
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: recuperarEstadosCiviles
-      x-stoplight:
-        id: j8e12vndanrtq
-      description: Recupera los estados civiles de una persona permitidos por el sistema
-  /api/empleados/motivosBaja:
-    get:
-      summary: Recuperar motivos de baja
-      tags:
-        - Empleados
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Registros'
-                  x-stoplight:
-                    id: hchhjxjdjf6f5
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-      operationId: recuperarMotivosBaja
-      x-stoplight:
-        id: 76bkg7log5l7o
-      description: Recupera los motivos de bajas de un empleado permitidos por el sistema
   /api/roles:
     get:
       summary: Recuperar roles
@@ -813,6 +884,72 @@ components:
           type: string
           x-stoplight:
             id: 5fb5v3omhsc6j
+    DocumentosPersona:
+      title: DocumentosPersona
+      x-stoplight:
+        id: lq7eq7hkx1vcv
+      type: object
+      required:
+        - ine
+        - actaNacimiento
+        - numeroSeguroSocial
+        - curp
+        - rfc
+        - comprobanteDomicilio
+        - titulosProfesionales
+      properties:
+        ine:
+          type: string
+          x-stoplight:
+            id: rmqjl06k10r6h
+          format: binary
+        actaNacimiento:
+          type: string
+          x-stoplight:
+            id: vnfb86q7vclpl
+          format: binary
+        numeroSeguroSocial:
+          type: string
+          x-stoplight:
+            id: ad0vp7fjj6aby
+          format: binary
+        curp:
+          type: string
+          x-stoplight:
+            id: v61u8mf8c07im
+          format: binary
+        rfc:
+          type: string
+          x-stoplight:
+            id: mbm0wj6xv0383
+          format: binary
+        comprobanteDomicilio:
+          type: string
+          x-stoplight:
+            id: oxb3sgzkwf5cs
+          format: binary
+        titulosProfesionales:
+          type: array
+          x-stoplight:
+            id: mkarj8x7wlz7c
+          minItems: 1
+          maxItems: 10
+          items:
+            x-stoplight:
+              id: i6tf3j1whpm5o
+            type: string
+            format: binary
+        cedulasProfesionales:
+          type: array
+          x-stoplight:
+            id: n4d3oxqw5eqpc
+          minItems: 0
+          maxItems: 10
+          items:
+            x-stoplight:
+              id: yjzkwgpocadwx
+            type: string
+            format: binary
   requestBodies: {}
   responses: {}
   securitySchemes:

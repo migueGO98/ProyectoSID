@@ -41,6 +41,49 @@ import jakarta.annotation.Generated;
 public interface PersonasApi {
 
     /**
+     * GET /api/persona/{id}/documentos : Recuperar documentos persona
+     * Recupera los documentos oficiales de una persona
+     *
+     * @param id ID de la persona (required)
+     * @return OK (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     */
+    @Operation(
+        operationId = "recuperarDocumentos",
+        summary = "Recuperar documentos persona",
+        description = "Recupera los documentos oficiales de una persona",
+        tags = { "Personas" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/api/persona/{id}/documentos",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<Void> recuperarDocumentos(
+        
+@Parameter(name = "id", description = "ID de la persona", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
+    );
+
+
+    /**
      * GET /api/personas/estadosCiviles : Recupera los estados civiles de una persona
      * Recupera los estados civiles de una persona permitidos por el sistema
      *
@@ -115,6 +158,66 @@ public interface PersonasApi {
     
     ResponseEntity<List<RegistrosDto>> recuperarGeneros(
         
+    );
+
+
+    /**
+     * POST /api/persona/{id}/documentos : Subir documentos persona
+     * Sube los documentos oficiales de una persona
+     *
+     * @param id ID de la persona (required)
+     * @param ine  (required)
+     * @param actaNacimiento  (required)
+     * @param numeroSeguroSocial  (required)
+     * @param curp  (required)
+     * @param rfc  (required)
+     * @param comprobanteDomicilio  (required)
+     * @param titulosProfesionales  (required)
+     * @param cedulasProfesionales  (optional)
+     * @return Created (status code 201)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     */
+    @Operation(
+        operationId = "subirDocumentos",
+        summary = "Subir documentos persona",
+        description = "Sube los documentos oficiales de una persona",
+        tags = { "Personas" },
+        responses = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/api/persona/{id}/documentos",
+        produces = { "application/json" },
+        consumes = { "multipart/form-data" }
+    )
+    
+    ResponseEntity<Void> subirDocumentos(
+        
+@Parameter(name = "id", description = "ID de la persona", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+        @Parameter(name = "ine", description = "", required = true) @RequestPart(value = "ine", required = true) MultipartFile ine,
+        @Parameter(name = "actaNacimiento", description = "", required = true) @RequestPart(value = "actaNacimiento", required = true) MultipartFile actaNacimiento,
+        @Parameter(name = "numeroSeguroSocial", description = "", required = true) @RequestPart(value = "numeroSeguroSocial", required = true) MultipartFile numeroSeguroSocial,
+        @Parameter(name = "curp", description = "", required = true) @RequestPart(value = "curp", required = true) MultipartFile curp,
+        @Parameter(name = "rfc", description = "", required = true) @RequestPart(value = "rfc", required = true) MultipartFile rfc,
+        @Parameter(name = "comprobanteDomicilio", description = "", required = true) @RequestPart(value = "comprobanteDomicilio", required = true) MultipartFile comprobanteDomicilio,
+        @Parameter(name = "titulosProfesionales", description = "", required = true) @RequestPart(value = "titulosProfesionales", required = true) List<MultipartFile> titulosProfesionales,
+        @Parameter(name = "cedulasProfesionales", description = "") @RequestPart(value = "cedulasProfesionales", required = false) List<MultipartFile> cedulasProfesionales
     );
 
 }
