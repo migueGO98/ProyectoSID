@@ -29,6 +29,13 @@
 		<junit.version>5.9.3</junit.version>
 		<mockito.version>5.10.0</mockito.version>
 		<postgresql.version>42.6.1</postgresql.version>
+		<jacoco.version>0.8.12</jacoco.version>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.junit.reportsPath>${project.basedir}/../target/</sonar.junit.reportsPath>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.tests>${project.basedir}/src/test/</sonar.tests>
+		<sonar.language>java</sonar.language>
 	</properties>
 
 	<dependencies>
@@ -161,6 +168,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -197,6 +210,32 @@
 						<!-- other annotation processors -->
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>mx/agr/dgec/generate/**</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
