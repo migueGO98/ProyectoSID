@@ -1,6 +1,5 @@
 package mx.agr.dgec.enums;
 
-import mx.agr.dgec.enums.NivelesEscolaridadesEnum;
 import mx.agr.dgec.generate.model.NivelesEscolaridadesEnumDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
