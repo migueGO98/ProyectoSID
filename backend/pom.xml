@@ -30,10 +30,10 @@
 		<mockito.version>5.10.0</mockito.version>
 		<postgresql.version>42.6.1</postgresql.version>
 		<jacoco.version>0.8.12</jacoco.version>
+		<sonar.plugin.version.maven>3.9.1.2184</sonar.plugin.version.maven>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.junit.reportsPath>${project.basedir}/../target/</sonar.junit.reportsPath>
-		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.tests>${project.basedir}/src/test/</sonar.tests>
 		<sonar.language>java</sonar.language>
 	</properties>
@@ -171,7 +171,7 @@
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>${jacoco.version}</version>
+			<version>0.8.12</version>
 		</dependency>
 
 	</dependencies>
@@ -213,6 +213,12 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>${sonar.plugin.version.maven}</version>
+			</plugin>
+
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
@@ -230,6 +236,9 @@
 							<goal>report</goal>
 						</goals>
 						<configuration>
+							<formats>
+								<format>XML</format>
+							</formats>
 							<excludes>
 								<exclude>mx/agr/dgec/generate/**</exclude>
 							</excludes>
