@@ -1,0 +1,37 @@
+<form [formGroup]="formDomicilio" (ngSubmit)="onSave()">
+  <div class="flex flex-column gap-2">
+    <label for="calle">Calle</label>
+    <input type="text" pInputText id="calle" formControlName="calle" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="codigoPostal">Codigo postal</label>
+    <p-inputMask mask="99999" placeholder="01000" formControlName="telefcodigoPostalonoPersonal" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="colonia">Colonia</label>
+    <input pInputText id="colonia" formControlName="colonia" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="municipio">Municipio</label>
+    <input pInputText id="municipio" formControlName="municipio" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="ciudad">Ciudad</label>
+    <input pInputText id="ciudad" formControlName="ciudad" />
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="estado">Estado</label>
+    <p-dropdown
+      formControlName="estado"
+      [options]="estados"
+      placeholder="Selecciona un estado"
+      optionLabel="name" />
+  </div>
+
+  <p-button type="submit" label="Siguiente" />
+</form>

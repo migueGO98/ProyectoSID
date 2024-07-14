@@ -10,6 +10,6 @@ import { ProgressSpinnerComponent } from './component/progress-spinner/progress-
 @NgModule({
   declarations: [MenuBarComponent, ProgressSpinnerComponent],
   imports: [CommonModule, MenubarModule, ProgressSpinnerModule],
-  exports: [MenuBarComponent],
+  exports: [MenuBarComponent, ProgressSpinnerComponent],
 })
 export class SharedModule {}

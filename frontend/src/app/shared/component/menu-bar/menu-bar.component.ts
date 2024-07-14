@@ -18,14 +18,17 @@ export class MenuBarComponent implements OnInit {
           {
             label: 'Nuevo empleado',
             icon: 'pi pi-fw pi-user-plus',
+            routerLink: '/empleados/crear-empleado',
           },
           {
             label: 'Dar de baja empleado',
             icon: 'pi pi-fw pi-user-minus',
+            routerLink: '/empleados/dar-baja-empleado',
           },
           {
             label: 'Datos de empleados',
             icon: 'pi pi-fw pi-users',
+            routerLink: '/empleados/datos-empleados',
           },
         ],
       },

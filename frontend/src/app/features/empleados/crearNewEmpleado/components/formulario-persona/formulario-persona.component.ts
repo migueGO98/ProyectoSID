@@ -3,11 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Registros } from 'src/app/generate/openapi';
 
 @Component({
-  selector: 'app-formulario',
-  templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.sass'],
+  selector: 'app-formulario-persona',
+  templateUrl: './formulario-persona.component.html',
+  styleUrls: ['./formulario-persona.component.sass'],
 })
-export class FormularioComponent implements OnInit {
+export class FormularioPersonaComponent implements OnInit {
   private fb = inject(FormBuilder);
   public generos = signal<Registros[] | undefined>(undefined);
   public estadosCiviles = signal<Registros[] | undefined>(undefined);
@@ -36,20 +36,20 @@ export class FormularioComponent implements OnInit {
   }
 
   public myForm: FormGroup = this.fb.group({
-    nombre: ['', Validators.required],
-    apellidoPaterno: ['', Validators.required],
+    nombre: ['', [Validators.required]],
+    apellidoPaterno: ['', [Validators.required]],
     apellidoMaterno: [''],
-    curp: ['', Validators.required],
-    rfc: ['', Validators.required],
+    curp: ['', [Validators.required]],
+    rfc: ['', [Validators.required]],
     numeroSeguroSocial: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    fechaNacimiento: new FormControl<Date | null>(null),
-    genero: new FormControl<Registros | null>(null),
-    telefonoPersonal: ['', Validators.required],
+    fechaNacimiento: [new FormControl<Date | null>(null), [Validators.required]],
+    genero: [new FormControl<Registros | null>(null), [Validators.required]],
+    telefonoPersonal: ['', [Validators.required]],
     correoElectronicoPersonal: ['', [Validators.required, Validators.email]],
-    estadoCivil: new FormControl<Registros | null>(null),
+    estadoCivil: [new FormControl<Registros | null>(null), [Validators.required]],
     hijos: new FormControl(),
-    contactoEmergenciaNombre: ['', Validators.required],
-    contactoEmergenciaTelefono: ['', Validators.required],
+    contactoEmergenciaNombre: ['', [Validators.required]],
+    contactoEmergenciaTelefono: ['', [Validators.required]],
   });
 
   onSave() {
