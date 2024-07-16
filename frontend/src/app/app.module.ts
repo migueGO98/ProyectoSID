@@ -16,6 +16,7 @@ import { WelcomeModule } from './features/welcome/welcome.module';
 import { SharedModule } from './shared/shared.module';
 import { EmpleadosModule } from './features/empleados/empleados.module';
 import { MessageService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
@@ -30,7 +31,7 @@ import { MessageService } from 'primeng/api';
     SharedModule,
     WelcomeModule,
   ],
-  providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }, MessageService],
+  providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }, DatePipe, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
