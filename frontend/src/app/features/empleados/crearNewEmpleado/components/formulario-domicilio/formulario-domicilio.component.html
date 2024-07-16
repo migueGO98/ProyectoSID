@@ -6,7 +6,7 @@
 
   <div class="flex flex-column gap-2">
     <label for="codigoPostal">Codigo postal</label>
-    <p-inputMask mask="99999" placeholder="01000" formControlName="telefcodigoPostalonoPersonal" />
+    <p-inputMask mask="99999" placeholder="01000" formControlName="codigoPostal" />
   </div>
 
   <div class="flex flex-column gap-2">
@@ -28,7 +28,7 @@
     <label for="estado">Estado</label>
     <p-dropdown
       formControlName="estado"
-      [options]="estados"
+      [options]="estados()"
       placeholder="Selecciona un estado"
       optionLabel="name" />
   </div>

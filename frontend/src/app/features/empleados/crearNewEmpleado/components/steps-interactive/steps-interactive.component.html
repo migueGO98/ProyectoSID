@@ -8,7 +8,7 @@
 </div>
 
 <div *ngIf="activeIndex() === 0">
-  <app-formulario-persona />
+  <app-formulario-persona (personaForm)="actualizarValoresPersona($event)" />
 </div>
 <div *ngIf="activeIndex() === 1">
   <app-formulario-domicilio />
