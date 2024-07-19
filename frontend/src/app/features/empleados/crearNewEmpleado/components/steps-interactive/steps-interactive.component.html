@@ -8,17 +8,34 @@
 </div>
 
 <div *ngIf="activeIndex() === 0">
-  <app-formulario-persona (personaForm)="actualizarValoresPersona($event)" />
+  <app-formulario-persona
+    [generos]="generos"
+    [estadosCiviles]="estadosCiviles"
+    [inputFormPersona]="formPersona"
+    (emmitFormPersona)="emmitFormPersona($event)"
+    (activeIndex)="onActiveIndexChange($event)" />
 </div>
+
 <div *ngIf="activeIndex() === 1">
-  <app-formulario-domicilio />
+  <app-formulario-domicilio
+    (activeIndex)="onActiveIndexChange($event)"
+    (formularioDomicilio)="emitirFormularioDomicilioNuevaPersona($event)" />
 </div>
+
 <div *ngIf="activeIndex() === 2">
-  <app-formulario-escolaridad />
+  <app-formulario-escolaridad
+    [nivelesEscolaridades]="nivelesEscolaridades"
+    [estadosNivelesEscolaridades]="estadosNivelesEscolaridades"
+    (activeIndex)="onActiveIndexChange($event)" />
 </div>
+
 <div *ngIf="activeIndex() === 3">
-  <app-formulario-empleado />
+  <app-formulario-empleado
+    [tiposPlazas]="tiposPlazas"
+    [roles]="roles"
+    (activeIndex)="onActiveIndexChange($event)" />
 </div>
+
 <div *ngIf="activeIndex() === 4">
-  <app-confirmacion-new-empleado />
+  <app-confirmacion-new-empleado (activeIndex)="onActiveIndexChange($event)" />
 </div>

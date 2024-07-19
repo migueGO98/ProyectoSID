@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ApiModule, BASE_PATH } from './generate/openapi';
+import { ApiModule, BASE_PATH, Configuration } from './generate/openapi';
 
 import { NotFoundPageComponent } from './core/pages/notFound/not-found-page.component';
 
@@ -17,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
 import { EmpleadosModule } from './features/empleados/empleados.module';
 import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
+import { ServicioAuth } from './core/services/servicio-auth.service';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
@@ -31,7 +32,22 @@ import { DatePipe } from '@angular/common';
     SharedModule,
     WelcomeModule,
   ],
-  providers: [{ provide: BASE_PATH, useValue: environment.apiBasePath }, DatePipe, MessageService],
+  providers: [
+    { provide: BASE_PATH, useValue: environment.apiBasePath },
+    DatePipe,
+    MessageService,
+    ServicioAuth,
+    {
+      provide: Configuration,
+      useFactory: (authService: ServicioAuth) =>
+        new Configuration({
+          basePath: environment.apiBasePath,
+          accessToken: authService.getAccessToken.bind(authService),
+        }),
+      deps: [ServicioAuth],
+      multi: false,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

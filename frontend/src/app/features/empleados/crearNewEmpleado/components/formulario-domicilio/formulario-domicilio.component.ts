@@ -1,5 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Domicilio } from 'src/app/generate/openapi';
 
 import { Estado } from 'src/app/interfaces/public.interface';
 
@@ -12,6 +13,11 @@ export class FormularioDomicilioComponent implements OnInit {
   private fb = inject(FormBuilder);
 
   public estados = signal<Estado[] | undefined>(undefined);
+
+  @Output()
+  public formularioDomicilio = new EventEmitter<Domicilio>();
+  @Output()
+  public activeIndex = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.estados.set([
@@ -51,15 +57,31 @@ export class FormularioDomicilioComponent implements OnInit {
   }
 
   public formDomicilio: FormGroup = this.fb.group({
-    calle: ['', [Validators.required]],
-    codigoPostal: ['', [Validators.required]],
-    colonia: ['', [Validators.required]],
-    municipio: ['', [Validators.required]],
-    ciudad: ['', [Validators.required]],
+    calle: ['T', [Validators.required]],
+    codigoPostal: [null, [Validators.required]],
+    colonia: ['LP', [Validators.required]],
+    municipio: ['TL', [Validators.required]],
+    ciudad: ['CD', [Validators.required]],
     estado: [new FormControl<Estado | null>(null), [Validators.required]],
   });
 
   onSave() {
-    console.log(this.formDomicilio.value);
+    this.formularioDomicilio.emit({
+      calle: this.formDomicilio.value.calle,
+      codigoPostal: this.formDomicilio.value.codigoPostal,
+      colonia: this.formDomicilio.value.colonia,
+      municipio: this.formDomicilio.value.municipio,
+      ciudad: this.formDomicilio.value.ciudad,
+      estado: this.formDomicilio.value.estado.code,
+    });
+    this.nextStep();
+  }
+
+  nextStep() {
+    this.activeIndex.emit(2);
+  }
+
+  previousStep() {
+    this.activeIndex.emit(0);
   }
 }

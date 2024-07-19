@@ -1,4 +1,4 @@
-<form [formGroup]="formularioPersona" (ngSubmit)="onSaveDatosPersona()">
+<form [formGroup]="formPersona" (ngSubmit)="onSaveDatosPersona()">
   <div class="flex flex-column gap-2">
     <label for="nombre">Nombre</label>
     <input type="text" pInputText id="nombre" formControlName="nombre" />
@@ -35,7 +35,7 @@
     <label for="fechaNacimiento">Fecha de Nacimiento</label>
     <p-calendar
       [showIcon]="true"
-      dateFormat="dd-mm-yy"
+      dateFormat="yy-mm-dd"
       [readonlyInput]="true"
       [showTime]="false"
       formControlName="fechaNacimiento" />
@@ -101,5 +101,5 @@
       formControlName="contactoEmergenciaTelefono" />
   </div>
 
-  <p-button type="submit" label="Siguiente" />
+  <p-button type="submit" label="Siguiente" (click)="nextStep()" />
 </form>

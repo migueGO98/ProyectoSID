@@ -30,8 +30,10 @@
       formControlName="estado"
       [options]="estados()"
       placeholder="Selecciona un estado"
+      optionValue="code"
       optionLabel="name" />
   </div>
 
+  <p-button type="button" label="Regresar" (onClick)="previousStep()" />
   <p-button type="submit" label="Siguiente" />
 </form>
