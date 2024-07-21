@@ -1,3 +1,48 @@
-<p>formulario-escolaridad works!</p>
-<p-button type="button" label="Regresar" (onClick)="previousStep()" />
-<p-button type="submit" label="Siguiente" />
+<form [formGroup]="formEscolaridad" (ngSubmit)="onSubmit()">
+  <div class="flex flex-column gap-2">
+    <label for="nivel">Nivel escolar</label>
+    <p-dropdown
+      [options]="nivelesEscolaridades()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el nivel escolar"
+      formControlName="nivel" />
+    <span *ngIf="isValidField('nivel')" class="p-error block">
+      {{ getErrorMessage('nivel') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="carrera">Nombre completo de la carrera</label>
+    <input pInputText id="carrera" formControlName="carrera" />
+    <span *ngIf="isValidField('carrera')" class="p-error block">
+      {{ getErrorMessage('carrera') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="estadoNivel">Estado del nivel de estudios</label>
+    <p-dropdown
+      [options]="estadosNivelesEscolaridades()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el estado civil"
+      formControlName="estadoNivel" />
+    <span *ngIf="isValidField('estadoNivel')" class="p-error block">
+      {{ getErrorMessage('estadoNivel') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="cedulaProfesional">Número de cedula profesional</label>
+    <input pInputText id="cedulaProfesional" formControlName="cedulaProfesional" />
+    <small id="cedulaProfesional-help"
+      >Ignorar campo en caso de no contar con cedula profesional</small
+    >
+    <span *ngIf="isValidField('cedulaProfesional')" class="p-error block">
+      {{ getErrorMessage('cedulaProfesional') }}
+    </span>
+  </div>
+
+  <button mat-raised-button type="submit" color="primary">Siguiente</button>
+</form>

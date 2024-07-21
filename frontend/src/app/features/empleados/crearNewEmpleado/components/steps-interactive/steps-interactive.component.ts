@@ -1,25 +1,45 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { Domicilio, Escolaridad, Persona, Registros } from 'src/app/generate/openapi';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  signal,
+  ViewChild,
+} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Domicilio, Escolaridad, NewEmpleado, Persona, Registros, Rol } from 'src/app/generate/openapi';
 import { DatosEmpleado } from 'src/app/interfaces/public.interface';
+import { FormularioPersonaComponent } from '../formulario-persona/formulario-persona.component';
+import { MatStepper } from '@angular/material/stepper';
+import { FormularioDomicilioComponent } from '../formulario-domicilio/formulario-domicilio.component';
+import { FormularioEscolaridadComponent } from '../formulario-escolaridad/formulario-escolaridad.component';
+import { FormularioEmpleadoComponent } from '../formulario-empleado/formulario-empleado.component';
+import { ConfirmacionNewEmpleadoComponent } from '../confirmacion-new-empleado/confirmacion-new-empleado.component';
 
 @Component({
   selector: 'app-steps-interactive',
   templateUrl: './steps-interactive.component.html',
   styleUrls: ['./steps-interactive.component.sass'],
 })
-export class StepsInteractiveComponent {
-  public items = signal([
-    { label: 'Datos Generales' },
-    { label: 'Domicilio' },
-    { label: 'Escolaridad' },
-    { label: 'Empleado' },
-    { label: 'Confirmacion' },
-  ]);
+export class StepsInteractiveComponent implements AfterViewInit {
+  private cdr = inject(ChangeDetectorRef);
+  @ViewChild('stepper')
+  stepper!: MatStepper;
+  @ViewChild('formPersonaComponent')
+  formPersonaComponent!: FormularioPersonaComponent;
+  @ViewChild('formDomicilioComponent')
+  formDomicilioComponent!: FormularioDomicilioComponent;
+  @ViewChild('formEscolaridadComponent')
+  formEscolaridadComponent!: FormularioEscolaridadComponent;
+  @ViewChild('formEmpleadoComponent')
+  formEmpleadoComponent!: FormularioEmpleadoComponent;
+  @ViewChild('formConfirmacionComponent')
+  formConfirmacionComponent!: ConfirmacionNewEmpleadoComponent;
 
-  @Input()
-  public activeIndex = signal(0);
-
-  // * Datos que se pasan a los componentes hijos para que puedan ser utilizados, estos datos son elegidos por el usuario
+  // * Datos NECESARIOS que utilizan los componente hijos
   @Input()
   public generos = signal<Registros[] | undefined>(undefined); // Para el formulario de persona
   @Input()
@@ -31,33 +51,25 @@ export class StepsInteractiveComponent {
   @Input()
   public tiposPlazas = signal<Registros[] | undefined>(undefined); // Para el formulario de empleado
   @Input()
-  public roles = signal<Registros[] | undefined>(undefined); // Para el formulario de empleado
+  public roles = signal<Rol[] | undefined>(undefined); // Para el formulario de empleado
 
-  // * Datos que se pasan a los componentes hijos para que puedan ser utilizados
-  @Input()
-  public formPersona = signal<Persona | undefined>(undefined);
+  @Output()
+  public nuevoEmpleado = new EventEmitter<NewEmpleado>();
 
-  // * Eventos que emiten los componentes hijos
-  @Output()
-  public emmitFormPersonaValues = new EventEmitter<Persona>();
-  @Output()
-  public formularioDomicilioNuevaPersona = new EventEmitter<Domicilio>();
-  @Output()
-  public formularioEscolaridades = new EventEmitter<Escolaridad[]>();
-  @Output()
-  public formularioDatosEmpleado = new EventEmitter<DatosEmpleado>();
-  @Output()
-  public confirmacionNuevoEmpleado = new EventEmitter<boolean>();
+  public formPersona!: FormGroup;
+  public formDomicilio!: FormGroup;
+  public formEscolaridad!: FormGroup;
+  public formEmpleado!: FormGroup;
 
-  onActiveIndexChange(event: number) {
-    this.activeIndex.set(event);
+  ngAfterViewInit() {
+    this.formPersona = this.formPersonaComponent.formPersona;
+    this.formDomicilio = this.formDomicilioComponent.formDomicilio;
+    this.formEscolaridad = this.formEscolaridadComponent.formEscolaridad;
+    this.formEmpleado = this.formEmpleadoComponent.formEmpleado;
+    this.cdr.detectChanges();
   }
 
-  emmitFormPersona(event: Persona) {
-    this.emmitFormPersonaValues.emit(event);
-  }
-
-  emitirFormularioDomicilioNuevaPersona(event: Domicilio) {
-    this.formularioDomicilioNuevaPersona.emit(event);
+  goToNextStep() {
+    this.stepper.next();
   }
 }

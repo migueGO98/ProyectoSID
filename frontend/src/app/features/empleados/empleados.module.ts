@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
 
 import { NewEmpleadoPageComponent } from './crearNewEmpleado/pages/new-empleado-page/new-empleado-page.component';
@@ -35,9 +39,12 @@ import { ConfirmacionNewEmpleadoComponent } from './crearNewEmpleado/components/
     FormsModule,
     InputMaskModule,
     InputTextModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
     RadioButtonModule,
     ReactiveFormsModule,
-    StepsModule,
     ToastModule,
   ],
   exports: [NewEmpleadoPageComponent],

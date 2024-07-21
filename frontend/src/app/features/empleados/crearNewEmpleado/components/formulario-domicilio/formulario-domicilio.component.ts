@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, OnInit, Output, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Domicilio } from 'src/app/generate/openapi';
 
 import { Estado } from 'src/app/interfaces/public.interface';
 
@@ -15,9 +14,7 @@ export class FormularioDomicilioComponent implements OnInit {
   public estados = signal<Estado[] | undefined>(undefined);
 
   @Output()
-  public formularioDomicilio = new EventEmitter<Domicilio>();
-  @Output()
-  public activeIndex = new EventEmitter<number>();
+  formSubmit = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.estados.set([
@@ -57,31 +54,42 @@ export class FormularioDomicilioComponent implements OnInit {
   }
 
   public formDomicilio: FormGroup = this.fb.group({
-    calle: ['T', [Validators.required]],
+    calle: [null, [Validators.required]],
     codigoPostal: [null, [Validators.required]],
-    colonia: ['LP', [Validators.required]],
-    municipio: ['TL', [Validators.required]],
-    ciudad: ['CD', [Validators.required]],
+    colonia: [null, [Validators.required]],
+    municipio: [null, [Validators.required]],
+    ciudad: [null, [Validators.required]],
     estado: [new FormControl<Estado | null>(null), [Validators.required]],
   });
 
-  onSave() {
-    this.formularioDomicilio.emit({
-      calle: this.formDomicilio.value.calle,
-      codigoPostal: this.formDomicilio.value.codigoPostal,
-      colonia: this.formDomicilio.value.colonia,
-      municipio: this.formDomicilio.value.municipio,
-      ciudad: this.formDomicilio.value.ciudad,
-      estado: this.formDomicilio.value.estado.code,
-    });
-    this.nextStep();
+  isValidField(field: string) {
+    return this.formDomicilio.controls[field].errors && this.formDomicilio.controls[field].touched;
   }
 
-  nextStep() {
-    this.activeIndex.emit(2);
+  getErrorMessage(field: string) {
+    if (!this.formDomicilio.controls[field]) return; // Si no existe el campo en el formulario, no se muestra mensaje de error
+    const errors = this.formDomicilio.controls[field].errors || {}; // Si no hay errores, se asigna un objeto vacío
+
+    // Se recorren los errores
+    for (const key of Object.keys(errors)) {
+      switch (key) {
+        case 'required':
+          return 'Este campo es requerido';
+        case 'email':
+          return 'Correo electrónico inválido';
+        case 'pattern':
+          return 'Solo se permiten números';
+        case 'minlength':
+          return `Se requiere ${errors[key].requiredLength} caracteres`;
+        case 'maxlength':
+          return `Se requiere ${errors[key].requiredLength} caracteres`;
+      }
+    }
+    return; // Si no hay errores, no se muestra mensaje de error
   }
 
-  previousStep() {
-    this.activeIndex.emit(0);
+  onSubmit() {
+    if (this.formDomicilio.valid) this.formSubmit.emit();
+    else this.formDomicilio.markAllAsTouched();
   }
 }

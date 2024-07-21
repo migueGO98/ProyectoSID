@@ -46,9 +46,9 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
   // * Signal necesarias de la página para poder enviar datos a la API
   public nuevoEmpleado = signal<NewEmpleado | undefined>(undefined);
   public formPersona = signal<Persona | undefined>(undefined);
-  public formularioDomicilio = signal<Domicilio | undefined>(undefined);
-  public formularioEscolaridad = signal<Escolaridad[] | undefined>(undefined);
-  public formularioDatosEmpleado = signal<DatosEmpleado | undefined>(undefined); // Esta interfaz solo es del frontend, se hace para no tener que pasar tantos datos a la vez
+  public formDomicilio = signal<Domicilio | undefined>(undefined);
+  public formEscolaridad = signal<Escolaridad[] | undefined>(undefined);
+  public formDatosEmpleado = signal<DatosEmpleado | undefined>(undefined); // Esta interfaz solo es del frontend, se hace para no tener que pasar tantos datos a la vez
 
   // * Respuestas de la API
   public empleado = signal<Empleado | undefined>(undefined);
@@ -95,44 +95,28 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  obtenerValoresFormularioPersona(event: Persona) {
-    this.formPersona.set(event);
-  }
+  // crearNuevoEmpleado(nuevoEmpleado: NewEmpleado) {
+  //   const datosEmpleado = this.formularioDatosEmpleado() as DatosEmpleado;
+  //   this.nuevoEmpleado.set({
+  //     persona: this.formPersona() as Persona,
+  //     domicilio: this.formularioDomicilio() as Domicilio,
+  //     escolaridades: this.formularioEscolaridad() as Escolaridad[],
+  //     fechaIngreso: datosEmpleado.fechaIngreso,
+  //     correoElectronicoInstitucional: datosEmpleado.correoElectronicoInstitucional,
+  //     idTipoPlaza: datosEmpleado.idTipoPlaza,
+  //     idRegion: datosEmpleado.idRegion,
+  //     idDireccion: datosEmpleado.idDireccion,
+  //     idSubdireccion: datosEmpleado.idSubdireccion,
+  //     idPuesto: datosEmpleado.idPuesto,
+  //     idRoles: datosEmpleado.idRoles,
+  //   });
 
-  obtenerValoresFormularioDomicilio(event: Domicilio) {
-    this.formularioDomicilio.set(event);
-  }
-
-  obtenerValoresFormularioEscolaridad(event: Escolaridad[]) {
-    this.formularioEscolaridad.set(event);
-  }
-
-  obtenerValoresFormularioDatosEmpleado(event: DatosEmpleado) {
-    this.formularioDatosEmpleado.set(event);
-  }
-
-  crearNuevoEmpleado() {
-    const datosEmpleado = this.formularioDatosEmpleado() as DatosEmpleado;
-    this.nuevoEmpleado.set({
-      persona: this.formPersona() as Persona,
-      domicilio: this.formularioDomicilio() as Domicilio,
-      escolaridades: this.formularioEscolaridad() as Escolaridad[],
-      fechaIngreso: datosEmpleado.fechaIngreso,
-      correoElectronicoInstitucional: datosEmpleado.correoElectronicoInstitucional,
-      idTipoPlaza: datosEmpleado.idTipoPlaza,
-      idRegion: datosEmpleado.idRegion,
-      idDireccion: datosEmpleado.idDireccion,
-      idSubdireccion: datosEmpleado.idSubdireccion,
-      idPuesto: datosEmpleado.idPuesto,
-      idRoles: datosEmpleado.idRoles,
-    });
-
-    this.empleadosService.crearEmpleado(this.nuevoEmpleado() as NewEmpleado).subscribe({
-      next: empleadoResponse => this.empleado.set(empleadoResponse),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
-      error: e => console.error(e.error),
-    });
-  }
+  //   this.empleadosService.crearEmpleado(this.nuevoEmpleado() as NewEmpleado).subscribe({
+  //     next: empleadoResponse => this.empleado.set(empleadoResponse),
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
+  //     error: e => console.error(e.error),
+  //   });
+  // }
 
   // Unsubscribe para evitar fugas de memoria en las subscripciones a observables
   ngOnDestroy(): void {

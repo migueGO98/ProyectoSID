@@ -1,3 +1,105 @@
-<p>formulario-empleado works!</p>
-<p-button type="button" label="Regresar" (onClick)="previousStep()" />
-<p-button type="submit" label="Siguiente" />
+<form [formGroup]="formEmpleado" (ngSubmit)="onSubmit()">
+  <div class="flex flex-column gap-2">
+    <label for="fechaIngreso">Fecha de ingreso</label>
+    <p-calendar
+      [showIcon]="true"
+      dateFormat="yy-mm-dd"
+      [readonlyInput]="true"
+      [showTime]="false"
+      formControlName="fechaIngreso" />
+    <span *ngIf="isValidField('fechaIngreso')" class="p-error block">
+      {{ getErrorMessage('fechaIngreso') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="correoElectronicoInstitucional">Correo Electrónico Institucional</label>
+    <input
+      pInputText
+      id="correoElectronicoInstitucional"
+      formControlName="correoElectronicoInstitucional" />
+    <span *ngIf="isValidField('correoElectronicoInstitucional')" class="p-error block">
+      {{ getErrorMessage('correoElectronicoInstitucional') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idTipoPlaza">Tipo de plaza</label>
+    <p-dropdown
+      [options]="tiposPlazas()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el tipo de plaza"
+      formControlName="idTipoPlaza" />
+    <span *ngIf="isValidField('idTipoPlaza')" class="p-error block">
+      {{ getErrorMessage('idTipoPlaza') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idRegion">Región</label>
+    <p-dropdown
+      [options]="tiposPlazas()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona la Región "
+      formControlName="idRegion" />
+    <span *ngIf="isValidField('idRegion')" class="p-error block">
+      {{ getErrorMessage('idRegion') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idDireccion">Dirección</label>
+    <p-dropdown
+      [options]="tiposPlazas()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona la Dirección"
+      formControlName="idDireccion" />
+    <span *ngIf="isValidField('idDireccion')" class="p-error block">
+      {{ getErrorMessage('idDireccion') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idSubdireccion">Subdirección</label>
+    <p-dropdown
+      [options]="tiposPlazas()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona la Subdirección"
+      formControlName="idSubdireccion" />
+    <span *ngIf="isValidField('idSubdireccion')" class="p-error block">
+      {{ getErrorMessage('idSubdireccion') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idPuesto">Puesto</label>
+    <p-dropdown
+      [options]="tiposPlazas()"
+      optionValue="id"
+      optionLabel="descripcion"
+      placeholder="Selecciona el "
+      formControlName="idPuesto" />
+    <span *ngIf="isValidField('idPuesto')" class="p-error block">
+      {{ getErrorMessage('idPuesto') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
+    <label for="idRoles">Roles</label>
+    <p-dropdown
+      [options]="roles()"
+      optionValue="idRol"
+      optionLabel="descripcion"
+      placeholder="Selecciona los roles"
+      formControlName="idRoles" />
+    <span *ngIf="isValidField('idRoles')" class="p-error block">
+      {{ getErrorMessage('idRoles') }}
+    </span>
+  </div>
+
+  <button mat-raised-button type="submit" color="primary">Siguiente</button>
+</form>

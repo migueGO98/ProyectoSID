@@ -1,27 +1,42 @@
-<form [formGroup]="formDomicilio" (ngSubmit)="onSave()">
+<form [formGroup]="formDomicilio" (ngSubmit)="onSubmit()">
   <div class="flex flex-column gap-2">
     <label for="calle">Calle</label>
     <input type="text" pInputText id="calle" formControlName="calle" />
+    <span *ngIf="isValidField('calle')" class="p-error block">
+      {{ getErrorMessage('calle') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="codigoPostal">Codigo postal</label>
     <p-inputMask mask="99999" placeholder="01000" formControlName="codigoPostal" />
+    <span *ngIf="isValidField('codigoPostal')" class="p-error block">
+      {{ getErrorMessage('codigoPostal') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="colonia">Colonia</label>
     <input pInputText id="colonia" formControlName="colonia" />
+    <span *ngIf="isValidField('colonia')" class="p-error block">
+      {{ getErrorMessage('colonia') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="municipio">Municipio</label>
     <input pInputText id="municipio" formControlName="municipio" />
+    <span *ngIf="isValidField('municipio')" class="p-error block">
+      {{ getErrorMessage('municipio') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="ciudad">Ciudad</label>
     <input pInputText id="ciudad" formControlName="ciudad" />
+    <span *ngIf="isValidField('ciudad')" class="p-error block">
+      {{ getErrorMessage('ciudad') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -32,8 +47,10 @@
       placeholder="Selecciona un estado"
       optionValue="code"
       optionLabel="name" />
+    <span *ngIf="isValidField('estado')" class="p-error block">
+      {{ getErrorMessage('estado') }}
+    </span>
   </div>
 
-  <p-button type="button" label="Regresar" (onClick)="previousStep()" />
-  <p-button type="submit" label="Siguiente" />
+  <button mat-raised-button type="submit" color="primary">Siguiente</button>
 </form>

@@ -1,34 +1,50 @@
-<form [formGroup]="formPersona" (ngSubmit)="onSaveDatosPersona()">
+<form [formGroup]="formPersona" (ngSubmit)="onSubmit()">
   <div class="flex flex-column gap-2">
-    <label for="nombre">Nombre</label>
-    <input type="text" pInputText id="nombre" formControlName="nombre" />
-    <span class="p-error block"> El precio debe de ser 0 o mayor </span>
+    <label for="nombre">Nombre(s)</label>
+    <input pInputText id="nombre" formControlName="nombre" />
+    <span *ngIf="isValidField('nombre')" class="p-error block">
+      {{ getErrorMessage('nombre') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="apellidoPaterno">Apellido Paterno</label>
     <input pInputText id="apellidoPaterno" formControlName="apellidoPaterno" />
-    <span> El precio debe de ser 0 o mayor </span>
+    <span *ngIf="isValidField('apellidoPaterno')" class="p-error block">
+      {{ getErrorMessage('apellidoPaterno') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="apellidoMaterno">Apellido Materno</label>
     <input pInputText id="apellidoMaterno" formControlName="apellidoMaterno" />
+    <span *ngIf="isValidField('apellidoMaterno')" class="p-error block">
+      {{ getErrorMessage('apellidoMaterno') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="curp">CURP</label>
     <input pInputText id="curp" formControlName="curp" />
+    <span *ngIf="isValidField('curp')" class="p-error block">
+      {{ getErrorMessage('curp') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="rfc">RFC</label>
     <input pInputText id="rfc" formControlName="rfc" />
+    <span *ngIf="isValidField('rfc')" class="p-error block">
+      {{ getErrorMessage('rfc') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="numeroSeguroSocial">Número de Seguro Social</label>
     <input pInputText id="numeroSeguroSocial" formControlName="numeroSeguroSocial" />
+    <span *ngIf="isValidField('numeroSeguroSocial')" class="p-error block">
+      {{ getErrorMessage('numeroSeguroSocial') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -39,6 +55,9 @@
       [readonlyInput]="true"
       [showTime]="false"
       formControlName="fechaNacimiento" />
+    <span *ngIf="isValidField('fechaNacimiento')" class="p-error block">
+      {{ getErrorMessage('fechaNacimiento') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -49,6 +68,9 @@
       optionLabel="descripcion"
       placeholder="Selecciona el género"
       formControlName="genero" />
+    <span *ngIf="isValidField('genero')" class="p-error block">
+      {{ getErrorMessage('genero') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -57,11 +79,17 @@
       mask="99 9999 9999"
       placeholder="55 1234 5678"
       formControlName="telefonoPersonal" />
+    <span *ngIf="isValidField('telefonoPersonal')" class="p-error block">
+      {{ getErrorMessage('telefonoPersonal') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
     <label for="correoElectronicoPersonal">Correo Electrónico Personal</label>
     <input pInputText id="correoElectronicoPersonal" formControlName="correoElectronicoPersonal" />
+    <span *ngIf="isValidField('correoElectronicoPersonal')" class="p-error block">
+      {{ getErrorMessage('correoElectronicoPersonal') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -72,6 +100,9 @@
       optionLabel="descripcion"
       placeholder="Selecciona el estado civil"
       formControlName="estadoCivil" />
+    <span *ngIf="isValidField('estadoCivil')" class="p-error block">
+      {{ getErrorMessage('estadoCivil') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -84,6 +115,9 @@
         <p-radioButton value="false" label="No" formControlName="hijos" />
       </div>
     </div>
+    <span *ngIf="isValidField('hijos')" class="p-error block">
+      {{ getErrorMessage('hijos') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -91,6 +125,9 @@
       >Nombre completo de una persona de confianza en caso de emergencia</label
     >
     <input pInputText id="contactoEmergenciaNombre" formControlName="contactoEmergenciaNombre" />
+    <span *ngIf="isValidField('contactoEmergenciaNombre')" class="p-error block">
+      {{ getErrorMessage('contactoEmergenciaNombre') }}
+    </span>
   </div>
 
   <div class="flex flex-column gap-2">
@@ -99,7 +136,10 @@
       mask="99 9999 9999"
       placeholder="55 1234 5678"
       formControlName="contactoEmergenciaTelefono" />
+    <span *ngIf="isValidField('contactoEmergenciaTelefono')" class="p-error block">
+      {{ getErrorMessage('contactoEmergenciaTelefono') }}
+    </span>
   </div>
 
-  <p-button type="submit" label="Siguiente" (click)="nextStep()" />
+  <button mat-raised-button type="submit" color="primary">Siguiente</button>
 </form>

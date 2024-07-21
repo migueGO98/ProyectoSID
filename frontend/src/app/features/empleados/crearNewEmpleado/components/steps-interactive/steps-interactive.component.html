@@ -1,41 +1,33 @@
-<div class="card">
-  <p-toast></p-toast>
-  <p-steps
-    [model]="items()"
-    [readonly]="false"
-    [activeIndex]="activeIndex()"
-    (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
-</div>
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="formPersona" label="Datos generales">
+    <app-formulario-persona
+      #formPersonaComponent
+      [estadosCiviles]="estadosCiviles"
+      [generos]="generos"
+      (formSubmit)="goToNextStep()" />
+  </mat-step>
 
-<div *ngIf="activeIndex() === 0">
-  <app-formulario-persona
-    [generos]="generos"
-    [estadosCiviles]="estadosCiviles"
-    [inputFormPersona]="formPersona"
-    (emmitFormPersona)="emmitFormPersona($event)"
-    (activeIndex)="onActiveIndexChange($event)" />
-</div>
+  <mat-step [stepControl]="formDomicilio" label="Domicilio">
+    <app-formulario-domicilio #formDomicilioComponent (formSubmit)="goToNextStep()" />
+  </mat-step>
 
-<div *ngIf="activeIndex() === 1">
-  <app-formulario-domicilio
-    (activeIndex)="onActiveIndexChange($event)"
-    (formularioDomicilio)="emitirFormularioDomicilioNuevaPersona($event)" />
-</div>
+  <mat-step [stepControl]="formEscolaridad" label="Escolaridad">
+    <app-formulario-escolaridad
+      #formEscolaridadComponent
+      [nivelesEscolaridades]="nivelesEscolaridades"
+      [estadosNivelesEscolaridades]="estadosNivelesEscolaridades"
+      (formSubmit)="goToNextStep()" />
+  </mat-step>
 
-<div *ngIf="activeIndex() === 2">
-  <app-formulario-escolaridad
-    [nivelesEscolaridades]="nivelesEscolaridades"
-    [estadosNivelesEscolaridades]="estadosNivelesEscolaridades"
-    (activeIndex)="onActiveIndexChange($event)" />
-</div>
+  <mat-step [stepControl]="formEmpleado" label="Datos empleado">
+    <app-formulario-empleado
+      #formEmpleadoComponent
+      [tiposPlazas]="tiposPlazas"
+      [roles]="roles"
+      (formSubmit)="goToNextStep()" />
+  </mat-step>
 
-<div *ngIf="activeIndex() === 3">
-  <app-formulario-empleado
-    [tiposPlazas]="tiposPlazas"
-    [roles]="roles"
-    (activeIndex)="onActiveIndexChange($event)" />
-</div>
-
-<div *ngIf="activeIndex() === 4">
-  <app-confirmacion-new-empleado (activeIndex)="onActiveIndexChange($event)" />
-</div>
+  <mat-step label="Confirmación">
+    <app-confirmacion-new-empleado #formConfirmacionComponent />
+  </mat-step>
+</mat-stepper>
