@@ -6,8 +6,7 @@
 package mx.agr.dgec.generate.api;
 
 import mx.agr.dgec.generate.model.ErrorDto;
-import mx.agr.dgec.generate.model.PuestoDto;
-import mx.agr.dgec.generate.model.RegistrosDto;
+import mx.agr.dgec.generate.model.SubdireccionDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,27 +37,27 @@ import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 @Validated
-@Tag(name = "TiposPlazas", description = "Funciones sobre los tipos de plazas")
-public interface TiposPlazasApi {
+@Tag(name = "Direcciones", description = "Funciones sobre direcciones generales")
+public interface DireccionesApi {
 
     /**
-     * GET /api/tipos-plazas/{id}/puestos : Recuperar puestos de un tipo de plaza
-     * Recupera los puestos de acuerdo al tipo de plaza
+     * GET /api/direcciones/{id}/subdirecciones : Recuperar subdirecciones de una dirección
+     * Recupera todas las subdirecciones que pertenezcan a una dirección
      *
-     * @param id ID del Tipo de Plaza (required)
+     * @param id ID de la Dirección General (required)
      * @return OK (status code 200)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
-        operationId = "recuperarPuestosByTipoPlaza",
-        summary = "Recuperar puestos de un tipo de plaza",
-        description = "Recupera los puestos de acuerdo al tipo de plaza",
-        tags = { "TiposPlazas" },
+        operationId = "recuperarSubdireccionesByDireccion",
+        summary = "Recuperar subdirecciones de una dirección",
+        description = "Recupera todas las subdirecciones que pertenezcan a una dirección",
+        tags = { "Direcciones" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = PuestoDto.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SubdireccionDto.class)))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
@@ -76,52 +75,13 @@ public interface TiposPlazasApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/tipos-plazas/{id}/puestos",
+        value = "/api/direcciones/{id}/subdirecciones",
         produces = { "application/json" }
     )
     
-    ResponseEntity<List<PuestoDto>> recuperarPuestosByTipoPlaza(
+    ResponseEntity<List<SubdireccionDto>> recuperarSubdireccionesByDireccion(
         
-@Parameter(name = "id", description = "ID del Tipo de Plaza", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
-    );
-
-
-    /**
-     * GET /api/tipos-plazas : Recuperar tipos de plazas
-     * Recupera los tipos de plazas registrados en el sistema
-     *
-     * @return OK (status code 200)
-     *         or Unauthorized (status code 401)
-     *         or Forbidden (status code 403)
-     */
-    @Operation(
-        operationId = "recuperarTiposPlazas",
-        summary = "Recuperar tipos de plazas",
-        description = "Recupera los tipos de plazas registrados en el sistema",
-        tags = { "TiposPlazas" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
-            }),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
-            }),
-            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
-            })
-        },
-        security = {
-            @SecurityRequirement(name = "jwt")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/api/tipos-plazas",
-        produces = { "application/json" }
-    )
-    
-    ResponseEntity<List<RegistrosDto>> recuperarTiposPlazas(
-        
+@Parameter(name = "id", description = "ID de la Dirección General", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     );
 
 }

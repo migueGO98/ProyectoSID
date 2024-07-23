@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { Puesto } from '../model/puesto';
+import { Direccion } from '../model/direccion';
 // @ts-ignore
-import { Registros } from '../model/registros';
+import { Region } from '../model/region';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -32,7 +32,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class TiposPlazasService {
+export class RegionesService {
 
     protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
@@ -94,18 +94,18 @@ export class TiposPlazasService {
     }
 
     /**
-     * Recuperar puestos de un tipo de plaza
-     * Recupera los puestos de acuerdo al tipo de plaza
-     * @param id ID del Tipo de Plaza
+     * Recuperar direcciones de una región
+     * Recupera todas las direcciones generales (departamentos) que pertenecen a una región
+     * @param id ID de la Región
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public recuperarPuestosByTipoPlaza(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Puesto>>;
-    public recuperarPuestosByTipoPlaza(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Puesto>>>;
-    public recuperarPuestosByTipoPlaza(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Puesto>>>;
-    public recuperarPuestosByTipoPlaza(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public recuperarDireccionesByRegion(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Direccion>>;
+    public recuperarDireccionesByRegion(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Direccion>>>;
+    public recuperarDireccionesByRegion(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Direccion>>>;
+    public recuperarDireccionesByRegion(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling recuperarPuestosByTipoPlaza.');
+            throw new Error('Required parameter id was null or undefined when calling recuperarDireccionesByRegion.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -146,8 +146,8 @@ export class TiposPlazasService {
             }
         }
 
-        let localVarPath = `/api/tipos-plazas/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/puestos`;
-        return this.httpClient.request<Array<Puesto>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/regiones/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/direcciones`;
+        return this.httpClient.request<Array<Direccion>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -160,15 +160,15 @@ export class TiposPlazasService {
     }
 
     /**
-     * Recuperar tipos de plazas
-     * Recupera los tipos de plazas registrados en el sistema
+     * Recuperar regiones
+     * Recupera las regiones
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public recuperarTiposPlazas(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Registros>>;
-    public recuperarTiposPlazas(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Registros>>>;
-    public recuperarTiposPlazas(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Registros>>>;
-    public recuperarTiposPlazas(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public recuperarRegiones(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Region>>;
+    public recuperarRegiones(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Region>>>;
+    public recuperarRegiones(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Region>>>;
+    public recuperarRegiones(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -208,8 +208,8 @@ export class TiposPlazasService {
             }
         }
 
-        let localVarPath = `/api/tipos-plazas`;
-        return this.httpClient.request<Array<Registros>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/regiones`;
+        return this.httpClient.request<Array<Region>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

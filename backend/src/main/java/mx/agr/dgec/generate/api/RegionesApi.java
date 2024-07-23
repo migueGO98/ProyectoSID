@@ -5,9 +5,9 @@
  */
 package mx.agr.dgec.generate.api;
 
+import mx.agr.dgec.generate.model.DireccionDto;
 import mx.agr.dgec.generate.model.ErrorDto;
-import mx.agr.dgec.generate.model.PuestoDto;
-import mx.agr.dgec.generate.model.RegistrosDto;
+import mx.agr.dgec.generate.model.RegionDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,27 +38,27 @@ import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", comments = "Generator version: 7.5.0")
 @Validated
-@Tag(name = "TiposPlazas", description = "Funciones sobre los tipos de plazas")
-public interface TiposPlazasApi {
+@Tag(name = "Regiones", description = "Funciones sobre regiones")
+public interface RegionesApi {
 
     /**
-     * GET /api/tipos-plazas/{id}/puestos : Recuperar puestos de un tipo de plaza
-     * Recupera los puestos de acuerdo al tipo de plaza
+     * GET /api/regiones/{id}/direcciones : Recuperar direcciones de una región
+     * Recupera todas las direcciones generales (departamentos) que pertenecen a una región
      *
-     * @param id ID del Tipo de Plaza (required)
+     * @param id ID de la Región (required)
      * @return OK (status code 200)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
-        operationId = "recuperarPuestosByTipoPlaza",
-        summary = "Recuperar puestos de un tipo de plaza",
-        description = "Recupera los puestos de acuerdo al tipo de plaza",
-        tags = { "TiposPlazas" },
+        operationId = "recuperarDireccionesByRegion",
+        summary = "Recuperar direcciones de una región",
+        description = "Recupera todas las direcciones generales (departamentos) que pertenecen a una región",
+        tags = { "Regiones" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = PuestoDto.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = DireccionDto.class)))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
@@ -76,32 +76,32 @@ public interface TiposPlazasApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/tipos-plazas/{id}/puestos",
+        value = "/api/regiones/{id}/direcciones",
         produces = { "application/json" }
     )
     
-    ResponseEntity<List<PuestoDto>> recuperarPuestosByTipoPlaza(
+    ResponseEntity<List<DireccionDto>> recuperarDireccionesByRegion(
         
-@Parameter(name = "id", description = "ID del Tipo de Plaza", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
+@Parameter(name = "id", description = "ID de la Región", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     );
 
 
     /**
-     * GET /api/tipos-plazas : Recuperar tipos de plazas
-     * Recupera los tipos de plazas registrados en el sistema
+     * GET /api/regiones : Recuperar regiones
+     * Recupera las regiones
      *
      * @return OK (status code 200)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
-        operationId = "recuperarTiposPlazas",
-        summary = "Recuperar tipos de plazas",
-        description = "Recupera los tipos de plazas registrados en el sistema",
-        tags = { "TiposPlazas" },
+        operationId = "recuperarRegiones",
+        summary = "Recuperar regiones",
+        description = "Recupera las regiones",
+        tags = { "Regiones" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegistrosDto.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegionDto.class)))
             }),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
@@ -116,11 +116,11 @@ public interface TiposPlazasApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/tipos-plazas",
+        value = "/api/regiones",
         produces = { "application/json" }
     )
     
-    ResponseEntity<List<RegistrosDto>> recuperarTiposPlazas(
+    ResponseEntity<List<RegionDto>> recuperarRegiones(
         
     );
 

@@ -1,3 +1,4 @@
+export * from './direccion';
 export * from './domicilio';
 export * from './empleado';
 export * from './escolaridad';
@@ -9,5 +10,8 @@ export * from './motivoBajaEnum';
 export * from './newEmpleado';
 export * from './nivelesEscolaridadesEnum';
 export * from './persona';
+export * from './puesto';
+export * from './region';
 export * from './registros';
 export * from './rol';
+export * from './subdireccion';
