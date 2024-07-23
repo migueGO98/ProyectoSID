@@ -1,11 +1,15 @@
 openapi: 3.1.0
 tags:
+  - name: Direcciones
+    description: Funciones sobre direcciones generales
   - name: Empleados
     description: Funciones sobre empleados de la DGEC
   - name: Escolaridades
     description: Funciones sobre niveles escolares
   - name: Personas
     description: Funciones sobre personas
+  - name: Regiones
+    description: Funciones sobre regiones
   - name: Roles
     description: Funciones sobre roles
   - name: TiposPlazas
@@ -402,6 +406,175 @@ paths:
       x-stoplight:
         id: 0zvrwsofztb5s
       description: Recupera los tipos de plazas registrados en el sistema
+  '/api/tipos-plazas/{id}/puestos':
+    get:
+      summary: Recuperar puestos de un tipo de plaza
+      tags:
+        - TiposPlazas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Puesto'
+                  x-stoplight:
+                    id: g7cgnhodnz9c8
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarPuestosByTipoPlaza
+      x-stoplight:
+        id: a28fbqxtlq8rx
+      description: Recupera los puestos de acuerdo al tipo de plaza
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID del Tipo de Plaza
+  /api/regiones:
+    get:
+      summary: Recuperar regiones
+      tags:
+        - Regiones
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Region'
+                  x-stoplight:
+                    id: x0ohbkgxjvc7y
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarRegiones
+      x-stoplight:
+        id: zciqw9ksyazku
+      description: Recupera las regiones
+      parameters: []
+  '/api/regiones/{id}/direcciones':
+    get:
+      summary: Recuperar direcciones de una región
+      tags:
+        - Regiones
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Direccion'
+                  x-stoplight:
+                    id: qri189geugvhr
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarDireccionesByRegion
+      x-stoplight:
+        id: hvykjjwnwtoif
+      description: Recupera todas las direcciones generales (departamentos) que pertenecen a una región
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID de la Región
+  '/api/direcciones/{id}/subdirecciones':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID de la Dirección General
+    get:
+      summary: Recuperar subdirecciones de una dirección
+      tags:
+        - Direcciones
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subdireccion'
+                  x-stoplight:
+                    id: wcd7x8oo7dqfx
+        '400':
+          description: Bad Request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarSubdireccionesByDireccion
+      x-stoplight:
+        id: 62wg2yunla9js
+      description: Recupera todas las subdirecciones que pertenezcan a una dirección
 components:
   schemas:
     NewEmpleado:
@@ -950,6 +1123,74 @@ components:
               id: yjzkwgpocadwx
             type: string
             format: binary
+    Region:
+      title: Region
+      x-stoplight:
+        id: dqz9cpjf16puu
+      type: object
+      required:
+        - idRegion
+        - descripcion
+      properties:
+        idRegion:
+          type: string
+          x-stoplight:
+            id: r95biacijvrv4
+        descripcion:
+          type: string
+          x-stoplight:
+            id: rj3pz11s29726
+    Direccion:
+      title: Direccion
+      x-stoplight:
+        id: 1u6ds9wg0mqow
+      type: object
+      required:
+        - idDireccion
+        - descripcion
+      properties:
+        idDireccion:
+          type: string
+          x-stoplight:
+            id: syuffzbhaieme
+        descripcion:
+          type: string
+          x-stoplight:
+            id: 5fqty9f8jqm6c
+    Subdireccion:
+      title: Subdireccion
+      x-stoplight:
+        id: unpk3ep0c6o1j
+      type: object
+      required:
+        - idSubdireccion
+        - descripcion
+      properties:
+        idSubdireccion:
+          type: string
+          x-stoplight:
+            id: a2ckjb5n61jm0
+        descripcion:
+          type: string
+          x-stoplight:
+            id: 25k89bsw77o2p
+    Puesto:
+      title: Puesto
+      x-stoplight:
+        id: y88sbm24g2uv4
+      type: object
+      required:
+        - idPuesto
+        - descripcion
+      properties:
+        idPuesto:
+          type: string
+          x-stoplight:
+            id: 4b9vzp8fgkxtp
+        descripcion:
+          type: string
+          x-stoplight:
+            id: uxnsrujinkic3
   requestBodies: {}
   responses: {}
   securitySchemes:
