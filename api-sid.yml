@@ -229,6 +229,8 @@ paths:
                   $ref: '#/components/schemas/Empleado'
                   x-stoplight:
                     id: 4uji0c9gxh4pr
+        '204':
+          description: No Content
         '401':
           description: Unauthorized
           content:
@@ -244,7 +246,47 @@ paths:
       operationId: recuperarEmpleados
       x-stoplight:
         id: o3kbw90rqp4if
-      description: Recupera todos los empleados registrados
+      description: |-
+        Recupera todos los empleados registrados o recupera con base a filtros por
+        Estado, Región, Dirección, Subdirección, 
+        Tipo de Plaza, Puesto y/o Rol.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: idRegion
+          description: ID de la Región
+          allowEmptyValue: false
+        - schema:
+            type: string
+          in: query
+          name: idDireccion
+          description: ID de la Dirección
+        - schema:
+            type: string
+          in: query
+          name: idSubdireccion
+          description: ID de la Subdirección
+        - schema:
+            type: string
+          in: query
+          name: idTipoPlaza
+          description: ID del Tipo de Plaza
+        - schema:
+            type: string
+          in: query
+          name: idPuesto
+          description: ID del Puesto
+        - schema:
+            type: string
+          in: query
+          name: idEstado
+          description: ID del Estado
+        - schema:
+            type: string
+          in: query
+          name: idRol
+          description: ID del Rol
   /api/empleados/motivosBaja:
     get:
       summary: Recuperar motivos de baja
