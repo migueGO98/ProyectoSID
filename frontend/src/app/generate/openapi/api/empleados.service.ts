@@ -173,14 +173,51 @@ export class EmpleadosService {
 
     /**
      * Recuperar empleados
-     * Recupera todos los empleados registrados
+     * Recupera todos los empleados registrados o recupera con base a filtros por Estado, Región, Dirección, Subdirección,  Tipo de Plaza, Puesto y/o Rol.
+     * @param idRegion ID de la Región
+     * @param idDireccion ID de la Dirección
+     * @param idSubdireccion ID de la Subdirección
+     * @param idTipoPlaza ID del Tipo de Plaza
+     * @param idPuesto ID del Puesto
+     * @param idEstado ID del Estado
+     * @param idRol ID del Rol
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public recuperarEmpleados(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Empleado>>;
-    public recuperarEmpleados(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Empleado>>>;
-    public recuperarEmpleados(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Empleado>>>;
-    public recuperarEmpleados(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public recuperarEmpleados(idRegion?: string, idDireccion?: string, idSubdireccion?: string, idTipoPlaza?: string, idPuesto?: string, idEstado?: string, idRol?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Empleado>>;
+    public recuperarEmpleados(idRegion?: string, idDireccion?: string, idSubdireccion?: string, idTipoPlaza?: string, idPuesto?: string, idEstado?: string, idRol?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Empleado>>>;
+    public recuperarEmpleados(idRegion?: string, idDireccion?: string, idSubdireccion?: string, idTipoPlaza?: string, idPuesto?: string, idEstado?: string, idRol?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Empleado>>>;
+    public recuperarEmpleados(idRegion?: string, idDireccion?: string, idSubdireccion?: string, idTipoPlaza?: string, idPuesto?: string, idEstado?: string, idRol?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (idRegion !== undefined && idRegion !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idRegion, 'idRegion');
+        }
+        if (idDireccion !== undefined && idDireccion !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idDireccion, 'idDireccion');
+        }
+        if (idSubdireccion !== undefined && idSubdireccion !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idSubdireccion, 'idSubdireccion');
+        }
+        if (idTipoPlaza !== undefined && idTipoPlaza !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idTipoPlaza, 'idTipoPlaza');
+        }
+        if (idPuesto !== undefined && idPuesto !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idPuesto, 'idPuesto');
+        }
+        if (idEstado !== undefined && idEstado !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idEstado, 'idEstado');
+        }
+        if (idRol !== undefined && idRol !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>idRol, 'idRol');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -224,6 +261,7 @@ export class EmpleadosService {
         return this.httpClient.request<Array<Empleado>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
