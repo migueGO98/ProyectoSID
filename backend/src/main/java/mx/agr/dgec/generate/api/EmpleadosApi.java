@@ -90,21 +90,30 @@ public interface EmpleadosApi {
 
     /**
      * GET /api/empleados : Recuperar empleados
-     * Recupera todos los empleados registrados
+     * Recupera todos los empleados registrados o recupera con base a filtros por Estado, Región, Dirección, Subdirección,  Tipo de Plaza, Puesto y/o Rol.
      *
+     * @param idRegion ID de la Región (optional)
+     * @param idDireccion ID de la Dirección (optional)
+     * @param idSubdireccion ID de la Subdirección (optional)
+     * @param idTipoPlaza ID del Tipo de Plaza (optional)
+     * @param idPuesto ID del Puesto (optional)
+     * @param idEstado ID del Estado (optional)
+     * @param idRol ID del Rol (optional)
      * @return OK (status code 200)
+     *         or No Content (status code 204)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
      */
     @Operation(
         operationId = "recuperarEmpleados",
         summary = "Recuperar empleados",
-        description = "Recupera todos los empleados registrados",
+        description = "Recupera todos los empleados registrados o recupera con base a filtros por Estado, Región, Dirección, Subdirección,  Tipo de Plaza, Puesto y/o Rol.",
         tags = { "Empleados" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = EmpleadoDto.class)))
             }),
+            @ApiResponse(responseCode = "204", description = "No Content"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
@@ -124,6 +133,19 @@ public interface EmpleadosApi {
     
     ResponseEntity<List<EmpleadoDto>> recuperarEmpleados(
         
+@Parameter(name = "idRegion", description = "ID de la Región", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idRegion", required = false) String idRegion,
+        
+@Parameter(name = "idDireccion", description = "ID de la Dirección", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idDireccion", required = false) String idDireccion,
+        
+@Parameter(name = "idSubdireccion", description = "ID de la Subdirección", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idSubdireccion", required = false) String idSubdireccion,
+        
+@Parameter(name = "idTipoPlaza", description = "ID del Tipo de Plaza", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idTipoPlaza", required = false) String idTipoPlaza,
+        
+@Parameter(name = "idPuesto", description = "ID del Puesto", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idPuesto", required = false) String idPuesto,
+        
+@Parameter(name = "idEstado", description = "ID del Estado", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idEstado", required = false) String idEstado,
+        
+@Parameter(name = "idRol", description = "ID del Rol", in = ParameterIn.QUERY) @Valid @RequestParam(value = "idRol", required = false) String idRol
     );
 
 
