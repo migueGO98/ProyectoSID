@@ -31,11 +31,12 @@ public class ControlPersonas implements PersonasApi {
 
     @Override
     public ResponseEntity<Void> subirDocumentos(String id, MultipartFile ine, MultipartFile actaNacimiento, MultipartFile numeroSeguroSocial, MultipartFile curp, MultipartFile rfc, MultipartFile comprobanteDomicilio, List<MultipartFile> titulosProfesionales, List<MultipartFile> cedulasProfesionales) {
+        /*TODO*/
         return null;
     }
 
     @Override
     public ResponseEntity<Void> recuperarDocumentos(String id) {
-        return null;
+        /*TODO*/ return null;
     }
 }

@@ -2,6 +2,7 @@ package mx.agr.dgec.controladores;
 
 import lombok.RequiredArgsConstructor;
 import mx.agr.dgec.generate.api.TiposPlazasApi;
+import mx.agr.dgec.generate.model.PuestoDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
 import mx.agr.dgec.servicios.ServicioTiposPlazas;
 import org.springframework.http.HttpStatus;
@@ -19,5 +20,11 @@ public class ControlTiposPlazas implements TiposPlazasApi {
     public ResponseEntity<List<RegistrosDto>> recuperarTiposPlazas() {
         var tiposPlazas = servicioTiposPlazas.recuperarTiposPlazas();
         return ResponseEntity.status(HttpStatus.OK).body(tiposPlazas);
+    }
+
+    @Override
+    public ResponseEntity<List<PuestoDto>> recuperarPuestosByTipoPlaza(String id) {
+        /*TODO*/
+        return null;
     }
 }
