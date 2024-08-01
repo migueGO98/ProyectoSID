@@ -72,6 +72,7 @@ public class Empleado extends Persona implements PersonaInterface {
 
     @Override
     public void formatearDatos() {
+        correoElectronico = correoElectronico.trim();
         super.formatearDatosPersona();
     }
 
