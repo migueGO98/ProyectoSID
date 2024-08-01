@@ -1,3 +1,5 @@
+export * from './actualizarDatosEmpleado';
+export * from './actualizarDatosPersona';
 export * from './direccion';
 export * from './domicilio';
 export * from './empleado';
@@ -15,3 +17,4 @@ export * from './region';
 export * from './registros';
 export * from './rol';
 export * from './subdireccion';
+export * from './uRIDocumentosPersona';

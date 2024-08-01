@@ -14,6 +14,8 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/actualizarDatosEmpleado.ts
+model/actualizarDatosPersona.ts
 model/direccion.ts
 model/domicilio.ts
 model/empleado.ts
@@ -32,5 +34,6 @@ model/region.ts
 model/registros.ts
 model/rol.ts
 model/subdireccion.ts
+model/uRIDocumentosPersona.ts
 param.ts
 variables.ts
