@@ -5,6 +5,8 @@ src/main/java/mx/agr/dgec/generate/api/PersonasApi.java
 src/main/java/mx/agr/dgec/generate/api/RegionesApi.java
 src/main/java/mx/agr/dgec/generate/api/RolesApi.java
 src/main/java/mx/agr/dgec/generate/api/TiposPlazasApi.java
+src/main/java/mx/agr/dgec/generate/model/ActualizarDatosEmpleadoDto.java
+src/main/java/mx/agr/dgec/generate/model/ActualizarDatosPersonaDto.java
 src/main/java/mx/agr/dgec/generate/model/DireccionDto.java
 src/main/java/mx/agr/dgec/generate/model/DomicilioDto.java
 src/main/java/mx/agr/dgec/generate/model/EmpleadoDto.java
@@ -22,3 +24,4 @@ src/main/java/mx/agr/dgec/generate/model/RegionDto.java
 src/main/java/mx/agr/dgec/generate/model/RegistrosDto.java
 src/main/java/mx/agr/dgec/generate/model/RolDto.java
 src/main/java/mx/agr/dgec/generate/model/SubdireccionDto.java
+src/main/java/mx/agr/dgec/generate/model/URIDocumentosPersonaDto.java

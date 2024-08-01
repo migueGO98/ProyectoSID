@@ -7,6 +7,7 @@ package mx.agr.dgec.generate.api;
 
 import mx.agr.dgec.generate.model.ErrorDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
+import mx.agr.dgec.generate.model.URIDocumentosPersonaDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,22 +42,31 @@ import jakarta.annotation.Generated;
 public interface PersonasApi {
 
     /**
-     * GET /api/persona/{id}/documentos : Recuperar documentos persona
-     * Recupera los documentos oficiales de una persona
+     * PUT /api/persona/{id}/documentos : Actualizar documentos
+     * Actualiza los documentos de un empleado con base a su ID
      *
      * @param id ID de la persona (required)
-     * @return OK (status code 200)
+     * @param ine  (required)
+     * @param actaNacimiento  (required)
+     * @param numeroSeguroSocial  (required)
+     * @param curp  (required)
+     * @param rfc  (required)
+     * @param comprobanteDomicilio  (required)
+     * @param titulosProfesionales  (required)
+     * @param cedulasProfesionales  (optional)
+     * @return No Content (status code 204)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
      */
     @Operation(
-        operationId = "recuperarDocumentos",
-        summary = "Recuperar documentos persona",
-        description = "Recupera los documentos oficiales de una persona",
+        operationId = "actualizarDocumentos",
+        summary = "Actualizar documentos",
+        description = "Actualiza los documentos de un empleado con base a su ID",
         tags = { "Personas" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "204", description = "No Content"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
@@ -64,6 +74,69 @@ public interface PersonasApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/api/persona/{id}/documentos",
+        produces = { "application/json" },
+        consumes = { "multipart/form-data" }
+    )
+    
+    ResponseEntity<Void> actualizarDocumentos(
+        
+@Parameter(name = "id", description = "ID de la persona", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+        @Parameter(name = "ine", description = "", required = true) @RequestPart(value = "ine", required = true) MultipartFile ine,
+        @Parameter(name = "actaNacimiento", description = "", required = true) @RequestPart(value = "actaNacimiento", required = true) MultipartFile actaNacimiento,
+        @Parameter(name = "numeroSeguroSocial", description = "", required = true) @RequestPart(value = "numeroSeguroSocial", required = true) MultipartFile numeroSeguroSocial,
+        @Parameter(name = "curp", description = "", required = true) @RequestPart(value = "curp", required = true) MultipartFile curp,
+        @Parameter(name = "rfc", description = "", required = true) @RequestPart(value = "rfc", required = true) MultipartFile rfc,
+        @Parameter(name = "comprobanteDomicilio", description = "", required = true) @RequestPart(value = "comprobanteDomicilio", required = true) MultipartFile comprobanteDomicilio,
+        @Parameter(name = "titulosProfesionales", description = "", required = true) @RequestPart(value = "titulosProfesionales", required = true) List<MultipartFile> titulosProfesionales,
+        @Parameter(name = "cedulasProfesionales", description = "") @RequestPart(value = "cedulasProfesionales", required = false) List<MultipartFile> cedulasProfesionales
+    );
+
+
+    /**
+     * GET /api/persona/{id}/documentos : Recuperar documentos persona
+     * Recupera los documentos oficiales de una persona
+     *
+     * @param id ID de la persona (required)
+     * @return OK (status code 200)
+     *         or No Content (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     */
+    @Operation(
+        operationId = "recuperarDocumentos",
+        summary = "Recuperar documentos persona",
+        description = "Recupera los documentos oficiales de una persona",
+        tags = { "Personas" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = URIDocumentosPersonaDto.class))
+            }),
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
         },
@@ -77,7 +150,7 @@ public interface PersonasApi {
         produces = { "application/json" }
     )
     
-    ResponseEntity<Void> recuperarDocumentos(
+    ResponseEntity<URIDocumentosPersonaDto> recuperarDocumentos(
         
 @Parameter(name = "id", description = "ID de la persona", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     );
@@ -178,6 +251,8 @@ public interface PersonasApi {
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Conflict (status code 409)
      */
     @Operation(
         operationId = "subirDocumentos",
@@ -193,6 +268,12 @@ public interface PersonasApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
         },

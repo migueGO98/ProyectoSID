@@ -5,6 +5,7 @@
  */
 package mx.agr.dgec.generate.api;
 
+import mx.agr.dgec.generate.model.ActualizarDatosEmpleadoDto;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.ErrorDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
@@ -43,6 +44,57 @@ import jakarta.annotation.Generated;
 public interface EmpleadosApi {
 
     /**
+     * PUT /api/empleados/{id} : Actualizar un empleado
+     * Actualiza los datos de un empleado con base a su ID
+     *
+     * @param id ID del empleado (required)
+     * @param actualizarDatosEmpleadoDto  (optional)
+     * @return No Content (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     */
+    @Operation(
+        operationId = "actualizarEmpleado",
+        summary = "Actualizar un empleado",
+        description = "Actualiza los datos de un empleado con base a su ID",
+        tags = { "Empleados" },
+        responses = {
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/api/empleados/{id}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    ResponseEntity<Void> actualizarEmpleado(
+        
+@Parameter(name = "id", description = "ID del empleado", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+        @Parameter(name = "ActualizarDatosEmpleadoDto", description = "") @Valid
+ @RequestBody(required = false) ActualizarDatosEmpleadoDto actualizarDatosEmpleadoDto
+    );
+
+
+    /**
      * POST /api/empleados : Crear un nuevo empleado
      * Crea un nuevo empleado
      *
@@ -51,6 +103,7 @@ public interface EmpleadosApi {
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
+     *         or Conflict (status code 409)
      */
     @Operation(
         operationId = "crearEmpleado",
@@ -69,6 +122,9 @@ public interface EmpleadosApi {
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
         },
         security = {
@@ -85,6 +141,102 @@ public interface EmpleadosApi {
     ResponseEntity<EmpleadoDto> crearEmpleado(
         @Parameter(name = "NewEmpleadoDto", description = "", required = true) @Valid
  @RequestBody NewEmpleadoDto newEmpleadoDto
+    );
+
+
+    /**
+     * DELETE /api/empleados/{id} : Eliminar un empleado
+     * Elimina un empleado con base a su ID
+     *
+     * @param id ID del empleado (required)
+     * @return No Content (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Conflict (status code 409)
+     */
+    @Operation(
+        operationId = "eliminarEmpleado",
+        summary = "Eliminar un empleado",
+        description = "Elimina un empleado con base a su ID",
+        tags = { "Empleados" },
+        responses = {
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/api/empleados/{id}",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<Void> eliminarEmpleado(
+        
+@Parameter(name = "id", description = "ID del empleado", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
+    );
+
+
+    /**
+     * GET /api/empleados/{id} : Recuperar un empleado
+     * Recupera datos de un empleado con base a su ID
+     *
+     * @param id ID del empleado (required)
+     * @return OK (status code 200)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     */
+    @Operation(
+        operationId = "recuperarEmpleado",
+        summary = "Recuperar un empleado",
+        description = "Recupera datos de un empleado con base a su ID",
+        tags = { "Empleados" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = EmpleadoDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
+        },
+        security = {
+            @SecurityRequirement(name = "jwt")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/api/empleados/{id}",
+        produces = { "application/json" }
+    )
+    
+    ResponseEntity<EmpleadoDto> recuperarEmpleado(
+        
+@Parameter(name = "id", description = "ID del empleado", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     );
 
 
