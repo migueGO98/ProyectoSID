@@ -14,9 +14,9 @@ public class ServicioPuestos {
 
     private final RepositorioPuesto repositorioPuesto;
 
-    public Puesto obtenerPuesto(String idPuestoValue) {
-        final var puesto = repositorioPuesto.findById(idPuestoValue.toUpperCase());
-        if (puesto.isEmpty()) throw new ElementoNoEncontradoException("No existe el Puesto con el id proporcionado");
+    public Puesto obtenerPuesto(String idPuesto) {
+        final var puesto = repositorioPuesto.findById(idPuesto.toUpperCase());
+        if (puesto.isEmpty()) throw new ElementoNoEncontradoException("No existe el Puesto con el id proporcionado: " + idPuesto.toUpperCase());
         return puesto.get();
     }
 }

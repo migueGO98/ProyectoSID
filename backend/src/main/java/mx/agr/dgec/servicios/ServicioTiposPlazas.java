@@ -26,9 +26,9 @@ public class ServicioTiposPlazas {
         return TipoPlazaMapper.INSTANCE.tiposPlazasToRegistrosDto(tiposPlazas);
     }
 
-    public TipoPlaza obtenerTipoPlaza(String idTipoPlazaValue) {
-        var tipoPlaza = repositorioTipoPlaza.findById(idTipoPlazaValue.toUpperCase());
-        if (tipoPlaza.isEmpty()) throw new ElementoNoEncontradoException("No existe el Tipo de Plaza con el id proporcionado");
+    public TipoPlaza obtenerTipoPlaza(String idTipoPlaza) {
+        var tipoPlaza = repositorioTipoPlaza.findById(idTipoPlaza.toUpperCase());
+        if (tipoPlaza.isEmpty()) throw new ElementoNoEncontradoException("No existe el Tipo de Plaza con el id proporcionado: " + idTipoPlaza.toUpperCase());
         return tipoPlaza.get();
     }
 

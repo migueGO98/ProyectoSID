@@ -24,6 +24,7 @@ public class ServicioRegiones {
 
     public List<RegionDto> recuperarRegiones() {
         var regiones = repositorioRegion.findAll();
+        log.info("Se recuperaron las regiones");
         return RegionMapper.INSTANCE.listRegionesToListRegionesDto(regiones);
     }
 
@@ -36,7 +37,7 @@ public class ServicioRegiones {
 
     public Region obtenerRegion(String idRegion) {
         final var region = repositorioRegion.findById(idRegion.toUpperCase());
-        if (region.isEmpty()) throw new ElementoNoEncontradoException("No existe la Región con el id proporcionado " + idRegion.toUpperCase());
+        if (region.isEmpty()) throw new ElementoNoEncontradoException("No existe la Región con el id proporcionado: " + idRegion.toUpperCase());
         return region.get();
     }
 

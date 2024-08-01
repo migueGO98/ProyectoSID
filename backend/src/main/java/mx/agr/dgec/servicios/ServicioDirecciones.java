@@ -20,9 +20,9 @@ public class ServicioDirecciones {
 
     private final RepositorioDireccion repositorioDirecciones;
 
-    public Direccion obtenerDireccion(String direccionValue) {
-        final var direccion = repositorioDirecciones.findById(direccionValue.toUpperCase());
-        if (direccion.isEmpty()) throw new ElementoNoEncontradoException("No existe la Dirección con el id proporcionado");
+    public Direccion obtenerDireccion(String idDireccion) {
+        final var direccion = repositorioDirecciones.findById(idDireccion.toUpperCase());
+        if (direccion.isEmpty()) throw new ElementoNoEncontradoException("No existe la Dirección con el id proporcionado: " + idDireccion.toUpperCase());
         return direccion.get();
     }
 

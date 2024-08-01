@@ -14,9 +14,9 @@ public class ServicioSubdirecciones {
 
     private final RepositorioSubdireccion repositorioSubdireccion;
 
-    public Subdireccion obtenerSubdireccion(String idSubdireccionValue) {
-        final var subdireccion = repositorioSubdireccion.findById(idSubdireccionValue.toUpperCase());
-        if (subdireccion.isEmpty()) throw new ElementoNoEncontradoException("No existe la Subdirección con el id proporcionado");
+    public Subdireccion obtenerSubdireccion(String idSubdireccion) {
+        final var subdireccion = repositorioSubdireccion.findById(idSubdireccion.toUpperCase());
+        if (subdireccion.isEmpty()) throw new ElementoNoEncontradoException("No existe la Subdirección con el id proporcionado: " + idSubdireccion.toUpperCase());
         return subdireccion.get();
     }
 }
