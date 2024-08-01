@@ -3,6 +3,7 @@ package mx.agr.dgec.controladores;
 import lombok.RequiredArgsConstructor;
 import mx.agr.dgec.enums.MetodosHttpEnum;
 import mx.agr.dgec.generate.api.EmpleadosApi;
+import mx.agr.dgec.generate.model.ActualizarDatosEmpleadoDto;
 import mx.agr.dgec.generate.model.EmpleadoDto;
 import mx.agr.dgec.generate.model.NewEmpleadoDto;
 import mx.agr.dgec.generate.model.RegistrosDto;
@@ -27,6 +28,21 @@ public class ControlEmpleados implements EmpleadosApi {
     }
 
     @Override
+    public ResponseEntity<EmpleadoDto> recuperarEmpleado(String id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> actualizarEmpleado(String id, ActualizarDatosEmpleadoDto actualizarDatosEmpleadoDto) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> eliminarEmpleado(String id) {
+        return null;
+    }
+
+    @Override
     @DynamicRolesAllowed(metodoHttp = MetodosHttpEnum.GET, rutaEndpoint = "/api/empleados")
     public ResponseEntity<List<EmpleadoDto>> recuperarEmpleados(String idRegion, String idDireccion, String idSubdireccion,
                                                                 String idTipoPlaza, String idPuesto, String idEstado, String idRol) {
@@ -34,7 +50,7 @@ public class ControlEmpleados implements EmpleadosApi {
 
         if (empleados.isEmpty())
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        else return ResponseEntity.status(HttpStatus.OK).body(empleados);
+        return ResponseEntity.status(HttpStatus.OK).body(empleados);
     }
 
     @Override
