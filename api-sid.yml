@@ -281,7 +281,6 @@ paths:
             schema:
               $ref: '#/components/schemas/NewEmpleado'
             examples: {}
-        description: ''
         required: true
     parameters: []
     get:
@@ -742,6 +741,8 @@ paths:
                   $ref: '#/components/schemas/Direccion'
                   x-stoplight:
                     id: qri189geugvhr
+        '204':
+          description: No Content
         '400':
           description: Bad Request
           content:
@@ -756,6 +757,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:
@@ -794,6 +801,8 @@ paths:
                   $ref: '#/components/schemas/Subdireccion'
                   x-stoplight:
                     id: wcd7x8oo7dqfx
+        '204':
+          description: No Content
         '400':
           description: Bad Request
           headers: {}
@@ -809,6 +818,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:
