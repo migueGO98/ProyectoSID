@@ -115,7 +115,7 @@ public class ServicioEmpleados {
         var fechaPeriodoActual = obtenerFechaPeriodoActual();
         var diferenciaEnDias = ChronoUnit.DAYS.between(fechaIngreso, fechaPeriodoActual);
         float diferenciaEnMeses = diferenciaEnDias / PROMEDIO_DIAS_POR_MES;
-        if (diferenciaEnMeses > 1.0f) throw new ReglaNegocioException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales anteriores del periodo quincenal actual");
+        if (diferenciaEnMeses > 1.03f) throw new ReglaNegocioException("La fecha de ingreso del nuevo empleado no debe pasar de 2 periodos quincenales anteriores del periodo quincenal actual");
     }
 
     private void validarNoPasaDe1MesFuturoFechaIngreso(LocalDate fechaIngreso) {
