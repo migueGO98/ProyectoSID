@@ -121,6 +121,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       operationId: subirDocumentos
       x-stoplight:
         id: 54w1jjcfohb7k
@@ -144,6 +156,12 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/URIDocumentosPersona'
+        '204':
+          description: No Content
         '400':
           description: Bad Request
           content:
@@ -162,10 +180,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       operationId: recuperarDocumentos
       x-stoplight:
         id: 6nobuukzgykuq
       description: Recupera los documentos oficiales de una persona
+    put:
+      summary: Actualizar documentos
+      tags:
+        - Personas
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: actualizarDocumentos
+      x-stoplight:
+        id: jn461ardouxw7
+      description: Actualiza los documentos de un empleado con base a su ID
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentosPersona'
   /api/empleados:
     post:
       summary: Crear un nuevo empleado
@@ -197,6 +261,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
           content:
             application/json:
               schema:
@@ -287,6 +357,128 @@ paths:
           in: query
           name: idRol
           description: ID del Rol
+  '/api/empleados/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID del empleado
+    get:
+      summary: Recuperar un empleado
+      tags:
+        - Empleados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empleado'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: recuperarEmpleado
+      x-stoplight:
+        id: qjyvs5h4f1fz6
+      description: Recupera datos de un empleado con base a su ID
+    delete:
+      summary: Eliminar un empleado
+      tags:
+        - Empleados
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: eliminarEmpleado
+      x-stoplight:
+        id: izelop9r9pw1d
+      description: Elimina un empleado con base a su ID
+    put:
+      summary: Actualizar un empleado
+      tags:
+        - Empleados
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: actualizarEmpleado
+      x-stoplight:
+        id: kycxgcq6759dx
+      description: Actualiza los datos de un empleado con base a su ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActualizarDatosEmpleado'
   /api/empleados/motivosBaja:
     get:
       summary: Recuperar motivos de baja
@@ -464,6 +656,8 @@ paths:
                   $ref: '#/components/schemas/Puesto'
                   x-stoplight:
                     id: g7cgnhodnz9c8
+        '204':
+          description: No Content
         '400':
           description: Bad Request
           content:
@@ -478,6 +672,12 @@ paths:
                 $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:
@@ -716,6 +916,72 @@ components:
             type: string
             example: rh1
             pattern: '^[a-zA-Z0-9]+$'
+    ActualizarDatosEmpleado:
+      title: ActualizarDatosEmpleado
+      x-stoplight:
+        id: s54vxquyoef5d
+      type: object
+      required:
+        - persona
+        - domicilio
+        - escolaridades
+        - correoElectronicoInstitucional
+        - idTipoPlaza
+        - idRegion
+        - idDireccion
+        - idSubdireccion
+        - idPuesto
+        - idRoles
+      properties:
+        persona:
+          $ref: '#/components/schemas/ActualizarDatosPersona'
+        domicilio:
+          $ref: '#/components/schemas/Domicilio'
+        escolaridades:
+          type: array
+          minItems: 1
+          maxItems: 5
+          x-constraints: '@NotNullElement'
+          items:
+            $ref: '#/components/schemas/Escolaridad'
+        correoElectronicoInstitucional:
+          type: string
+          format: email
+          example: fabian.estarda@agricultura.com.mx
+        idTipoPlaza:
+          type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: SPC
+          x-constraints: '@NotBlank'
+        idRegion:
+          type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: oc
+          x-constraints: '@NotBlank'
+        idDireccion:
+          type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: DGEC
+          x-constraints: '@NotBlank'
+        idSubdireccion:
+          type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: SUBAdmonOC
+          x-constraints: '@NotBlank'
+        idPuesto:
+          type: string
+          pattern: '^[a-zA-Z0-9]+$'
+          example: na1
+          x-constraints: '@NotBlank'
+        idRoles:
+          type: array
+          minItems: 1
+          maxItems: 20
+          x-constraints: '@NotNullElement @NotBlankElement @NotDuplicateElement'
+          items:
+            type: string
+            example: rh1
+            pattern: '^[a-zA-Z0-9]+$'
     Domicilio:
       title: DomicilioEmpleado
       x-stoplight:
@@ -886,6 +1152,49 @@ components:
           type: string
           x-stoplight:
             id: 3o9viaperyc06
+          minLength: 10
+          maxLength: 10
+          example: '9876543210'
+          x-constraints: '@NotBlank @NumericOnly'
+    ActualizarDatosPersona:
+      title: ActualizarDatosPersona
+      x-stoplight:
+        id: jx3eojbopuymz
+      type: object
+      required:
+        - genero
+        - telefonoPersonal
+        - correoElectronicoPersonal
+        - estadoCivil
+        - hijos
+        - contactoEmergenciaNombre
+        - contactoEmergenciaTelefono
+      properties:
+        genero:
+          $ref: '#/components/schemas/GeneroEnum'
+        telefonoPersonal:
+          type: string
+          minLength: 10
+          maxLength: 10
+          example: '1234567890'
+          x-constraints: '@NotBlank @NumericOnly'
+        correoElectronicoPersonal:
+          type: string
+          format: email
+          example: user@example.com
+          x-constraints: '@NotBlank'
+        estadoCivil:
+          $ref: '#/components/schemas/EstadoCivilEnum'
+        hijos:
+          type: boolean
+          default: false
+        contactoEmergenciaNombre:
+          type: string
+          pattern: '^[\p{L}\s''-ñÑÁÉÍÓÚáéíóú]+$'
+          example: Martina Estrada Martínez
+          x-constraints: '@NotBlank'
+        contactoEmergenciaTelefono:
+          type: string
           minLength: 10
           maxLength: 10
           example: '9876543210'
@@ -1165,6 +1474,52 @@ components:
               id: yjzkwgpocadwx
             type: string
             format: binary
+    URIDocumentosPersona:
+      title: DocumentosPersona
+      x-stoplight:
+        id: vr0w0ywve5z0a
+      type: object
+      required:
+        - ine
+        - actaNacimiento
+        - numeroSeguroSocial
+        - curp
+        - rfc
+        - comprobanteDomicilio
+        - titulosProfesionales
+      properties:
+        ine:
+          type: string
+          format: uri
+        actaNacimiento:
+          type: string
+          format: uri
+        numeroSeguroSocial:
+          type: string
+          format: uri
+        curp:
+          type: string
+          format: uri
+        rfc:
+          type: string
+          format: uri
+        comprobanteDomicilio:
+          type: string
+          format: uri
+        titulosProfesionales:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            type: string
+            format: uri
+        cedulasProfesionales:
+          type: array
+          minItems: 0
+          maxItems: 10
+          items:
+            type: string
+            format: uri
     Region:
       title: Region
       x-stoplight:
