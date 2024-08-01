@@ -28,6 +28,17 @@ public class ControlEmpleados implements EmpleadosApi {
     }
 
     @Override
+    @DynamicRolesAllowed(metodoHttp = MetodosHttpEnum.GET, rutaEndpoint = "/api/empleados")
+    public ResponseEntity<List<EmpleadoDto>> recuperarEmpleados(String idRegion, String idDireccion, String idSubdireccion,
+                                                                String idTipoPlaza, String idPuesto, String idEstado, String idRol) {
+        var empleados = servicioEmpleados.recuperarEmpleados();
+
+        if (empleados.isEmpty())
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(empleados);
+    }
+
+    @Override
     public ResponseEntity<EmpleadoDto> recuperarEmpleado(String id) {
         return null;
     }
@@ -40,17 +51,6 @@ public class ControlEmpleados implements EmpleadosApi {
     @Override
     public ResponseEntity<Void> eliminarEmpleado(String id) {
         return null;
-    }
-
-    @Override
-    @DynamicRolesAllowed(metodoHttp = MetodosHttpEnum.GET, rutaEndpoint = "/api/empleados")
-    public ResponseEntity<List<EmpleadoDto>> recuperarEmpleados(String idRegion, String idDireccion, String idSubdireccion,
-                                                                String idTipoPlaza, String idPuesto, String idEstado, String idRol) {
-        var empleados = servicioEmpleados.recuperarEmpleados();
-
-        if (empleados.isEmpty())
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        return ResponseEntity.status(HttpStatus.OK).body(empleados);
     }
 
     @Override

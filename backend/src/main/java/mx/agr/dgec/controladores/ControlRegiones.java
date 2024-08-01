@@ -25,7 +25,9 @@ public class ControlRegiones implements RegionesApi {
 
     @Override
     public ResponseEntity<List<DireccionDto>> recuperarDireccionesByRegion(String id) {
-        /*TODO*/
-        return null;
+        var direccionesDto = servicioRegiones.recuperarDireccionesByRegion(id);
+        if (direccionesDto.isEmpty())
+            ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).body(direccionesDto);
     }
 }
