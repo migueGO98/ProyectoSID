@@ -16,8 +16,4 @@ public interface TipoPlazaMapper {
         return tiposPlazas.stream().map(tipoPlaza -> new RegistrosDto(tipoPlaza.getIdTipoPlaza(), tipoPlaza.getNombre())).toList();
     }
 
-    default String tipoPlazaToIdTipoPlaza(TipoPlaza tipoPlaza) {
-        return tipoPlaza.getIdTipoPlaza();
-    }
-
 }

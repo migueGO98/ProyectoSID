@@ -28,7 +28,7 @@ public class ServicioAzureGraph {
     private String tenantId;
 
     /*
-    * La documentacion de Azure B2C con Graph, indica que para agregar un atributo personalizado a un usuario,
+    * La documentacion de Azure B2C con Graph, indica que para agregar un atributo personalizado (claims) a un usuario,
     * se debe agregar un prefijo 'extension_' seguido de un GUID que se obtiene de la aplicacion de extensiones
     * */
     private static final String EXTENSION_CLIENT_ID = "extension_2d2c645787b3430e9749c9546ace41d4_";
