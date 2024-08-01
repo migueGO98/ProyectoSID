@@ -46,9 +46,11 @@ public interface DireccionesApi {
      *
      * @param id ID de la Dirección General (required)
      * @return OK (status code 200)
+     *         or No Content (status code 204)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
      */
     @Operation(
         operationId = "recuperarSubdireccionesByDireccion",
@@ -59,6 +61,7 @@ public interface DireccionesApi {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SubdireccionDto.class)))
             }),
+            @ApiResponse(responseCode = "204", description = "No Content"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
@@ -66,6 +69,9 @@ public interface DireccionesApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             })
         },
