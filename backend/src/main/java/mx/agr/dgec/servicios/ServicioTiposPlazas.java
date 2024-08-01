@@ -32,7 +32,6 @@ public class ServicioTiposPlazas {
         return tipoPlaza.get();
     }
 
-    // Valida que el puesto pertenezca al tipo de plaza
     public void validarPuestoPertenezcaToTipoPlaza(TipoPlaza tipoPlaza, Puesto puesto) {
         if(!puesto.getTipoPlaza().equals(tipoPlaza))
             throw new ElementoNoPerteneceException("El puesto no pertenece al tipo de plaza");

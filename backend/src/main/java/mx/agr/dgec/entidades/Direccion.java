@@ -33,6 +33,6 @@ public class Direccion {
 
     @OneToMany(mappedBy = "direccion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<Subdireccion> subdireccions;
+    private List<Subdireccion> subdirecciones;
 
 }

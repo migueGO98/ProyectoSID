@@ -31,7 +31,7 @@ public class ServicioRegiones {
     public List<DireccionDto> recuperarDireccionesByRegion(String idRegion) {
         var region = obtenerRegion(idRegion);
         var direcciones = region.getDirecciones();
-        log.info("Se recuperaron las direcciones de la región con ID {}", idRegion.toUpperCase());
+        log.info("Se recuperaron las direcciones de la región con ID: {}", idRegion.toUpperCase());
         return servicioDirecciones.mapearDireccionesToDireccionesDto(direcciones);
     }
 
