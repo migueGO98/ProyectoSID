@@ -54,6 +54,7 @@
       dateFormat="yy-mm-dd"
       [readonlyInput]="true"
       [showTime]="false"
+      placeholder="yyyy-mm-dd"
       formControlName="fechaNacimiento" />
     <span *ngIf="isValidField('fechaNacimiento')" class="p-error block">
       {{ getErrorMessage('fechaNacimiento') }}
@@ -75,10 +76,7 @@
 
   <div class="flex flex-column gap-2">
     <label for="telefonoPersonal">Telefóno Personal</label>
-    <p-inputMask
-      mask="99 9999 9999"
-      placeholder="55 1234 5678"
-      formControlName="telefonoPersonal" />
+    <p-inputMask mask="9999999999" placeholder="5512345678" formControlName="telefonoPersonal" />
     <span *ngIf="isValidField('telefonoPersonal')" class="p-error block">
       {{ getErrorMessage('telefonoPersonal') }}
     </span>
@@ -133,8 +131,8 @@
   <div class="flex flex-column gap-2">
     <label for="contactoEmergenciaTelefono">Número Telefónico de la persona de confianza</label>
     <p-inputMask
-      mask="99 9999 9999"
-      placeholder="55 1234 5678"
+      mask="9999999999"
+      placeholder="5512345678"
       formControlName="contactoEmergenciaTelefono" />
     <span *ngIf="isValidField('contactoEmergenciaTelefono')" class="p-error block">
       {{ getErrorMessage('contactoEmergenciaTelefono') }}

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Registros } from 'src/app/generate/openapi';
+import { Persona, Registros } from 'src/app/generate/openapi';
 
 @Component({
   selector: 'app-formulario-persona',
@@ -24,7 +24,7 @@ export class FormularioPersonaComponent {
     apellidoPaterno: [null, [Validators.required]],
     apellidoMaterno: [null],
     curp: [null, [Validators.required, Validators.minLength(18), Validators.maxLength(18)]],
-    rfc: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+    rfc: [null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
     numeroSeguroSocial: [
       null,
       [
@@ -71,7 +71,29 @@ export class FormularioPersonaComponent {
   }
 
   onSubmit() {
+    this.formatearDatos();
     if (this.formPersona.valid) this.formSubmit.emit();
     else this.formPersona.markAllAsTouched();
+  }
+
+  // * Quita los espacios en blanco de los campos de texto, poner formato de fecha en YYYY-MM-DD
+  private formatearDatos() {
+    const values = this.formPersona.value as Persona;
+    this.formPersona.controls['nombre'].setValue(values.nombre?.trim());
+    this.formPersona.controls['apellidoPaterno'].setValue(values.apellidoPaterno?.trim());
+    this.formPersona.controls['apellidoMaterno'].setValue(values.apellidoMaterno?.trim());
+    this.formPersona.controls['curp'].setValue(values.curp?.trim());
+    this.formPersona.controls['rfc'].setValue(values.rfc?.trim());
+    this.formPersona.controls['numeroSeguroSocial'].setValue(values.numeroSeguroSocial?.trim());
+    this.formPersona.controls['telefonoPersonal'].setValue(values.telefonoPersonal?.trim());
+    this.formPersona.controls['correoElectronicoPersonal'].setValue(
+      values.correoElectronicoPersonal?.trim()
+    );
+    this.formPersona.controls['contactoEmergenciaNombre'].setValue(
+      values.contactoEmergenciaNombre?.trim()
+    );
+    this.formPersona.controls['contactoEmergenciaTelefono'].setValue(
+      values.contactoEmergenciaTelefono?.trim()
+    );
   }
 }

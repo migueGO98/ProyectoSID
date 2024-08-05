@@ -7,9 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ConfirmacionNewEmpleadoComponent {
   @Output()
-  public activeIndex = new EventEmitter<number>();
+  confirmarNewEmpleado = new EventEmitter<void>();
 
-  previousStep() {
-    this.activeIndex.emit(3);
+  confirmarNuevoEmpleado() {
+    this.confirmarNewEmpleado.emit();
   }
 }

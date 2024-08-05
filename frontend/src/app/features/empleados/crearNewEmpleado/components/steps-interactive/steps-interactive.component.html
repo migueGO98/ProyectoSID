@@ -1,4 +1,4 @@
-<mat-stepper linear #stepper>
+<mat-stepper linear="false" #stepper>
   <mat-step [stepControl]="formPersona" label="Datos generales">
     <app-formulario-persona
       #formPersonaComponent
@@ -24,10 +24,13 @@
       #formEmpleadoComponent
       [tiposPlazas]="tiposPlazas"
       [roles]="roles"
+      [regiones]="regiones"
       (formSubmit)="goToNextStep()" />
   </mat-step>
 
   <mat-step label="Confirmación">
-    <app-confirmacion-new-empleado #formConfirmacionComponent />
+    <app-confirmacion-new-empleado
+      #formConfirmacionComponent
+      (confirmarNewEmpleado)="crearNuevoEmpleado()" />
   </mat-step>
 </mat-stepper>

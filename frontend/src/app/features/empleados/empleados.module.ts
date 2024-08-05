@@ -11,6 +11,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ToastModule } from 'primeng/toast';
 
@@ -43,6 +44,7 @@ import { ConfirmacionNewEmpleadoComponent } from './crearNewEmpleado/components/
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
+    MultiSelectModule,
     RadioButtonModule,
     ReactiveFormsModule,
     ToastModule,

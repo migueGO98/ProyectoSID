@@ -3,10 +3,20 @@
     <label for="fechaIngreso">Fecha de ingreso</label>
     <p-calendar
       [showIcon]="true"
-      dateFormat="yy-mm-dd"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [disabledDates]="disabledDates"
       [readonlyInput]="true"
       [showTime]="false"
+      dateFormat="yy-mm-dd"
       formControlName="fechaIngreso" />
+    <small id="fechaIngreso-help"
+      >Nota 1: Solo es permitido los ingresos el día <b>1° ó 16</b></small
+    >
+    <small id="fechaIngreso-help"
+      >Nota 2: Solo se permite hasta un mes anterior y uno posterior del
+      <b>periodo quincenal actual</b></small
+    >
     <span *ngIf="isValidField('fechaIngreso')" class="p-error block">
       {{ getErrorMessage('fechaIngreso') }}
     </span>
@@ -37,10 +47,23 @@
   </div>
 
   <div class="flex flex-column gap-2">
+    <label for="idPuesto">Puesto</label>
+    <p-dropdown
+      [options]="puestos()"
+      optionValue="idPuesto"
+      optionLabel="descripcion"
+      placeholder="Selecciona el "
+      formControlName="idPuesto" />
+    <span *ngIf="isValidField('idPuesto')" class="p-error block">
+      {{ getErrorMessage('idPuesto') }}
+    </span>
+  </div>
+
+  <div class="flex flex-column gap-2">
     <label for="idRegion">Región</label>
     <p-dropdown
-      [options]="tiposPlazas()"
-      optionValue="id"
+      [options]="regiones()"
+      optionValue="idRegion"
       optionLabel="descripcion"
       placeholder="Selecciona la Región "
       formControlName="idRegion" />
@@ -52,8 +75,8 @@
   <div class="flex flex-column gap-2">
     <label for="idDireccion">Dirección</label>
     <p-dropdown
-      [options]="tiposPlazas()"
-      optionValue="id"
+      [options]="direcciones()"
+      optionValue="idDireccion"
       optionLabel="descripcion"
       placeholder="Selecciona la Dirección"
       formControlName="idDireccion" />
@@ -65,8 +88,8 @@
   <div class="flex flex-column gap-2">
     <label for="idSubdireccion">Subdirección</label>
     <p-dropdown
-      [options]="tiposPlazas()"
-      optionValue="id"
+      [options]="subdirecciones()"
+      optionValue="idSubdireccion"
       optionLabel="descripcion"
       placeholder="Selecciona la Subdirección"
       formControlName="idSubdireccion" />
@@ -76,21 +99,8 @@
   </div>
 
   <div class="flex flex-column gap-2">
-    <label for="idPuesto">Puesto</label>
-    <p-dropdown
-      [options]="tiposPlazas()"
-      optionValue="id"
-      optionLabel="descripcion"
-      placeholder="Selecciona el "
-      formControlName="idPuesto" />
-    <span *ngIf="isValidField('idPuesto')" class="p-error block">
-      {{ getErrorMessage('idPuesto') }}
-    </span>
-  </div>
-
-  <div class="flex flex-column gap-2">
     <label for="idRoles">Roles</label>
-    <p-dropdown
+    <p-multiSelect
       [options]="roles()"
       optionValue="idRol"
       optionLabel="descripcion"

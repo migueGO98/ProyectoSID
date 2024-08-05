@@ -1,6 +1,7 @@
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
+  DireccionesService,
   Domicilio,
   Empleado,
   EmpleadosService,
@@ -9,6 +10,8 @@ import {
   NewEmpleado,
   Persona,
   PersonasService,
+  Region,
+  RegionesService,
   Registros,
   Rol,
   RolesService,
@@ -27,6 +30,8 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
   private empleadosService = inject(EmpleadosService);
   private escolaridadesService = inject(EscolaridadesService);
   private tiposPlazasService = inject(TiposPlazasService);
+  private regionService = inject(RegionesService);
+  private direccionesService = inject(DireccionesService);
   private rolesService = inject(RolesService);
   public subscripcionGenero$!: Subscription;
   public subscripcionEstadosCiviles$!: Subscription;
@@ -34,6 +39,9 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
   public subscripcionEstadosNivelesEscolaridades$!: Subscription;
   public subscripcionTiposPlazas$!: Subscription;
   public subscripcionRoles$!: Subscription;
+  public subscripcionNuevoEmpleado$!: Subscription;
+  public subscripcionRegiones$!: Subscription;
+  public subscripcionDirecciones$!: Subscription;
 
   // * Signal para pasar datos **NECESARIOS** a los componentes hijos, se solicitan en el ngOnInit
   public generos = signal<Registros[] | undefined>(undefined);
@@ -42,6 +50,7 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
   public estadosNivelesEscolaridades = signal<Registros[] | undefined>(undefined);
   public tiposPlazas = signal<Registros[] | undefined>(undefined);
   public roles = signal<Rol[] | undefined>(undefined);
+  public regiones = signal<Region[] | undefined>(undefined);
 
   // * Signal necesarias de la página para poder enviar datos a la API
   public nuevoEmpleado = signal<NewEmpleado | undefined>(undefined);
@@ -63,7 +72,7 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
     this.subscripcionEstadosCiviles$ = this.personasService.recuperarEstadosCiviles().subscribe({
       next: value => this.estadosCiviles.set(value),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
-      error: e => console.error(e.error),
+      error: e => console.error(e),
     });
 
     this.subscripcionNivelesEscolaridades$ = this.escolaridadesService
@@ -93,30 +102,21 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
       error: e => console.error(e.error),
     });
+
+    this.subscripcionRegiones$ = this.regionService.recuperarRegiones().subscribe({
+      next: value => this.regiones.set(value),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
+      error: e => console.error(e.error),
+    });
   }
 
-  // crearNuevoEmpleado(nuevoEmpleado: NewEmpleado) {
-  //   const datosEmpleado = this.formularioDatosEmpleado() as DatosEmpleado;
-  //   this.nuevoEmpleado.set({
-  //     persona: this.formPersona() as Persona,
-  //     domicilio: this.formularioDomicilio() as Domicilio,
-  //     escolaridades: this.formularioEscolaridad() as Escolaridad[],
-  //     fechaIngreso: datosEmpleado.fechaIngreso,
-  //     correoElectronicoInstitucional: datosEmpleado.correoElectronicoInstitucional,
-  //     idTipoPlaza: datosEmpleado.idTipoPlaza,
-  //     idRegion: datosEmpleado.idRegion,
-  //     idDireccion: datosEmpleado.idDireccion,
-  //     idSubdireccion: datosEmpleado.idSubdireccion,
-  //     idPuesto: datosEmpleado.idPuesto,
-  //     idRoles: datosEmpleado.idRoles,
-  //   });
-
-  //   this.empleadosService.crearEmpleado(this.nuevoEmpleado() as NewEmpleado).subscribe({
-  //     next: empleadoResponse => this.empleado.set(empleadoResponse),
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
-  //     error: e => console.error(e.error),
-  //   });
-  // }
+  crearNuevoEmpleado(nuevoEmpleado: NewEmpleado) {
+    this.subscripcionNuevoEmpleado$ = this.empleadosService.crearEmpleado(nuevoEmpleado).subscribe({
+      next: empleadoResponse => this.empleado.set(empleadoResponse),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
+      error: e => console.error(e.error),
+    });
+  }
 
   // Unsubscribe para evitar fugas de memoria en las subscripciones a observables
   ngOnDestroy(): void {
@@ -126,5 +126,7 @@ export class NewEmpleadoPageComponent implements OnInit, OnDestroy {
     this.subscripcionEstadosNivelesEscolaridades$.unsubscribe();
     this.subscripcionTiposPlazas$.unsubscribe();
     this.subscripcionRoles$.unsubscribe();
+    this.subscripcionNuevoEmpleado$.unsubscribe();
+    this.subscripcionRegiones$.unsubscribe();
   }
 }
