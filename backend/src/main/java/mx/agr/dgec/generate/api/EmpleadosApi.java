@@ -103,6 +103,7 @@ public interface EmpleadosApi {
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
      *         or Conflict (status code 409)
      */
     @Operation(
@@ -121,6 +122,9 @@ public interface EmpleadosApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
             }),
             @ApiResponse(responseCode = "409", description = "Conflict", content = {
