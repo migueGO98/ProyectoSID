@@ -8,6 +8,7 @@ import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.exceptions.ElementoNoEncontradoException;
 import mx.agr.dgec.exceptions.ElementoNoPerteneceException;
+import mx.agr.dgec.exceptions.ElementoYaExisteException;
 import mx.agr.dgec.exceptions.ReglaNegocioException;
 import mx.agr.dgec.generate.model.ErrorDto;
 import org.springframework.http.HttpHeaders;
@@ -35,13 +36,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex) {
 
-        if(ex instanceof InsufficientAuthenticationException) {
+        if (ex instanceof InsufficientAuthenticationException) {
             var error = new ErrorDto("ERROR_AUTH", "No se ha proporcionado un medio de autenticación");
             log.info("No se ha proporcionado alguna autentificación: {}", ex.getMessage());
             return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
         }
 
-        if(ex instanceof CredentialsExpiredException) {
+        if (ex instanceof CredentialsExpiredException) {
             var error = new ErrorDto("ERROR_AUTH_CRED", "Credencial expirada");
             log.info("Credencial expirada: {}", ex.getMessage());
             return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
@@ -74,7 +75,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .findFirst()
                 .orElse(null); // Si no hay errores, error será null
 
-        if(error != null) log.info("Error en el campo {}", error.getMensaje());
+        if (error != null) log.info("Error en el campo {}", error.getMensaje());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -93,7 +94,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         // Para los enums
-        if(ex.getCause() instanceof ValueInstantiationException vie) {
+        if (ex.getCause() instanceof ValueInstantiationException vie) {
             var error = getError(vie);
             error.setMensaje(error.getMensaje() + ", el valor debe estar en la lista de valores permitidos");
             log.info("Error de valor permitido (Enum): {}", error.getMensaje());
@@ -101,7 +102,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         // Errores en parsear el objeto JSON a un Dto (errores en el tipo de dato)
-        if(ex.getCause() instanceof MismatchedInputException mie) {
+        if (ex.getCause() instanceof MismatchedInputException mie) {
             var error = getError(mie);
             error.setMensaje(error.getMensaje() + ", tipo de dato incorrecto");
             log.info("Errores en el cuerpo de la petición: {}", error.getMensaje());
@@ -133,18 +134,25 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ElementoNoEncontradoException.class)
-    public ResponseEntity<ErrorDto> handleElementoNoEncontradoException(ElementoNoEncontradoException ex) {
-        var error = new ErrorDto("ERROR_ELEMENT_NOT_EXIST", ex.getMessage());
-        log.info("Elemento no encontrado: {}", error.getMensaje());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(ElementoNoPerteneceException.class)
     public ResponseEntity<ErrorDto> handleElementoNoPerteneceException(ElementoNoPerteneceException ex) {
         var error = new ErrorDto("ERROR_ELEMENT_NOT_BELONG", ex.getMessage());
         log.info("Elemento no pertenece: {}", error.getMensaje());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ElementoNoEncontradoException.class)
+    public ResponseEntity<ErrorDto> handleElementoNoEncontradoException(ElementoNoEncontradoException ex) {
+        var error = new ErrorDto("ERROR_ELEMENT_NOT_FOUND", ex.getMessage());
+        log.info("Elemento no encontrado: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ElementoYaExisteException.class)
+    public ResponseEntity<ErrorDto> handleElementoYaExisteException(ElementoYaExisteException ex) {
+        var error = new ErrorDto("ERROR_ELEMENT_EXIST", ex.getMessage());
+        log.info("Elemento ya existe: {}", error.getMensaje());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
     /*********************************
