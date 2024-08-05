@@ -101,9 +101,9 @@ public class SidApplication {
 
 		var rolRh2 = Rol.builder().idRol("RH2").descripcion("Recursos Humanos Nivel 2").build();
 		var endpoints = Stream.of(
-						Endpoint.builder().metodoHttp(MetodosHttpEnum.GET).rutaEndpoint("/api/empleados").description("Obtener todos los empleados").roles(listaRoles),
+						Endpoint.builder().metodoHttp(MetodosHttpEnum.GET).rutaEndpoint("/api/empleados").description("Obtener todos los empleados respecto a un filtro").roles(listaRoles),
 						Endpoint.builder().metodoHttp(MetodosHttpEnum.POST).rutaEndpoint("/api/empleados").description("Crear un empleado").roles(listaRoles),
-						Endpoint.builder().metodoHttp(MetodosHttpEnum.GET).rutaEndpoint("/api/motivos-baja").description("Obtener los motivos de baja").roles(Set.of(rolRh2))
+						Endpoint.builder().metodoHttp(MetodosHttpEnum.GET).rutaEndpoint("/api/empleados/motivosBaja").description("Obtener los motivos de baja").roles(Set.of(rolRh2))
 				)
 				.map(Endpoint.EndpointBuilder::build)
 				.toList();
