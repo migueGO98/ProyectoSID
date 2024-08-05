@@ -3,6 +3,7 @@ package mx.agr.dgec.servicios;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mx.agr.dgec.enums.MotivoBajaEnum;
+import mx.agr.dgec.exceptions.ElementoYaExisteException;
 import mx.agr.dgec.exceptions.ReglaNegocioException;
 import mx.agr.dgec.generate.model.*;
 import mx.agr.dgec.mappers.EmpleadoMapper;
@@ -54,8 +55,9 @@ public class ServicioEmpleados {
         // Validaciones de fondo (Reglas de Negocio)
         if (existeEmpleado(idEmpleado)) {
             log.info("El empleado con ID {} ya existe", idEmpleado);
-            throw new ReglaNegocioException("El empleado ya existe");
+            throw new ElementoYaExisteException("El empleado ya existe");
         }
+
         servicioTiposPlazas.validarPuestoPertenezcaToTipoPlaza(tipoPlaza, puesto);
         servicioRegiones.validarDireccionPertenezcaToRegion(region, direccion);
         servicioDirecciones.validarSubdireccionPertenezcaToDireccion(direccion, subdireccion);
@@ -90,6 +92,11 @@ public class ServicioEmpleados {
     }
 
 
+    /**
+     * Los siguientes metodos son utilizados por otros servicios
+     * o el mismo servicio, los metodos de arriba son utilizados por los controladores
+     * para realizar las operaciones de los endpoints
+     */
 
     private String generarIdEmpleado(String rfc, LocalDate fechaIngreso) {
         var rfcInicio = rfc.substring(0, 4);
