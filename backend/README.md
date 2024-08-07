@@ -6,6 +6,20 @@ El proyecto está construido en [Spring Boot](https://spring.io/projects/spring-
 - Java 17 
 - Solicitar a un administrador del proyecto, dar de alta en el Tenant **agricultura-dgec** de Microsoft Azure B2C.
 
+- Dar de alta las siguientes variables de entorno en el sistema operativo:
+    ```bash
+    DB_PGPASSWORD="value"
+    DB_PGPORT="value"
+    
+    DB_PGHOST="value"
+    DB_PGDATABASE="value"
+    DB_PGUSER="value"
+    DB_PGUSER_PASSWORD="value"
+    
+    AZURE_TENANT_CLIENT_SECRET="value"
+    ```
+**Nota**: Debes solicitar a un miembro del proyecto los valores de las variables de entorno. 
+
 ## Instrucciones
 El proceso de instalación se realiza en la carpeta `ProyectoSID/backend`
 

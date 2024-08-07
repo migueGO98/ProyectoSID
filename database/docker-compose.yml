@@ -1,11 +1,10 @@
 services:
   db:
-    container_name: db_sid
+    container_name: db_sid_container
     image: postgres:16.3
     #restart: always
     environment:
       POSTGRES_PASSWORD: ${DB_PGPASSWORD}
-      POSTGRES_DB: ${DB_PGDATABASE}
     ports:
       - ${DB_PGPORT}:${DB_PGPORT}
     volumes:
